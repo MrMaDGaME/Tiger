@@ -1,4 +1,4 @@
-matheo.ducrot
-nicolas.muller
-hector.de-turckheim
-arthur.moine
+Mathéo Ducrot		<matheo.ducrot@epita.fr>
+Nicolas Muller		<nicolas.muller@epita.fr>
+Hector De Turckheim	<hector.de-turckheim@epita.fr>
+Arthur Moine		<arthur.moine@epita.fr>
