@@ -67,7 +67,7 @@ namespace parse
     misc::symbol filename(fn == nullptr  ? ""
                             : *fn == "-" ? "standard input"
                                          : *fn);
-    location_.initialize(&filename.get());
+    location_.initialize(&filename.get()) ;
 
     std::shared_ptr<std::istream> in;
     if (fn == nullptr)
@@ -89,10 +89,15 @@ namespace parse
       }
 
     // FIXME: Some code was deleted here (Enable scan traces and link the scanner to the input).
+    scan_trace();
+    scanner_ = in;
 
     // FIXME: Some code was deleted here (Initialize the parser and enable parse traces).
+    parser bob(this);
+    parse_trace();
 
     // FIXME: Some code was deleted here (Run the parser and close the scanner).
+    scan_trace(false);
 
     ast_type res = ast_;
     ast_ = static_cast<ast::Exp*>(nullptr);

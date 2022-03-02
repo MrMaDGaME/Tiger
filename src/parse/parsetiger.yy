@@ -14,7 +14,9 @@
 
 // In TC, we expect the GLR to resolve one Shift-Reduce and zero Reduce-Reduce
 // conflict at runtime. Use %expect and %expect-rr to tell Bison about it.
-  // FIXME: Some code was deleted here (Other directives).
+  // FIXME: Some code was deleted here (Other directives). FIXED
+%expect 1
+%expect-rr 0
 
 %define parse.error verbose
 %defines
@@ -207,8 +209,10 @@ chunks:
         end
      which is why we end the recursion with a %empty. */
   %empty                  
-| tychunk   chunks        
+| tychunk   chunks
   // FIXME: Some code was deleted here (More rules).
+| tychunk   TypeDec
+| tychunk   FunctionDec
 ;
 
 /*--------------------.
