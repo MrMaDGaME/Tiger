@@ -188,9 +188,50 @@ program:
    
 ;
 
+exps:
+ [ exp { ";" exp } ] ;
+
 exp:
   INT
-   
+  STRING
+  "nil"
+
+  (* Array and record creations. *)
+  | typeid "[" exp "]" "of" exp
+  | typeid "{" [ id "=" exp { "," id "=" exp } ] "}"
+
+  (* Variables, field, elements of an array. *)
+  | lvalue
+
+  (* Function call. *)
+  | id "(" [ exp { "," exp }] ")"
+
+  (* Operations. *)
+  | "-" exp
+  | exp op exp
+  | "(" exps ")"
+
+  (* Assignment. *)
+  | lvalue ":=" exp
+
+  (* Control structures. *)
+  | "if" exp "then" exp ["else" exp]
+  | "while" exp "do" exp
+  | "for" id ":=" exp "to" exp "do" exp
+  | "break"
+  | "let" chunks "in" exps "end"
+;
+
+lvalue:
+    id
+  (* Record field access. *)
+  | lvalue "." id
+  (* Array subscript. *)
+  | lvalue "[" exp "]"
+;
+
+op:
+    "+" | "-" | "*" | "/" | "=" | "<>" | ">" | "<" | ">=" | "<=" | "&" | "|" ;
   // FIXME: Some code was deleted here (More rules).
 
 /*---------------.
@@ -210,9 +251,18 @@ chunks:
      which is why we end the recursion with a %empty. */
   %empty                  
 | tychunk   chunks
-  // FIXME: Some code was deleted here (More rules).
-| tychunk   TypeDec
-| tychunk   FunctionDec
+| fundec   chunks
+| tydec   chunks
+| vardec   chunks
+  // FIXME: Some code was deleted here (More rules). CHECK ?
+;
+
+vardec:
+ "var" ID [ ":" typeid ] ":=" exp ;
+
+fundec :
+    "function" ID "(" tyfields ")" [ ":" typeid ] "=" exp
+  | "primitive" ID "(" tyfields ")" [ ":" typeid ]
 ;
 
 /*--------------------.
