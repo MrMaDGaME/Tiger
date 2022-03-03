@@ -165,6 +165,7 @@
 
 
   // FIXME: Some code was deleted here (Priorities/associativities).
+%precedence "lvalue"
 
 // Solving conflicts on:
 // let type foo = bar
@@ -187,52 +188,72 @@ program:
   chunks
    
 ;
-
 exps:
- [ exp { ";" exp } ] ;
+   epsilon
+  | exp
+  | exp ";" exps // accept 'exp ;' but should'nt
 
 exp:
-  INT
-  STRING
-  "nil"
+  /* Literals. */
+    "nil"
+  | INT
+  | STRING
 
-  (* Array and record creations. *)
+  /* Array and record creations. */
   | typeid "[" exp "]" "of" exp
-  | typeid "{" [ id "=" exp { "," id "=" exp } ] "}"
+  | typeid "{" "}"
+  | typeid "{" ID "=" exp array_r "}"
 
-  (* Variables, field, elements of an array. *)
+  /* Variables, field, elements of an array. */
   | lvalue
 
-  (* Function call. *)
-  | id "(" [ exp { "," exp }] ")"
+  /* Function call. */
+  | ID "(" ")"
+  | ID "(" exp function_r ")"
 
-  (* Operations. *)
+  /* Operations. */
   | "-" exp
   | exp op exp
   | "(" exps ")"
 
-  (* Assignment. *)
+  /* Assignment. */
   | lvalue ":=" exp
 
-  (* Control structures. *)
-  | "if" exp "then" exp ["else" exp]
+  /* Control structures. */
+  | "if" exp "then" exp
+  | "if" exp "then" exp "else" exp
   | "while" exp "do" exp
-  | "for" id ":=" exp "to" exp "do" exp
+  | "for" ID ":=" exp "to" exp "do" exp
   | "break"
   | "let" chunks "in" exps "end"
 ;
 
+array_r:
+     "," ID "=" exp
+   | "," ID "=" exp array_r
+   | epsilon
+;
+
+function_r:
+    "," exp
+   | "," exp function_r
+   | epsilon
+;
+
 lvalue:
-    id
-  (* Record field access. *)
-  | lvalue "." id
-  (* Array subscript. *)
+    ID
+  /* Record field access. */
+  | lvalue "." ID
+  /* Array subscript. */
   | lvalue "[" exp "]"
 ;
 
 op:
     "+" | "-" | "*" | "/" | "=" | "<>" | ">" | "<" | ">=" | "<=" | "&" | "|" ;
-  // FIXME: Some code was deleted here (More rules).
+  // FIXME: Some code was deleted here (More rules). DONE
+
+epsilon:
+    %empty;
 
 /*---------------.
 | Declarations.  |
@@ -254,15 +275,18 @@ chunks:
 | fundec   chunks
 | tydec   chunks
 | vardec   chunks
-  // FIXME: Some code was deleted here (More rules). CHECK ?
+  // FIXME: Some code was deleted here (More rules). DONE
 ;
 
 vardec:
- "var" ID [ ":" typeid ] ":=" exp ;
+ "var" ID ":=" exp ;
+ |"var" ID ":" typeid ":=" exp ;
 
 fundec :
-    "function" ID "(" tyfields ")" [ ":" typeid ] "=" exp
-  | "primitive" ID "(" tyfields ")" [ ":" typeid ]
+    "function" ID "(" tyfields ")" "=" exp
+  | "function" ID "(" tyfields ")" ":" typeid "=" exp
+  | "primitive" ID "(" tyfields ")"
+  | "primitive" ID "(" tyfields ")" ":" typeid
 ;
 
 /*--------------------.
