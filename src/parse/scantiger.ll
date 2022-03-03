@@ -58,18 +58,16 @@ int             [0-9]+
 identifier      [a-zA-Z]+[a-zA-Z0-9_]*
 %%
 %{
-  // FIXME: Some code was deleted here (Local variables).
+  /* DONE: Some code was deleted here (Local variables). */
 
-    #include <parse/parsetiger.hh>
-
+    yy::parser::location_type tp.locaction_;
     #define YY_USER_ACTION
     do {
         tp.location_.columns(yyleng);
     } while (false);
-
+%}
   // Each time yylex is called.
   tp.location_.step();
-%}
 
  /* The rules.  */
 {int}         {
