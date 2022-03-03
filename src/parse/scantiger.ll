@@ -26,6 +26,7 @@
 #include <parse/tiger-parser.hh>
 
   // FIXME: Some code was deleted here.
+  // END_FIXME
 
 // Convenient shortcuts.
 #define TOKEN_VAL(Type, Value)                  \
@@ -56,6 +57,7 @@ YY_FLEX_NAMESPACE_BEGIN
 int             [0-9]+
 /* DONE: Some code was deleted here. */
 identifier      [a-zA-Z]+[a-zA-Z0-9_]*
+// END_FIXME
 %%
 %{
   // FIXME: Some code was deleted here (Local variables).
@@ -64,6 +66,7 @@ identifier      [a-zA-Z]+[a-zA-Z0-9_]*
     do {
         tp.location_.columns(yyleng);
     } while (false);
+  // END_FIXME
   // Each time yylex is called.
   tp.location_.step();
 }%
