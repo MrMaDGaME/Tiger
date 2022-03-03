@@ -26,6 +26,7 @@
 #include <parse/tiger-parser.hh>
 
   // FIXME: Some code was deleted here.
+  // yy::parser::location_type tp.location_
   // END_FIXME
 
 // Convenient shortcuts.
@@ -60,7 +61,7 @@ identifier      [a-zA-Z]+[a-zA-Z0-9_]*
 // END_FIXME
 %%
 %{
-  // FIXME: Some code was deleted here (Local variables).
+  // DONE: Some code was deleted here (Local variables).
 
     #define YY_USER_ACTION
     do {
