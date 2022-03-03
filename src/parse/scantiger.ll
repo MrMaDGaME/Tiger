@@ -58,16 +58,15 @@ int             [0-9]+
 identifier      [a-zA-Z]+[a-zA-Z0-9_]*
 %%
 %{
-  /* DONE: Some code was deleted here (Local variables). */
+  // FIXME: Some code was deleted here (Local variables).
 
-    yy::parser::location_type tp.locaction_;
     #define YY_USER_ACTION
     do {
         tp.location_.columns(yyleng);
     } while (false);
-%}
   // Each time yylex is called.
   tp.location_.step();
+}%
 
  /* The rules.  */
 {int}         {
