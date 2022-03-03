@@ -27,7 +27,7 @@ namespace misc
   typename unique<T, C>::object_size_type unique<T, C>::object_map_size()
   {
     // DONE: Some code was deleted here.
-    return object_set_instance().size();
+    return (object_size_type)object_set_instance().size();
   }
 
   template <typename T, class C>

@@ -54,24 +54,37 @@ YY_FLEX_NAMESPACE_BEGIN
 
 /* Abbreviations.  */
 int             [0-9]+
-  /* FIXME: Some code was deleted here. */
+/* DONE: Some code was deleted here. */
+identifier      [a-zA-Z]+[a-zA-Z0-9_]*
 %%
 %{
   // FIXME: Some code was deleted here (Local variables).
+
+    #include <parse/parsetiger.hh>
+
+    #define YY_USER_ACTION
+    do {
+        tp.location_.columns(yyleng);
+    } while (false);
 
   // Each time yylex is called.
   tp.location_.step();
 %}
 
  /* The rules.  */
-
 {int}         {
-                int val = 0;
-  // FIXME: Some code was deleted here (Decode, and check the value).
+                // DONE: Some code was deleted here (Decode, and check the value).
+                int val = std::stoi(yytext);
                 return TOKEN_VAL(INT, val);
               }
 
-  /* FIXME: Some code was deleted here. */
+  /* DONE: Some code was deleted here. */
+"_main"       return TOKEN_VAL(ID, yytext);
+{identifier}  return TOKEN_VAL(ID,yytext);
+.             {
+                    std::cerr << "unexpected character: " << yytext << '\n';
+
+              }
 %%
 
 // Do not use %option noyywrap, because then flex generates the same

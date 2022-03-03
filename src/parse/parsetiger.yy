@@ -14,7 +14,7 @@
 
 // In TC, we expect the GLR to resolve one Shift-Reduce and zero Reduce-Reduce
 // conflict at runtime. Use %expect and %expect-rr to tell Bison about it.
-  // FIXME: Some code was deleted here (Other directives). FIXED
+  // DONE: Some code was deleted here (Other directives).
 %expect 1
 %expect-rr 0
 
@@ -313,5 +313,5 @@ typeid:
 void
 parse::parser::error(const location_type& l, const std::string& m)
 {
-  // FIXME: Some code was deleted here.
+    std::cerr << l << ":" << m << '\n';
 }

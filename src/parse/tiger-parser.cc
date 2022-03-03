@@ -90,15 +90,15 @@ namespace parse
 
     // FIXME: Some code was deleted here (Enable scan traces and link the scanner to the input).
     scan_trace(true);
-    scanner_ = in;
+    scanner_->scan_open_(*in);
 
     // FIXME: Some code was deleted here (Initialize the parser and enable parse traces).
-    auto parser = TigerParser();
-    //parse_trace(true);
+    parser parser(*this);
+    parse_trace(true);
 
     // FIXME: Some code was deleted here (Run the parser and close the scanner).
-    //ast_type ast_ = parser.parse();
-    scan_trace(false);
+    parser.parse();
+    scanner_->scan_close_();
 
     ast_type res = ast_;
     ast_ = static_cast<ast::Exp*>(nullptr);
