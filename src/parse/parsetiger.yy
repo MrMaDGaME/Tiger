@@ -14,9 +14,10 @@
 
 // In TC, we expect the GLR to resolve one Shift-Reduce and zero Reduce-Reduce
 // conflict at runtime. Use %expect and %expect-rr to tell Bison about it.
-  // DONE: Some code was deleted here (Other directives).
+  // FIXME DONE: Some code was deleted here (Other directives).
 %expect 1
 %expect-rr 0
+// END FIXME DONE: Some code was deleted here (Other directives).
 
 %define parse.error verbose
 %defines
@@ -76,8 +77,6 @@
 %token <std::string>    STRING "string"
 %token <misc::symbol>   ID     "identifier"
 %token <int>            INT    "integer"
-
-
 
 /*-----------------------------------------.
 | Code output in the implementation file.  |
@@ -165,7 +164,6 @@
 
 
   // FIXME: Some code was deleted here (Priorities/associativities).
-%precedence "lvalue"
 
 // Solving conflicts on:
 // let type foo = bar
@@ -173,9 +171,22 @@
 // which can be understood as a list of two TypeChunk containing
 // a unique TypeDec each, or a single TypeChunk containing two TypeDec.
 // We want the latter.
+
+%precedence "if" "then" "else" "while" "do" "end"
+%precedence ";"
+%nonassoc ":="
+%precedence "function" "primitive" "var" "end of file" "in" "let" "break" "to"
+%left "|"
+%left "&"
+%nonassoc ">=" "<=" "=" "<>" "<" ">"
+%precedence NAMETY "nil" "identifier" "string" "integer"
+%left "+" "-"
+%left "*" "/"
+%precedence "[" "]" "of" "(" ")" "{" "}" ":"
+
 %precedence CHUNKS
 %precedence TYPE
-  // FIXME: Some code was deleted here (Other declarations).
+  // END FIXME: Some code was deleted here (Other declarations).
 
 %start program
 
@@ -183,15 +194,18 @@
 program:
   /* Parsing a source program.  */
   exp
-   
+
 | /* Parsing an imported file.  */
   chunks
-   
 ;
+
+// FIXME: Some code was deleted here (More rules). DONE
+
+
 exps:
-   epsilon
+    %empty
   | exp
-  | exp ";" exps // accept 'exp ;' but should'nt
+  | exp ";" exps
 
 exp:
   /* Literals. */
@@ -202,6 +216,7 @@ exp:
   /* Array and record creations. */
   | typeid "[" exp "]" "of" exp
   | typeid "{" "}"
+  | typeid "{" ID "=" exp "}"
   | typeid "{" ID "=" exp array_r "}"
 
   /* Variables, field, elements of an array. */
@@ -209,11 +224,23 @@ exp:
 
   /* Function call. */
   | ID "(" ")"
+  | ID "(" exp ")"
   | ID "(" exp function_r ")"
 
   /* Operations. */
   | "-" exp
-  | exp op exp
+  | exp "+" exp
+  | exp "<=" exp
+  | exp ">=" exp
+  | exp "<>" exp
+  | exp "-" exp
+  | exp "*" exp
+  | exp "/" exp
+  | exp "=" exp
+  | exp "<" exp
+  | exp ">" exp
+  | exp "&" exp
+  | exp "|" exp
   | "(" exps ")"
 
   /* Assignment. */
@@ -225,19 +252,17 @@ exp:
   | "while" exp "do" exp
   | "for" ID ":=" exp "to" exp "do" exp
   | "break"
-  | "let" chunks "in" exps "end"
+  | "let" chunks "in" exp "end"
 ;
 
 array_r:
      "," ID "=" exp
    | "," ID "=" exp array_r
-   | epsilon
 ;
 
 function_r:
     "," exp
    | "," exp function_r
-   | epsilon
 ;
 
 lvalue:
@@ -248,12 +273,8 @@ lvalue:
   | lvalue "[" exp "]"
 ;
 
-op:
-    "+" | "-" | "*" | "/" | "=" | "<>" | ">" | "<" | ">=" | "<=" | "&" | "|" ;
-  // FIXME: Some code was deleted here (More rules). DONE
 
-epsilon:
-    %empty;
+  // END FIXME: Some code was deleted here (More rules). DONE
 
 /*---------------.
 | Declarations.  |
@@ -270,13 +291,23 @@ chunks:
             ..
         end
      which is why we end the recursion with a %empty. */
-  %empty                  
+  %empty
+// FIXME: Some code was deleted here (More rules). DONE
 | tychunk   chunks
-| fundec   chunks
-| tydec   chunks
-| vardec   chunks
-  // FIXME: Some code was deleted here (More rules). DONE
+| funchunk   chunks
+| varchunk   chunks
+
+  // END FIXME: Some code was deleted here (More rules). DONE
 ;
+
+varchunk:
+     vardec %prec CHUNKS
+    | vardec tychunk
+;
+
+funchunk:
+     fundec %prec CHUNKS
+    | fundec tychunk
 
 vardec:
  "var" ID ":=" exp ;
@@ -296,40 +327,40 @@ fundec :
 tychunk:
   /* Use `%prec CHUNKS' to do context-dependent precedence and resolve a
      shift-reduce conflict. */
-  tydec %prec CHUNKS  
-| tydec tychunk       
+  tydec %prec CHUNKS
+| tydec tychunk
 ;
 
 tydec:
-  "type" ID "=" ty 
+  "type" ID "=" ty
 ;
 
 ty:
-  typeid               
-| "{" tyfields "}"     
-| "array" "of" typeid  
+  typeid
+| "{" tyfields "}"
+| "array" "of" typeid
 ;
 
 tyfields:
-  %empty               
-| tyfields.1           
+  %empty
+| tyfields.1
 ;
 
 tyfields.1:
-  tyfields.1 "," tyfield 
-| tyfield                
+  tyfields.1 "," tyfield
+| tyfield
 ;
 
 tyfield:
-  ID ":" typeid     
+  ID ":" typeid
 ;
 
 %token NAMETY "_namety";
 typeid:
-  ID                    
+  ID
   /* This is a metavariable. It it used internally by TWEASTs to retrieve
      already parsed nodes when given an input to parse. */
-| NAMETY "(" INT ")"    
+| NAMETY "(" INT ")"
 ;
 
 %%
