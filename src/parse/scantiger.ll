@@ -56,8 +56,12 @@ YY_FLEX_NAMESPACE_BEGIN
 
 /* Abbreviations.  */
 int             [0-9]+
-/* DONE: Some code was deleted here. */
 identifier      [a-zA-Z]+[a-zA-Z0-9_]*
+end_of_line     [\n\r]+
+comments        \/\*(.|\n)*\*\/
+white_character [\t ]
+string          \"(\\.|[^\"])*\"
+
 // END_FIXME
 %%
 %{
@@ -80,6 +84,14 @@ identifier      [a-zA-Z]+[a-zA-Z0-9_]*
               }
 
   /* DONE: Some code was deleted here. */
+{comments}      tp.location_.step();
+
+{string}        return TOKEN_VAL(STRING, (std::string) yytext);
+
+{end_of_line}   tp.location_.step();
+
+{white_character} tp.location_.step();
+
 "_main"         return TOKEN_VAL(ID, yytext);
 
 {identifier}    return TOKEN_VAL(ID,yytext);
