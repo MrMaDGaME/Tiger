@@ -16,7 +16,7 @@
 // conflict at runtime. Use %expect and %expect-rr to tell Bison about it.
   // FIXME DONE: Some code was deleted here (Other directives).
 %expect 1
-%expect-rr 0
+%expect-rr 1 // remettre a 0
 // END FIXME DONE: Some code was deleted here (Other directives).
 
 %define parse.error verbose
@@ -172,17 +172,13 @@
 // a unique TypeDec each, or a single TypeChunk containing two TypeDec.
 // We want the latter.
 
-%precedence "if" "then" "else" "while" "do" "end"
-%precedence ";"
-%nonassoc ":="
-%precedence "function" "primitive" "var" "end of file" "in" "let" "break" "to"
+%precedence "then" "else" "do"
 %left "|"
 %left "&"
-%nonassoc ">=" "<=" "=" "<>" "<" ">"
-%precedence NAMETY "nil" "identifier" "string" "integer"
+%nonassoc ">=" "<=" "=" "<>" "<" ">" ":="
 %left "+" "-"
 %left "*" "/"
-%precedence "[" "]" "of" "(" ")" "{" "}" ":"
+%precedence "of"
 
 %precedence CHUNKS
 %precedence TYPE
