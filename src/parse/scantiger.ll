@@ -26,8 +26,7 @@
 #include <parse/tiger-parser.hh>
 
   // FIXME: Some code was deleted here.
-  // yy::parser::location_type tp.location_
-  // END_FIXME
+  yy::parser::location_type tp.location_
 
 // Convenient shortcuts.
 #define TOKEN_VAL(Type, Value)                  \
@@ -62,7 +61,6 @@ comments        \/\*(.|\n)*\*\/
 white_character [\t ]
 string          \"(\\.|[^\"])*\"
 
-// END_FIXME
 %%
 %{
   // DONE: Some code was deleted here (Local variables).
@@ -88,13 +86,20 @@ string          \"(\\.|[^\"])*\"
 
 {string}        return TOKEN_VAL(STRING, (std::string) yytext);
 
-{end_of_line}   tp.location_.step();
+{end_of_line}   {
+                    tp.location_.lines(yyleng);
+                    tp.location_.step();
+                }
 
 {white_character} tp.location_.step();
 
 "_main"         return TOKEN_VAL(ID, yytext);
 
-{identifier}    return TOKEN_VAL(ID,yytext);
+{identifier}    {
+                    std::string str(yytext);
+                    auto res = misc::symbol(str);
+                    return TOKEN_VAL(ID,res);
+                }
 
 "if"            return TOKEN(IF);
 
@@ -176,7 +181,7 @@ string          \"(\\.|[^\"])*\"
 
 ")"             return TOKEN(RPAREN);
 
-";"             return TOKEN(SEMI);
+";"            return TOKEN(SEMI);
 
 "then"          return TOKEN(THEN);
 

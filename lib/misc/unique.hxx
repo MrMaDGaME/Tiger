@@ -12,14 +12,16 @@ namespace misc
 {
   template <typename T, class C> unique<T, C>::unique(const data_type& s)
   // DONE: Some code was deleted here (Initializations).
-  obj_(&(*object_set_instance().insert(s).first));
-  {}
+  {
+      obj_ = (&(*object_set_instance().insert(s).first));
+
+  }
 
   template <typename T, class C>
   typename unique<T, C>::object_set_type& unique<T, C>::object_set_instance()
   {
     // DONE: Some code was deleted here (Classical Singleton pattern, a la Scott Meyers').
-    static object_set_instance res;
+    static object_set_type res;
     return res;
   }
 
