@@ -26,7 +26,6 @@
 #include <parse/tiger-parser.hh>
 
   // FIXME: Some code was deleted here.
-  yy::parser::location_type tp.location_
 
 // Convenient shortcuts.
 #define TOKEN_VAL(Type, Value)                  \
@@ -60,47 +59,19 @@ end_of_line     [\n\r]+
 comments        \/\*(.|\n)*\*\/
 white_character [\t ]
 string          \"(\\.|[^\"])*\"
-
+  /* FIXME: Some code was deleted here. */
 %%
 %{
-  // DONE: Some code was deleted here (Local variables).
-
-    #define YY_USER_ACTION
-    do {
+  // FIXME: Some code was deleted here (Local variables) prob ln 88 a 98.
+   #define YY_USER_ACTION
+     do {
         tp.location_.columns(yyleng);
-    } while (false);
-  // END_FIXME
+     } while (false);
   // Each time yylex is called.
   tp.location_.step();
-}%
+%}
 
  /* The rules.  */
-{int}         {
-                // DONE: Some code was deleted here (Decode, and check the value).
-                int val = std::stoi(yytext);
-                return TOKEN_VAL(INT, val);
-              }
-
-  /* DONE: Some code was deleted here. */
-{comments}      tp.location_.step();
-
-{string}        return TOKEN_VAL(STRING, (std::string) yytext);
-
-{end_of_line}   {
-                    tp.location_.lines(yyleng);
-                    tp.location_.step();
-                }
-
-{white_character} tp.location_.step();
-
-"_main"         return TOKEN_VAL(ID, yytext);
-
-{identifier}    {
-                    std::string str(yytext);
-                    auto res = misc::symbol(str);
-                    return TOKEN_VAL(ID,res);
-                }
-
 "if"            return TOKEN(IF);
 
 "array"         return TOKEN(ARRAY);
@@ -194,6 +165,32 @@ string          \"(\\.|[^\"])*\"
 "var"           return TOKEN(VAR);
 
 "while"         return TOKEN(WHILE);
+
+{int}         {
+                int val = std::stoi(yytext);
+                if (val < INT_MIN || val > INT_MAX)
+                {
+                    tp.error_ << misc::error::error_type::scan << tp.location_ << ": int out_of_bound: " << misc::escape(yytext) << '\n';
+                }
+                return TOKEN_VAL(INT, val);
+              }
+
+  {string}      return TOKEN_VAL(STRING, (std::string) yytext);
+
+  {end_of_line}   {
+                      tp.location_.lines(yyleng);
+                      tp.location_.step();
+                  }
+{white_character} tp.location_.step();
+
+"_main"         return TOKEN_VAL(ID, "_main");
+
+{identifier}    {
+                    std::string str(yytext);
+                    auto res = misc::symbol(str);
+                    return TOKEN_VAL(ID,res);
+                }
+
 
 .             {
                     std::cerr << "unexpected character: " << yytext << '\n';
