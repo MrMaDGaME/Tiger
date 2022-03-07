@@ -8,5 +8,19 @@
 
 namespace ast
 {
-  // FIXME: Some code was deleted here.
+    IfExp::IfExp(const Location& location, Exp* condition, Exp* body)
+            : Exp(location)
+            , condition_(condition)
+            , body_(body)
+    {}
+
+    IfExp::~IfExp()
+    {
+        delete condition_;
+        delete body_;
+    }
+
+    void IfExp::accept(ConstVisitor& v) const { v(*this); }
+
+    void IfExp::accept(Visitor& v) { v(*this); }
 } // namespace ast

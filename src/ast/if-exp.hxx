@@ -9,5 +9,9 @@
 
 namespace ast
 {
-  // FIXME: Some code was deleted here.
+    inline const Exp& IfExp::condition_get() const { return *condition_; }
+    inline Exp& IfExp::condition_get() { return *condition_; }
+
+    inline const Exp& IfExp::body_get() const { return *body_; }
+    inline Exp& IfExp::body_get() { return *body_; }
 } // namespace ast
