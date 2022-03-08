@@ -18,14 +18,14 @@ Incomplete classes are tagged with a `*'.
 
 *   ArrayExp
 *   AssignExp
-*   BreakExp
+*   BreakExp //DONE (string break_str)
 *   CallExp
 *     MethodCallExp
     CastExp         (Exp exp, Ty ty)
     ForExp          (VarDec vardec, Exp hi, Exp body)
-*   IfExp // DONE   (Exp condition, Exp body)
+*   IfExp // DONE   (Exp condition, Exp body, Exp else_clause)
     IntExp          (int value)
-*   LetExp
+*   LetExp // DONE  (Exp declarations, Exp instructions)
     NilExp          ()
 *   ObjectExp
     OpExp           (Exp left, Oper oper, Exp right)

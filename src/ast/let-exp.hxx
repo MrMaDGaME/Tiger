@@ -9,5 +9,9 @@
 
 namespace ast
 {
-  // FIXME: Some code was deleted here.
+    inline const Exp& LetExp::declarations_get() const { return *condition_; }
+    inline Exp& LetExp::declarations_get() { return *condition_; }
+
+    inline const Exp& LetExp::instructions_get() const { return *body_; }
+    inline Exp& LetExp::instructions_get() { return *body_; }
 } // namespace ast

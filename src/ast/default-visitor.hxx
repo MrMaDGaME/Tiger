@@ -89,7 +89,10 @@ namespace ast
   template <template <typename> class Const>
   void GenDefaultVisitor<Const>::operator()(const_t<IfExp>& e)
   {
-    // FIXME: Some code was deleted here.
+    e.condition_get().accept(*this);
+    e.body_get().accept(*this);
+    if (e.else_clause_get() != nullptr)
+        e.else_clause_get().accept(*this);
   }
 
   template <template <typename> class Const>
@@ -114,7 +117,8 @@ namespace ast
   template <template <typename> class Const>
   void GenDefaultVisitor<Const>::operator()(const_t<LetExp>& e)
   {
-    // FIXME: Some code was deleted here.
+    e.declarations_get().accept(*this);
+    e.instructions_get().accept(*this);
   }
 
   template <template <typename> class Const>

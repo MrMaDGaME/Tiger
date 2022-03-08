@@ -17,7 +17,7 @@ namespace ast
       /** \name Ctor & dtor.
        ** \{ */
       /// Construct a IfExp node.
-      IfExp(const Location& location, Exp* condition, Exp* body);
+      IfExp(const Location& location, Exp* condition, Exp* body, Exp* else_clause = nullptr);
       IfExp(const IfExp&) = delete;
       IfExp& operator=(const IfExp&) = delete;
       /// Destroy a IfExp node.
@@ -34,21 +34,27 @@ namespace ast
 
       /** \name Accessors.
        ** \{ */
-      /// Return high bound of the loop.
+      /// Return condition of the statement.
       const Exp& condition_get() const;
-      /// Return high bound of the loop.
+      /// Return condition of the statement.
       Exp& condition_get();
-      /// Return instructions executed in the loop.
+      /// Return body of the statement.
       const Exp& body_get() const;
-      /// Return instructions executed in the loop.
+      /// Return body of the statement.
       Exp& body_get();
+      /// Return else_clause of the statement.
+      const Exp& else_clause_get() const;
+      /// Return else_clause of the statement.
+      Exp& else_clause_get();
       /** \} */
 
   protected:
-      /// High bound of the loop.
+      /// Condition of the statement.
       Exp* condition_;
-      /// Instructions executed in the loop.
+      /// Body of the statement.
       Exp* body_;
+      /// Else clause of the statement.
+      Exp* else_clause_;
   };
 } // namespace ast
 #include <ast/if-exp.hxx>

@@ -8,16 +8,18 @@
 
 namespace ast
 {
-    IfExp::IfExp(const Location& location, Exp* condition, Exp* body)
+    IfExp::IfExp(const Location& location, Exp* condition, Exp* body, Exp* else_clause)
             : Exp(location)
             , condition_(condition)
             , body_(body)
+            , else_clause_(else_clause)
     {}
 
     IfExp::~IfExp()
     {
         delete condition_;
         delete body_;
+        delete else_clause_;
     }
 
     void IfExp::accept(ConstVisitor& v) const { v(*this); }

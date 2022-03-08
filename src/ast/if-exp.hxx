@@ -14,4 +14,7 @@ namespace ast
 
     inline const Exp& IfExp::body_get() const { return *body_; }
     inline Exp& IfExp::body_get() { return *body_; }
+
+    inline const Exp& IfExp::else_clause_get() const { return *else_clause_; }
+    inline Exp& IfExp::else_clause_get() { return *else_clause_; }
 } // namespace ast

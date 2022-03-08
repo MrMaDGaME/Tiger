@@ -14,7 +14,42 @@ namespace ast
   /// LetExp.
   class LetExp : public Exp
   {
-    // FIXME: Some code was deleted here.
+  public:
+      /** \name Ctor & dtor.
+       ** \{ */
+      /// Construct a LetExp node.
+      LetExp(const Location& location, Exp* declarations, Exp* instructions);
+      LetExp(const LetExp&) = delete;
+      LetExp& operator=(const LetExp&) = delete;
+      /// Destroy a LetExp node.
+      ~LetExp() override;
+      /** \} */
+
+      /// \name Visitors entry point.
+      /// \{ */
+      /// Accept a const visitor \a v.
+      void accept(ConstVisitor& v) const override;
+      /// Accept a non-const visitor \a v.
+      void accept(Visitor& v) override;
+      /// \}
+
+      /** \name Accessors.
+       ** \{ */
+      /// Return declarations of the statement.
+      const Exp& declarations_get() const;
+      /// Return declarations of the statement.
+      Exp& declarations_get();
+      /// Return instructions executed in the statement.
+      const Exp& instructions_get() const;
+      /// Return instructions executed in the statement.
+      Exp& instructions_get();
+      /** \} */
+
+  protected:
+      /// High bound of the loop.
+      Exp* declarations_;
+      /// Instructions executed in the loop.
+      Exp* instructions_;
   };
 } // namespace ast
 #include <ast/let-exp.hxx>
