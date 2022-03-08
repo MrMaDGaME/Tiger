@@ -9,5 +9,19 @@
 
 namespace ast
 {
-  // FIXME: Some code was deleted here.
+    SeqExp::SeqExp(const Location& location, std::list<Exp*> exps)
+            : Exp(location)
+            , exps_(exps)
+    {}
+
+    SeqExp::~SeqExp()
+    {
+        for (Exp* exp : exps_){
+            delete exp;
+        }
+    }
+
+    void SeqExp::accept(ConstVisitor& v) const { v(*this); }
+
+    void SeqExp::accept(Visitor& v) { v(*this); }
 } // namespace ast

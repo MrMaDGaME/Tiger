@@ -31,7 +31,7 @@ Incomplete classes are tagged with a `*'.
     OpExp           (Exp left, Oper oper, Exp right)
 *   RecordExp
 *   SeqExp
-*   StringExp
+*   StringExp//DONE (string value)
     WhileExp        (Exp test, Exp body)
 
   /Ty/              ()

@@ -9,5 +9,6 @@
 
 namespace ast
 {
-  // FIXME: Some code was deleted here.
+    inline const std::list<Exp*> SeqExp::exps_get() const { return exps_; }
+    inline std::list<Exp*> SeqExp::exps_get() { return exps_; }
 } // namespace ast

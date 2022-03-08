@@ -77,7 +77,9 @@ namespace ast
   template <template <typename> class Const>
   void GenDefaultVisitor<Const>::operator()(const_t<SeqExp>& e)
   {
-    // FIXME: Some code was deleted here.
+    for (Exp* exp : e.exps_get()){
+        exp->accept(*this);
+    }
   }
 
   template <template <typename> class Const>
