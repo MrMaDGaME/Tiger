@@ -50,6 +50,12 @@ namespace ast
     ostr_ << "_cast(" << e.exp_get() << ", " << e.ty_get() << ')';
   }
 
-  // FIXME: Some code was deleted here.
+    // FIXME: Some code was deleted here.
+  void PrettyPrinter::operator()(const IfExp& e)
+  {
+      ostr_ << "if " << e.condition_get() << " then " << misc::incendl <<  e.body_get() << misc::decindent;
+      ostr_ << "else" << misc::incendl << e.body_get() << misc::decindent;
+  }
+
 
 } // namespace ast

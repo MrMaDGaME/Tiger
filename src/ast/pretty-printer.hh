@@ -29,6 +29,7 @@ namespace ast
     void operator()(const FieldVar& e) override;
     void operator()(const SubscriptVar& e) override;
     void operator()(const CastExp& e) override;
+    void operator()(const IfExp& e) override;
     // FIXME: Some code was deleted here.
     /// \}
 
