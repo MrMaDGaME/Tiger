@@ -12,17 +12,17 @@ Incomplete classes are tagged with a `*'.
 
   /Exp/             ()
     /Var/           ()
-*     FieldVar
+*     FieldVar//DONE(Var var, misc::symbol name)
       SimpleVar     (symbol name)
       SubscriptVar  (Var var, Exp index)
 
-*   ArrayExp
-*   AssignExp
-*   BreakExp //DONE (string break_str)
-*   CallExp
+*   ArrayExp //DONE
+*   AssignExp //DONE()
+*   BreakExp //DONE ()
+*   CallExp //DONE ()
 *     MethodCallExp
     CastExp         (Exp exp, Ty ty)
-    ForExp          (VarDec vardec, Exp hi, Exp body)
+    ForExp          (VarDec vardec, xpE hi, Exp body)
 *   IfExp // DONE   (Exp condition, Exp body, Exp else_clause)
     IntExp          (int value)
 *   LetExp // DONE  (Exp declarations, Exp instructions)
@@ -30,7 +30,7 @@ Incomplete classes are tagged with a `*'.
 *   ObjectExp
     OpExp           (Exp left, Oper oper, Exp right)
 *   RecordExp
-*   SeqExp
+*   SeqExp //DONE   (exps_type exps)
 *   StringExp//DONE (string value)
     WhileExp        (Exp test, Exp body)
 

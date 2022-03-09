@@ -10,7 +10,9 @@ namespace ast
 {
     BreakExp::BreakExp(const Location& location)
             : Exp(location)
-    {}
+    {
+        break_str_ = "break";
+    }
 
     BreakExp::~BreakExp()
     {}

@@ -18,7 +18,7 @@ namespace ast
       /** \name Ctor & dtor.
        ** \{ */
       /// Construct a LetExp node.
-      LetExp(const Location& location, Exp* declarations, Exp* instructions);
+      LetExp(const Location& location, ChunkList* declarations, Exp* instructions);
       LetExp(const LetExp&) = delete;
       LetExp& operator=(const LetExp&) = delete;
       /// Destroy a LetExp node.
@@ -36,9 +36,9 @@ namespace ast
       /** \name Accessors.
        ** \{ */
       /// Return declarations of the statement.
-      const Exp& declarations_get() const;
+      const ChunkList& declarations_get() const;
       /// Return declarations of the statement.
-      Exp& declarations_get();
+      ChunkList& declarations_get();
       /// Return instructions executed in the statement.
       const Exp& instructions_get() const;
       /// Return instructions executed in the statement.
@@ -47,7 +47,7 @@ namespace ast
 
   protected:
       /// High bound of the loop.
-      Exp* declarations_;
+      ChunkList* declarations_;
       /// Instructions executed in the loop.
       Exp* instructions_;
   };

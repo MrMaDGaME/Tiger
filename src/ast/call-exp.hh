@@ -14,7 +14,42 @@ namespace ast
   /// CallExp.
   class CallExp : public Exp
   {
-    // FIXME: Some code was deleted here.
+  public:
+      /** \name Ctor & dtor.
+       ** \{ */
+      /// Construct a CallExp node.
+      CallExp(const Location& location, misc::symbol name, exps_type* args);
+      CallExp(const CallExp&) = delete;
+      CallExp& operator=(const CallExp&) = delete;
+      /// Destroy a CallExp node.
+      ~CallExp() override;
+      /** \} */
+
+      /// \name Visitors entry point.
+      /// \{ */
+      /// Accept a const visitor \a v.
+      void accept(ConstVisitor& v) const override;
+      /// Accept a non-const visitor \a v.
+      void accept(Visitor& v) override;
+      /// \}
+
+      /** \name Accessors.
+       ** \{ */
+      /// Return declarations of the statement.
+      const misc::symbol name_get() const;
+      /// Return declarations of the statement.
+      misc::symbol name_get();
+      /// Return instructions executed in the statement.
+      const exps_type& args_get() const;
+      /// Return instructions executed in the statement.
+      exps_type& args_get();
+      /** \} */
+
+  protected:
+      /// High bound of the loop.
+      misc::symbol name_;
+      /// Instructions executed in the loop.
+      exps_type* args_;
   };
 } // namespace ast
 #include <ast/call-exp.hxx>

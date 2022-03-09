@@ -9,9 +9,9 @@
 
 namespace ast
 {
-    inline const Exp& LetExp::declarations_get() const { return *condition_; }
-    inline Exp& LetExp::declarations_get() { return *condition_; }
+    inline const ChunkList& LetExp::declarations_get() const { return *declarations_; }
+    inline ChunkList& LetExp::declarations_get() { return *declarations_; }
 
-    inline const Exp& LetExp::instructions_get() const { return *body_; }
-    inline Exp& LetExp::instructions_get() { return *body_; }
+    inline const Exp& LetExp::instructions_get() const { return *instructions_; }
+    inline Exp& LetExp::instructions_get() { return *instructions_; }
 } // namespace ast

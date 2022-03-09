@@ -16,7 +16,7 @@ namespace ast
       /** \name Ctor & dtor.
        ** \{ */
       /// Construct a SeqExp node.
-      SeqExp(const Location& location, std::list<Exp*> exps);
+      SeqExp(const Location& location, exps_type* exps);
       SeqExp(const SeqExp&) = delete;
       SeqExp& operator=(const SeqExp&) = delete;
       /// Destroy a SeqExp node.
@@ -34,14 +34,14 @@ namespace ast
       /** \name Accessors.
        ** \{ */
       /// Return the expression list.
-      const std::list<Exp*> exps_get() const;
+      const exps_type& exps_get() const;
       /// Return the expression list.
-      std::list<Exp*> exps_get();
+      exps_type& exps_get();
       /** \} */
 
   protected:
       /// Expression list.
-      std::list<Exp*> exps_;
+      exps_type* exps_;
   };
 } // namespace ast
 #include <ast/seq-exp.hxx>

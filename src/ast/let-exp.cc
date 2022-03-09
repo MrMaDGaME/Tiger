@@ -8,7 +8,7 @@
 
 namespace ast
 {
-    LetExp::LetExp(const Location& location, Exp* declarations, Exp* instructions)
+    LetExp::LetExp(const Location& location, ChunkList* declarations, Exp* instructions)
             : Exp(location)
             , declarations_(declarations)
             , instructions_(instructions)
