@@ -31,5 +31,27 @@ namespace ast
 
 std::string str(ast::OpExp::Oper oper)
 {
-  // FIXME: Some code was deleted here.
+    switch (oper) {
+        case ast::OpExp::Oper::add:
+            return std::string("+");
+        case ast::OpExp::Oper::sub:
+            return std::string("-");
+        case ast::OpExp::Oper::mul:
+            return std::string("*");
+        case ast::OpExp::Oper::div:
+            return std::string("/");
+        case ast::OpExp::Oper::eq:
+            return std::string("=");
+        case ast::OpExp::Oper::ne:
+            return std::string("<>");
+        case ast::OpExp::Oper::lt:
+            return std::string("<");
+        case ast::OpExp::Oper::le:
+            return std::string("<=");
+        case ast::OpExp::Oper::gt:
+            return std::string(">");
+        case ast::OpExp::Oper::ge:
+            return std::string(">=");
+    }
+    throw std::invalid_argument("opExp : str : couldn't find matching operator");
 }

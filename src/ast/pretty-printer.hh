@@ -31,6 +31,19 @@ namespace ast
     void operator()(const CastExp& e) override;
     void operator()(const IfExp& e) override;
     // FIXME: Some code was deleted here.
+    void operator()(const LetExp& e)override;
+    void operator()(const OpExp& e)override;
+    void operator()(const BreakExp& e)override;
+    void operator()(const NilExp& e)override;
+    void operator()(const ArrayExp& e)override;
+    void operator()(const ForExp& e)override;
+    void operator()(const WhileExp& e)override;
+    void operator()(const StringExp& e)override;
+    void operator()(const RecordExp& e)override;
+    void operator()(const ChunkList& e)override;
+    void operator()(const AssignExp& e)override;
+    void operator()(const SeqExp& e) override;
+
     /// \}
 
   private:

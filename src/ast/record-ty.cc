@@ -9,7 +9,7 @@
 
 namespace ast
 {
-    RecordTy::RecordTy(const Location& location, fieldinits_type* fields)
+    RecordTy::RecordTy(const Location& location, fields_type* fields)
             : Ty(location)
             , fields_(fields)
     {}

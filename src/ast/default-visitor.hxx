@@ -90,13 +90,13 @@ namespace ast
       e.exp_get().accept(*this);
   }
 
-  template <template <typename> class Const>
+  template <template <typename> class Const> //FIXME CA MARCH PU
   void GenDefaultVisitor<Const>::operator()(const_t<IfExp>& e)
   {
     e.condition_get().accept(*this);
     e.body_get().accept(*this);
-    if (e.else_clause_get() != nullptr)
-        e.else_clause_get().accept(*this);
+   //FIXME ? if (e.else_clause_get() != nullptr)
+    e.else_clause_get().accept(*this);
   }
 
   template <template <typename> class Const>

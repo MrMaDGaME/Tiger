@@ -36,7 +36,7 @@ namespace ast
   void PrettyPrinter::operator()(const FieldVar& e)
   {
     // FIXME: Some code was deleted here.
-    ostr_ << "var " << e.name_get() << " := " << e.var_get() ";\n";
+    ostr_ << "var " << e.name_get() << " := " << e.var_get() << ";\n";
   }
 
   /* Foo[10]. */
@@ -51,13 +51,13 @@ namespace ast
     ostr_ << "_cast(" << e.exp_get() << ", " << e.ty_get() << ')';
   }
 
-    // FIXME: Some code was deleted here.
+    // FIXME: Some code was deleted here. AJOUTER DANS HH
     // If printer
   void PrettyPrinter::operator()(const IfExp& e)
   {
       ostr_ << "if " << e.condition_get() << " then " << misc::incendl <<  e.body_get() << misc::decindent;
-      if (e.else_clause_get() != nullptr)
-        ostr_ << "else" << misc::incendl << e.body_get() << misc::decindent;
+      //if (e.else_clause_get() == 0) //bizar bizar ca marchait avant FIXME ?
+      ostr_ << "else" << misc::incendl << e.body_get() << misc::decindent;
   }
 
   //SeqExp printer
@@ -72,13 +72,13 @@ namespace ast
   //LetExp printer
   void PrettyPrinter::operator()(const LetExp& e)
   {
-      ostr_ << "let" << misc::incendl <<  e.declaration_get() << misc::decindent;
+      ostr_ << "let" << misc::incendl <<  e.declarations_get() << misc::decindent;
   }
 
   //OpExp printer
   void PrettyPrinter::operator()(const OpExp& e)
   {
-      ostr_ << e.left_get() << " " << e.oper_get() << " " << e.right_get();
+      ostr_ << e.left_get() << " " << str(e.oper_get()) << " " << e.right_get();
   }
 
   //BreakExp printer
@@ -102,13 +102,13 @@ namespace ast
   //ForExp printer
   void PrettyPrinter::operator()(const ForExp& e)
   {
-      ostr_ << "for " << PrettyPrinter::operator()(e.vardec_get()) << " to " << e.hi_get() << " do " << PrettyPrinter::operator()(e.body_get());
+      ostr_ << "for " << e.vardec_get() << " to " << e.hi_get() << " do " << e.body_get();
   }
 
   //While printer
   void PrettyPrinter::operator()(const WhileExp& e)
   {
-      ostr_ << "while " << PrettyPrinter::operator()(e.test_get()) << " do " << PrettyPrinter::operator()(e.body_get());
+      ostr_ << "while " << e.test_get() << " do " << e.body_get();
   }
 
   //StringExp printer
@@ -120,7 +120,7 @@ namespace ast
   //RecordExp printer
   void PrettyPrinter::operator()(const RecordExp& e)
   {
-      ostr_ << PrettyPrinter::operator()(e.type_name_get()) << ' ' << PrettyPrinter::operator()(e.fields_get());//FIXME: Weird printing
+    //FIXME  ostr_ << e.type_name_get() << ' ' << e.fields_get();//FIXME: Weird printing //fields_init is an array of field-init
   }
 
   //ChunkList printer
@@ -132,7 +132,7 @@ namespace ast
   //AssignExp printer
   void PrettyPrinter::operator()(const AssignExp& e)
   {
-      ostr_ << PrettyPrinter::operator()(e.var_get()) << " := " << PrettyPrinter::operator()(e.exp_get());
+      ostr_ << e.var_get() << " := " << e.exp_get();
   }
 
   //
