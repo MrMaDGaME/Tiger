@@ -29,7 +29,7 @@ Incomplete classes are tagged with a `*'.
     NilExp          ()
 *   ObjectExp //DONE
     OpExp           (Exp left, Oper oper, Exp right)
-*   RecordExp
+*   RecordExp // DONE
 *   SeqExp //DONE   (exps_type exps)
 *   StringExp//DONE (string value)
     WhileExp        (Exp test, Exp body)
@@ -38,7 +38,7 @@ Incomplete classes are tagged with a `*'.
     ArrayTy         (NameTy base_type)
     ClassTy         (NameTy super, ChunkList chunks)
     NameTy          (symbol name)
-*   RecordTy
+*   RecordTy //DONE
 
   ChunkList         (list_type chunks)
 

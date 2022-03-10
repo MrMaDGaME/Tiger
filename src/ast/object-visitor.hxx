@@ -27,7 +27,7 @@ namespace ast
   template <template <typename> class Const>
   void GenObjectVisitor<Const>::operator()(const_t<ClassTy>& e)
   {
-    // FIXME: Some code was deleted here.
+      // FIXME: Some code was deleted here.
   }
 
   template <template <typename> class Const>
