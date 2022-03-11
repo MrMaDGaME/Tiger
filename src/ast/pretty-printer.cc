@@ -90,6 +90,7 @@ namespace ast
   //NilExp printer
   void PrettyPrinter::operator()(const NilExp& e)
   {
+      (void)e;
       ostr_ << "nil";
   }
 

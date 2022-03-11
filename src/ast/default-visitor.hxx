@@ -58,7 +58,7 @@ namespace ast
   template <template <typename> class Const>
   void GenDefaultVisitor<Const>::operator()(const_t<CallExp>& e)
   {
-      e.args_get().accept(*this);
+      //e.args_get().accept(*this);
   }
 
   template <template <typename> class Const>
@@ -71,8 +71,8 @@ namespace ast
   template <template <typename> class Const>
   void GenDefaultVisitor<Const>::operator()(const_t<RecordExp>& e)
   {
-      e.type_name_get().accept(*this);
-      e.fields_get().accept(*this);
+     // e.type_name_get().accept(*this);
+     // e.fields_get().accept(*this);
   }
 
   template <template <typename> class Const>
@@ -149,8 +149,8 @@ namespace ast
   template <template <typename> class Const>
   void GenDefaultVisitor<Const>::operator()(const_t<ChunkList>& e)
   {
-      e.decs_get().accept(*this);
-      e.body_get().accept(*this);
+    //  e.decs_get().accept(*this);
+    //  e.body_get().accept(*this);
   }
 
   template <template <typename> class Const>
@@ -191,9 +191,9 @@ namespace ast
   template <template <typename> class Const>
   void GenDefaultVisitor<Const>::operator()(const_t<FunctionDec>& e)
   {
-      e.formals_get().accept(*this);
+    /*  e.formals_get().accept(*this);
       e.result_get().accept(*this);
-      e.body_get().accept(*this);
+      e.body_get().accept(*this);*/
   }
 
   template <template <typename> class Const>
@@ -215,7 +215,7 @@ namespace ast
   template <template <typename> class Const>
   void GenDefaultVisitor<Const>::operator()(const_t<RecordTy>& e)
   {
-      e.fields_get().accept(*this);
+    //  e.fields_get().accept(*this);
   }
 
   template <template <typename> class Const>
