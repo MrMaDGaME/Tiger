@@ -198,6 +198,13 @@
 %type <ast::NameTy*>          typeid
 %type <ast::Ty*>              ty
 
+%type <ast::FunctionChunk*>   funchunk
+%type <ast::FunctionDec*>     fundec
+%type <ast::VarChunk*>        varchunk
+%type <ast::VarDec*>          vardec
+%type <ast::Var*>             lvalue
+%type <ast:SeqExp*>           exps
+
 %type <ast::Field*>           tyfield
 %type <ast::fields_type*>     tyfields tyfields.1
   // FIXME: Some code was deleted here (More %types).
@@ -228,84 +235,82 @@
 %%
 program:
   /* Parsing a source program.  */
-  exp
-   { tp.ast_ = $1; }
+  exp { tp.ast_ = $1; }
 | /* Parsing an imported file.  */
-  chunks
-   { tp.ast_ = $1; }
+  chunks { tp.ast_ = $1; }
 ;
 
 exps:
-    %empty
-  | exp
-  | exp ";" exps
+    %empty          { $$ = tp.td_.make_ChunkList(@$); }
+  | exp             { tp.ast_ = $1; }
+  | exp ";" exps    { tp.ast_ = $1; tp.td_.make_SeqExp(@$, $3); }
 
 
 exp:
-  INT
-   { $$ = tp.td_.make_IntExp(@$, $1); }
+  INT                                           { $$ = tp.td_.make_IntExp(@$, $1); }
   // FIXME: Some code was deleted here (More rules).
-  | "nil"
-  | STRING
+  | "nil"                                       { tp.td_.make_NilExp(@$); }
+  | STRING                                      { tp.td_.make_StringExp(@$, $1); }
   /* Array and record creations. */
-  | typeid "[" exp "]" "of" exp
-  | typeid "{" "}"
-  | typeid "{" ID "=" exp "}"
-  | typeid "{" ID "=" exp array_r "}"
+  | typeid "[" exp "]" "of" exp                 { tp.td_.make_ArrayExp(@$, tp.td_.make_ArrayTy(@1, $1), $3, $6); }
+  | typeid "{" "}"                              { tp.td_.make_RecordExp(@$, tp.td_.make_RecordTy(@1, $1), nullptr); }
+  | typeid "{" ID "=" exp "}"                   { tp.td_.make_RecordExp(@$, tp.td_.make_RecordTy(@1, $1), tp.td_.make_fieldinits_type(tp.td_.make_OpExp(@3, $3, eq, $5))); }
+  | typeid "{" ID "=" exp record_r "}"          { tp.td_.make_RecordExp(@$, tp.td_.make_RecordTy(@1, $1), tp.td_.make_fieldinits_type(tp.td_.make_OpExp(@3, $3, eq, $5))); }
 
   /* Variables, field, elements of an array. */
-  | lvalue
+  | lvalue                      { tp.td_.make_SimpleVar(@$, $1); }
 
   /* Function call. */
-  | ID "(" ")"
-  | ID "(" exp ")"
-  | ID "(" exp function_r ")"
+  | ID "(" ")"                  { tp.td_.make_FunctionChunk(nullptr); }
+  | ID "(" exp ")"              { tp.td_.make_FunctionChunk($3); }
+  | ID "(" exp function_r ")"   { tp.td_.make_FunctionChunk($3); }
 
   /* Operations. */
-  | "-" exp
-  | exp "+" exp
-  | exp "<=" exp
-  | exp ">=" exp
-  | exp "<>" exp
-  | exp "-" exp
-  | exp "*" exp
-  | exp "/" exp
-  | exp "=" exp
-  | exp "<" exp
-  | exp ">" exp
-  | exp "&" exp
-  | exp "|" exp
-  | "(" exps ")"
+  | "-" exp         { tp.td_.make_OpExp(@$, 0, sub, $2); }
+  | exp "+" exp     { tp.td_.make_OpExp(@$, $1, add, $3); }
+  | exp "<=" exp    { tp.td_.make_OpExp(@$, $1, le, $3); }
+  | exp ">=" exp    { tp.td_.make_OpExp(@$, $1, ge, $3); }
+  | exp "<>" exp    { tp.td_.make_OpExp(@$, $1, ne, $3); }
+  | exp "-" exp     { tp.td_.make_OpExp(@$, $1, sub, $3); }
+  | exp "*" exp     { tp.td_.make_OpExp(@$, $1, mul, $3); }
+  | exp "/" exp     { tp.td_.make_OpExp(@$, $1, div, $3); }
+  | exp "=" exp     { tp.td_.make_OpExp(@$, $1, eq, $3); }
+  | exp "<" exp     { tp.td_.make_OpExp(@$, $1, lt, $3); }
+  | exp ">" exp     { tp.td_.make_OpExp(@$, $1, gt, $3); }
+  | exp "&" exp     { $$ = $1 && $3; }
+  | exp "|" exp     { $$ = $1 || $3; }
+  | "(" exps ")"    { tp.td_.make_SeqExp(@$, $2); }
 
   /* Assignment. */
-  | lvalue ":=" exp
+  | lvalue ":=" exp     { tp.td_.make_AssignExp(@$, $1, $3); }
 
   /* Control structures. */
-  | "if" exp "then" exp
-  | "if" exp "then" exp "else" exp
-  | "while" exp "do" exp
-  | "for" ID ":=" exp "to" exp "do" exp
-  | "break"
-  | "let" chunks "in" exp "end"
+  | "if" exp "then" exp                     { tp.td_.make_IfExp(@$, $2, $4); }
+  | "if" exp "then" exp "else" exp          { tp.td_.make_IfExp(@$, $2, $4, $6); }
+  | "while" exp "do" exp                    { tp.td_.make_WhileExp(@$, $2, $4); }
+  | "for" ID ":=" exp "to" exp "do" exp     { tp.td_.make_ForExp(@$, make_VarDec(@2, $2, nullptr, $4), $6, $8); }
+  | "break"                                 { tp.td_.make_BreakExp(@$); }
+  | "let" chunks "in" exp "end"             { tp.td_.make_make_LetExp(@$, $2, $4); }
 ;
 
-array_r:
-     "," ID "=" exp
-   | "," ID "=" exp array_r
+record_r:
+     "," ID "=" exp             { tp.td_.make_RecordExp(@$, $2, $4); }
+   | "," ID "=" exp record_r    { tp.td_.make_RecordExp(@$, $2, $4); }
 ;
 
 function_r:
-    "," exp
-   | "," exp function_r
+    "," exp                 { tp.ast_ = $2; }
+   | "," exp function_r     { tp.ast_ = $2; }
 ;
 
 lvalue:
-    ID
+    ID                          { tp.td_.make_NameTy(@$, $1); }
   /* Record field access. */
-  | lvalue "." ID
+  | lvalue "." ID               { tp.td_.make_FieldVar(@$, $1, $3); }
   /* Array subscript. */
-  | lvalue "[" exp "]"
+  | lvalue "[" exp "]"          { tp.td_.make_SubscriptVar(@$, $1, $3); }
 ;
+
 /*---------------.
 | Declarations.  |
 `---------------*/
@@ -313,7 +318,7 @@ lvalue:
 %token CHUNKS "_chunks";
 chunks:
   /* Chunks are contiguous series of declarations of the same type
-     (TypeDec, FunctionDec...) to which we allow certain specfic behavior like
+     (TypeDec, FunctionDec...) to which we allow certain specific behavior like
      self referencing.
      They are held by a ChunkList, that can be empty, like in this case:
         let
@@ -324,34 +329,36 @@ chunks:
   %empty                  { $$ = tp.td_.make_ChunkList(@$); }
 | tychunk   chunks        { $$ = $2; $$->push_front($1); }
   // FIXME: Some code was deleted here (More rules).
-| funchunk   chunks
-| varchunk   chunks
+| funchunk   chunks       { $$ = $2; $$->push_front($1); }
+| varchunk   chunks       { $$ = $2; $$->push_front($1); }
 ;
 // FIXME: Some code was deleted here (More rules). DONE
-
 
   // END FIXME: Some code was deleted here (More rules). DONE
 ;
 
 varchunk:
-     vardec %prec CHUNKS
-    | vardec tychunk
+     vardec %prec CHUNKS    { $$ = tp.td_.make_VarChunk(@1); $$->push_front(*$1); }
+    | vardec tychunk        { $$ = $2; $$->push_front(*$1); }
 ;
 
 funchunk:
-     fundec %prec CHUNKS
-    | fundec tychunk
+     fundec %prec CHUNKS    { $$ = tp.td_.make_FunctionChunk(@1); $$->push_front(*$1); }
+    | fundec tychunk        { $$ = $2; $$->push_front(*$1); }
+;
 
 vardec:
- "var" ID ":=" exp ;
- |"var" ID ":" typeid ":=" exp ;
+ "var" ID ":=" exp                 { $$ = tp.td_.make_VarDec(@$, $2, nullptr, $4); }
+ |"var" ID ":" typeid ":=" exp    { $$ = tp.td_.make_VarDec(@$, $2, $4, $6); }
+ ;
 
 fundec :
-    "function" ID "(" tyfields ")" "=" exp
-  | "function" ID "(" tyfields ")" ":" typeid "=" exp
-  | "primitive" ID "(" tyfields ")"
-  | "primitive" ID "(" tyfields ")" ":" typeid
+    "function" ID "(" tyfields ")" "=" exp              { tp.td_.make_FunctionDec(@$, $2, make_VarChunk(@4), nullptr, $7); }
+  | "function" ID "(" tyfields ")" ":" typeid "=" exp   { tp.td_.make_FunctionDec(@$, $2, make_VarChunk(@4), make_NameTy(@7, $7), $7); }
+  | "primitive" ID "(" tyfields ")"                     { tp.td_.make_FunctionDec(@$, $2, make_VarChunk(@4), nullptr, nullptr); }
+  | "primitive" ID "(" tyfields ")" ":" typeid          { tp.td_.make_FunctionDec(@$, $2, make_VarChunk(@4), make_NameTy(@7, $7), nullptr); }
 ;
+
 /*--------------------.
 | Type Declarations.  |
 `--------------------*/
