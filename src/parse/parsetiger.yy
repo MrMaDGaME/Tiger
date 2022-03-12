@@ -15,7 +15,7 @@
 // In TC, we expect the GLR to resolve one Shift-Reduce and zero Reduce-Reduce
 // conflict at runtime. Use %expect and %expect-rr to tell Bison about it.
 %expect 1
-%expect-rr 1 // remettre a 0
+%expect-rr 0 // remettre a 0
 
 %define parse.error verbose
 %defines
@@ -229,17 +229,18 @@
 // which can be understood as a list of two TypeChunk containing
 // a unique TypeDec each, or a single TypeChunk containing two TypeDec.
 // We want the latter.
-%precedence CHUNKS
-%precedence TYPE
 
-%precedence "then" "else" "do"
+%precedence "of"
+%precedence "do" ":="
+%right "then" "else"
 %left "|"
 %left "&"
-%nonassoc ">=" "<=" "=" "<>" "<" ">" ":="
+%nonassoc ">=" "<=" "=" "<>" "<" ">"
 %left "+" "-"
 %left "*" "/"
-%precedence "of"
 
+%precedence CHUNKS
+%precedence TYPE
 
 %start program
 
@@ -316,7 +317,7 @@ function_r:
 ;
 
 lvalue:
-    ID                          { $$ = tp.td_.make_NameTy(@$, $1); }
+    typeid                      { $$ = tp.td_.make_NameTy(@$, $1); }
   /* Record field access. */
   | lvalue "." ID               { $$ = tp.td_.make_FieldVar(@$, $1, $3); }
   /* Array subscript. */
