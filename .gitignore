@@ -50,3 +50,24 @@ Makefile
 
 .idea
 .DS_Store
+**/*.Plo
+**/*.lo
+**/*.o
+**/*.Tlo
+**/*.Po
+**/*.Tpo
+src/task/.deps/*
+src/parse/location.hh
+src/parse/location.hh.bak
+src/parse/parsetiger.cc
+src/parse/parsetiger.hh
+src/parse/parsetiger.output
+src/parse/parsetiger.stamp
+src/object/.deps/
+src/.deps/
+config.*
+build-aux/
+src/bind/.deps/
+src/bind/.dirstamp
+src/escapes/.deps/
+src/escapes/.dirstamp
