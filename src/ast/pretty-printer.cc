@@ -142,7 +142,9 @@ namespace ast
     // RecordExp printer
     void PrettyPrinter::operator()(const RecordExp &e)
     {
-        // FIXME  ostr_ << e.type_name_get() << ' ' << e.fields_get();//FIXME:
+        ostr_ << "type " << e.type_name_get() << " = {";
+        std::for_each(e.fields_get().begin(), e.fields_get().end(), [this](auto field){ostr_ << field->name_get() << " : " << field->init_get() << ", ";});
+        ostr_ << "}\n";
         // Weird printing //fields_init is an array of field-init
     }
 
@@ -160,6 +162,54 @@ namespace ast
 
     void PrettyPrinter::operator()(const ArrayTy &e)
     {
+        // FIXME
+    }
+
+    void PrettyPrinter::operator()(const CallExp &e) {
+        // FIXME
+    }
+
+    void PrettyPrinter::operator()(const ClassTy &e) {
+        // FIXME
+    }
+
+    void PrettyPrinter::operator()(const Field &e) {
+        // FIXME
+    }
+
+    void PrettyPrinter::operator()(const FieldInit &e) {
+        // FIXME
+    }
+
+    void PrettyPrinter::operator()(const IntExp &e) {
+        // FIXME
+    }
+
+    void PrettyPrinter::operator()(const MethodCallExp &e) {
+        // FIXME
+    }
+
+    void PrettyPrinter::operator()(const MethodDec &e) {
+        // FIXME
+    }
+
+    void PrettyPrinter::operator()(const NameTy &e) {
+        // FIXME
+    }
+
+    void PrettyPrinter::operator()(const ObjectExp &e) {
+        // FIXME
+    }
+
+    void PrettyPrinter::operator()(const RecordTy &e) {
+        // FIXME
+    }
+
+    void PrettyPrinter::operator()(const TypeDec &e) {
+        // FIXME
+    }
+
+    void PrettyPrinter::operator()(const VarDec &e) {
         // FIXME
     }
 
