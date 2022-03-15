@@ -71,3 +71,9 @@ src/bind/.deps/
 src/bind/.dirstamp
 src/escapes/.deps/
 src/escapes/.dirstamp
+build-aux/config.guess
+build-aux/config.sub
+build-aux/ltmain.sh
+build-aux/m4/libtool.m4
+build-aux/ltmain.sh
+config.h.in~
