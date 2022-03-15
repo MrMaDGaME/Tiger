@@ -9,6 +9,6 @@
 
 namespace escapes
 {
-  // FIXME: Some code was deleted here.
+    // FIXME: Some code was deleted here.
 
 } // namespace escapes

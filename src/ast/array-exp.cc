@@ -8,11 +8,12 @@
 
 namespace ast
 {
-    ArrayExp::ArrayExp(const Location& location, NameTy* type_name, Exp* size, Exp* init)
-            : Exp(location)
-            , type_name_(type_name)
-            , size_(size)
-            , init_(init)
+    ArrayExp::ArrayExp(const Location &location, NameTy *type_name, Exp *size,
+                       Exp *init)
+        : Exp(location)
+        , type_name_(type_name)
+        , size_(size)
+        , init_(init)
     {}
 
     ArrayExp::~ArrayExp()
@@ -22,7 +23,13 @@ namespace ast
         delete init_;
     }
 
-    void ArrayExp::accept(ConstVisitor& v) const { v(*this); }
+    void ArrayExp::accept(ConstVisitor &v) const
+    {
+        v(*this);
+    }
 
-    void ArrayExp::accept(Visitor& v) { v(*this); }
+    void ArrayExp::accept(Visitor &v)
+    {
+        v(*this);
+    }
 } // namespace ast

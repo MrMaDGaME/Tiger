@@ -9,9 +9,9 @@
 
 namespace ast
 {
-    RecordTy::RecordTy(const Location& location, fields_type* fields)
-            : Ty(location)
-            , fields_(fields)
+    RecordTy::RecordTy(const Location &location, fields_type *fields)
+        : Ty(location)
+        , fields_(fields)
     {}
 
     RecordTy::~RecordTy()
@@ -19,7 +19,13 @@ namespace ast
         delete fields_;
     }
 
-    void RecordTy::accept(ConstVisitor& v) const { v(*this); }
+    void RecordTy::accept(ConstVisitor &v) const
+    {
+        v(*this);
+    }
 
-    void RecordTy::accept(Visitor& v) { v(*this); }
+    void RecordTy::accept(Visitor &v)
+    {
+        v(*this);
+    }
 } // namespace ast

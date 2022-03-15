@@ -11,46 +11,46 @@
 
 namespace ast
 {
-  /// NameTy.
-  class NameTy : public Ty
-  {
-  public:
-    /** \name Ctor & dtor.
-     ** \{ */
-    /// Construct a NameTy node.
-    NameTy(const Location& location, misc::symbol name);
-    NameTy(const NameTy&) = delete;
-    NameTy& operator=(const NameTy&) = delete;
-    /// Destroy a NameTy node.
-    /** \} */
+    /// NameTy.
+    class NameTy : public Ty
+    {
+    public:
+        /** \name Ctor & dtor.
+         ** \{ */
+        /// Construct a NameTy node.
+        NameTy(const Location &location, misc::symbol name);
+        NameTy(const NameTy &) = delete;
+        NameTy &operator=(const NameTy &) = delete;
+        /// Destroy a NameTy node.
+        /** \} */
 
-    /// \name Visitors entry point.
-    /// \{ */
-    /// Accept a const visitor \a v.
-    void accept(ConstVisitor& v) const override;
-    /// Accept a non-const visitor \a v.
-    void accept(Visitor& v) override;
-    /// \}
+        /// \name Visitors entry point.
+        /// \{ */
+        /// Accept a const visitor \a v.
+        void accept(ConstVisitor &v) const override;
+        /// Accept a non-const visitor \a v.
+        void accept(Visitor &v) override;
+        /// \}
 
-    /** \name Accessors.
-     ** \{ */
-    /// Return the name of the type.
-    misc::symbol name_get() const;
-    /// Set the name of the type.
-    void name_set(misc::symbol);
-    /// Return definition site.
-    const TypeDec* def_get() const;
-    /// Return definition site.
-    TypeDec* def_get();
-    /// Set definition site.
-    void def_set(TypeDec*);
-    /** \} */
+        /** \name Accessors.
+         ** \{ */
+        /// Return the name of the type.
+        misc::symbol name_get() const;
+        /// Set the name of the type.
+        void name_set(misc::symbol);
+        /// Return definition site.
+        const TypeDec *def_get() const;
+        /// Return definition site.
+        TypeDec *def_get();
+        /// Set definition site.
+        void def_set(TypeDec *);
+        /** \} */
 
-  protected:
-    /// The name of the type.
-    misc::symbol name_;
-    /// Definition site.
-    TypeDec* def_ = nullptr;
-  };
+    protected:
+        /// The name of the type.
+        misc::symbol name_;
+        /// Definition site.
+        TypeDec *def_ = nullptr;
+    };
 } // namespace ast
 #include <ast/name-ty.hxx>

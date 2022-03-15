@@ -10,38 +10,38 @@
 
 namespace ast
 {
-  /// RecordTy.
-  class RecordTy : public Ty
-  {
-  public:
-      /** \name Ctor & dtor.
-       ** \{ */
-      /// Construct a RecordTy node.
-      RecordTy(const Location& location, fields_type* fields);
-      RecordTy(const RecordTy&) = delete;
-      RecordTy& operator=(const RecordTy&) = delete;
-      /// Destroy a RecordTy node.
-      ~RecordTy() override;
-      /** \} */
+    /// RecordTy.
+    class RecordTy : public Ty
+    {
+    public:
+        /** \name Ctor & dtor.
+         ** \{ */
+        /// Construct a RecordTy node.
+        RecordTy(const Location &location, fields_type *fields);
+        RecordTy(const RecordTy &) = delete;
+        RecordTy &operator=(const RecordTy &) = delete;
+        /// Destroy a RecordTy node.
+        ~RecordTy() override;
+        /** \} */
 
-      /// \name Visitors entry point.
-      /// \{ */
-      /// Accept a const visitor \a v.
-      void accept(ConstVisitor& v) const override;
-      /// Accept a non-const visitor \a v.
-      void accept(Visitor& v) override;
-      /// \}
+        /// \name Visitors entry point.
+        /// \{ */
+        /// Accept a const visitor \a v.
+        void accept(ConstVisitor &v) const override;
+        /// Accept a non-const visitor \a v.
+        void accept(Visitor &v) override;
+        /// \}
 
-      /** \name Accessors.
-       ** \{ */
-      /// Return instructions executed in the statement.
-      const fields_type& fields_get() const;
-      /// Return instructions executed in the statement.
-      fields_type& fields_get();
-      /** \} */
+        /** \name Accessors.
+         ** \{ */
+        /// Return instructions executed in the statement.
+        const fields_type &fields_get() const;
+        /// Return instructions executed in the statement.
+        fields_type &fields_get();
+        /** \} */
 
-  protected:
-      fields_type* fields_;
-  };
+    protected:
+        fields_type *fields_;
+    };
 } // namespace ast
 #include <ast/record-ty.hxx>

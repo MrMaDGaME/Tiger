@@ -9,16 +9,16 @@
 
 namespace ast
 {
-  /// Declare ChunkInterface
-  class ChunkInterface : public Ast
-  {
-    /** \name Ctors and dtors.
-     ** \{ */
-  public:
-    /// Construct a ChunkInterface
-    explicit ChunkInterface(const Location& location);
-    /** \} */
-  };
+    /// Declare ChunkInterface
+    class ChunkInterface : public Ast
+    {
+        /** \name Ctors and dtors.
+         ** \{ */
+    public:
+        /// Construct a ChunkInterface
+        explicit ChunkInterface(const Location &location);
+        /** \} */
+    };
 
 } // namespace ast
 

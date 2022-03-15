@@ -10,5 +10,5 @@
 
 namespace ast
 {
-  using Location = parse::location;
+    using Location = parse::location;
 }

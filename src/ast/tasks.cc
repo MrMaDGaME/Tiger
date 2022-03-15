@@ -11,20 +11,20 @@
 
 namespace ast::tasks
 {
-  // The abstract syntax tree.
-  std::unique_ptr<ast::ChunkList> the_program(nullptr);
+    // The abstract syntax tree.
+    std::unique_ptr<ast::ChunkList> the_program(nullptr);
 
-  void ast_display()
-  {
-    precondition(the_program);
-    std::cout << "/* == Abstract Syntax Tree. == */\n"
-              << *the_program << std::endl;
-  }
+    void ast_display()
+    {
+        precondition(the_program);
+        std::cout << "/* == Abstract Syntax Tree. == */\n"
+                  << *the_program << std::endl;
+    }
 
-  void ast_dump()
-  {
-    precondition(the_program);
-    ast::dump_dot(*the_program, std::cout);
-  }
+    void ast_dump()
+    {
+        precondition(the_program);
+        ast::dump_dot(*the_program, std::cout);
+    }
 
 } // namespace ast::tasks

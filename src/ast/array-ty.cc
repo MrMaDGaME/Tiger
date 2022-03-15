@@ -8,14 +8,23 @@
 
 namespace ast
 {
-  ArrayTy::ArrayTy(const Location& location, NameTy* base_type)
-    : Ty(location)
-    , base_type_(base_type)
-  {}
+    ArrayTy::ArrayTy(const Location &location, NameTy *base_type)
+        : Ty(location)
+        , base_type_(base_type)
+    {}
 
-  ArrayTy::~ArrayTy() { delete base_type_; }
+    ArrayTy::~ArrayTy()
+    {
+        delete base_type_;
+    }
 
-  void ArrayTy::accept(ConstVisitor& v) const { v(*this); }
+    void ArrayTy::accept(ConstVisitor &v) const
+    {
+        v(*this);
+    }
 
-  void ArrayTy::accept(Visitor& v) { v(*this); }
+    void ArrayTy::accept(Visitor &v)
+    {
+        v(*this);
+    }
 } // namespace ast

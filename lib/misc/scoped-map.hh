@@ -17,16 +17,17 @@
 
 namespace misc
 {
-  template <typename Key, typename Data> class scoped_map
-  {
+    template <typename Key, typename Data>
+    class scoped_map
+    {
+        // FIXME: Some code was deleted here.
+    };
+
+    template <typename Key, typename Data>
+    std::ostream &operator<<(std::ostream &ostr,
+                             const scoped_map<Key, Data> &tbl);
+
     // FIXME: Some code was deleted here.
-  };
-
-  template <typename Key, typename Data>
-  std::ostream& operator<<(std::ostream& ostr,
-                           const scoped_map<Key, Data>& tbl);
-
-  // FIXME: Some code was deleted here.
 
 } // namespace misc
 

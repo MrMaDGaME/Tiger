@@ -8,15 +8,18 @@
 
 namespace ast
 {
-  MethodDec::MethodDec(const Location& location,
-                       misc::symbol name,
-                       VarChunk* formals,
-                       NameTy* result,
-                       Exp* body)
-    : FunctionDec(location, name, formals, result, body)
-  {}
+    MethodDec::MethodDec(const Location &location, misc::symbol name,
+                         VarChunk *formals, NameTy *result, Exp *body)
+        : FunctionDec(location, name, formals, result, body)
+    {}
 
-  void MethodDec::accept(ConstVisitor& v) const { v(*this); }
+    void MethodDec::accept(ConstVisitor &v) const
+    {
+        v(*this);
+    }
 
-  void MethodDec::accept(Visitor& v) { v(*this); }
+    void MethodDec::accept(Visitor &v)
+    {
+        v(*this);
+    }
 } // namespace ast

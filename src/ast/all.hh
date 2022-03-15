@@ -5,10 +5,6 @@
 
 #pragma once
 
-#include <ast/fwd.hh>
-
-#include <ast/chunk.hh>
-
 #include <ast/array-exp.hh>
 #include <ast/array-ty.hh>
 #include <ast/assign-exp.hh>
@@ -17,6 +13,7 @@
 #include <ast/call-exp.hh>
 #include <ast/cast-exp.hh>
 #include <ast/chunk-list.hh>
+#include <ast/chunk.hh>
 #include <ast/class-ty.hh>
 #include <ast/dec.hh>
 #include <ast/escapable.hh>
@@ -26,6 +23,7 @@
 #include <ast/field.hh>
 #include <ast/for-exp.hh>
 #include <ast/function-dec.hh>
+#include <ast/fwd.hh>
 #include <ast/if-exp.hh>
 #include <ast/int-exp.hh>
 #include <ast/let-exp.hh>
