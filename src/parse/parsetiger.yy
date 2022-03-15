@@ -202,7 +202,7 @@
 %type <ast::VarChunk*>        varchunk
 %type <ast::VarDec*>          vardec
 %type <ast::Var*>             lvalue
-%type <ast:SeqExp*>           exps
+%type <ast::exps_type*>          exps exps.1
 %type <ast::RecordTy*>        record_r
 
 %type <ast::Field*>           tyfield
@@ -254,17 +254,22 @@ program:
 
 
 exps:
-    %empty          { $$ = tp.td_.make_ChunkList(@$); }
-  | exp             { $$ = tp.ast_ = $1; }
-  | exp ";" exps    { $$ = tp.ast_ = $1; tp.td_.make_SeqExp(@$, $3); }
-  | error ";"       { $$ = printf("Error on \"exp ; exps\"\n"); }
+    %empty          { $$ = tp.td_.make_exps_type(); }
+  | exps.1          { $$ = $1; }
+  /*| error ";"       { $$ = printf("Error on \"exp ; exps\"\n"); }*/
+;
+
+exps.1:
+    exps ";" exp    { $$ = $1; $$->emplace_back($3); }
+  | exp             { $$ = tp.td_.make_exps_type($1); }
+;
 
 exp:
     INT                                         { $$ = tp.td_.make_IntExp(@$, $1); }
   | "nil"                                       { $$ = tp.td_.make_NilExp(@$); }
   | STRING                                      { $$ = tp.td_.make_StringExp(@$, $1); }
   /* Array and record creations. */
-  | ID "[" exp "]" "of" exp                     { $$ = tp.td_.make_ArrayExp(@$, tp.td_.make_ArrayTy(@1, $1), $3, $6); }
+  | ID "[" exp "]" "of" exp                     { $$ = tp.td_.make_ArrayExp(@$, tp.td_.make_NameTy(@1, $1), $3, $6); }
   | typeid "{" "}"                              { $$ = tp.td_.make_RecordExp(@$, tp.td_.make_RecordTy(@1, $1), nullptr); }
   | typeid "{" ID "=" exp "}"                   { $$ = tp.td_.make_RecordExp(@$, tp.td_.make_RecordTy(@1, $1), tp.td_.make_fieldinits_type(tp.td_.make_OpExp(@3, $3, eq, $5))); }
   | typeid "{" ID "=" exp record_r "}"          { $$ = tp.td_.make_RecordExp(@$, tp.td_.make_RecordTy(@1, $1), tp.td_.make_fieldinits_type(tp.td_.make_OpExp(@3, $3, eq, $5))); }
@@ -309,18 +314,20 @@ exp:
 
   /* An expression metavariable */
   | EXP "(" INT ")"                    { $$ = tp.metavar<ast::Exp>(tp, $3); }
-   ;
 
 ;
 
+record:
+    %empty                  { $$ = tp.td_.make_RecordExp()
+
 record_r:
-     "," ID "=" exp             { $$ = tp.td_.make_RecordExp(@$, $2, $4); }
-   | "," ID "=" exp record_r    { $$ = tp.td_.make_RecordExp(@$, $2, $4); }
+    record_r "," record     { $$ = $1; $$->emplace_back($3); }
+  | record                  { $$ = tp.td_.make_VarChunk(@1); }
 ;
 
 function_r:
-    "," exp                 { $$ = tp.ast_ = $2; }
-   | "," exp function_r     { $$ = tp.ast_ = $2; }
+    "," exp                 { $$ = $2; }
+   | "," exp function_r     { $$ = $2; }
 ;
 
 %token LVALUE "_lvalue";
@@ -354,7 +361,7 @@ chunks:
 | funchunk   chunks                     { $$ = $2; $$->push_front($1); }
 | varchunk   chunks                     { $$ = $2; $$->push_front($1); }
 | "import" STRING                       { $$ = tp.parse_import($2, @$); }
-| CHUNKS "(" INT ")" chunks      { $$ = metavar<ast::ChunkList>(tp, $3); }
+| CHUNKS "(" INT ")" chunks      { $$ = $5; $$->splice_front(metavar<ast::ChunkList>(tp, $3)); }
 ;
 
 varchunk:
