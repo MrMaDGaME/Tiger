@@ -82,3 +82,6 @@ build-aux/bin/flex++
 config.h
 libtool
 tcsh/run
+**/.deps/*.Po
+**/.deps/*.Tpo
+authors.h
