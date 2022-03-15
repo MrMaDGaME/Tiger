@@ -101,7 +101,6 @@
 
   // FIXME: Some code was deleted here (Printers and destructors).
 
-
 /*-----------------------------------------.
 | Code output in the implementation file.  |
 `-----------------------------------------*/
@@ -208,20 +207,20 @@
 %type <ast::Field*>           tyfield
 %type <ast::fields_type*>     tyfields tyfields.1
 
-%destructor                   { free ($$); }    varchunk
-%destructor                   { free ($$); }    funchunk
-%destructor                   { free ($$); }    tychunk
-%destructor                   { free ($$); }    fundec
-%destructor                   { free ($$); }    tydec
-%destructor                   { free ($$); }    vardec
-%destructor                   { free ($$); }    exps
-%destructor                   { free ($$); }    lvalue
-%destructor                   { free ($$); }    ty
-%destructor                   { free ($$); }    typeid
-%destructor                   { free ($$); }    chunks
-%destructor                   { free ($$); }    exp
-%destructor                   { free ($$); }    tyfield
-%destructor                   { free ($$); }    tyfields tyfields.1
+%destructor                   { delete ($$); }    varchunk
+%destructor                   { delete ($$); }    funchunk
+%destructor                   { delete ($$); }    tychunk
+%destructor                   { delete ($$); }    fundec
+%destructor                   { delete ($$); }    tydec
+%destructor                   { delete ($$); }    vardec
+%destructor                   { delete ($$); }    exps
+%destructor                   { delete ($$); }    lvalue
+%destructor                   { delete ($$); }    ty
+%destructor                   { delete ($$); }    typeid
+%destructor                   { delete ($$); }    chunks
+%destructor                   { delete ($$); }    exp
+%destructor                   { delete ($$); }    tyfield
+%destructor                   { delete ($$); }    tyfields tyfields.1
 
 // Solving conflicts on:
 // let type foo = bar
@@ -264,7 +263,7 @@ exp:
   | "nil"                                       { $$ = tp.td_.make_NilExp(@$); }
   | STRING                                      { $$ = tp.td_.make_StringExp(@$, $1); }
   /* Array and record creations. */
-  | typeid "[" exp "]" "of" exp                 { $$ = tp.td_.make_ArrayExp(@$, tp.td_.make_ArrayTy(@1, $1), $3, $6); }
+  | ID "[" exp "]" "of" exp                     { $$ = tp.td_.make_ArrayExp(@$, tp.td_.make_ArrayTy(@1, $1), $3, $6); }
   | typeid "{" "}"                              { $$ = tp.td_.make_RecordExp(@$, tp.td_.make_RecordTy(@1, $1), nullptr); }
   | typeid "{" ID "=" exp "}"                   { $$ = tp.td_.make_RecordExp(@$, tp.td_.make_RecordTy(@1, $1), tp.td_.make_fieldinits_type(tp.td_.make_OpExp(@3, $3, eq, $5))); }
   | typeid "{" ID "=" exp record_r "}"          { $$ = tp.td_.make_RecordExp(@$, tp.td_.make_RecordTy(@1, $1), tp.td_.make_fieldinits_type(tp.td_.make_OpExp(@3, $3, eq, $5))); }
@@ -317,7 +316,7 @@ function_r:
 ;
 
 lvalue:
-    typeid                      { $$ = tp.td_.make_NameTy(@$, $1); }
+    ID                      { $$ = tp.td_.make_SimpleVar(@$, $1); }
   /* Record field access. */
   | lvalue "." ID               { $$ = tp.td_.make_FieldVar(@$, $1, $3); }
   /* Array subscript. */
