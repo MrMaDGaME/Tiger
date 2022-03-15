@@ -120,7 +120,7 @@ namespace ast
   //ForExp printer
   void PrettyPrinter::operator()(const ForExp& e)
   {
-      ostr_ << "for " << e.vardec_get() << " to " << e.hi_get() << " do " << e.body_get();
+      ostr_ << "for " << e.vardec_get().init_get() << " to " << e.hi_get() << " do " << e.body_get();
   }
 
   //While printer

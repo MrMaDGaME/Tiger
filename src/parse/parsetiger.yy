@@ -153,6 +153,7 @@
        ELSE         "else"
        END          "end"
        EQ           "="
+       EXP          "_exp"
        EXTENDS      "extends"
        FOR          "for"
        FUNCTION     "function"
@@ -303,6 +304,13 @@ exp:
   | "for" ID ":=" exp "to" exp "do" exp     { $$ = tp.td_.make_ForExp(@$, make_VarDec(@2, $2, nullptr, $4), $6, $8); }
   | "break"                                 { $$ = tp.td_.make_BreakExp(@$); }
   | "let" chunks "in" exp "end"             { $$ = tp.td_.make_make_LetExp(@$, $2, $4); }
+
+  /* Cast of an expression to a given type */
+
+  /* An expression metavariable */
+  | EXP "(" INT ")"                    { $$ = tp.metavar<ast::Exp>(tp, $3); }
+   ;
+
 ;
 
 record_r:
@@ -315,6 +323,7 @@ function_r:
    | "," exp function_r     { $$ = tp.ast_ = $2; }
 ;
 
+%token LVALUE "_lvalue";
 lvalue:
     ID                      { $$ = tp.td_.make_SimpleVar(@$, $1); }
   /* Record field access. */
@@ -322,6 +331,7 @@ lvalue:
   /* Array subscript. */
   | lvalue "[" exp "]"          { $$ = tp.td_.make_SubscriptVar(@$, $1, $3); }
   | lvalue "[" error "]"        { $$ = printf("Error on \"\lvalue [ exp ]\"\n"); free($1);}
+  | LVALUE "(" INT ")" { $$ = tp.metavar<ast::lvalue>(tp, $3); }
 ;
 
 /*---------------.
@@ -339,10 +349,12 @@ chunks:
             ..
         end
      which is why we end the recursion with a %empty. */
-  %empty                  { $$ = tp.td_.make_ChunkList(@$); }
-| tychunk   chunks        { $$ = $2; $$->push_front($1); }
-| funchunk   chunks       { $$ = $2; $$->push_front($1); }
-| varchunk   chunks       { $$ = $2; $$->push_front($1); }
+  %empty                                { $$ = tp.td_.make_ChunkList(@$); }
+| tychunk   chunks                      { $$ = $2; $$->push_front($1); }
+| funchunk   chunks                     { $$ = $2; $$->push_front($1); }
+| varchunk   chunks                     { $$ = $2; $$->push_front($1); }
+| "import" STRING                       { $$ = tp.parse_import($2, @$); }
+| CHUNKS "(" INT ")" chunks      { $$ = metavar<ast::ChunkList>(tp, $3); }
 ;
 
 varchunk:
