@@ -54,7 +54,7 @@ YY_FLEX_NAMESPACE_BEGIN
 
 /* Abbreviations.  */
 int             [0-9]+
-identifier      [a-zA-Z]+[a-zA-Z0-9_]*
+identifier      [a-zA-Z][a-zA-Z0-9_]*
 end_of_line     [\n\r]+
 comments        \/\*(.|\n)*\*\/
 white_character [\t ]
@@ -168,7 +168,7 @@ string          \"(\\.|[^\"])*\"
 
 "to"            return TOKEN(TO);
 
-"types"         return TOKEN(TYPE);
+"type"         return TOKEN(TYPE);
 
 "var"           return TOKEN(VAR);
 

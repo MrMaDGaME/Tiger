@@ -149,11 +149,6 @@ namespace ast
         // Weird printing //fields_init is an array of field-init
     }
 
-    // ChunkList printer
-    void PrettyPrinter::operator()(const ChunkList &e)
-    {
-        // FIXME: Nani?
-    }
 
     // AssignExp printer
     void PrettyPrinter::operator()(const AssignExp &e)

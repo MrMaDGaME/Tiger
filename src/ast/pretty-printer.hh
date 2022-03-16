@@ -31,7 +31,6 @@ namespace ast
         void operator()(const BreakExp &e) override;
         void operator()(const CallExp &e) override;
         void operator()(const CastExp &e) override;
-        void operator()(const ChunkList &e) override;
         void operator()(const ClassTy &e) override;
         void operator()(const Field &e) override;
         void operator()(const FieldInit &e) override;
