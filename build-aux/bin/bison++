@@ -228,8 +228,8 @@ status=0
 : ${BISON='bison'}
 
 me=$(basename $0)
-fuse_switch='/Users/matheo/local_doc/info_ing1/tiger/Tiger/build-aux/bin/fuse-switch'
-move_if_change='/Users/matheo/local_doc/info_ing1/tiger/Tiger/build-aux/bin/move-if-change --color'
+fuse_switch='/home/sygall/Documents/EPITA/Tiger/build-aux/bin/fuse-switch'
+move_if_change='/home/sygall/Documents/EPITA/Tiger/build-aux/bin/move-if-change --color'
 verbose=false
 
 get_options "$@"

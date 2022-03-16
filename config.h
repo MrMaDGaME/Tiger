@@ -37,6 +37,9 @@
 /* Define to 1 if you have the <inttypes.h> header file. */
 #define HAVE_INTTYPES_H 1
 
+/* Define to 1 if you have the <memory.h> header file. */
+#define HAVE_MEMORY_H 1
+
 /* Define to 1 if you have the <Python.h> header file. */
 /* #undef HAVE_PYTHON_H */
 
@@ -45,9 +48,6 @@
 
 /* Define to 1 if you have the <stdint.h> header file. */
 #define HAVE_STDINT_H 1
-
-/* Define to 1 if you have the <stdio.h> header file. */
-#define HAVE_STDIO_H 1
 
 /* Define to 1 if you have the <stdlib.h> header file. */
 #define HAVE_STDLIB_H 1
@@ -80,7 +80,7 @@
 #define PACKAGE_NAME "LRDE Tiger Compiler"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "LRDE Tiger Compiler 1.91.b"
+#define PACKAGE_STRING "LRDE Tiger Compiler 1.91.c"
 
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME "tc"
@@ -89,12 +89,10 @@
 #define PACKAGE_URL "http://tiger.lrde.epita.fr"
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "1.91.b"
+#define PACKAGE_VERSION "1.91.c"
 
-/* Define to 1 if all of the C90 standard headers exist (not just the ones
-   required in a freestanding environment). This macro is provided for
-   backward compatibility; new code need not use it. */
+/* Define to 1 if you have the ANSI C header files. */
 #define STDC_HEADERS 1
 
 /* Version number of package */
-#define VERSION "1.91.b"
+#define VERSION "1.91.c"

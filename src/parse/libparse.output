@@ -1,0 +1,3135 @@
+Terminals unused in grammar
+
+    "_cast"
+    "class"
+    "extends"
+    "method"
+    "new"
+
+
+State 2 conflicts: 1 shift/reduce
+
+
+Grammar
+
+    0 $accept: program "end of file"
+
+    1 program: exp
+    2        | chunks
+
+    3 exps: ε
+    4     | exps.1
+
+    5 exps.1: exps ";" exp
+    6       | exp
+
+    7 exp: "integer"
+    8    | "nil"
+    9    | "string"
+   10    | "identifier" "[" exp "]" "of" exp
+   11    | typeid "{" "}"
+   12    | typeid "{" record_r "}"
+   13    | lvalue
+   14    | "identifier" "(" ")"
+   15    | "identifier" "(" function_r ")"
+   16    | "-" exp
+   17    | exp "+" exp
+   18    | exp "<=" exp
+   19    | exp ">=" exp
+   20    | exp "<>" exp
+   21    | exp "-" exp
+   22    | exp "*" exp
+   23    | exp "/" exp
+   24    | exp "=" exp
+   25    | exp "<" exp
+   26    | exp ">" exp
+   27    | exp "&" exp
+   28    | exp "|" exp
+   29    | "(" exps ")"
+   30    | lvalue ":=" exp
+   31    | "if" exp "then" exp
+   32    | "if" exp "then" exp "else" exp
+   33    | "while" exp "do" exp
+   34    | "for" "identifier" ":=" exp "to" exp "do" exp
+   35    | "break"
+   36    | "let" chunks "in" exp "end"
+   37    | "_exp" "(" "integer" ")"
+
+   38 record_r: record_r "," "identifier" "=" exp
+   39         | "identifier" "=" exp
+
+   40 function_r: function_r "," exp
+   41           | exp
+
+   42 lvalue: "identifier"
+   43       | lvalue "." "identifier"
+   44       | lvalue "[" exp "]"
+   45       | "_lvalue" "(" "integer" ")"
+
+   46 chunks: ε
+   47       | tychunk chunks
+   48       | funchunk chunks
+   49       | varchunk chunks
+   50       | "import" "string"
+   51       | "_chunks" "(" "integer" ")" chunks
+
+   52 varchunk: vardec
+   53         | vardec varchunk
+
+   54 funchunk: fundec
+   55         | fundec funchunk
+
+   56 vardec: "var" "identifier" ":=" exp
+   57       | "var" "identifier" ":" typeid ":=" exp
+
+   58 fundec: "function" "identifier" "(" tyfields ")" "=" exp
+   59       | "function" "identifier" "(" tyfields ")" ":" typeid "=" exp
+   60       | "primitive" "identifier" "(" tyfields ")"
+   61       | "primitive" "identifier" "(" tyfields ")" ":" typeid
+
+   62 tychunk: tydec
+   63        | tydec tychunk
+
+   64 tydec: "type" "identifier" "=" ty
+
+   65 ty: typeid
+   66   | "{" tyfields "}"
+   67   | "array" "of" typeid
+
+   68 tyfields: ε
+   69         | tyfields.1
+
+   70 tyfields.1: tyfields.1 "," tyfield
+   71           | tyfield
+
+   72 tyfield: "identifier" ":" typeid
+
+   73 typeid: "identifier"
+   74       | "_namety" "(" "integer" ")"
+
+
+Terminals, with rules where they appear
+
+    "end of file" (0) 0
+    error (256)
+    "string" <std::string> (258) 9 50
+    "identifier" <misc::symbol> (259) 10 14 15 34 38 39 42 43 56 57 58 59 60 61 64 72 73
+    "integer" <int> (260) 7 37 45 51 74
+    "&" (261) 27
+    "array" (262) 67
+    ":=" (263) 30 34 56 57
+    "break" (264) 35
+    "_cast" (265)
+    "class" (266)
+    ":" (267) 57 59 61 72
+    "," (268) 38 40 70
+    "/" (269) 23
+    "do" (270) 33 34
+    "." (271) 43
+    "else" (272) 32
+    "end" (273) 36
+    "=" (274) 24 38 39 58 59 64
+    "_exp" (275) 37
+    "extends" (276)
+    "for" (277) 34
+    "function" (278) 58 59
+    ">=" (279) 19
+    ">" (280) 26
+    "if" (281) 31 32
+    "import" (282) 50
+    "in" (283) 36
+    "{" (284) 11 12 66
+    "[" (285) 10 44
+    "<=" (286) 18
+    "let" (287) 36
+    "(" (288) 14 15 29 37 45 51 58 59 60 61 74
+    "<" (289) 25
+    "-" (290) 16 21
+    "method" (291)
+    "<>" (292) 20
+    "new" (293)
+    "nil" (294) 8
+    "of" (295) 10 67
+    "|" (296) 28
+    "+" (297) 17
+    "primitive" (298) 60 61
+    "}" (299) 11 12 66
+    "]" (300) 10 44
+    ")" (301) 14 15 29 37 45 51 58 59 60 61 74
+    ";" (302) 5
+    "then" (303) 31 32
+    "*" (304) 22
+    "to" (305) 34
+    "type" (306) 64
+    "var" (307) 56 57
+    "while" (308) 33
+    "_lvalue" (309) 45
+    "_chunks" (310) 51
+    "_namety" (311) 74
+
+
+Nonterminals, with rules where they appear
+
+    $accept (57)
+        on left: 0
+    program (58)
+        on left: 1 2
+        on right: 0
+    exps <ast::exps_type*> (59)
+        on left: 3 4
+        on right: 5 29
+    exps.1 <ast::exps_type*> (60)
+        on left: 5 6
+        on right: 4
+    exp <ast::Exp*> (61)
+        on left: 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37
+        on right: 1 5 6 10 16 17 18 19 20 21 22 23 24 25 26 27 28 30 31 32 33 34 36 38 39 40 41 44 56 57 58 59
+    record_r <ast::fieldinits_type*> (62)
+        on left: 38 39
+        on right: 12 38
+    function_r <ast::CallExp*> (63)
+        on left: 40 41
+        on right: 15 40
+    lvalue <ast::Var*> (64)
+        on left: 42 43 44 45
+        on right: 13 30 43 44
+    chunks <ast::ChunkList*> (65)
+        on left: 46 47 48 49 50 51
+        on right: 2 36 47 48 49 51
+    varchunk <ast::VarChunk*> (66)
+        on left: 52 53
+        on right: 49 53
+    funchunk <ast::FunctionChunk*> (67)
+        on left: 54 55
+        on right: 48 55
+    vardec <ast::VarDec*> (68)
+        on left: 56 57
+        on right: 52 53
+    fundec <ast::FunctionDec*> (69)
+        on left: 58 59 60 61
+        on right: 54 55
+    tychunk <ast::TypeChunk*> (70)
+        on left: 62 63
+        on right: 47 63
+    tydec <ast::TypeDec*> (71)
+        on left: 64
+        on right: 62 63
+    ty <ast::Ty*> (72)
+        on left: 65 66 67
+        on right: 64
+    tyfields <ast::fields_type*> (73)
+        on left: 68 69
+        on right: 58 59 60 61 66
+    tyfields.1 <ast::fields_type*> (74)
+        on left: 70 71
+        on right: 69 70
+    tyfield <ast::Field*> (75)
+        on left: 72
+        on right: 70 71
+    typeid <ast::NameTy*> (76)
+        on left: 73 74
+        on right: 11 12 57 59 61 65 67 72
+
+
+State 0
+
+    0 $accept: • program "end of file"
+
+    "string"      shift, and go to state 1
+    "identifier"  shift, and go to state 2
+    "integer"     shift, and go to state 3
+    "break"       shift, and go to state 4
+    "_exp"        shift, and go to state 5
+    "for"         shift, and go to state 6
+    "function"    shift, and go to state 7
+    "if"          shift, and go to state 8
+    "import"      shift, and go to state 9
+    "let"         shift, and go to state 10
+    "("           shift, and go to state 11
+    "-"           shift, and go to state 12
+    "nil"         shift, and go to state 13
+    "primitive"   shift, and go to state 14
+    "type"        shift, and go to state 15
+    "var"         shift, and go to state 16
+    "while"       shift, and go to state 17
+    "_lvalue"     shift, and go to state 18
+    "_chunks"     shift, and go to state 19
+    "_namety"     shift, and go to state 20
+
+    $default  reduce using rule 46 (chunks)
+
+    program   go to state 21
+    exp       go to state 22
+    lvalue    go to state 23
+    chunks    go to state 24
+    varchunk  go to state 25
+    funchunk  go to state 26
+    vardec    go to state 27
+    fundec    go to state 28
+    tychunk   go to state 29
+    tydec     go to state 30
+    typeid    go to state 31
+
+
+State 1
+
+    9 exp: "string" •
+
+    $default  reduce using rule 9 (exp)
+
+
+State 2
+
+   10 exp: "identifier" • "[" exp "]" "of" exp
+   14    | "identifier" • "(" ")"
+   15    | "identifier" • "(" function_r ")"
+   42 lvalue: "identifier" •
+   73 typeid: "identifier" •
+
+    "["  shift, and go to state 32
+    "("  shift, and go to state 33
+
+    "{"       reduce using rule 73 (typeid)
+    "["       [reduce using rule 42 (lvalue)]
+    $default  reduce using rule 42 (lvalue)
+
+
+State 3
+
+    7 exp: "integer" •
+
+    $default  reduce using rule 7 (exp)
+
+
+State 4
+
+   35 exp: "break" •
+
+    $default  reduce using rule 35 (exp)
+
+
+State 5
+
+   37 exp: "_exp" • "(" "integer" ")"
+
+    "("  shift, and go to state 34
+
+
+State 6
+
+   34 exp: "for" • "identifier" ":=" exp "to" exp "do" exp
+
+    "identifier"  shift, and go to state 35
+
+
+State 7
+
+   58 fundec: "function" • "identifier" "(" tyfields ")" "=" exp
+   59       | "function" • "identifier" "(" tyfields ")" ":" typeid "=" exp
+
+    "identifier"  shift, and go to state 36
+
+
+State 8
+
+   31 exp: "if" • exp "then" exp
+   32    | "if" • exp "then" exp "else" exp
+
+    "string"      shift, and go to state 1
+    "identifier"  shift, and go to state 2
+    "integer"     shift, and go to state 3
+    "break"       shift, and go to state 4
+    "_exp"        shift, and go to state 5
+    "for"         shift, and go to state 6
+    "if"          shift, and go to state 8
+    "let"         shift, and go to state 10
+    "("           shift, and go to state 11
+    "-"           shift, and go to state 12
+    "nil"         shift, and go to state 13
+    "while"       shift, and go to state 17
+    "_lvalue"     shift, and go to state 18
+    "_namety"     shift, and go to state 20
+
+    exp     go to state 37
+    lvalue  go to state 23
+    typeid  go to state 31
+
+
+State 9
+
+   50 chunks: "import" • "string"
+
+    "string"  shift, and go to state 38
+
+
+State 10
+
+   36 exp: "let" • chunks "in" exp "end"
+
+    "function"   shift, and go to state 7
+    "import"     shift, and go to state 9
+    "primitive"  shift, and go to state 14
+    "type"       shift, and go to state 15
+    "var"        shift, and go to state 16
+    "_chunks"    shift, and go to state 19
+
+    $default  reduce using rule 46 (chunks)
+
+    chunks    go to state 39
+    varchunk  go to state 25
+    funchunk  go to state 26
+    vardec    go to state 27
+    fundec    go to state 28
+    tychunk   go to state 29
+    tydec     go to state 30
+
+
+State 11
+
+   29 exp: "(" • exps ")"
+
+    "string"      shift, and go to state 1
+    "identifier"  shift, and go to state 2
+    "integer"     shift, and go to state 3
+    "break"       shift, and go to state 4
+    "_exp"        shift, and go to state 5
+    "for"         shift, and go to state 6
+    "if"          shift, and go to state 8
+    "let"         shift, and go to state 10
+    "("           shift, and go to state 11
+    "-"           shift, and go to state 12
+    "nil"         shift, and go to state 13
+    "while"       shift, and go to state 17
+    "_lvalue"     shift, and go to state 18
+    "_namety"     shift, and go to state 20
+
+    $default  reduce using rule 3 (exps)
+
+    exps    go to state 40
+    exps.1  go to state 41
+    exp     go to state 42
+    lvalue  go to state 23
+    typeid  go to state 31
+
+
+State 12
+
+   16 exp: "-" • exp
+
+    "string"      shift, and go to state 1
+    "identifier"  shift, and go to state 2
+    "integer"     shift, and go to state 3
+    "break"       shift, and go to state 4
+    "_exp"        shift, and go to state 5
+    "for"         shift, and go to state 6
+    "if"          shift, and go to state 8
+    "let"         shift, and go to state 10
+    "("           shift, and go to state 11
+    "-"           shift, and go to state 12
+    "nil"         shift, and go to state 13
+    "while"       shift, and go to state 17
+    "_lvalue"     shift, and go to state 18
+    "_namety"     shift, and go to state 20
+
+    exp     go to state 43
+    lvalue  go to state 23
+    typeid  go to state 31
+
+
+State 13
+
+    8 exp: "nil" •
+
+    $default  reduce using rule 8 (exp)
+
+
+State 14
+
+   60 fundec: "primitive" • "identifier" "(" tyfields ")"
+   61       | "primitive" • "identifier" "(" tyfields ")" ":" typeid
+
+    "identifier"  shift, and go to state 44
+
+
+State 15
+
+   64 tydec: "type" • "identifier" "=" ty
+
+    "identifier"  shift, and go to state 45
+
+
+State 16
+
+   56 vardec: "var" • "identifier" ":=" exp
+   57       | "var" • "identifier" ":" typeid ":=" exp
+
+    "identifier"  shift, and go to state 46
+
+
+State 17
+
+   33 exp: "while" • exp "do" exp
+
+    "string"      shift, and go to state 1
+    "identifier"  shift, and go to state 2
+    "integer"     shift, and go to state 3
+    "break"       shift, and go to state 4
+    "_exp"        shift, and go to state 5
+    "for"         shift, and go to state 6
+    "if"          shift, and go to state 8
+    "let"         shift, and go to state 10
+    "("           shift, and go to state 11
+    "-"           shift, and go to state 12
+    "nil"         shift, and go to state 13
+    "while"       shift, and go to state 17
+    "_lvalue"     shift, and go to state 18
+    "_namety"     shift, and go to state 20
+
+    exp     go to state 47
+    lvalue  go to state 23
+    typeid  go to state 31
+
+
+State 18
+
+   45 lvalue: "_lvalue" • "(" "integer" ")"
+
+    "("  shift, and go to state 48
+
+
+State 19
+
+   51 chunks: "_chunks" • "(" "integer" ")" chunks
+
+    "("  shift, and go to state 49
+
+
+State 20
+
+   74 typeid: "_namety" • "(" "integer" ")"
+
+    "("  shift, and go to state 50
+
+
+State 21
+
+    0 $accept: program • "end of file"
+
+    "end of file"  shift, and go to state 51
+
+
+State 22
+
+    1 program: exp •
+   17 exp: exp • "+" exp
+   18    | exp • "<=" exp
+   19    | exp • ">=" exp
+   20    | exp • "<>" exp
+   21    | exp • "-" exp
+   22    | exp • "*" exp
+   23    | exp • "/" exp
+   24    | exp • "=" exp
+   25    | exp • "<" exp
+   26    | exp • ">" exp
+   27    | exp • "&" exp
+   28    | exp • "|" exp
+
+    "&"   shift, and go to state 52
+    "/"   shift, and go to state 53
+    "="   shift, and go to state 54
+    ">="  shift, and go to state 55
+    ">"   shift, and go to state 56
+    "<="  shift, and go to state 57
+    "<"   shift, and go to state 58
+    "-"   shift, and go to state 59
+    "<>"  shift, and go to state 60
+    "|"   shift, and go to state 61
+    "+"   shift, and go to state 62
+    "*"   shift, and go to state 63
+
+    $default  reduce using rule 1 (program)
+
+
+State 23
+
+   13 exp: lvalue •
+   30    | lvalue • ":=" exp
+   43 lvalue: lvalue • "." "identifier"
+   44       | lvalue • "[" exp "]"
+
+    ":="  shift, and go to state 64
+    "."   shift, and go to state 65
+    "["   shift, and go to state 66
+
+    $default  reduce using rule 13 (exp)
+
+
+State 24
+
+    2 program: chunks •
+
+    $default  reduce using rule 2 (program)
+
+
+State 25
+
+   49 chunks: varchunk • chunks
+
+    "function"   shift, and go to state 7
+    "import"     shift, and go to state 9
+    "primitive"  shift, and go to state 14
+    "type"       shift, and go to state 15
+    "var"        shift, and go to state 16
+    "_chunks"    shift, and go to state 19
+
+    $default  reduce using rule 46 (chunks)
+
+    chunks    go to state 67
+    varchunk  go to state 25
+    funchunk  go to state 26
+    vardec    go to state 27
+    fundec    go to state 28
+    tychunk   go to state 29
+    tydec     go to state 30
+
+
+State 26
+
+   48 chunks: funchunk • chunks
+
+    "function"   shift, and go to state 7
+    "import"     shift, and go to state 9
+    "primitive"  shift, and go to state 14
+    "type"       shift, and go to state 15
+    "var"        shift, and go to state 16
+    "_chunks"    shift, and go to state 19
+
+    $default  reduce using rule 46 (chunks)
+
+    chunks    go to state 68
+    varchunk  go to state 25
+    funchunk  go to state 26
+    vardec    go to state 27
+    fundec    go to state 28
+    tychunk   go to state 29
+    tydec     go to state 30
+
+
+State 27
+
+   52 varchunk: vardec •
+   53         | vardec • varchunk
+
+    $default  reduce using rule 52 (varchunk)
+
+    varchunk  go to state 69
+    vardec    go to state 27
+
+
+State 28
+
+   54 funchunk: fundec •
+   55         | fundec • funchunk
+
+    $default  reduce using rule 54 (funchunk)
+
+    funchunk  go to state 70
+    fundec    go to state 28
+
+
+State 29
+
+   47 chunks: tychunk • chunks
+
+    "function"   shift, and go to state 7
+    "import"     shift, and go to state 9
+    "primitive"  shift, and go to state 14
+    "type"       shift, and go to state 15
+    "var"        shift, and go to state 16
+    "_chunks"    shift, and go to state 19
+
+    $default  reduce using rule 46 (chunks)
+
+    chunks    go to state 71
+    varchunk  go to state 25
+    funchunk  go to state 26
+    vardec    go to state 27
+    fundec    go to state 28
+    tychunk   go to state 29
+    tydec     go to state 30
+
+
+State 30
+
+   62 tychunk: tydec •
+   63        | tydec • tychunk
+
+    "type"  shift, and go to state 15
+
+    $default  reduce using rule 62 (tychunk)
+
+    tychunk  go to state 72
+    tydec    go to state 30
+
+
+State 31
+
+   11 exp: typeid • "{" "}"
+   12    | typeid • "{" record_r "}"
+
+    "{"  shift, and go to state 73
+
+
+State 32
+
+   10 exp: "identifier" "[" • exp "]" "of" exp
+
+    "string"      shift, and go to state 1
+    "identifier"  shift, and go to state 2
+    "integer"     shift, and go to state 3
+    "break"       shift, and go to state 4
+    "_exp"        shift, and go to state 5
+    "for"         shift, and go to state 6
+    "if"          shift, and go to state 8
+    "let"         shift, and go to state 10
+    "("           shift, and go to state 11
+    "-"           shift, and go to state 12
+    "nil"         shift, and go to state 13
+    "while"       shift, and go to state 17
+    "_lvalue"     shift, and go to state 18
+    "_namety"     shift, and go to state 20
+
+    exp     go to state 74
+    lvalue  go to state 23
+    typeid  go to state 31
+
+
+State 33
+
+   14 exp: "identifier" "(" • ")"
+   15    | "identifier" "(" • function_r ")"
+
+    "string"      shift, and go to state 1
+    "identifier"  shift, and go to state 2
+    "integer"     shift, and go to state 3
+    "break"       shift, and go to state 4
+    "_exp"        shift, and go to state 5
+    "for"         shift, and go to state 6
+    "if"          shift, and go to state 8
+    "let"         shift, and go to state 10
+    "("           shift, and go to state 11
+    "-"           shift, and go to state 12
+    "nil"         shift, and go to state 13
+    ")"           shift, and go to state 75
+    "while"       shift, and go to state 17
+    "_lvalue"     shift, and go to state 18
+    "_namety"     shift, and go to state 20
+
+    exp         go to state 76
+    function_r  go to state 77
+    lvalue      go to state 23
+    typeid      go to state 31
+
+
+State 34
+
+   37 exp: "_exp" "(" • "integer" ")"
+
+    "integer"  shift, and go to state 78
+
+
+State 35
+
+   34 exp: "for" "identifier" • ":=" exp "to" exp "do" exp
+
+    ":="  shift, and go to state 79
+
+
+State 36
+
+   58 fundec: "function" "identifier" • "(" tyfields ")" "=" exp
+   59       | "function" "identifier" • "(" tyfields ")" ":" typeid "=" exp
+
+    "("  shift, and go to state 80
+
+
+State 37
+
+   17 exp: exp • "+" exp
+   18    | exp • "<=" exp
+   19    | exp • ">=" exp
+   20    | exp • "<>" exp
+   21    | exp • "-" exp
+   22    | exp • "*" exp
+   23    | exp • "/" exp
+   24    | exp • "=" exp
+   25    | exp • "<" exp
+   26    | exp • ">" exp
+   27    | exp • "&" exp
+   28    | exp • "|" exp
+   31    | "if" exp • "then" exp
+   32    | "if" exp • "then" exp "else" exp
+
+    "&"     shift, and go to state 52
+    "/"     shift, and go to state 53
+    "="     shift, and go to state 54
+    ">="    shift, and go to state 55
+    ">"     shift, and go to state 56
+    "<="    shift, and go to state 57
+    "<"     shift, and go to state 58
+    "-"     shift, and go to state 59
+    "<>"    shift, and go to state 60
+    "|"     shift, and go to state 61
+    "+"     shift, and go to state 62
+    "then"  shift, and go to state 81
+    "*"     shift, and go to state 63
+
+
+State 38
+
+   50 chunks: "import" "string" •
+
+    $default  reduce using rule 50 (chunks)
+
+
+State 39
+
+   36 exp: "let" chunks • "in" exp "end"
+
+    "in"  shift, and go to state 82
+
+
+State 40
+
+    5 exps.1: exps • ";" exp
+   29 exp: "(" exps • ")"
+
+    ")"  shift, and go to state 83
+    ";"  shift, and go to state 84
+
+
+State 41
+
+    4 exps: exps.1 •
+
+    $default  reduce using rule 4 (exps)
+
+
+State 42
+
+    6 exps.1: exp •
+   17 exp: exp • "+" exp
+   18    | exp • "<=" exp
+   19    | exp • ">=" exp
+   20    | exp • "<>" exp
+   21    | exp • "-" exp
+   22    | exp • "*" exp
+   23    | exp • "/" exp
+   24    | exp • "=" exp
+   25    | exp • "<" exp
+   26    | exp • ">" exp
+   27    | exp • "&" exp
+   28    | exp • "|" exp
+
+    "&"   shift, and go to state 52
+    "/"   shift, and go to state 53
+    "="   shift, and go to state 54
+    ">="  shift, and go to state 55
+    ">"   shift, and go to state 56
+    "<="  shift, and go to state 57
+    "<"   shift, and go to state 58
+    "-"   shift, and go to state 59
+    "<>"  shift, and go to state 60
+    "|"   shift, and go to state 61
+    "+"   shift, and go to state 62
+    "*"   shift, and go to state 63
+
+    $default  reduce using rule 6 (exps.1)
+
+
+State 43
+
+   16 exp: "-" exp •
+   17    | exp • "+" exp
+   18    | exp • "<=" exp
+   19    | exp • ">=" exp
+   20    | exp • "<>" exp
+   21    | exp • "-" exp
+   22    | exp • "*" exp
+   23    | exp • "/" exp
+   24    | exp • "=" exp
+   25    | exp • "<" exp
+   26    | exp • ">" exp
+   27    | exp • "&" exp
+   28    | exp • "|" exp
+
+    "/"  shift, and go to state 53
+    "*"  shift, and go to state 63
+
+    $default  reduce using rule 16 (exp)
+
+
+State 44
+
+   60 fundec: "primitive" "identifier" • "(" tyfields ")"
+   61       | "primitive" "identifier" • "(" tyfields ")" ":" typeid
+
+    "("  shift, and go to state 85
+
+
+State 45
+
+   64 tydec: "type" "identifier" • "=" ty
+
+    "="  shift, and go to state 86
+
+
+State 46
+
+   56 vardec: "var" "identifier" • ":=" exp
+   57       | "var" "identifier" • ":" typeid ":=" exp
+
+    ":="  shift, and go to state 87
+    ":"   shift, and go to state 88
+
+
+State 47
+
+   17 exp: exp • "+" exp
+   18    | exp • "<=" exp
+   19    | exp • ">=" exp
+   20    | exp • "<>" exp
+   21    | exp • "-" exp
+   22    | exp • "*" exp
+   23    | exp • "/" exp
+   24    | exp • "=" exp
+   25    | exp • "<" exp
+   26    | exp • ">" exp
+   27    | exp • "&" exp
+   28    | exp • "|" exp
+   33    | "while" exp • "do" exp
+
+    "&"   shift, and go to state 52
+    "/"   shift, and go to state 53
+    "do"  shift, and go to state 89
+    "="   shift, and go to state 54
+    ">="  shift, and go to state 55
+    ">"   shift, and go to state 56
+    "<="  shift, and go to state 57
+    "<"   shift, and go to state 58
+    "-"   shift, and go to state 59
+    "<>"  shift, and go to state 60
+    "|"   shift, and go to state 61
+    "+"   shift, and go to state 62
+    "*"   shift, and go to state 63
+
+
+State 48
+
+   45 lvalue: "_lvalue" "(" • "integer" ")"
+
+    "integer"  shift, and go to state 90
+
+
+State 49
+
+   51 chunks: "_chunks" "(" • "integer" ")" chunks
+
+    "integer"  shift, and go to state 91
+
+
+State 50
+
+   74 typeid: "_namety" "(" • "integer" ")"
+
+    "integer"  shift, and go to state 92
+
+
+State 51
+
+    0 $accept: program "end of file" •
+
+    $default  accept
+
+
+State 52
+
+   27 exp: exp "&" • exp
+
+    "string"      shift, and go to state 1
+    "identifier"  shift, and go to state 2
+    "integer"     shift, and go to state 3
+    "break"       shift, and go to state 4
+    "_exp"        shift, and go to state 5
+    "for"         shift, and go to state 6
+    "if"          shift, and go to state 8
+    "let"         shift, and go to state 10
+    "("           shift, and go to state 11
+    "-"           shift, and go to state 12
+    "nil"         shift, and go to state 13
+    "while"       shift, and go to state 17
+    "_lvalue"     shift, and go to state 18
+    "_namety"     shift, and go to state 20
+
+    exp     go to state 93
+    lvalue  go to state 23
+    typeid  go to state 31
+
+
+State 53
+
+   23 exp: exp "/" • exp
+
+    "string"      shift, and go to state 1
+    "identifier"  shift, and go to state 2
+    "integer"     shift, and go to state 3
+    "break"       shift, and go to state 4
+    "_exp"        shift, and go to state 5
+    "for"         shift, and go to state 6
+    "if"          shift, and go to state 8
+    "let"         shift, and go to state 10
+    "("           shift, and go to state 11
+    "-"           shift, and go to state 12
+    "nil"         shift, and go to state 13
+    "while"       shift, and go to state 17
+    "_lvalue"     shift, and go to state 18
+    "_namety"     shift, and go to state 20
+
+    exp     go to state 94
+    lvalue  go to state 23
+    typeid  go to state 31
+
+
+State 54
+
+   24 exp: exp "=" • exp
+
+    "string"      shift, and go to state 1
+    "identifier"  shift, and go to state 2
+    "integer"     shift, and go to state 3
+    "break"       shift, and go to state 4
+    "_exp"        shift, and go to state 5
+    "for"         shift, and go to state 6
+    "if"          shift, and go to state 8
+    "let"         shift, and go to state 10
+    "("           shift, and go to state 11
+    "-"           shift, and go to state 12
+    "nil"         shift, and go to state 13
+    "while"       shift, and go to state 17
+    "_lvalue"     shift, and go to state 18
+    "_namety"     shift, and go to state 20
+
+    exp     go to state 95
+    lvalue  go to state 23
+    typeid  go to state 31
+
+
+State 55
+
+   19 exp: exp ">=" • exp
+
+    "string"      shift, and go to state 1
+    "identifier"  shift, and go to state 2
+    "integer"     shift, and go to state 3
+    "break"       shift, and go to state 4
+    "_exp"        shift, and go to state 5
+    "for"         shift, and go to state 6
+    "if"          shift, and go to state 8
+    "let"         shift, and go to state 10
+    "("           shift, and go to state 11
+    "-"           shift, and go to state 12
+    "nil"         shift, and go to state 13
+    "while"       shift, and go to state 17
+    "_lvalue"     shift, and go to state 18
+    "_namety"     shift, and go to state 20
+
+    exp     go to state 96
+    lvalue  go to state 23
+    typeid  go to state 31
+
+
+State 56
+
+   26 exp: exp ">" • exp
+
+    "string"      shift, and go to state 1
+    "identifier"  shift, and go to state 2
+    "integer"     shift, and go to state 3
+    "break"       shift, and go to state 4
+    "_exp"        shift, and go to state 5
+    "for"         shift, and go to state 6
+    "if"          shift, and go to state 8
+    "let"         shift, and go to state 10
+    "("           shift, and go to state 11
+    "-"           shift, and go to state 12
+    "nil"         shift, and go to state 13
+    "while"       shift, and go to state 17
+    "_lvalue"     shift, and go to state 18
+    "_namety"     shift, and go to state 20
+
+    exp     go to state 97
+    lvalue  go to state 23
+    typeid  go to state 31
+
+
+State 57
+
+   18 exp: exp "<=" • exp
+
+    "string"      shift, and go to state 1
+    "identifier"  shift, and go to state 2
+    "integer"     shift, and go to state 3
+    "break"       shift, and go to state 4
+    "_exp"        shift, and go to state 5
+    "for"         shift, and go to state 6
+    "if"          shift, and go to state 8
+    "let"         shift, and go to state 10
+    "("           shift, and go to state 11
+    "-"           shift, and go to state 12
+    "nil"         shift, and go to state 13
+    "while"       shift, and go to state 17
+    "_lvalue"     shift, and go to state 18
+    "_namety"     shift, and go to state 20
+
+    exp     go to state 98
+    lvalue  go to state 23
+    typeid  go to state 31
+
+
+State 58
+
+   25 exp: exp "<" • exp
+
+    "string"      shift, and go to state 1
+    "identifier"  shift, and go to state 2
+    "integer"     shift, and go to state 3
+    "break"       shift, and go to state 4
+    "_exp"        shift, and go to state 5
+    "for"         shift, and go to state 6
+    "if"          shift, and go to state 8
+    "let"         shift, and go to state 10
+    "("           shift, and go to state 11
+    "-"           shift, and go to state 12
+    "nil"         shift, and go to state 13
+    "while"       shift, and go to state 17
+    "_lvalue"     shift, and go to state 18
+    "_namety"     shift, and go to state 20
+
+    exp     go to state 99
+    lvalue  go to state 23
+    typeid  go to state 31
+
+
+State 59
+
+   21 exp: exp "-" • exp
+
+    "string"      shift, and go to state 1
+    "identifier"  shift, and go to state 2
+    "integer"     shift, and go to state 3
+    "break"       shift, and go to state 4
+    "_exp"        shift, and go to state 5
+    "for"         shift, and go to state 6
+    "if"          shift, and go to state 8
+    "let"         shift, and go to state 10
+    "("           shift, and go to state 11
+    "-"           shift, and go to state 12
+    "nil"         shift, and go to state 13
+    "while"       shift, and go to state 17
+    "_lvalue"     shift, and go to state 18
+    "_namety"     shift, and go to state 20
+
+    exp     go to state 100
+    lvalue  go to state 23
+    typeid  go to state 31
+
+
+State 60
+
+   20 exp: exp "<>" • exp
+
+    "string"      shift, and go to state 1
+    "identifier"  shift, and go to state 2
+    "integer"     shift, and go to state 3
+    "break"       shift, and go to state 4
+    "_exp"        shift, and go to state 5
+    "for"         shift, and go to state 6
+    "if"          shift, and go to state 8
+    "let"         shift, and go to state 10
+    "("           shift, and go to state 11
+    "-"           shift, and go to state 12
+    "nil"         shift, and go to state 13
+    "while"       shift, and go to state 17
+    "_lvalue"     shift, and go to state 18
+    "_namety"     shift, and go to state 20
+
+    exp     go to state 101
+    lvalue  go to state 23
+    typeid  go to state 31
+
+
+State 61
+
+   28 exp: exp "|" • exp
+
+    "string"      shift, and go to state 1
+    "identifier"  shift, and go to state 2
+    "integer"     shift, and go to state 3
+    "break"       shift, and go to state 4
+    "_exp"        shift, and go to state 5
+    "for"         shift, and go to state 6
+    "if"          shift, and go to state 8
+    "let"         shift, and go to state 10
+    "("           shift, and go to state 11
+    "-"           shift, and go to state 12
+    "nil"         shift, and go to state 13
+    "while"       shift, and go to state 17
+    "_lvalue"     shift, and go to state 18
+    "_namety"     shift, and go to state 20
+
+    exp     go to state 102
+    lvalue  go to state 23
+    typeid  go to state 31
+
+
+State 62
+
+   17 exp: exp "+" • exp
+
+    "string"      shift, and go to state 1
+    "identifier"  shift, and go to state 2
+    "integer"     shift, and go to state 3
+    "break"       shift, and go to state 4
+    "_exp"        shift, and go to state 5
+    "for"         shift, and go to state 6
+    "if"          shift, and go to state 8
+    "let"         shift, and go to state 10
+    "("           shift, and go to state 11
+    "-"           shift, and go to state 12
+    "nil"         shift, and go to state 13
+    "while"       shift, and go to state 17
+    "_lvalue"     shift, and go to state 18
+    "_namety"     shift, and go to state 20
+
+    exp     go to state 103
+    lvalue  go to state 23
+    typeid  go to state 31
+
+
+State 63
+
+   22 exp: exp "*" • exp
+
+    "string"      shift, and go to state 1
+    "identifier"  shift, and go to state 2
+    "integer"     shift, and go to state 3
+    "break"       shift, and go to state 4
+    "_exp"        shift, and go to state 5
+    "for"         shift, and go to state 6
+    "if"          shift, and go to state 8
+    "let"         shift, and go to state 10
+    "("           shift, and go to state 11
+    "-"           shift, and go to state 12
+    "nil"         shift, and go to state 13
+    "while"       shift, and go to state 17
+    "_lvalue"     shift, and go to state 18
+    "_namety"     shift, and go to state 20
+
+    exp     go to state 104
+    lvalue  go to state 23
+    typeid  go to state 31
+
+
+State 64
+
+   30 exp: lvalue ":=" • exp
+
+    "string"      shift, and go to state 1
+    "identifier"  shift, and go to state 2
+    "integer"     shift, and go to state 3
+    "break"       shift, and go to state 4
+    "_exp"        shift, and go to state 5
+    "for"         shift, and go to state 6
+    "if"          shift, and go to state 8
+    "let"         shift, and go to state 10
+    "("           shift, and go to state 11
+    "-"           shift, and go to state 12
+    "nil"         shift, and go to state 13
+    "while"       shift, and go to state 17
+    "_lvalue"     shift, and go to state 18
+    "_namety"     shift, and go to state 20
+
+    exp     go to state 105
+    lvalue  go to state 23
+    typeid  go to state 31
+
+
+State 65
+
+   43 lvalue: lvalue "." • "identifier"
+
+    "identifier"  shift, and go to state 106
+
+
+State 66
+
+   44 lvalue: lvalue "[" • exp "]"
+
+    "string"      shift, and go to state 1
+    "identifier"  shift, and go to state 2
+    "integer"     shift, and go to state 3
+    "break"       shift, and go to state 4
+    "_exp"        shift, and go to state 5
+    "for"         shift, and go to state 6
+    "if"          shift, and go to state 8
+    "let"         shift, and go to state 10
+    "("           shift, and go to state 11
+    "-"           shift, and go to state 12
+    "nil"         shift, and go to state 13
+    "while"       shift, and go to state 17
+    "_lvalue"     shift, and go to state 18
+    "_namety"     shift, and go to state 20
+
+    exp     go to state 107
+    lvalue  go to state 23
+    typeid  go to state 31
+
+
+State 67
+
+   49 chunks: varchunk chunks •
+
+    $default  reduce using rule 49 (chunks)
+
+
+State 68
+
+   48 chunks: funchunk chunks •
+
+    $default  reduce using rule 48 (chunks)
+
+
+State 69
+
+   53 varchunk: vardec varchunk •
+
+    $default  reduce using rule 53 (varchunk)
+
+
+State 70
+
+   55 funchunk: fundec funchunk •
+
+    $default  reduce using rule 55 (funchunk)
+
+
+State 71
+
+   47 chunks: tychunk chunks •
+
+    $default  reduce using rule 47 (chunks)
+
+
+State 72
+
+   63 tychunk: tydec tychunk •
+
+    $default  reduce using rule 63 (tychunk)
+
+
+State 73
+
+   11 exp: typeid "{" • "}"
+   12    | typeid "{" • record_r "}"
+
+    "identifier"  shift, and go to state 108
+    "}"           shift, and go to state 109
+
+    record_r  go to state 110
+
+
+State 74
+
+   10 exp: "identifier" "[" exp • "]" "of" exp
+   17    | exp • "+" exp
+   18    | exp • "<=" exp
+   19    | exp • ">=" exp
+   20    | exp • "<>" exp
+   21    | exp • "-" exp
+   22    | exp • "*" exp
+   23    | exp • "/" exp
+   24    | exp • "=" exp
+   25    | exp • "<" exp
+   26    | exp • ">" exp
+   27    | exp • "&" exp
+   28    | exp • "|" exp
+
+    "&"   shift, and go to state 52
+    "/"   shift, and go to state 53
+    "="   shift, and go to state 54
+    ">="  shift, and go to state 55
+    ">"   shift, and go to state 56
+    "<="  shift, and go to state 57
+    "<"   shift, and go to state 58
+    "-"   shift, and go to state 59
+    "<>"  shift, and go to state 60
+    "|"   shift, and go to state 61
+    "+"   shift, and go to state 62
+    "]"   shift, and go to state 111
+    "*"   shift, and go to state 63
+
+
+State 75
+
+   14 exp: "identifier" "(" ")" •
+
+    $default  reduce using rule 14 (exp)
+
+
+State 76
+
+   17 exp: exp • "+" exp
+   18    | exp • "<=" exp
+   19    | exp • ">=" exp
+   20    | exp • "<>" exp
+   21    | exp • "-" exp
+   22    | exp • "*" exp
+   23    | exp • "/" exp
+   24    | exp • "=" exp
+   25    | exp • "<" exp
+   26    | exp • ">" exp
+   27    | exp • "&" exp
+   28    | exp • "|" exp
+   41 function_r: exp •
+
+    "&"   shift, and go to state 52
+    "/"   shift, and go to state 53
+    "="   shift, and go to state 54
+    ">="  shift, and go to state 55
+    ">"   shift, and go to state 56
+    "<="  shift, and go to state 57
+    "<"   shift, and go to state 58
+    "-"   shift, and go to state 59
+    "<>"  shift, and go to state 60
+    "|"   shift, and go to state 61
+    "+"   shift, and go to state 62
+    "*"   shift, and go to state 63
+
+    $default  reduce using rule 41 (function_r)
+
+
+State 77
+
+   15 exp: "identifier" "(" function_r • ")"
+   40 function_r: function_r • "," exp
+
+    ","  shift, and go to state 112
+    ")"  shift, and go to state 113
+
+
+State 78
+
+   37 exp: "_exp" "(" "integer" • ")"
+
+    ")"  shift, and go to state 114
+
+
+State 79
+
+   34 exp: "for" "identifier" ":=" • exp "to" exp "do" exp
+
+    "string"      shift, and go to state 1
+    "identifier"  shift, and go to state 2
+    "integer"     shift, and go to state 3
+    "break"       shift, and go to state 4
+    "_exp"        shift, and go to state 5
+    "for"         shift, and go to state 6
+    "if"          shift, and go to state 8
+    "let"         shift, and go to state 10
+    "("           shift, and go to state 11
+    "-"           shift, and go to state 12
+    "nil"         shift, and go to state 13
+    "while"       shift, and go to state 17
+    "_lvalue"     shift, and go to state 18
+    "_namety"     shift, and go to state 20
+
+    exp     go to state 115
+    lvalue  go to state 23
+    typeid  go to state 31
+
+
+State 80
+
+   58 fundec: "function" "identifier" "(" • tyfields ")" "=" exp
+   59       | "function" "identifier" "(" • tyfields ")" ":" typeid "=" exp
+
+    "identifier"  shift, and go to state 116
+
+    $default  reduce using rule 68 (tyfields)
+
+    tyfields    go to state 117
+    tyfields.1  go to state 118
+    tyfield     go to state 119
+
+
+State 81
+
+   31 exp: "if" exp "then" • exp
+   32    | "if" exp "then" • exp "else" exp
+
+    "string"      shift, and go to state 1
+    "identifier"  shift, and go to state 2
+    "integer"     shift, and go to state 3
+    "break"       shift, and go to state 4
+    "_exp"        shift, and go to state 5
+    "for"         shift, and go to state 6
+    "if"          shift, and go to state 8
+    "let"         shift, and go to state 10
+    "("           shift, and go to state 11
+    "-"           shift, and go to state 12
+    "nil"         shift, and go to state 13
+    "while"       shift, and go to state 17
+    "_lvalue"     shift, and go to state 18
+    "_namety"     shift, and go to state 20
+
+    exp     go to state 120
+    lvalue  go to state 23
+    typeid  go to state 31
+
+
+State 82
+
+   36 exp: "let" chunks "in" • exp "end"
+
+    "string"      shift, and go to state 1
+    "identifier"  shift, and go to state 2
+    "integer"     shift, and go to state 3
+    "break"       shift, and go to state 4
+    "_exp"        shift, and go to state 5
+    "for"         shift, and go to state 6
+    "if"          shift, and go to state 8
+    "let"         shift, and go to state 10
+    "("           shift, and go to state 11
+    "-"           shift, and go to state 12
+    "nil"         shift, and go to state 13
+    "while"       shift, and go to state 17
+    "_lvalue"     shift, and go to state 18
+    "_namety"     shift, and go to state 20
+
+    exp     go to state 121
+    lvalue  go to state 23
+    typeid  go to state 31
+
+
+State 83
+
+   29 exp: "(" exps ")" •
+
+    $default  reduce using rule 29 (exp)
+
+
+State 84
+
+    5 exps.1: exps ";" • exp
+
+    "string"      shift, and go to state 1
+    "identifier"  shift, and go to state 2
+    "integer"     shift, and go to state 3
+    "break"       shift, and go to state 4
+    "_exp"        shift, and go to state 5
+    "for"         shift, and go to state 6
+    "if"          shift, and go to state 8
+    "let"         shift, and go to state 10
+    "("           shift, and go to state 11
+    "-"           shift, and go to state 12
+    "nil"         shift, and go to state 13
+    "while"       shift, and go to state 17
+    "_lvalue"     shift, and go to state 18
+    "_namety"     shift, and go to state 20
+
+    exp     go to state 122
+    lvalue  go to state 23
+    typeid  go to state 31
+
+
+State 85
+
+   60 fundec: "primitive" "identifier" "(" • tyfields ")"
+   61       | "primitive" "identifier" "(" • tyfields ")" ":" typeid
+
+    "identifier"  shift, and go to state 116
+
+    $default  reduce using rule 68 (tyfields)
+
+    tyfields    go to state 123
+    tyfields.1  go to state 118
+    tyfield     go to state 119
+
+
+State 86
+
+   64 tydec: "type" "identifier" "=" • ty
+
+    "identifier"  shift, and go to state 124
+    "array"       shift, and go to state 125
+    "{"           shift, and go to state 126
+    "_namety"     shift, and go to state 20
+
+    ty      go to state 127
+    typeid  go to state 128
+
+
+State 87
+
+   56 vardec: "var" "identifier" ":=" • exp
+
+    "string"      shift, and go to state 1
+    "identifier"  shift, and go to state 2
+    "integer"     shift, and go to state 3
+    "break"       shift, and go to state 4
+    "_exp"        shift, and go to state 5
+    "for"         shift, and go to state 6
+    "if"          shift, and go to state 8
+    "let"         shift, and go to state 10
+    "("           shift, and go to state 11
+    "-"           shift, and go to state 12
+    "nil"         shift, and go to state 13
+    "while"       shift, and go to state 17
+    "_lvalue"     shift, and go to state 18
+    "_namety"     shift, and go to state 20
+
+    exp     go to state 129
+    lvalue  go to state 23
+    typeid  go to state 31
+
+
+State 88
+
+   57 vardec: "var" "identifier" ":" • typeid ":=" exp
+
+    "identifier"  shift, and go to state 124
+    "_namety"     shift, and go to state 20
+
+    typeid  go to state 130
+
+
+State 89
+
+   33 exp: "while" exp "do" • exp
+
+    "string"      shift, and go to state 1
+    "identifier"  shift, and go to state 2
+    "integer"     shift, and go to state 3
+    "break"       shift, and go to state 4
+    "_exp"        shift, and go to state 5
+    "for"         shift, and go to state 6
+    "if"          shift, and go to state 8
+    "let"         shift, and go to state 10
+    "("           shift, and go to state 11
+    "-"           shift, and go to state 12
+    "nil"         shift, and go to state 13
+    "while"       shift, and go to state 17
+    "_lvalue"     shift, and go to state 18
+    "_namety"     shift, and go to state 20
+
+    exp     go to state 131
+    lvalue  go to state 23
+    typeid  go to state 31
+
+
+State 90
+
+   45 lvalue: "_lvalue" "(" "integer" • ")"
+
+    ")"  shift, and go to state 132
+
+
+State 91
+
+   51 chunks: "_chunks" "(" "integer" • ")" chunks
+
+    ")"  shift, and go to state 133
+
+
+State 92
+
+   74 typeid: "_namety" "(" "integer" • ")"
+
+    ")"  shift, and go to state 134
+
+
+State 93
+
+   17 exp: exp • "+" exp
+   18    | exp • "<=" exp
+   19    | exp • ">=" exp
+   20    | exp • "<>" exp
+   21    | exp • "-" exp
+   22    | exp • "*" exp
+   23    | exp • "/" exp
+   24    | exp • "=" exp
+   25    | exp • "<" exp
+   26    | exp • ">" exp
+   27    | exp • "&" exp
+   27    | exp "&" exp •
+   28    | exp • "|" exp
+
+    "/"   shift, and go to state 53
+    "="   shift, and go to state 54
+    ">="  shift, and go to state 55
+    ">"   shift, and go to state 56
+    "<="  shift, and go to state 57
+    "<"   shift, and go to state 58
+    "-"   shift, and go to state 59
+    "<>"  shift, and go to state 60
+    "+"   shift, and go to state 62
+    "*"   shift, and go to state 63
+
+    $default  reduce using rule 27 (exp)
+
+
+State 94
+
+   17 exp: exp • "+" exp
+   18    | exp • "<=" exp
+   19    | exp • ">=" exp
+   20    | exp • "<>" exp
+   21    | exp • "-" exp
+   22    | exp • "*" exp
+   23    | exp • "/" exp
+   23    | exp "/" exp •
+   24    | exp • "=" exp
+   25    | exp • "<" exp
+   26    | exp • ">" exp
+   27    | exp • "&" exp
+   28    | exp • "|" exp
+
+    $default  reduce using rule 23 (exp)
+
+
+State 95
+
+   17 exp: exp • "+" exp
+   18    | exp • "<=" exp
+   19    | exp • ">=" exp
+   20    | exp • "<>" exp
+   21    | exp • "-" exp
+   22    | exp • "*" exp
+   23    | exp • "/" exp
+   24    | exp • "=" exp
+   24    | exp "=" exp •
+   25    | exp • "<" exp
+   26    | exp • ">" exp
+   27    | exp • "&" exp
+   28    | exp • "|" exp
+
+    "/"  shift, and go to state 53
+    "-"  shift, and go to state 59
+    "+"  shift, and go to state 62
+    "*"  shift, and go to state 63
+
+    "="   error (nonassociative)
+    ">="  error (nonassociative)
+    ">"   error (nonassociative)
+    "<="  error (nonassociative)
+    "<"   error (nonassociative)
+    "<>"  error (nonassociative)
+
+    $default  reduce using rule 24 (exp)
+
+
+State 96
+
+   17 exp: exp • "+" exp
+   18    | exp • "<=" exp
+   19    | exp • ">=" exp
+   19    | exp ">=" exp •
+   20    | exp • "<>" exp
+   21    | exp • "-" exp
+   22    | exp • "*" exp
+   23    | exp • "/" exp
+   24    | exp • "=" exp
+   25    | exp • "<" exp
+   26    | exp • ">" exp
+   27    | exp • "&" exp
+   28    | exp • "|" exp
+
+    "/"  shift, and go to state 53
+    "-"  shift, and go to state 59
+    "+"  shift, and go to state 62
+    "*"  shift, and go to state 63
+
+    "="   error (nonassociative)
+    ">="  error (nonassociative)
+    ">"   error (nonassociative)
+    "<="  error (nonassociative)
+    "<"   error (nonassociative)
+    "<>"  error (nonassociative)
+
+    $default  reduce using rule 19 (exp)
+
+
+State 97
+
+   17 exp: exp • "+" exp
+   18    | exp • "<=" exp
+   19    | exp • ">=" exp
+   20    | exp • "<>" exp
+   21    | exp • "-" exp
+   22    | exp • "*" exp
+   23    | exp • "/" exp
+   24    | exp • "=" exp
+   25    | exp • "<" exp
+   26    | exp • ">" exp
+   26    | exp ">" exp •
+   27    | exp • "&" exp
+   28    | exp • "|" exp
+
+    "/"  shift, and go to state 53
+    "-"  shift, and go to state 59
+    "+"  shift, and go to state 62
+    "*"  shift, and go to state 63
+
+    "="   error (nonassociative)
+    ">="  error (nonassociative)
+    ">"   error (nonassociative)
+    "<="  error (nonassociative)
+    "<"   error (nonassociative)
+    "<>"  error (nonassociative)
+
+    $default  reduce using rule 26 (exp)
+
+
+State 98
+
+   17 exp: exp • "+" exp
+   18    | exp • "<=" exp
+   18    | exp "<=" exp •
+   19    | exp • ">=" exp
+   20    | exp • "<>" exp
+   21    | exp • "-" exp
+   22    | exp • "*" exp
+   23    | exp • "/" exp
+   24    | exp • "=" exp
+   25    | exp • "<" exp
+   26    | exp • ">" exp
+   27    | exp • "&" exp
+   28    | exp • "|" exp
+
+    "/"  shift, and go to state 53
+    "-"  shift, and go to state 59
+    "+"  shift, and go to state 62
+    "*"  shift, and go to state 63
+
+    "="   error (nonassociative)
+    ">="  error (nonassociative)
+    ">"   error (nonassociative)
+    "<="  error (nonassociative)
+    "<"   error (nonassociative)
+    "<>"  error (nonassociative)
+
+    $default  reduce using rule 18 (exp)
+
+
+State 99
+
+   17 exp: exp • "+" exp
+   18    | exp • "<=" exp
+   19    | exp • ">=" exp
+   20    | exp • "<>" exp
+   21    | exp • "-" exp
+   22    | exp • "*" exp
+   23    | exp • "/" exp
+   24    | exp • "=" exp
+   25    | exp • "<" exp
+   25    | exp "<" exp •
+   26    | exp • ">" exp
+   27    | exp • "&" exp
+   28    | exp • "|" exp
+
+    "/"  shift, and go to state 53
+    "-"  shift, and go to state 59
+    "+"  shift, and go to state 62
+    "*"  shift, and go to state 63
+
+    "="   error (nonassociative)
+    ">="  error (nonassociative)
+    ">"   error (nonassociative)
+    "<="  error (nonassociative)
+    "<"   error (nonassociative)
+    "<>"  error (nonassociative)
+
+    $default  reduce using rule 25 (exp)
+
+
+State 100
+
+   17 exp: exp • "+" exp
+   18    | exp • "<=" exp
+   19    | exp • ">=" exp
+   20    | exp • "<>" exp
+   21    | exp • "-" exp
+   21    | exp "-" exp •
+   22    | exp • "*" exp
+   23    | exp • "/" exp
+   24    | exp • "=" exp
+   25    | exp • "<" exp
+   26    | exp • ">" exp
+   27    | exp • "&" exp
+   28    | exp • "|" exp
+
+    "/"  shift, and go to state 53
+    "*"  shift, and go to state 63
+
+    $default  reduce using rule 21 (exp)
+
+
+State 101
+
+   17 exp: exp • "+" exp
+   18    | exp • "<=" exp
+   19    | exp • ">=" exp
+   20    | exp • "<>" exp
+   20    | exp "<>" exp •
+   21    | exp • "-" exp
+   22    | exp • "*" exp
+   23    | exp • "/" exp
+   24    | exp • "=" exp
+   25    | exp • "<" exp
+   26    | exp • ">" exp
+   27    | exp • "&" exp
+   28    | exp • "|" exp
+
+    "/"  shift, and go to state 53
+    "-"  shift, and go to state 59
+    "+"  shift, and go to state 62
+    "*"  shift, and go to state 63
+
+    "="   error (nonassociative)
+    ">="  error (nonassociative)
+    ">"   error (nonassociative)
+    "<="  error (nonassociative)
+    "<"   error (nonassociative)
+    "<>"  error (nonassociative)
+
+    $default  reduce using rule 20 (exp)
+
+
+State 102
+
+   17 exp: exp • "+" exp
+   18    | exp • "<=" exp
+   19    | exp • ">=" exp
+   20    | exp • "<>" exp
+   21    | exp • "-" exp
+   22    | exp • "*" exp
+   23    | exp • "/" exp
+   24    | exp • "=" exp
+   25    | exp • "<" exp
+   26    | exp • ">" exp
+   27    | exp • "&" exp
+   28    | exp • "|" exp
+   28    | exp "|" exp •
+
+    "&"   shift, and go to state 52
+    "/"   shift, and go to state 53
+    "="   shift, and go to state 54
+    ">="  shift, and go to state 55
+    ">"   shift, and go to state 56
+    "<="  shift, and go to state 57
+    "<"   shift, and go to state 58
+    "-"   shift, and go to state 59
+    "<>"  shift, and go to state 60
+    "+"   shift, and go to state 62
+    "*"   shift, and go to state 63
+
+    $default  reduce using rule 28 (exp)
+
+
+State 103
+
+   17 exp: exp • "+" exp
+   17    | exp "+" exp •
+   18    | exp • "<=" exp
+   19    | exp • ">=" exp
+   20    | exp • "<>" exp
+   21    | exp • "-" exp
+   22    | exp • "*" exp
+   23    | exp • "/" exp
+   24    | exp • "=" exp
+   25    | exp • "<" exp
+   26    | exp • ">" exp
+   27    | exp • "&" exp
+   28    | exp • "|" exp
+
+    "/"  shift, and go to state 53
+    "*"  shift, and go to state 63
+
+    $default  reduce using rule 17 (exp)
+
+
+State 104
+
+   17 exp: exp • "+" exp
+   18    | exp • "<=" exp
+   19    | exp • ">=" exp
+   20    | exp • "<>" exp
+   21    | exp • "-" exp
+   22    | exp • "*" exp
+   22    | exp "*" exp •
+   23    | exp • "/" exp
+   24    | exp • "=" exp
+   25    | exp • "<" exp
+   26    | exp • ">" exp
+   27    | exp • "&" exp
+   28    | exp • "|" exp
+
+    $default  reduce using rule 22 (exp)
+
+
+State 105
+
+   17 exp: exp • "+" exp
+   18    | exp • "<=" exp
+   19    | exp • ">=" exp
+   20    | exp • "<>" exp
+   21    | exp • "-" exp
+   22    | exp • "*" exp
+   23    | exp • "/" exp
+   24    | exp • "=" exp
+   25    | exp • "<" exp
+   26    | exp • ">" exp
+   27    | exp • "&" exp
+   28    | exp • "|" exp
+   30    | lvalue ":=" exp •
+
+    "&"   shift, and go to state 52
+    "/"   shift, and go to state 53
+    "="   shift, and go to state 54
+    ">="  shift, and go to state 55
+    ">"   shift, and go to state 56
+    "<="  shift, and go to state 57
+    "<"   shift, and go to state 58
+    "-"   shift, and go to state 59
+    "<>"  shift, and go to state 60
+    "|"   shift, and go to state 61
+    "+"   shift, and go to state 62
+    "*"   shift, and go to state 63
+
+    $default  reduce using rule 30 (exp)
+
+
+State 106
+
+   43 lvalue: lvalue "." "identifier" •
+
+    $default  reduce using rule 43 (lvalue)
+
+
+State 107
+
+   17 exp: exp • "+" exp
+   18    | exp • "<=" exp
+   19    | exp • ">=" exp
+   20    | exp • "<>" exp
+   21    | exp • "-" exp
+   22    | exp • "*" exp
+   23    | exp • "/" exp
+   24    | exp • "=" exp
+   25    | exp • "<" exp
+   26    | exp • ">" exp
+   27    | exp • "&" exp
+   28    | exp • "|" exp
+   44 lvalue: lvalue "[" exp • "]"
+
+    "&"   shift, and go to state 52
+    "/"   shift, and go to state 53
+    "="   shift, and go to state 54
+    ">="  shift, and go to state 55
+    ">"   shift, and go to state 56
+    "<="  shift, and go to state 57
+    "<"   shift, and go to state 58
+    "-"   shift, and go to state 59
+    "<>"  shift, and go to state 60
+    "|"   shift, and go to state 61
+    "+"   shift, and go to state 62
+    "]"   shift, and go to state 135
+    "*"   shift, and go to state 63
+
+
+State 108
+
+   39 record_r: "identifier" • "=" exp
+
+    "="  shift, and go to state 136
+
+
+State 109
+
+   11 exp: typeid "{" "}" •
+
+    $default  reduce using rule 11 (exp)
+
+
+State 110
+
+   12 exp: typeid "{" record_r • "}"
+   38 record_r: record_r • "," "identifier" "=" exp
+
+    ","  shift, and go to state 137
+    "}"  shift, and go to state 138
+
+
+State 111
+
+   10 exp: "identifier" "[" exp "]" • "of" exp
+
+    "of"  shift, and go to state 139
+
+
+State 112
+
+   40 function_r: function_r "," • exp
+
+    "string"      shift, and go to state 1
+    "identifier"  shift, and go to state 2
+    "integer"     shift, and go to state 3
+    "break"       shift, and go to state 4
+    "_exp"        shift, and go to state 5
+    "for"         shift, and go to state 6
+    "if"          shift, and go to state 8
+    "let"         shift, and go to state 10
+    "("           shift, and go to state 11
+    "-"           shift, and go to state 12
+    "nil"         shift, and go to state 13
+    "while"       shift, and go to state 17
+    "_lvalue"     shift, and go to state 18
+    "_namety"     shift, and go to state 20
+
+    exp     go to state 140
+    lvalue  go to state 23
+    typeid  go to state 31
+
+
+State 113
+
+   15 exp: "identifier" "(" function_r ")" •
+
+    $default  reduce using rule 15 (exp)
+
+
+State 114
+
+   37 exp: "_exp" "(" "integer" ")" •
+
+    $default  reduce using rule 37 (exp)
+
+
+State 115
+
+   17 exp: exp • "+" exp
+   18    | exp • "<=" exp
+   19    | exp • ">=" exp
+   20    | exp • "<>" exp
+   21    | exp • "-" exp
+   22    | exp • "*" exp
+   23    | exp • "/" exp
+   24    | exp • "=" exp
+   25    | exp • "<" exp
+   26    | exp • ">" exp
+   27    | exp • "&" exp
+   28    | exp • "|" exp
+   34    | "for" "identifier" ":=" exp • "to" exp "do" exp
+
+    "&"   shift, and go to state 52
+    "/"   shift, and go to state 53
+    "="   shift, and go to state 54
+    ">="  shift, and go to state 55
+    ">"   shift, and go to state 56
+    "<="  shift, and go to state 57
+    "<"   shift, and go to state 58
+    "-"   shift, and go to state 59
+    "<>"  shift, and go to state 60
+    "|"   shift, and go to state 61
+    "+"   shift, and go to state 62
+    "*"   shift, and go to state 63
+    "to"  shift, and go to state 141
+
+
+State 116
+
+   72 tyfield: "identifier" • ":" typeid
+
+    ":"  shift, and go to state 142
+
+
+State 117
+
+   58 fundec: "function" "identifier" "(" tyfields • ")" "=" exp
+   59       | "function" "identifier" "(" tyfields • ")" ":" typeid "=" exp
+
+    ")"  shift, and go to state 143
+
+
+State 118
+
+   69 tyfields: tyfields.1 •
+   70 tyfields.1: tyfields.1 • "," tyfield
+
+    ","  shift, and go to state 144
+
+    $default  reduce using rule 69 (tyfields)
+
+
+State 119
+
+   71 tyfields.1: tyfield •
+
+    $default  reduce using rule 71 (tyfields.1)
+
+
+State 120
+
+   17 exp: exp • "+" exp
+   18    | exp • "<=" exp
+   19    | exp • ">=" exp
+   20    | exp • "<>" exp
+   21    | exp • "-" exp
+   22    | exp • "*" exp
+   23    | exp • "/" exp
+   24    | exp • "=" exp
+   25    | exp • "<" exp
+   26    | exp • ">" exp
+   27    | exp • "&" exp
+   28    | exp • "|" exp
+   31    | "if" exp "then" exp •
+   32    | "if" exp "then" exp • "else" exp
+
+    "&"     shift, and go to state 52
+    "/"     shift, and go to state 53
+    "else"  shift, and go to state 145
+    "="     shift, and go to state 54
+    ">="    shift, and go to state 55
+    ">"     shift, and go to state 56
+    "<="    shift, and go to state 57
+    "<"     shift, and go to state 58
+    "-"     shift, and go to state 59
+    "<>"    shift, and go to state 60
+    "|"     shift, and go to state 61
+    "+"     shift, and go to state 62
+    "*"     shift, and go to state 63
+
+    $default  reduce using rule 31 (exp)
+
+
+State 121
+
+   17 exp: exp • "+" exp
+   18    | exp • "<=" exp
+   19    | exp • ">=" exp
+   20    | exp • "<>" exp
+   21    | exp • "-" exp
+   22    | exp • "*" exp
+   23    | exp • "/" exp
+   24    | exp • "=" exp
+   25    | exp • "<" exp
+   26    | exp • ">" exp
+   27    | exp • "&" exp
+   28    | exp • "|" exp
+   36    | "let" chunks "in" exp • "end"
+
+    "&"    shift, and go to state 52
+    "/"    shift, and go to state 53
+    "end"  shift, and go to state 146
+    "="    shift, and go to state 54
+    ">="   shift, and go to state 55
+    ">"    shift, and go to state 56
+    "<="   shift, and go to state 57
+    "<"    shift, and go to state 58
+    "-"    shift, and go to state 59
+    "<>"   shift, and go to state 60
+    "|"    shift, and go to state 61
+    "+"    shift, and go to state 62
+    "*"    shift, and go to state 63
+
+
+State 122
+
+    5 exps.1: exps ";" exp •
+   17 exp: exp • "+" exp
+   18    | exp • "<=" exp
+   19    | exp • ">=" exp
+   20    | exp • "<>" exp
+   21    | exp • "-" exp
+   22    | exp • "*" exp
+   23    | exp • "/" exp
+   24    | exp • "=" exp
+   25    | exp • "<" exp
+   26    | exp • ">" exp
+   27    | exp • "&" exp
+   28    | exp • "|" exp
+
+    "&"   shift, and go to state 52
+    "/"   shift, and go to state 53
+    "="   shift, and go to state 54
+    ">="  shift, and go to state 55
+    ">"   shift, and go to state 56
+    "<="  shift, and go to state 57
+    "<"   shift, and go to state 58
+    "-"   shift, and go to state 59
+    "<>"  shift, and go to state 60
+    "|"   shift, and go to state 61
+    "+"   shift, and go to state 62
+    "*"   shift, and go to state 63
+
+    $default  reduce using rule 5 (exps.1)
+
+
+State 123
+
+   60 fundec: "primitive" "identifier" "(" tyfields • ")"
+   61       | "primitive" "identifier" "(" tyfields • ")" ":" typeid
+
+    ")"  shift, and go to state 147
+
+
+State 124
+
+   73 typeid: "identifier" •
+
+    $default  reduce using rule 73 (typeid)
+
+
+State 125
+
+   67 ty: "array" • "of" typeid
+
+    "of"  shift, and go to state 148
+
+
+State 126
+
+   66 ty: "{" • tyfields "}"
+
+    "identifier"  shift, and go to state 116
+
+    $default  reduce using rule 68 (tyfields)
+
+    tyfields    go to state 149
+    tyfields.1  go to state 118
+    tyfield     go to state 119
+
+
+State 127
+
+   64 tydec: "type" "identifier" "=" ty •
+
+    $default  reduce using rule 64 (tydec)
+
+
+State 128
+
+   65 ty: typeid •
+
+    $default  reduce using rule 65 (ty)
+
+
+State 129
+
+   17 exp: exp • "+" exp
+   18    | exp • "<=" exp
+   19    | exp • ">=" exp
+   20    | exp • "<>" exp
+   21    | exp • "-" exp
+   22    | exp • "*" exp
+   23    | exp • "/" exp
+   24    | exp • "=" exp
+   25    | exp • "<" exp
+   26    | exp • ">" exp
+   27    | exp • "&" exp
+   28    | exp • "|" exp
+   56 vardec: "var" "identifier" ":=" exp •
+
+    "&"   shift, and go to state 52
+    "/"   shift, and go to state 53
+    "="   shift, and go to state 54
+    ">="  shift, and go to state 55
+    ">"   shift, and go to state 56
+    "<="  shift, and go to state 57
+    "<"   shift, and go to state 58
+    "-"   shift, and go to state 59
+    "<>"  shift, and go to state 60
+    "|"   shift, and go to state 61
+    "+"   shift, and go to state 62
+    "*"   shift, and go to state 63
+
+    $default  reduce using rule 56 (vardec)
+
+
+State 130
+
+   57 vardec: "var" "identifier" ":" typeid • ":=" exp
+
+    ":="  shift, and go to state 150
+
+
+State 131
+
+   17 exp: exp • "+" exp
+   18    | exp • "<=" exp
+   19    | exp • ">=" exp
+   20    | exp • "<>" exp
+   21    | exp • "-" exp
+   22    | exp • "*" exp
+   23    | exp • "/" exp
+   24    | exp • "=" exp
+   25    | exp • "<" exp
+   26    | exp • ">" exp
+   27    | exp • "&" exp
+   28    | exp • "|" exp
+   33    | "while" exp "do" exp •
+
+    "&"   shift, and go to state 52
+    "/"   shift, and go to state 53
+    "="   shift, and go to state 54
+    ">="  shift, and go to state 55
+    ">"   shift, and go to state 56
+    "<="  shift, and go to state 57
+    "<"   shift, and go to state 58
+    "-"   shift, and go to state 59
+    "<>"  shift, and go to state 60
+    "|"   shift, and go to state 61
+    "+"   shift, and go to state 62
+    "*"   shift, and go to state 63
+
+    $default  reduce using rule 33 (exp)
+
+
+State 132
+
+   45 lvalue: "_lvalue" "(" "integer" ")" •
+
+    $default  reduce using rule 45 (lvalue)
+
+
+State 133
+
+   51 chunks: "_chunks" "(" "integer" ")" • chunks
+
+    "function"   shift, and go to state 7
+    "import"     shift, and go to state 9
+    "primitive"  shift, and go to state 14
+    "type"       shift, and go to state 15
+    "var"        shift, and go to state 16
+    "_chunks"    shift, and go to state 19
+
+    $default  reduce using rule 46 (chunks)
+
+    chunks    go to state 151
+    varchunk  go to state 25
+    funchunk  go to state 26
+    vardec    go to state 27
+    fundec    go to state 28
+    tychunk   go to state 29
+    tydec     go to state 30
+
+
+State 134
+
+   74 typeid: "_namety" "(" "integer" ")" •
+
+    $default  reduce using rule 74 (typeid)
+
+
+State 135
+
+   44 lvalue: lvalue "[" exp "]" •
+
+    $default  reduce using rule 44 (lvalue)
+
+
+State 136
+
+   39 record_r: "identifier" "=" • exp
+
+    "string"      shift, and go to state 1
+    "identifier"  shift, and go to state 2
+    "integer"     shift, and go to state 3
+    "break"       shift, and go to state 4
+    "_exp"        shift, and go to state 5
+    "for"         shift, and go to state 6
+    "if"          shift, and go to state 8
+    "let"         shift, and go to state 10
+    "("           shift, and go to state 11
+    "-"           shift, and go to state 12
+    "nil"         shift, and go to state 13
+    "while"       shift, and go to state 17
+    "_lvalue"     shift, and go to state 18
+    "_namety"     shift, and go to state 20
+
+    exp     go to state 152
+    lvalue  go to state 23
+    typeid  go to state 31
+
+
+State 137
+
+   38 record_r: record_r "," • "identifier" "=" exp
+
+    "identifier"  shift, and go to state 153
+
+
+State 138
+
+   12 exp: typeid "{" record_r "}" •
+
+    $default  reduce using rule 12 (exp)
+
+
+State 139
+
+   10 exp: "identifier" "[" exp "]" "of" • exp
+
+    "string"      shift, and go to state 1
+    "identifier"  shift, and go to state 2
+    "integer"     shift, and go to state 3
+    "break"       shift, and go to state 4
+    "_exp"        shift, and go to state 5
+    "for"         shift, and go to state 6
+    "if"          shift, and go to state 8
+    "let"         shift, and go to state 10
+    "("           shift, and go to state 11
+    "-"           shift, and go to state 12
+    "nil"         shift, and go to state 13
+    "while"       shift, and go to state 17
+    "_lvalue"     shift, and go to state 18
+    "_namety"     shift, and go to state 20
+
+    exp     go to state 154
+    lvalue  go to state 23
+    typeid  go to state 31
+
+
+State 140
+
+   17 exp: exp • "+" exp
+   18    | exp • "<=" exp
+   19    | exp • ">=" exp
+   20    | exp • "<>" exp
+   21    | exp • "-" exp
+   22    | exp • "*" exp
+   23    | exp • "/" exp
+   24    | exp • "=" exp
+   25    | exp • "<" exp
+   26    | exp • ">" exp
+   27    | exp • "&" exp
+   28    | exp • "|" exp
+   40 function_r: function_r "," exp •
+
+    "&"   shift, and go to state 52
+    "/"   shift, and go to state 53
+    "="   shift, and go to state 54
+    ">="  shift, and go to state 55
+    ">"   shift, and go to state 56
+    "<="  shift, and go to state 57
+    "<"   shift, and go to state 58
+    "-"   shift, and go to state 59
+    "<>"  shift, and go to state 60
+    "|"   shift, and go to state 61
+    "+"   shift, and go to state 62
+    "*"   shift, and go to state 63
+
+    $default  reduce using rule 40 (function_r)
+
+
+State 141
+
+   34 exp: "for" "identifier" ":=" exp "to" • exp "do" exp
+
+    "string"      shift, and go to state 1
+    "identifier"  shift, and go to state 2
+    "integer"     shift, and go to state 3
+    "break"       shift, and go to state 4
+    "_exp"        shift, and go to state 5
+    "for"         shift, and go to state 6
+    "if"          shift, and go to state 8
+    "let"         shift, and go to state 10
+    "("           shift, and go to state 11
+    "-"           shift, and go to state 12
+    "nil"         shift, and go to state 13
+    "while"       shift, and go to state 17
+    "_lvalue"     shift, and go to state 18
+    "_namety"     shift, and go to state 20
+
+    exp     go to state 155
+    lvalue  go to state 23
+    typeid  go to state 31
+
+
+State 142
+
+   72 tyfield: "identifier" ":" • typeid
+
+    "identifier"  shift, and go to state 124
+    "_namety"     shift, and go to state 20
+
+    typeid  go to state 156
+
+
+State 143
+
+   58 fundec: "function" "identifier" "(" tyfields ")" • "=" exp
+   59       | "function" "identifier" "(" tyfields ")" • ":" typeid "=" exp
+
+    ":"  shift, and go to state 157
+    "="  shift, and go to state 158
+
+
+State 144
+
+   70 tyfields.1: tyfields.1 "," • tyfield
+
+    "identifier"  shift, and go to state 116
+
+    tyfield  go to state 159
+
+
+State 145
+
+   32 exp: "if" exp "then" exp "else" • exp
+
+    "string"      shift, and go to state 1
+    "identifier"  shift, and go to state 2
+    "integer"     shift, and go to state 3
+    "break"       shift, and go to state 4
+    "_exp"        shift, and go to state 5
+    "for"         shift, and go to state 6
+    "if"          shift, and go to state 8
+    "let"         shift, and go to state 10
+    "("           shift, and go to state 11
+    "-"           shift, and go to state 12
+    "nil"         shift, and go to state 13
+    "while"       shift, and go to state 17
+    "_lvalue"     shift, and go to state 18
+    "_namety"     shift, and go to state 20
+
+    exp     go to state 160
+    lvalue  go to state 23
+    typeid  go to state 31
+
+
+State 146
+
+   36 exp: "let" chunks "in" exp "end" •
+
+    $default  reduce using rule 36 (exp)
+
+
+State 147
+
+   60 fundec: "primitive" "identifier" "(" tyfields ")" •
+   61       | "primitive" "identifier" "(" tyfields ")" • ":" typeid
+
+    ":"  shift, and go to state 161
+
+    $default  reduce using rule 60 (fundec)
+
+
+State 148
+
+   67 ty: "array" "of" • typeid
+
+    "identifier"  shift, and go to state 124
+    "_namety"     shift, and go to state 20
+
+    typeid  go to state 162
+
+
+State 149
+
+   66 ty: "{" tyfields • "}"
+
+    "}"  shift, and go to state 163
+
+
+State 150
+
+   57 vardec: "var" "identifier" ":" typeid ":=" • exp
+
+    "string"      shift, and go to state 1
+    "identifier"  shift, and go to state 2
+    "integer"     shift, and go to state 3
+    "break"       shift, and go to state 4
+    "_exp"        shift, and go to state 5
+    "for"         shift, and go to state 6
+    "if"          shift, and go to state 8
+    "let"         shift, and go to state 10
+    "("           shift, and go to state 11
+    "-"           shift, and go to state 12
+    "nil"         shift, and go to state 13
+    "while"       shift, and go to state 17
+    "_lvalue"     shift, and go to state 18
+    "_namety"     shift, and go to state 20
+
+    exp     go to state 164
+    lvalue  go to state 23
+    typeid  go to state 31
+
+
+State 151
+
+   51 chunks: "_chunks" "(" "integer" ")" chunks •
+
+    $default  reduce using rule 51 (chunks)
+
+
+State 152
+
+   17 exp: exp • "+" exp
+   18    | exp • "<=" exp
+   19    | exp • ">=" exp
+   20    | exp • "<>" exp
+   21    | exp • "-" exp
+   22    | exp • "*" exp
+   23    | exp • "/" exp
+   24    | exp • "=" exp
+   25    | exp • "<" exp
+   26    | exp • ">" exp
+   27    | exp • "&" exp
+   28    | exp • "|" exp
+   39 record_r: "identifier" "=" exp •
+
+    "&"   shift, and go to state 52
+    "/"   shift, and go to state 53
+    "="   shift, and go to state 54
+    ">="  shift, and go to state 55
+    ">"   shift, and go to state 56
+    "<="  shift, and go to state 57
+    "<"   shift, and go to state 58
+    "-"   shift, and go to state 59
+    "<>"  shift, and go to state 60
+    "|"   shift, and go to state 61
+    "+"   shift, and go to state 62
+    "*"   shift, and go to state 63
+
+    $default  reduce using rule 39 (record_r)
+
+
+State 153
+
+   38 record_r: record_r "," "identifier" • "=" exp
+
+    "="  shift, and go to state 165
+
+
+State 154
+
+   10 exp: "identifier" "[" exp "]" "of" exp •
+   17    | exp • "+" exp
+   18    | exp • "<=" exp
+   19    | exp • ">=" exp
+   20    | exp • "<>" exp
+   21    | exp • "-" exp
+   22    | exp • "*" exp
+   23    | exp • "/" exp
+   24    | exp • "=" exp
+   25    | exp • "<" exp
+   26    | exp • ">" exp
+   27    | exp • "&" exp
+   28    | exp • "|" exp
+
+    "&"   shift, and go to state 52
+    "/"   shift, and go to state 53
+    "="   shift, and go to state 54
+    ">="  shift, and go to state 55
+    ">"   shift, and go to state 56
+    "<="  shift, and go to state 57
+    "<"   shift, and go to state 58
+    "-"   shift, and go to state 59
+    "<>"  shift, and go to state 60
+    "|"   shift, and go to state 61
+    "+"   shift, and go to state 62
+    "*"   shift, and go to state 63
+
+    $default  reduce using rule 10 (exp)
+
+
+State 155
+
+   17 exp: exp • "+" exp
+   18    | exp • "<=" exp
+   19    | exp • ">=" exp
+   20    | exp • "<>" exp
+   21    | exp • "-" exp
+   22    | exp • "*" exp
+   23    | exp • "/" exp
+   24    | exp • "=" exp
+   25    | exp • "<" exp
+   26    | exp • ">" exp
+   27    | exp • "&" exp
+   28    | exp • "|" exp
+   34    | "for" "identifier" ":=" exp "to" exp • "do" exp
+
+    "&"   shift, and go to state 52
+    "/"   shift, and go to state 53
+    "do"  shift, and go to state 166
+    "="   shift, and go to state 54
+    ">="  shift, and go to state 55
+    ">"   shift, and go to state 56
+    "<="  shift, and go to state 57
+    "<"   shift, and go to state 58
+    "-"   shift, and go to state 59
+    "<>"  shift, and go to state 60
+    "|"   shift, and go to state 61
+    "+"   shift, and go to state 62
+    "*"   shift, and go to state 63
+
+
+State 156
+
+   72 tyfield: "identifier" ":" typeid •
+
+    $default  reduce using rule 72 (tyfield)
+
+
+State 157
+
+   59 fundec: "function" "identifier" "(" tyfields ")" ":" • typeid "=" exp
+
+    "identifier"  shift, and go to state 124
+    "_namety"     shift, and go to state 20
+
+    typeid  go to state 167
+
+
+State 158
+
+   58 fundec: "function" "identifier" "(" tyfields ")" "=" • exp
+
+    "string"      shift, and go to state 1
+    "identifier"  shift, and go to state 2
+    "integer"     shift, and go to state 3
+    "break"       shift, and go to state 4
+    "_exp"        shift, and go to state 5
+    "for"         shift, and go to state 6
+    "if"          shift, and go to state 8
+    "let"         shift, and go to state 10
+    "("           shift, and go to state 11
+    "-"           shift, and go to state 12
+    "nil"         shift, and go to state 13
+    "while"       shift, and go to state 17
+    "_lvalue"     shift, and go to state 18
+    "_namety"     shift, and go to state 20
+
+    exp     go to state 168
+    lvalue  go to state 23
+    typeid  go to state 31
+
+
+State 159
+
+   70 tyfields.1: tyfields.1 "," tyfield •
+
+    $default  reduce using rule 70 (tyfields.1)
+
+
+State 160
+
+   17 exp: exp • "+" exp
+   18    | exp • "<=" exp
+   19    | exp • ">=" exp
+   20    | exp • "<>" exp
+   21    | exp • "-" exp
+   22    | exp • "*" exp
+   23    | exp • "/" exp
+   24    | exp • "=" exp
+   25    | exp • "<" exp
+   26    | exp • ">" exp
+   27    | exp • "&" exp
+   28    | exp • "|" exp
+   32    | "if" exp "then" exp "else" exp •
+
+    "&"   shift, and go to state 52
+    "/"   shift, and go to state 53
+    "="   shift, and go to state 54
+    ">="  shift, and go to state 55
+    ">"   shift, and go to state 56
+    "<="  shift, and go to state 57
+    "<"   shift, and go to state 58
+    "-"   shift, and go to state 59
+    "<>"  shift, and go to state 60
+    "|"   shift, and go to state 61
+    "+"   shift, and go to state 62
+    "*"   shift, and go to state 63
+
+    $default  reduce using rule 32 (exp)
+
+
+State 161
+
+   61 fundec: "primitive" "identifier" "(" tyfields ")" ":" • typeid
+
+    "identifier"  shift, and go to state 124
+    "_namety"     shift, and go to state 20
+
+    typeid  go to state 169
+
+
+State 162
+
+   67 ty: "array" "of" typeid •
+
+    $default  reduce using rule 67 (ty)
+
+
+State 163
+
+   66 ty: "{" tyfields "}" •
+
+    $default  reduce using rule 66 (ty)
+
+
+State 164
+
+   17 exp: exp • "+" exp
+   18    | exp • "<=" exp
+   19    | exp • ">=" exp
+   20    | exp • "<>" exp
+   21    | exp • "-" exp
+   22    | exp • "*" exp
+   23    | exp • "/" exp
+   24    | exp • "=" exp
+   25    | exp • "<" exp
+   26    | exp • ">" exp
+   27    | exp • "&" exp
+   28    | exp • "|" exp
+   57 vardec: "var" "identifier" ":" typeid ":=" exp •
+
+    "&"   shift, and go to state 52
+    "/"   shift, and go to state 53
+    "="   shift, and go to state 54
+    ">="  shift, and go to state 55
+    ">"   shift, and go to state 56
+    "<="  shift, and go to state 57
+    "<"   shift, and go to state 58
+    "-"   shift, and go to state 59
+    "<>"  shift, and go to state 60
+    "|"   shift, and go to state 61
+    "+"   shift, and go to state 62
+    "*"   shift, and go to state 63
+
+    $default  reduce using rule 57 (vardec)
+
+
+State 165
+
+   38 record_r: record_r "," "identifier" "=" • exp
+
+    "string"      shift, and go to state 1
+    "identifier"  shift, and go to state 2
+    "integer"     shift, and go to state 3
+    "break"       shift, and go to state 4
+    "_exp"        shift, and go to state 5
+    "for"         shift, and go to state 6
+    "if"          shift, and go to state 8
+    "let"         shift, and go to state 10
+    "("           shift, and go to state 11
+    "-"           shift, and go to state 12
+    "nil"         shift, and go to state 13
+    "while"       shift, and go to state 17
+    "_lvalue"     shift, and go to state 18
+    "_namety"     shift, and go to state 20
+
+    exp     go to state 170
+    lvalue  go to state 23
+    typeid  go to state 31
+
+
+State 166
+
+   34 exp: "for" "identifier" ":=" exp "to" exp "do" • exp
+
+    "string"      shift, and go to state 1
+    "identifier"  shift, and go to state 2
+    "integer"     shift, and go to state 3
+    "break"       shift, and go to state 4
+    "_exp"        shift, and go to state 5
+    "for"         shift, and go to state 6
+    "if"          shift, and go to state 8
+    "let"         shift, and go to state 10
+    "("           shift, and go to state 11
+    "-"           shift, and go to state 12
+    "nil"         shift, and go to state 13
+    "while"       shift, and go to state 17
+    "_lvalue"     shift, and go to state 18
+    "_namety"     shift, and go to state 20
+
+    exp     go to state 171
+    lvalue  go to state 23
+    typeid  go to state 31
+
+
+State 167
+
+   59 fundec: "function" "identifier" "(" tyfields ")" ":" typeid • "=" exp
+
+    "="  shift, and go to state 172
+
+
+State 168
+
+   17 exp: exp • "+" exp
+   18    | exp • "<=" exp
+   19    | exp • ">=" exp
+   20    | exp • "<>" exp
+   21    | exp • "-" exp
+   22    | exp • "*" exp
+   23    | exp • "/" exp
+   24    | exp • "=" exp
+   25    | exp • "<" exp
+   26    | exp • ">" exp
+   27    | exp • "&" exp
+   28    | exp • "|" exp
+   58 fundec: "function" "identifier" "(" tyfields ")" "=" exp •
+
+    "&"   shift, and go to state 52
+    "/"   shift, and go to state 53
+    "="   shift, and go to state 54
+    ">="  shift, and go to state 55
+    ">"   shift, and go to state 56
+    "<="  shift, and go to state 57
+    "<"   shift, and go to state 58
+    "-"   shift, and go to state 59
+    "<>"  shift, and go to state 60
+    "|"   shift, and go to state 61
+    "+"   shift, and go to state 62
+    "*"   shift, and go to state 63
+
+    $default  reduce using rule 58 (fundec)
+
+
+State 169
+
+   61 fundec: "primitive" "identifier" "(" tyfields ")" ":" typeid •
+
+    $default  reduce using rule 61 (fundec)
+
+
+State 170
+
+   17 exp: exp • "+" exp
+   18    | exp • "<=" exp
+   19    | exp • ">=" exp
+   20    | exp • "<>" exp
+   21    | exp • "-" exp
+   22    | exp • "*" exp
+   23    | exp • "/" exp
+   24    | exp • "=" exp
+   25    | exp • "<" exp
+   26    | exp • ">" exp
+   27    | exp • "&" exp
+   28    | exp • "|" exp
+   38 record_r: record_r "," "identifier" "=" exp •
+
+    "&"   shift, and go to state 52
+    "/"   shift, and go to state 53
+    "="   shift, and go to state 54
+    ">="  shift, and go to state 55
+    ">"   shift, and go to state 56
+    "<="  shift, and go to state 57
+    "<"   shift, and go to state 58
+    "-"   shift, and go to state 59
+    "<>"  shift, and go to state 60
+    "|"   shift, and go to state 61
+    "+"   shift, and go to state 62
+    "*"   shift, and go to state 63
+
+    $default  reduce using rule 38 (record_r)
+
+
+State 171
+
+   17 exp: exp • "+" exp
+   18    | exp • "<=" exp
+   19    | exp • ">=" exp
+   20    | exp • "<>" exp
+   21    | exp • "-" exp
+   22    | exp • "*" exp
+   23    | exp • "/" exp
+   24    | exp • "=" exp
+   25    | exp • "<" exp
+   26    | exp • ">" exp
+   27    | exp • "&" exp
+   28    | exp • "|" exp
+   34    | "for" "identifier" ":=" exp "to" exp "do" exp •
+
+    "&"   shift, and go to state 52
+    "/"   shift, and go to state 53
+    "="   shift, and go to state 54
+    ">="  shift, and go to state 55
+    ">"   shift, and go to state 56
+    "<="  shift, and go to state 57
+    "<"   shift, and go to state 58
+    "-"   shift, and go to state 59
+    "<>"  shift, and go to state 60
+    "|"   shift, and go to state 61
+    "+"   shift, and go to state 62
+    "*"   shift, and go to state 63
+
+    $default  reduce using rule 34 (exp)
+
+
+State 172
+
+   59 fundec: "function" "identifier" "(" tyfields ")" ":" typeid "=" • exp
+
+    "string"      shift, and go to state 1
+    "identifier"  shift, and go to state 2
+    "integer"     shift, and go to state 3
+    "break"       shift, and go to state 4
+    "_exp"        shift, and go to state 5
+    "for"         shift, and go to state 6
+    "if"          shift, and go to state 8
+    "let"         shift, and go to state 10
+    "("           shift, and go to state 11
+    "-"           shift, and go to state 12
+    "nil"         shift, and go to state 13
+    "while"       shift, and go to state 17
+    "_lvalue"     shift, and go to state 18
+    "_namety"     shift, and go to state 20
+
+    exp     go to state 173
+    lvalue  go to state 23
+    typeid  go to state 31
+
+
+State 173
+
+   17 exp: exp • "+" exp
+   18    | exp • "<=" exp
+   19    | exp • ">=" exp
+   20    | exp • "<>" exp
+   21    | exp • "-" exp
+   22    | exp • "*" exp
+   23    | exp • "/" exp
+   24    | exp • "=" exp
+   25    | exp • "<" exp
+   26    | exp • ">" exp
+   27    | exp • "&" exp
+   28    | exp • "|" exp
+   59 fundec: "function" "identifier" "(" tyfields ")" ":" typeid "=" exp •
+
+    "&"   shift, and go to state 52
+    "/"   shift, and go to state 53
+    "="   shift, and go to state 54
+    ">="  shift, and go to state 55
+    ">"   shift, and go to state 56
+    "<="  shift, and go to state 57
+    "<"   shift, and go to state 58
+    "-"   shift, and go to state 59
+    "<>"  shift, and go to state 60
+    "|"   shift, and go to state 61
+    "+"   shift, and go to state 62
+    "*"   shift, and go to state 63
+
+    $default  reduce using rule 59 (fundec)
