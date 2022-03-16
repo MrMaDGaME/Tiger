@@ -72,6 +72,14 @@ string          \"(\\.|[^\"])*\"
 %}
 
  /* The rules.  */
+"_chunks"       return TOKEN(CHUNKS);
+
+"_exp"          return TOKEN(EXP);
+
+"_lvalue"       return TOKEN(LVALUE);
+
+"_namety"       return TOKEN(NAMETY);
+
 "if"            return TOKEN(IF);
 
 "array"         return TOKEN(ARRAY);
@@ -152,7 +160,7 @@ string          \"(\\.|[^\"])*\"
 
 ")"             return TOKEN(RPAREN);
 
-";"            return TOKEN(SEMI);
+";"                return TOKEN(SEMI);
 
 "then"          return TOKEN(THEN);
 
@@ -191,9 +199,13 @@ string          \"(\\.|[^\"])*\"
                     return TOKEN_VAL(ID,res);
                 }
 
+<<EOF>>         return TOKEN(EOF);
 
 .             {
-                    std::cerr << "unexpected character: " << yytext << '\n';
+                  tp.error_ << misc::error::error_type::scan
+                                  << tp.location_
+                                  << ": invalid identifier: `"
+                                  << misc::escape(yytext) << "'\n";
 
               }
 %%
