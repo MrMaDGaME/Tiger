@@ -55,6 +55,7 @@ namespace ast
         void operator()(const TypeDec &e) override;
         void operator()(const VarDec &e) override;
         void operator()(const WhileExp &e) override;
+        void operator()(const FunctionDec &e) override;
 
         /// \}
 

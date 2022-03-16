@@ -77,7 +77,7 @@ namespace parse
                                              ast::Exp* thenclause,
                                              ast::Exp* elseclause) const
   {
-    return new ast::IfExp(location, test, thenclause, elseclause);
+    return new ast::IfExp(location, test, thenclause, elseclause, true);
   }
 
   inline ast::IfExp* TigerDriver::make_IfExp(const location& location,

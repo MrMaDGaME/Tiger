@@ -8,12 +8,21 @@
 
 namespace ast
 {
+    IfExp::IfExp(const Location &location, Exp *condition, Exp *body)
+            : Exp(location)
+            , condition_(condition)
+            , body_(body)
+            , else_clause_(nullptr)
+            , is_else_(false)
+    {}
+
     IfExp::IfExp(const Location &location, Exp *condition, Exp *body,
-                 Exp *else_clause)
+                 Exp *else_clause, bool is_else)
         : Exp(location)
         , condition_(condition)
         , body_(body)
         , else_clause_(else_clause)
+        , is_else_(is_else)
     {}
 
     IfExp::~IfExp()

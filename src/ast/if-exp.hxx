@@ -17,4 +17,6 @@ namespace ast
 
     inline const Exp& IfExp::else_clause_get() const { return *else_clause_; }
     inline Exp& IfExp::else_clause_get() { return *else_clause_; }
+
+    inline bool IfExp::is_else_get() const { return is_else_; }
 } // namespace ast
