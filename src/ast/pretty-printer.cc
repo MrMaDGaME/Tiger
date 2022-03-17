@@ -71,9 +71,9 @@ namespace ast
     void PrettyPrinter::operator()(const IfExp &e)
     {
         ostr_ << "if " << e.condition_get() << " then" << misc::incendl
-              << e.body_get()  << misc::decendl;
+              << e.body_get() << misc::decendl;
         if (e.is_else_get())
-            ostr_ << "else" << misc::incendl << e.body_get() << misc::decendl;
+            ostr_ << "else" << misc::incendl << e.else_clause_get() << misc::decindent << misc::decendl;
     }
 
     // SeqExp printer
@@ -92,8 +92,8 @@ namespace ast
     void PrettyPrinter::operator()(const LetExp &e)
     {
         ostr_ << "let" << misc::incendl << e.declarations_get()
-              << misc::decindent << "in" << misc::incendl << e.instructions_get()
-              << misc::decindent;
+              << misc::decendl << "in" << misc::incendl << e.instructions_get()
+              << misc::decendl << "end";
     }
 
     // OpExp printer
