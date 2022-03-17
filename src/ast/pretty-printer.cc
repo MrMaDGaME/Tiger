@@ -132,7 +132,7 @@ namespace ast
     // While printer
     void PrettyPrinter::operator()(const WhileExp &e)
     {
-        ostr_ << "while " << e.test_get() << " do " << e.body_get();
+        ostr_ << "while " << e.test_get() << " do " << misc::incendl << e.body_get();
     }
 
     // StringExp printer
@@ -225,11 +225,18 @@ namespace ast
     }
 
     void PrettyPrinter::operator()(const VarDec &e) {
-        ostr_ << "var " << e.type_name_get() << " := " << e.init_get() << ";";
+        ostr_ << e.name_get();
     }
 
     void PrettyPrinter::operator()(const FunctionDec &e) {
-        ostr_ << "function " << e.name_get() << "(" << e.formals_get() << ")";
+        ostr_ << "function " << e.name_get() << "(";
+        for (auto it = e.formals_get().begin(); it != e.formals_get().end(); ++it)
+        {
+            ostr_ << (*it)->name_get() << " : " << *((*it)->type_name_get());
+            if (it != (e.formals_get().end() - 1))
+                ostr_ << ", ";
+        }
+        ostr_ << ")";
         if (e.result_get() != nullptr)
             ostr_ << ": " << *e.result_get();
         if (e.body_get())

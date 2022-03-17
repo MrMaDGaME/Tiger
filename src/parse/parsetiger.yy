@@ -424,8 +424,8 @@ tyfieldsbis:
 ;
 
 tyfieldsbis.1:
-  tyfieldsbis.1 "," tyfieldbis{ $$ = $1; $$->push_front(*$3); }
-| tyfieldbis                { $$ = tp.td_.make_VarChunk(@1); }
+  tyfieldsbis.1 "," tyfieldbis{ $$ = $1; $$->emplace_back(*$3); }
+| tyfieldbis                { $$ = tp.td_.make_VarChunk(@1); $$->emplace_back(*$1); }
 ;
 
 tyfieldbis:
