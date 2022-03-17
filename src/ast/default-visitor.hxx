@@ -27,7 +27,7 @@ namespace ast
   }
 
   template <template <typename> class Const>
-  void GenDefaultVisitor<Const>::operator()(const_t<SimpleVar>&)
+  void GenDefaultVisitor<Const>::operator()(const_t<SimpleVar>& e)
   {}
 
   template <template <typename> class Const>
@@ -58,7 +58,9 @@ namespace ast
   template <template <typename> class Const>
   void GenDefaultVisitor<Const>::operator()(const_t<CallExp>& e)
   {
-      //e.args_get().accept(*this);
+      for (auto& exp : e.args_get()) {
+          exp->accept(*this);
+      }
   }
 
   template <template <typename> class Const>
@@ -71,15 +73,17 @@ namespace ast
   template <template <typename> class Const>
   void GenDefaultVisitor<Const>::operator()(const_t<RecordExp>& e)
   {
-     // e.type_name_get().accept(*this);
-     // e.fields_get().accept(*this);
+      e.type_name_get().accept(*this);
+      for (auto& exp : e.fields_get()) {
+          exp->accept(*this);
+      }
   }
 
   template <template <typename> class Const>
   void GenDefaultVisitor<Const>::operator()(const_t<SeqExp>& e)
   {
     for (Exp* exp : e.exps_get()){
-        exp->accept(*this);
+      exp->accept(*this);
     }
   }
 
@@ -90,13 +94,13 @@ namespace ast
       e.exp_get().accept(*this);
   }
 
-  template <template <typename> class Const> //FIXME CA MARCH PU
+  template <template <typename> class Const>
   void GenDefaultVisitor<Const>::operator()(const_t<IfExp>& e)
   {
     e.condition_get().accept(*this);
     e.body_get().accept(*this);
-   //FIXME ? if (e.else_clause_get() != nullptr)
-    e.else_clause_get().accept(*this);
+    if (e.is_else_get())
+        e.else_clause_get();
   }
 
   template <template <typename> class Const>
@@ -149,8 +153,11 @@ namespace ast
   template <template <typename> class Const>
   void GenDefaultVisitor<Const>::operator()(const_t<ChunkList>& e)
   {
-    //  e.decs_get().accept(*this);
-    //  e.body_get().accept(*this);
+      for (auto& c : e)
+      {
+          c->accept(*this);
+      }
+
   }
 
   template <template <typename> class Const>
@@ -170,7 +177,7 @@ namespace ast
   template <template <typename> class Const>
   void GenDefaultVisitor<Const>::operator()(const_t<VarChunk>& e)
   {
-    chunk_visit<VarChunk>(e);
+        chunk_visit<VarChunk>(e);
   }
 
   template <template <typename> class Const>
@@ -191,9 +198,9 @@ namespace ast
   template <template <typename> class Const>
   void GenDefaultVisitor<Const>::operator()(const_t<FunctionDec>& e)
   {
-    /*  e.formals_get().accept(*this);
-      e.result_get().accept(*this);
-      e.body_get().accept(*this);*/
+      e.formals_get().accept(*this);
+      this->accept(e.result_get());
+      this->accept(e.body_get());
   }
 
   template <template <typename> class Const>
@@ -205,7 +212,7 @@ namespace ast
   template <template <typename> class Const>
   void GenDefaultVisitor<Const>::operator()(const_t<TypeDec>& e)
   {
-    e.ty_get().accept(*this);
+     e.ty_get().accept(*this);
   }
 
   template <template <typename> class Const>
@@ -215,7 +222,9 @@ namespace ast
   template <template <typename> class Const>
   void GenDefaultVisitor<Const>::operator()(const_t<RecordTy>& e)
   {
-    //  e.fields_get().accept(*this);
+      for (auto& exp : e.fields_get()) {
+          exp->accept(*this);
+      }
   }
 
   template <template <typename> class Const>

@@ -54,7 +54,7 @@ YY_FLEX_NAMESPACE_BEGIN
 
 /* Abbreviations.  */
 int             [0-9]+
-identifier      [a-zA-Z]+[a-zA-Z0-9_]*
+identifier      [a-zA-Z][a-zA-Z0-9_]*
 end_of_line     [\n\r]+
 comments        \/\*(.|\n)*\*\/
 white_character [\t ]
@@ -72,6 +72,14 @@ string          \"(\\.|[^\"])*\"
 %}
 
  /* The rules.  */
+"_chunks"       return TOKEN(CHUNKS);
+
+"_exp"          return TOKEN(EXP);
+
+"_lvalue"       return TOKEN(LVALUE);
+
+"_namety"       return TOKEN(NAMETY);
+
 "if"            return TOKEN(IF);
 
 "array"         return TOKEN(ARRAY);
@@ -152,7 +160,7 @@ string          \"(\\.|[^\"])*\"
 
 ")"             return TOKEN(RPAREN);
 
-";"            return TOKEN(SEMI);
+";"                return TOKEN(SEMI);
 
 "then"          return TOKEN(THEN);
 
@@ -160,7 +168,7 @@ string          \"(\\.|[^\"])*\"
 
 "to"            return TOKEN(TO);
 
-"types"         return TOKEN(TYPE);
+"type"         return TOKEN(TYPE);
 
 "var"           return TOKEN(VAR);
 
@@ -191,9 +199,13 @@ string          \"(\\.|[^\"])*\"
                     return TOKEN_VAL(ID,res);
                 }
 
+<<EOF>>         return TOKEN(EOF);
 
 .             {
-                    std::cerr << "unexpected character: " << yytext << '\n';
+                  tp.error_ << misc::error::error_type::scan
+                                  << tp.location_
+                                  << ": invalid identifier: `"
+                                  << misc::escape(yytext) << "'\n";
 
               }
 %%
