@@ -61,6 +61,8 @@ namespace bind
 
         /* The visiting methods. */
         void operator()(ast::LetExp &e) override;
+        void operator()(ast::LetExp &e) override;
+        void operator()(ast::LetExp &e) override;
         // FIXME: Some code was deleted here.
 
         // ---------------- //
@@ -149,7 +151,11 @@ namespace bind
         misc::error error_;
 
         // FIXME: Some code was deleted here (More members).
+        misc::scoped_map<misc::symbol, ast::TypeDec&> type_list_;
+        misc::scoped_map<misc::symbol, ast::FunctionDec&> function_list_;
+        misc::scoped_map<misc::symbol, ast::VarDec&> var_list_;
     };
+
 
 } // namespace bind
 

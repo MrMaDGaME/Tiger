@@ -32,12 +32,16 @@ namespace bind
 
     void Binder::scope_begin()
     {
-        // FIXME: Some code was deleted here.
+        type_list_.scope_begin();
+        function_list_.scope_begin();
+        var_list_.scope_begin();
     }
 
     void Binder::scope_end()
     {
-        // FIXME: Some code was deleted here.
+        type_list_.scope_end();
+        function_list_.scope_end();
+        var_list_.scope_end();
     }
 
     /*---------.
@@ -48,7 +52,10 @@ namespace bind
 
     void Binder::operator()(ast::LetExp &e)
     {
-        // FIXME: Some code was deleted here.
+        scope_begin();
+        e.declarations_get().accept(*this);
+        e.instructions_get().accept(*this);
+        scope_end();
     }
 
     /*-------------------.
