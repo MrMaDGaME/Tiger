@@ -1,0 +1,17 @@
+type node = {value : int, next : node}
+
+function append(list: node, element: int) = (
+    while (list.next <> nil) do (
+        list := list.next
+    );
+    list.next := node{ value = element, next = nil }
+)
+
+function display(list: node) = (
+    while (list.next <> nil) do (
+        print_int(list.value);
+    print(" -> ");
+    list := node{ value = list.next.value, next = list.next.next }
+    );
+    print_int(list.value)
+)

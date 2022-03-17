@@ -52,7 +52,7 @@ namespace ast
 
     void PrettyPrinter::operator()(const FieldVar &e)
     {
-        ostr_ << "var " << e.name_get() << " := " << e.var_get() << "prout";
+        ostr_ << e.var_get() << '.' << e.name_get();
     }
 
     /* Foo[10]. */
@@ -132,7 +132,7 @@ namespace ast
     // While printer
     void PrettyPrinter::operator()(const WhileExp &e)
     {
-        ostr_ << "while " << e.test_get() << " do " << misc::incendl << e.body_get();
+        ostr_ << "while " << e.test_get() << misc::iendl << "do " << e.body_get();
     }
 
     // StringExp printer
@@ -144,8 +144,14 @@ namespace ast
     // RecordExp printer
     void PrettyPrinter::operator()(const RecordExp &e)
     {
-        ostr_ << "{";
-        std::for_each(e.fields_get().begin(), e.fields_get().end(), [this](auto field){ostr_ << field << ", ";});
+        ostr_ << e.type_name_get() << "{";
+        for (auto it = e.fields_get().begin(); it != e.fields_get().end(); ++it)
+        {
+            ostr_ << *(*it);
+            if (it != (e.fields_get().end() - 1))
+                ostr_ << ", ";
+        }
+
         ostr_ << "}";
         // Weird printing //fields_init is an array of field-init
     }
@@ -180,7 +186,7 @@ namespace ast
     }
 
     void PrettyPrinter::operator()(const FieldInit &e) {
-        ostr_ << "var " << e.name_get() << " := " << e.init_get() << ";";
+        ostr_ << e.name_get() << " = " << e.init_get();
     }
 
     void PrettyPrinter::operator()(const IntExp &e) {
