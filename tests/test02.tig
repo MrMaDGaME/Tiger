@@ -1,6 +1,6 @@
 let
-	var a := "Salem"
+	var n := 666;
+	var i := 6
 in
-	print(a);
 	print("\n")
 end

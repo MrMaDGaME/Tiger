@@ -1,0 +1,23 @@
+let
+  class X
+  {
+    var i := 1
+
+    method m() : int = self.o()
+    method n() = self.p()
+    method o() : int = self.i
+
+    var j := 2
+
+    method p() = ()
+
+    var y := new Y
+    method q() = self.y.r()
+  }
+
+  class Y
+  {
+    method r() = ()
+  }
+in
+end

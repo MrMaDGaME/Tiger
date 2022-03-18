@@ -1,0 +1,7 @@
+let
+  type rec = { val : int }
+in
+  for i := 0 to 1 do
+    table[i] := rec { val = 42 };
+  table[0].val := 51
+end

@@ -1,0 +1,36 @@
+let
+  /* Allowed: A declared before B.  */
+  class A {}
+  class B extends A {}
+
+  /* Allowed: C declared before D.  */
+  class C {}
+  var foo := -42
+  class D extends C {}
+
+  /* Allowed: forward inheritance, with E and F in the same
+     block.  */
+  class F extends E {}
+  class E {}
+
+  /* Forbidden: forward inheritance, with G and H in different
+     blocks.   */
+  class H extends G {}
+  var bar := 2501
+  class G {}
+
+  /* Forbidden: recursive inheritance.  */
+  class I extends J {}
+  class J extends I {}
+
+  /* Forbidden: recursive inheritance and forward inheritance
+     with K and L in different blocks.  */
+  class K extends L {}
+  var baz := 2097
+  class L extends K {}
+
+  /* Forbidden: M inherits from a non-class type.  */
+  class M extends int {}
+in
+  /* ... */
+end

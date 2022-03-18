@@ -309,7 +309,7 @@ exp:
   | "while" exp "do" exp                    { $$ = tp.td_.make_WhileExp(@$, $2, $4); }
   | "for" ID ":=" exp "to" exp "do" exp     { $$ = tp.td_.make_ForExp(@$, tp.td_.make_VarDec(@2, $2, nullptr, $4), $6, $8); }
   | "break"                                 { $$ = tp.td_.make_BreakExp(@$); }
-  | "let" chunks "in" exp "end"             { $$ = tp.td_.make_LetExp(@$, $2, $4); }
+  | "let" chunks "in" exps "end"             { $$ = tp.td_.make_LetExp(@$, $2, tp.td_.make_SeqExp(@$,$4)); }
 
   /* Cast of an expression to a given type */
 
@@ -363,7 +363,7 @@ chunks:
 
 varchunk:
      vardec %prec CHUNKS     { $$ = tp.td_.make_VarChunk(@1); $$->push_front(*$1); }
-    | vardec varchunk        { $$ = $2; $$->push_front(*$1); }
+    | vardec ";" varchunk        { $$ = $3; $$->push_front(*$1); }
 ;
 
 funchunk:
@@ -372,8 +372,8 @@ funchunk:
 ;
 
 vardec:
- "var" ID ":=" exp                 { $$ = tp.td_.make_VarDec(@$, $2, nullptr, $4); }
- |"var" ID ":" typeid ":=" exp     { $$ = tp.td_.make_VarDec(@$, $2, $4, $6); }
+    "var" ID ":=" exp                 { $$ = tp.td_.make_VarDec(@$, $2, nullptr, $4); }
+    |"var" ID ":" typeid ":=" exp     { $$ = tp.td_.make_VarDec(@$, $2, $4, $6); }
  ;
 
 fundec :

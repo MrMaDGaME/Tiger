@@ -125,7 +125,7 @@ namespace ast
     // ForExp printer
     void PrettyPrinter::operator()(const ForExp &e)
     {
-        //ostr_ << "for " << e.vardec_get() << " to " << e.hi_get() << " do "
+        //FIXME:  ostr_ << "for " << e.vardec_get() << " to " << e.hi_get() << " do "
         //      << e.body_get();
     }
 
@@ -218,20 +218,20 @@ namespace ast
     }
 
     void PrettyPrinter::operator()(const RecordTy &e) {
-        ostr_ << "(";
+        ostr_ << "{ ";
         for (size_t i = 0; i < e.fields_get().size() - 1; ++i) {
             ostr_ << *e.fields_get().at(i) << ", ";
         }
         ostr_ << *e.fields_get().at(e.fields_get().size() - 1);
-        ostr_ << ")";
+        ostr_ << " }";
     }
 
     void PrettyPrinter::operator()(const TypeDec &e) {
-        ostr_ << e.ty_get() /*<< ";"*/;
+        ostr_ << "type " << e.name_get() << " = " << e.ty_get() /*<< ";"*/;
     }
 
     void PrettyPrinter::operator()(const VarDec &e) {
-        ostr_ << e.name_get();
+        ostr_ << "var " << e.name_get() << " := " << *(e.init_get());
     }
 
     void PrettyPrinter::operator()(const FunctionDec &e) {
