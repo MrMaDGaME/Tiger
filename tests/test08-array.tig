@@ -1,0 +1,7 @@
+let
+    type intArray = array of int
+    var row := intArray[8] of 0
+    /* euh nique ta mere*/
+in
+    print_int(row[0])
+end

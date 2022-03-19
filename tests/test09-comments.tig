@@ -1,0 +1,17 @@
+let
+	var n := 666
+
+	/* yeyeyeye test*/
+	/* a */
+	/* b */
+	/* c */
+	/* d */
+	/* e */
+	/* f */
+	/* /* g */*/
+	var i := 6
+	/* /* g */*/
+	var g := 69
+in
+	print("\n")
+end

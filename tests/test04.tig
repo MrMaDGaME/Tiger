@@ -1,9 +1,8 @@
 type node = {value : int, next : node}
 
 function append(list: node, element: int) = (
-    while (list.next <> nil) do (
-        list := list.next
-    );
+    while (list.next <> nil) do
+        list := list.next;
     list.next := node{ value = element, next = nil }
 )
 
