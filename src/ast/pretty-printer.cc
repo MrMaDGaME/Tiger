@@ -125,14 +125,14 @@ namespace ast
     // ForExp printer
     void PrettyPrinter::operator()(const ForExp &e)
     {
-        //FIXME:  ostr_ << "for " << e.vardec_get() << " to " << e.hi_get() << " do "
-        //      << e.body_get();
+        ostr_ << "for " << e.vardec_get().name_get() << " := " << *(e.vardec_get().init_get()) << " to " << e.hi_get() << " do "
+              << misc::incendl << e.body_get() << misc::decindent;
     }
 
     // While printer
     void PrettyPrinter::operator()(const WhileExp &e)
     {
-        ostr_ << "while " << e.test_get() << misc::iendl << "do " << e.body_get();
+        ostr_ << "while " << e.test_get() << misc::iendl << "do " << misc::incendl << e.body_get() << misc::decindent;
     }
 
     // StringExp printer
@@ -165,7 +165,7 @@ namespace ast
 
     void PrettyPrinter::operator()(const ArrayTy &e)
     {
-        ostr_ << e.base_type_get();
+        ostr_ << "array of " << e.base_type_get();
     }
 
     void PrettyPrinter::operator()(const CallExp &e) {
@@ -227,11 +227,11 @@ namespace ast
     }
 
     void PrettyPrinter::operator()(const TypeDec &e) {
-        ostr_ << "type " << e.name_get() << " = " << e.ty_get() /*<< ";"*/;
+        ostr_ << "type " << e.name_get() << " = " << e.ty_get() << misc::iendl /*<< ";"*/;
     }
 
     void PrettyPrinter::operator()(const VarDec &e) {
-        ostr_ << "var " << e.name_get() << " := " << *(e.init_get());
+        ostr_ << "var " << e.name_get() << " := " << *(e.init_get()) << misc::iendl;
     }
 
     void PrettyPrinter::operator()(const FunctionDec &e) {
@@ -247,8 +247,7 @@ namespace ast
             ostr_ << ": " << *e.result_get();
         if (e.body_get())
             ostr_ << " =" << misc::incendl << *e.body_get();
-        else
-            ostr_ << "\n";
+        ostr_ << misc::decendl << misc::iendl;
     }
 
     //

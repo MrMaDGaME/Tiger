@@ -47,6 +47,7 @@
                 << misc::escape(yytext) << "'\n";       \
   } while (false)
 
+
 YY_FLEX_NAMESPACE_BEGIN
 %}
 
@@ -58,12 +59,14 @@ identifier      [a-zA-Z][a-zA-Z0-9_]*
 end_of_line     [\n\r]+
 comments        \/\*(.|\n)*\*\/
 white_character [\t ]
-string          \"(\\.|[^\"])*\"
+/*string          \"(\\.|[^\"])*\"*/
   /* FIXME: Some code was deleted here. */
 %%
+
 %{
   // FIXME: Some code was deleted here (Local variables) prob ln 88 a 98.
-   #define YY_USER_ACTION
+  std::string grown_string;
+  #define YY_USER_ACTION
      do {
         tp.location_.columns(yyleng);
      } while (false);
@@ -160,7 +163,7 @@ string          \"(\\.|[^\"])*\"
 
 ")"             return TOKEN(RPAREN);
 
-";"                return TOKEN(SEMI);
+";"             return TOKEN(SEMI);
 
 "then"          return TOKEN(THEN);
 
@@ -174,6 +177,8 @@ string          \"(\\.|[^\"])*\"
 
 "while"         return TOKEN(WHILE);
 
+{comments}     {}
+
 {int}         {
                 int val = std::stoi(yytext);
                 if (val < INT_MIN || val > INT_MAX)
@@ -183,9 +188,28 @@ string          \"(\\.|[^\"])*\"
                 return TOKEN_VAL(INT, val);
               }
 
-  {string}      return TOKEN_VAL(STRING, (std::string) yytext);
+"\""        { grown_string.clear();
+              grown_string.append("\"");
+              BEGIN SC_STRING; }
 
-  {end_of_line}   {
+<SC_STRING>{
+                    "\""    { BEGIN INITIAL; grown_string.append("\""); return TOKEN_VAL(STRING, grown_string); }
+                    "\\\\"  { grown_string.append("\\\\"); }
+                    "\\\""  { grown_string.append("\\\""); }
+                    "\\a"   { grown_string.append("\\a"); }
+                    "\\b"   { grown_string.append("\\b"); }
+                    "\\f"   { grown_string.append("\\f"); }
+                    "\\n"   { grown_string.append("\\n"); }
+                    "\\r"   { grown_string.append("\\r"); }
+                    "\\t"   { grown_string.append("\\t"); }
+                    "\\v"   { grown_string.append("\\v"); }
+                    [0-9]   { grown_string.append(yytext); }
+                    [a-zA-Z]    { grown_string.append(yytext); }
+                    \\[0-3][0-7]{2}   { grown_string.append(1, strtol(yytext + 1, 0, 8)); }
+                    \\x[0-9a-fA-F]{2}  { grown_string.append(1, strtol(yytext + 2, 0, 16)); }
+}
+
+{end_of_line}     {
                       tp.location_.lines(yyleng);
                       tp.location_.step();
                   }
@@ -200,6 +224,7 @@ string          \"(\\.|[^\"])*\"
                 }
 
 <<EOF>>         return TOKEN(EOF);
+
 
 .             {
                   tp.error_ << misc::error::error_type::scan
