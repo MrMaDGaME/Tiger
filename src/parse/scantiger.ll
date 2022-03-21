@@ -57,15 +57,15 @@ YY_FLEX_NAMESPACE_BEGIN
 int             [0-9]+
 identifier      [a-zA-Z][a-zA-Z0-9_]*
 end_of_line     [\n\r]+
-comments        \/\*(.|\n)*\*\/
 white_character [\t ]
-/*string          \"(\\.|[^\"])*\"*/
   /* FIXME: Some code was deleted here. */
 %%
 
 %{
   // FIXME: Some code was deleted here (Local variables) prob ln 88 a 98.
   std::string grown_string;
+  int com_count = 0;
+
   #define YY_USER_ACTION
      do {
         tp.location_.columns(yyleng);
@@ -177,7 +177,6 @@ white_character [\t ]
 
 "while"         return TOKEN(WHILE);
 
-{comments}     {}
 
 {int}         {
                 int val = std::stoi(yytext);
@@ -207,12 +206,26 @@ white_character [\t ]
                     [a-zA-Z]    { grown_string.append(yytext); }
                     \\[0-3][0-7]{2}   { grown_string.append(1, strtol(yytext + 1, 0, 8)); }
                     \\x[0-9a-fA-F]{2}  { grown_string.append(1, strtol(yytext + 2, 0, 16)); }
+                    <<EOF>> { tp.error_ << misc::error::error_type::scan << tp.location_ << ": unterminated string : " << misc::escape(yytext) << '\n' ; BEGIN INITIAL;}
+                    .   { grown_string.append(yytext); }
 }
+
+"/*"        {   com_count++;
+                BEGIN SC_COMMENT;}
+
+<SC_COMMENT>{
+                "*/"    {com_count--; if(com_count==0) BEGIN INITIAL; tp.location_.step();}
+                "/*"    {com_count++; tp.location_.step();}
+                <<EOF>> { tp.error_ << misc::error::error_type::scan << tp.location_ << ": unterminated comment : " << misc::escape(yytext) << '\n' ;
+                          BEGIN INITIAL;}
+                .       {tp.location_.step();}
+            }
 
 {end_of_line}     {
                       tp.location_.lines(yyleng);
                       tp.location_.step();
                   }
+
 {white_character} tp.location_.step();
 
 "_main"         return TOKEN_VAL(ID, "_main");
@@ -231,7 +244,7 @@ white_character [\t ]
                                   << tp.location_
                                   << ": invalid identifier: `"
                                   << misc::escape(yytext) << "'\n";
-
+                  //return TOKEN(UNKOWN);
               }
 %%
 
