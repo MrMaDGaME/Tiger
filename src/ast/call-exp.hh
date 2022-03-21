@@ -50,6 +50,7 @@ namespace ast
         misc::symbol name_;
         /// Instructions executed in the loop.
         exps_type *args_;
+        FunctionDec *def_ = nullptr;
     };
 } // namespace ast
 #include <ast/call-exp.hxx>
