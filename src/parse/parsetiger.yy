@@ -367,8 +367,7 @@ chunks:
 
 varchunk:
      vardec %prec CHUNKS     { $$ = tp.td_.make_VarChunk(@1); $$->push_front(*$1); }
-    | vardec ";" varchunk        { $$ = $3; $$->push_front(*$1); }
-;
+;/* Things has been deleted here so be careful */
 
 funchunk:
      fundec %prec CHUNKS     { $$ = tp.td_.make_FunctionChunk(@1); $$->push_front(*$1); }
@@ -450,5 +449,5 @@ typeid:
 void
 parse::parser::error(const location_type& l, const std::string& m)
 {
-    std::cerr << l << ":" << m << '\n';
+    tp.error_ << misc::error::error_type::parse << l << ":" << m << '\n';
 }

@@ -16,17 +16,17 @@ namespace bind
   // FIXME: Some code was deleted here (Error reporting).
 
     void Binder::error(const ast::Ast &loc, const std::string &msg) {
-
+        error_ << misc::error::error_type::bind << loc.location_get() << " : " << msg << std::endl;
     }
 
     template<typename T>
     void Binder::undeclared(const std::string &k, const T &e) {
-
+        error(e, "undeclared " + k);
     }
 
     template<typename T>
     void Binder::redefinition(const T &e1, const T &e2) {
-
+        error(e1, "redefinition ");
     }
 
   /*----------------------------.
@@ -49,6 +49,10 @@ namespace bind
   /* These specializations are in bind/binder.hxx, so that derived
      visitors can use them (otherwise, they wouldn't see them).  */
 
-  // FIXME: Some code was deleted here.
+    template <class D>
+    void visit_dec_header(D &e);
+
+    template <class D>
+    void visit_dec_body(D &e);
 
 } // namespace bind
