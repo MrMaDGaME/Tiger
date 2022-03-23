@@ -1,0 +1,9 @@
+let
+  type a = int
+  type b = int
+  var x : a := 1
+  var y : b := 2
+in
+  x = y           /* OK */
+end
+

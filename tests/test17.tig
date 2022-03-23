@@ -1,0 +1,8 @@
+let
+  type a = {foo : int}
+  type b = {foo : int}
+  var va := a{foo = 1}
+  var vb := b{foo = 2}
+in
+  va = vb
+end
