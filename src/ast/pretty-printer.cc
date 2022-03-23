@@ -247,8 +247,9 @@ namespace ast
         if (e.result_get() != nullptr)
             ostr_ << ": " << *e.result_get();
         if (e.body_get())
-            ostr_ << " =" << misc::incendl << *e.body_get();
-        ostr_ << misc::decendl;
+        {   ostr_ << " =" << misc::incendl << *e.body_get();
+            ostr_ << misc::decindent; }
+        ostr_ << misc::iendl;
     }
 
     //
