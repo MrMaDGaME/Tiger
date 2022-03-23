@@ -79,12 +79,19 @@ namespace ast
     // SeqExp printer
     void PrettyPrinter::operator()(const SeqExp &e)
     {
-        ostr_ << '(';
-        if (e.exps_get().size() > 0) {
-            ostr_ << misc::incendl;
-            ostr_ << misc::separate(e.exps_get(), std::pair(';', misc::iendl)) << misc::decendl;
+        if (e.exps_get().size() == 1)
+        {
+            ostr_ << *e.exps_get()[0];
         }
-        ostr_ << ')';
+        else
+        {
+            ostr_ << '(';
+            if (e.exps_get().size() > 0) {
+                ostr_ << misc::incendl;
+                ostr_ << misc::separate(e.exps_get(), std::pair(';', misc::iendl)) << misc::decendl;
+            }
+            ostr_ << ')';
+        }
 
     }
 
@@ -232,11 +239,18 @@ namespace ast
     }
 
     void PrettyPrinter::operator()(const VarDec &e) {
-        ostr_ << "var " << e.name_get() << " := " << *(e.init_get()) << misc::iendl;
+        ostr_<< "var " << e.name_get() << " := " << *(e.init_get()) << misc::iendl;
     }
 
     void PrettyPrinter::operator()(const FunctionDec &e) {
-        ostr_ << "function " << e.name_get() << "(";
+        if (e.body_get() == nullptr)
+        {
+            ostr_ << "primitive " << e.name_get() << "(";
+        }
+        else
+        {
+            ostr_ << "function " << e.name_get() << "(";
+        }
         for (auto it = e.formals_get().begin(); it != e.formals_get().end(); ++it)
         {
             ostr_ << (*it)->name_get() << " : " << *((*it)->type_name_get());
