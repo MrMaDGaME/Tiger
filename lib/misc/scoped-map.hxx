@@ -18,7 +18,7 @@
 namespace misc
 {
     template<typename Key, typename Data>
-    inline void scoped_map<Key, Data>::put(const Key& key, Data& value){
+    inline void scoped_map<Key, Data>::put(const Key& key, const Data& value){
         if (!map_.contains(key))
             scope_.at(scope_.size() - 1).push_back(key);
         map_.insert_or_assign(key, value);

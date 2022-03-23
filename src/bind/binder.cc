@@ -53,39 +53,68 @@ namespace bind
     void Binder::operator()(ast::LetExp &e)
     {
         scope_begin();
-        e.declarations_get().accept(dynamic_cast<ast::ConstVisitor &>(*this));
-        e.instructions_get().accept(dynamic_cast<ast::ConstVisitor &>(*this));
+        (*this)(e.declarations_get());
+        (*this)(e.instructions_get());
         scope_end();
     }
 
     void Binder::operator()(ast::SimpleVar& e)
     {
-
+        ast::VarDec* var = var_list_.get(e.name_get());
+        if (var == nullptr){
+            undeclared("SimpleVar", e);
+        }
+        super_type::operator()(e);
     }
 
     void Binder::operator()(ast::NameTy& e)
     {
-
+        ast::TypeDec* var = type_list_.get(e.name_get());
+        if (var == nullptr){
+            undeclared("NameTy", e);
+        }
+        super_type::operator()(e);
     }
 
     void Binder::operator()(ast::CallExp& e)
     {
-
+        ast::FunctionDec* var = function_list_.get(e.name_get());
+        if (var == nullptr){
+            undeclared("CallExp", e);
+        }
+        super_type::operator()(e);
     }
 
     void Binder::operator()(ast::VarDec& e)
     {
-        var_list_.put(e.type_name_get(), e);
+        ast::VarDec* var = var_list_.get(e.name_get());
+        if (var != nullptr){
+            redefinition(*var, e);
+        }
+        var_list_.put(e.name_get(), &e);
+        super_type::operator()(e);
     }
 
     void Binder::operator()(ast::FunctionDec& e)
     {
-
+        ast::FunctionDec* var = function_list_.get(e.name_get());
+        if (var != nullptr){
+            redefinition(*var, e);
+        }
+        function_list_.put(e.name_get(), &e);
+        scope_begin();
+        super_type::operator()(e);
+        scope_end();
     }
 
     void Binder::operator()(ast::TypeDec& e)
     {
-
+        ast::TypeDec* var = type_list_.get(e.name_get());
+        if (var != nullptr){
+            redefinition(*var, e);
+        }
+        type_list_.put(e.name_get(), &e);
+        super_type::operator()(e);
     }
 
 
@@ -97,7 +126,7 @@ namespace bind
 
     void Binder::operator()(ast::VarChunk& e)
     {
-
+        chunk_visit<ast::VarDec>(e);
     }
 
 
@@ -110,7 +139,7 @@ namespace bind
 
     void Binder::operator()(ast::FunctionChunk& e)
     {
-
+        chunk_visit<ast::FunctionDec>(e);
     }
 
 
@@ -122,7 +151,7 @@ namespace bind
 
     void Binder::operator()(ast::TypeChunk& e)
     {
-
+        chunk_visit<ast::TypeDec>(e);
     }
 
 } // namespace bind

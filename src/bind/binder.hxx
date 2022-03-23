@@ -15,6 +15,20 @@ namespace bind
 
   // FIXME: Some code was deleted here (Error reporting).
 
+    void Binder::error(const ast::Ast &loc, const std::string &msg) {
+
+    }
+
+    template<typename T>
+    void Binder::undeclared(const std::string &k, const T &e) {
+
+    }
+
+    template<typename T>
+    void Binder::redefinition(const T &e1, const T &e2) {
+
+    }
+
   /*----------------------------.
   | Visiting /ChunkInterface/.  |
   `----------------------------*/

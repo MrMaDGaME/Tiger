@@ -23,7 +23,7 @@ namespace misc
     public:
         scoped_map() = default;
 
-        void put(const Key& key, Data& value);
+        void put(const Key& key, const Data& value);
         Data get(const Key& key) const;
         std::ostream& dump(std::ostream& ostr) const;
         void scope_begin();
