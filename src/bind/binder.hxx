@@ -24,6 +24,12 @@ namespace bind
     // Shorthand.
     using chunk_type = ast::Chunk<D>;
     // FIXME: Some code was deleted here (Two passes: once on headers, then on bodies).
+    for (auto elt = e.begin(); elt != e.end(); ++elt){
+        visit_dec_header(elt);
+    }
+      for (auto elt = e.begin(); elt != e.end(); ++elt){
+          visit_dec_body(elt);
+      }
   }
 
   /* These specializations are in bind/binder.hxx, so that derived
