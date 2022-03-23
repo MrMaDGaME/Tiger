@@ -53,8 +53,8 @@ namespace bind
     void Binder::operator()(ast::LetExp &e)
     {
         scope_begin();
-        e.declarations_get().accept(*this);
-        e.instructions_get().accept(*this);
+        e.declarations_get().accept(dynamic_cast<ast::ConstVisitor &>(*this));
+        e.instructions_get().accept(dynamic_cast<ast::ConstVisitor &>(*this));
         scope_end();
     }
 
@@ -73,6 +73,7 @@ namespace bind
     /*--------------------.
     | Visiting TypeChunk. |
     `--------------------*/
+
     // FIXME: Some code was deleted here.
 
 } // namespace bind
