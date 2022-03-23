@@ -3,10 +3,8 @@ src/parse/parsetiger.lo: src/parse/parsetiger.cc \
  /usr/include/c++/11/string \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
- /usr/include/features.h /usr/include/features-time64.h \
+ /usr/include/features.h /usr/include/x86_64-linux-gnu/sys/cdefs.h \
  /usr/include/x86_64-linux-gnu/bits/wordsize.h \
- /usr/include/x86_64-linux-gnu/bits/timesize.h \
- /usr/include/x86_64-linux-gnu/sys/cdefs.h \
  /usr/include/x86_64-linux-gnu/bits/long-double.h \
  /usr/include/x86_64-linux-gnu/gnu/stubs.h \
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
@@ -52,6 +50,7 @@ src/parse/parsetiger.lo: src/parse/parsetiger.cc \
  /usr/include/x86_64-linux-gnu/bits/wchar2.h /usr/include/c++/11/cstdint \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/types.h \
+ /usr/include/x86_64-linux-gnu/bits/timesize.h \
  /usr/include/x86_64-linux-gnu/bits/typesizes.h \
  /usr/include/x86_64-linux-gnu/bits/time64.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
@@ -115,10 +114,7 @@ src/parse/parsetiger.lo: src/parse/parsetiger.cc \
  /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h \
  /usr/include/x86_64-linux-gnu/bits/setjmp.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h \
- /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/atomic_word.h \
- /usr/include/x86_64-linux-gnu/sys/single_threaded.h \
  /usr/include/c++/11/ext/alloc_traits.h \
  /usr/include/c++/11/bits/alloc_traits.h /usr/include/c++/11/string_view \
  /usr/include/c++/11/bits/functional_hash.h \
@@ -132,6 +128,7 @@ src/parse/parsetiger.lo: src/parse/parsetiger.cc \
  /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
  /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h \
  /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
+ /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
  /usr/include/x86_64-linux-gnu/bits/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/stdio2.h /usr/include/c++/11/cerrno \
  /usr/include/errno.h /usr/include/x86_64-linux-gnu/bits/errno.h \
@@ -222,8 +219,7 @@ src/parse/parsetiger.lo: src/parse/parsetiger.cc \
  /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
  /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
  /usr/include/x86_64-linux-gnu/bits/unistd.h \
- /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
- /usr/include/linux/close_range.h /usr/include/syscall.h \
+ /usr/include/x86_64-linux-gnu/bits/unistd_ext.h /usr/include/syscall.h \
  /usr/include/x86_64-linux-gnu/sys/syscall.h \
  /usr/include/x86_64-linux-gnu/asm/unistd.h \
  /usr/include/x86_64-linux-gnu/asm/unistd_64.h \
@@ -320,6 +316,7 @@ src/parse/parsetiger.lo: src/parse/parsetiger.cc \
  /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
  /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
  /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
+ /usr/include/x86_64-linux-gnu/bits/mathinline.h \
  /usr/include/c++/11/bits/specfun.h /usr/include/c++/11/tr1/gamma.tcc \
  /usr/include/c++/11/tr1/special_function_util.h \
  /usr/include/c++/11/tr1/bessel_function.tcc \
@@ -351,11 +348,11 @@ src/parse/parsetiger.lo: src/parse/parsetiger.cc \
  lib/range/v3/algorithm/aux_/sort_n_with_buffer.hpp lib/misc/separator.hh \
  lib/misc/separator.hxx lib/misc/deref.hh lib/misc/ref.hh \
  lib/misc/ref.hxx lib/misc/deref.hxx lib/misc/contract.hh \
- lib/misc/symbol.hh /usr/include/c++/11/set \
+ lib/misc/symbol.hh lib/misc/unique.hh /usr/include/c++/11/set \
  /usr/include/c++/11/bits/stl_tree.h /usr/include/c++/11/bits/stl_set.h \
- /usr/include/c++/11/bits/stl_multiset.h lib/misc/unique.hh \
- lib/misc/unique.hxx lib/misc/symbol.hxx src/parse/fwd.hh \
- lib/misc/variant.hh /usr/include/c++/11/variant \
+ /usr/include/c++/11/bits/stl_multiset.h lib/misc/unique.hxx \
+ lib/misc/symbol.hxx src/parse/fwd.hh lib/misc/variant.hh \
+ /usr/include/c++/11/variant \
  /usr/include/c++/11/bits/enable_special_members.h \
  /usr/include/c++/11/bits/parse_numbers.h lib/misc/variant.hxx \
  src/ast/fwd.hh /usr/include/c++/11/list \
@@ -374,9 +371,9 @@ src/parse/parsetiger.lo: src/parse/parsetiger.cc \
  src/ast/function-dec.hh src/ast/chunk.hh src/ast/chunk-interface.hh \
  src/ast/chunk-interface.hxx src/ast/chunk.hxx src/ast/visitor.hh \
  lib/misc/select-const.hh src/ast/visitor.hxx src/ast/var-dec.hh \
- src/ast/var-dec.hxx src/ast/function-dec.hxx src/ast/chunk-list.hh \
- src/ast/chunk-list.hxx /usr/include/c++/11/cstring /usr/include/string.h \
- /usr/include/strings.h \
+ src/ast/escapable.hh src/ast/escapable.hxx src/ast/var-dec.hxx \
+ src/ast/function-dec.hxx src/ast/chunk-list.hh src/ast/chunk-list.hxx \
+ /usr/include/c++/11/cstring /usr/include/string.h /usr/include/strings.h \
  /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
  /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
  /usr/include/c++/11/iomanip /usr/include/c++/11/locale \
@@ -389,11 +386,11 @@ src/parse/parsetiger.lo: src/parse/parsetiger.cc \
  /usr/include/c++/11/bits/quoted_string.h /usr/include/c++/11/sstream \
  /usr/include/c++/11/bits/sstream.tcc src/parse/location.hh \
  src/parse/scantiger.hh src/parse/parsetiger.hh src/parse/tiger-parser.hh \
+ src/common.hh lib/misc/error.hh lib/misc/error.hxx lib/misc/timer.hh \
  /usr/include/c++/11/map /usr/include/c++/11/bits/stl_map.h \
  /usr/include/c++/11/bits/stl_multimap.h /usr/include/c++/11/stack \
  /usr/include/c++/11/deque /usr/include/c++/11/bits/stl_deque.h \
  /usr/include/c++/11/bits/deque.tcc /usr/include/c++/11/bits/stl_stack.h \
- src/common.hh lib/misc/error.hh lib/misc/error.hxx lib/misc/timer.hh \
  lib/misc/timer.hxx lib/misc/file-library.hh \
  /usr/include/c++/11/filesystem /usr/include/c++/11/bits/fs_fwd.h \
  /usr/include/c++/11/chrono /usr/include/c++/11/ratio \
@@ -699,9 +696,8 @@ src/parse/parsetiger.lo: src/parse/parsetiger.cc \
  /usr/include/boost/iterator/advance.hpp \
  /usr/include/boost/lexical_cast/bad_lexical_cast.hpp \
  /usr/include/boost/throw_exception.hpp \
- /usr/include/boost/assert/source_location.hpp \
- /usr/include/boost/current_function.hpp \
  /usr/include/boost/exception/exception.hpp \
+ /usr/include/boost/current_function.hpp \
  /usr/include/boost/lexical_cast/try_lexical_convert.hpp \
  /usr/include/boost/type_traits/type_identity.hpp \
  /usr/include/boost/lexical_cast/detail/is_character.hpp \
@@ -755,7 +751,7 @@ src/parse/parsetiger.lo: src/parse/parsetiger.cc \
  /usr/include/boost/integer_traits.hpp \
  /usr/include/boost/lexical_cast/detail/widest_char.hpp \
  /usr/include/boost/array.hpp /usr/include/boost/swap.hpp \
- /usr/include/boost/core/swap.hpp \
+ /usr/include/boost/core/swap.hpp /usr/include/boost/detail/iterator.hpp \
  /usr/include/boost/container/container_fwd.hpp \
  /usr/include/boost/container/detail/std_fwd.hpp \
  /usr/include/boost/move/detail/std_ns_begin.hpp \
@@ -918,7 +914,7 @@ src/parse/parsetiger.lo: src/parse/parsetiger.cc \
  /usr/include/boost/predef/os/bsd/free.h \
  /usr/include/boost/predef/os/bsd/open.h \
  /usr/include/boost/predef/os/bsd/net.h \
- /usr/include/boost/predef/platform/android.h \
+ /usr/include/boost/predef/os/android.h \
  /usr/include/boost/math/special_functions/fpclassify.hpp \
  /usr/include/boost/math/tools/real_cast.hpp \
  /usr/include/boost/integer.hpp /usr/include/boost/integer_fwd.hpp \
@@ -933,10 +929,8 @@ src/parse/parsetiger.hh:
 /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h:
 /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h:
 /usr/include/features.h:
-/usr/include/features-time64.h:
-/usr/include/x86_64-linux-gnu/bits/wordsize.h:
-/usr/include/x86_64-linux-gnu/bits/timesize.h:
 /usr/include/x86_64-linux-gnu/sys/cdefs.h:
+/usr/include/x86_64-linux-gnu/bits/wordsize.h:
 /usr/include/x86_64-linux-gnu/bits/long-double.h:
 /usr/include/x86_64-linux-gnu/gnu/stubs.h:
 /usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
@@ -989,6 +983,7 @@ src/parse/parsetiger.hh:
 /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h:
 /usr/include/stdint.h:
 /usr/include/x86_64-linux-gnu/bits/types.h:
+/usr/include/x86_64-linux-gnu/bits/timesize.h:
 /usr/include/x86_64-linux-gnu/bits/typesizes.h:
 /usr/include/x86_64-linux-gnu/bits/time64.h:
 /usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
@@ -1062,10 +1057,7 @@ src/parse/parsetiger.hh:
 /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h:
 /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h:
 /usr/include/x86_64-linux-gnu/bits/setjmp.h:
-/usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h:
-/usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h:
 /usr/include/x86_64-linux-gnu/c++/11/bits/atomic_word.h:
-/usr/include/x86_64-linux-gnu/sys/single_threaded.h:
 /usr/include/c++/11/ext/alloc_traits.h:
 /usr/include/c++/11/bits/alloc_traits.h:
 /usr/include/c++/11/string_view:
@@ -1083,6 +1075,7 @@ src/parse/parsetiger.hh:
 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
 /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h:
 /usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
+/usr/include/x86_64-linux-gnu/bits/sys_errlist.h:
 /usr/include/x86_64-linux-gnu/bits/stdio.h:
 /usr/include/x86_64-linux-gnu/bits/stdio2.h:
 /usr/include/c++/11/cerrno:
@@ -1212,7 +1205,6 @@ lib/range/v3/utility/addressof.hpp:
 /usr/include/x86_64-linux-gnu/bits/getopt_core.h:
 /usr/include/x86_64-linux-gnu/bits/unistd.h:
 /usr/include/x86_64-linux-gnu/bits/unistd_ext.h:
-/usr/include/linux/close_range.h:
 /usr/include/syscall.h:
 /usr/include/x86_64-linux-gnu/sys/syscall.h:
 /usr/include/x86_64-linux-gnu/asm/unistd.h:
@@ -1336,6 +1328,7 @@ lib/range/v3/utility/random.hpp:
 /usr/include/x86_64-linux-gnu/bits/mathcalls.h:
 /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h:
 /usr/include/x86_64-linux-gnu/bits/iscanonical.h:
+/usr/include/x86_64-linux-gnu/bits/mathinline.h:
 /usr/include/c++/11/bits/specfun.h:
 /usr/include/c++/11/tr1/gamma.tcc:
 /usr/include/c++/11/tr1/special_function_util.h:
@@ -1378,11 +1371,11 @@ lib/misc/ref.hxx:
 lib/misc/deref.hxx:
 lib/misc/contract.hh:
 lib/misc/symbol.hh:
+lib/misc/unique.hh:
 /usr/include/c++/11/set:
 /usr/include/c++/11/bits/stl_tree.h:
 /usr/include/c++/11/bits/stl_set.h:
 /usr/include/c++/11/bits/stl_multiset.h:
-lib/misc/unique.hh:
 lib/misc/unique.hxx:
 lib/misc/symbol.hxx:
 src/parse/fwd.hh:
@@ -1434,6 +1427,8 @@ src/ast/visitor.hh:
 lib/misc/select-const.hh:
 src/ast/visitor.hxx:
 src/ast/var-dec.hh:
+src/ast/escapable.hh:
+src/ast/escapable.hxx:
 src/ast/var-dec.hxx:
 src/ast/function-dec.hxx:
 src/ast/chunk-list.hh:
@@ -1460,6 +1455,10 @@ src/parse/location.hh:
 src/parse/scantiger.hh:
 src/parse/parsetiger.hh:
 src/parse/tiger-parser.hh:
+src/common.hh:
+lib/misc/error.hh:
+lib/misc/error.hxx:
+lib/misc/timer.hh:
 /usr/include/c++/11/map:
 /usr/include/c++/11/bits/stl_map.h:
 /usr/include/c++/11/bits/stl_multimap.h:
@@ -1468,10 +1467,6 @@ src/parse/tiger-parser.hh:
 /usr/include/c++/11/bits/stl_deque.h:
 /usr/include/c++/11/bits/deque.tcc:
 /usr/include/c++/11/bits/stl_stack.h:
-src/common.hh:
-lib/misc/error.hh:
-lib/misc/error.hxx:
-lib/misc/timer.hh:
 lib/misc/timer.hxx:
 lib/misc/file-library.hh:
 /usr/include/c++/11/filesystem:
@@ -1837,9 +1832,8 @@ lib/misc/map.hxx:
 /usr/include/boost/iterator/advance.hpp:
 /usr/include/boost/lexical_cast/bad_lexical_cast.hpp:
 /usr/include/boost/throw_exception.hpp:
-/usr/include/boost/assert/source_location.hpp:
-/usr/include/boost/current_function.hpp:
 /usr/include/boost/exception/exception.hpp:
+/usr/include/boost/current_function.hpp:
 /usr/include/boost/lexical_cast/try_lexical_convert.hpp:
 /usr/include/boost/type_traits/type_identity.hpp:
 /usr/include/boost/lexical_cast/detail/is_character.hpp:
@@ -1897,6 +1891,7 @@ lib/misc/map.hxx:
 /usr/include/boost/array.hpp:
 /usr/include/boost/swap.hpp:
 /usr/include/boost/core/swap.hpp:
+/usr/include/boost/detail/iterator.hpp:
 /usr/include/boost/container/container_fwd.hpp:
 /usr/include/boost/container/detail/std_fwd.hpp:
 /usr/include/boost/move/detail/std_ns_begin.hpp:
@@ -2073,7 +2068,7 @@ lib/misc/map.hxx:
 /usr/include/boost/predef/os/bsd/free.h:
 /usr/include/boost/predef/os/bsd/open.h:
 /usr/include/boost/predef/os/bsd/net.h:
-/usr/include/boost/predef/platform/android.h:
+/usr/include/boost/predef/os/android.h:
 /usr/include/boost/math/special_functions/fpclassify.hpp:
 /usr/include/boost/math/tools/real_cast.hpp:
 /usr/include/boost/integer.hpp:

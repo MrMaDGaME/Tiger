@@ -58,11 +58,49 @@ namespace bind
         scope_end();
     }
 
+    void Binder::operator()(ast::SimpleVar& e)
+    {
+
+    }
+
+    void Binder::operator()(ast::NameTy& e)
+    {
+
+    }
+
+    void Binder::operator()(ast::CallExp& e)
+    {
+
+    }
+
+    void Binder::operator()(ast::VarDec& e)
+    {
+        var_list_.put(e.type_name_get(), e);
+    }
+
+    void Binder::operator()(ast::FunctionDec& e)
+    {
+
+    }
+
+    void Binder::operator()(ast::TypeDec& e)
+    {
+
+    }
+
+
     /*-------------------.
     | Visiting VarChunk. |
     `-------------------*/
 
     // FIXME: Some code was deleted here.
+
+    void Binder::operator()(ast::VarChunk& e)
+    {
+
+    }
+
+
 
     /*------------------------.
     | Visiting FunctionChunk. |
@@ -70,10 +108,21 @@ namespace bind
 
     // FIXME: Some code was deleted here.
 
+    void Binder::operator()(ast::FunctionChunk& e)
+    {
+
+    }
+
+
     /*--------------------.
     | Visiting TypeChunk. |
     `--------------------*/
 
     // FIXME: Some code was deleted here.
+
+    void Binder::operator()(ast::TypeChunk& e)
+    {
+
+    }
 
 } // namespace bind

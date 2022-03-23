@@ -1,13 +1,10 @@
 src/parse/prelude.lo: src/parse/prelude.cc /usr/include/stdc-predef.h \
- src/parse/tiger-parser.hh /usr/include/c++/11/map \
- /usr/include/c++/11/bits/stl_tree.h \
+ src/parse/tiger-parser.hh src/ast/fwd.hh /usr/include/c++/11/list \
  /usr/include/c++/11/bits/stl_algobase.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
- /usr/include/features.h /usr/include/features-time64.h \
+ /usr/include/features.h /usr/include/x86_64-linux-gnu/sys/cdefs.h \
  /usr/include/x86_64-linux-gnu/bits/wordsize.h \
- /usr/include/x86_64-linux-gnu/bits/timesize.h \
- /usr/include/x86_64-linux-gnu/sys/cdefs.h \
  /usr/include/x86_64-linux-gnu/bits/long-double.h \
  /usr/include/x86_64-linux-gnu/gnu/stubs.h \
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
@@ -35,110 +32,103 @@ src/parse/prelude.lo: src/parse/prelude.cc /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++allocator.h \
  /usr/include/c++/11/ext/new_allocator.h \
  /usr/include/c++/11/bits/memoryfwd.h \
- /usr/include/c++/11/bits/stl_function.h \
- /usr/include/c++/11/backward/binders.h \
+ /usr/include/c++/11/bits/range_access.h \
+ /usr/include/c++/11/initializer_list /usr/include/c++/11/bits/stl_list.h \
  /usr/include/c++/11/ext/alloc_traits.h \
  /usr/include/c++/11/bits/alloc_traits.h \
  /usr/include/c++/11/bits/stl_construct.h \
+ /usr/include/c++/11/bits/allocated_ptr.h \
  /usr/include/c++/11/ext/aligned_buffer.h \
- /usr/include/c++/11/bits/node_handle.h \
- /usr/include/c++/11/bits/stl_map.h /usr/include/c++/11/initializer_list \
- /usr/include/c++/11/tuple /usr/include/c++/11/utility \
- /usr/include/c++/11/bits/stl_relops.h /usr/include/c++/11/array \
- /usr/include/c++/11/bits/range_access.h \
- /usr/include/c++/11/bits/uses_allocator.h \
- /usr/include/c++/11/bits/invoke.h \
- /usr/include/c++/11/bits/stl_multimap.h \
- /usr/include/c++/11/bits/erase_if.h /usr/include/c++/11/memory \
- /usr/include/c++/11/bits/stl_uninitialized.h \
- /usr/include/c++/11/bits/stl_tempbuf.h \
- /usr/include/c++/11/bits/stl_raw_storage_iter.h \
- /usr/include/c++/11/bits/align.h /usr/include/c++/11/bit \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h \
+ /usr/include/c++/11/bits/list.tcc lib/misc/fwd.hh lib/misc/vector.hh \
+ /usr/include/c++/11/algorithm /usr/include/c++/11/utility \
+ /usr/include/c++/11/bits/stl_relops.h \
+ /usr/include/c++/11/bits/stl_algo.h /usr/include/c++/11/cstdlib \
+ /usr/include/stdlib.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
- /usr/include/x86_64-linux-gnu/bits/types.h \
- /usr/include/x86_64-linux-gnu/bits/typesizes.h \
- /usr/include/x86_64-linux-gnu/bits/time64.h \
- /usr/include/x86_64-linux-gnu/bits/wchar.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
- /usr/include/c++/11/bits/unique_ptr.h \
- /usr/include/c++/11/bits/functional_hash.h \
- /usr/include/c++/11/bits/hash_bytes.h /usr/include/c++/11/ostream \
- /usr/include/c++/11/ios /usr/include/c++/11/iosfwd \
- /usr/include/c++/11/bits/stringfwd.h /usr/include/c++/11/bits/postypes.h \
- /usr/include/c++/11/cwchar /usr/include/wchar.h \
+ /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h \
+ /usr/include/x86_64-linux-gnu/bits/waitflags.h \
+ /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
  /usr/include/x86_64-linux-gnu/bits/floatn.h \
  /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h \
- /usr/include/x86_64-linux-gnu/bits/types/wint_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
- /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
  /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
- /usr/include/x86_64-linux-gnu/bits/wchar2.h \
- /usr/include/c++/11/exception /usr/include/c++/11/bits/exception_ptr.h \
- /usr/include/c++/11/bits/cxxabi_init_exception.h \
- /usr/include/c++/11/typeinfo /usr/include/c++/11/bits/nested_exception.h \
- /usr/include/c++/11/bits/char_traits.h /usr/include/c++/11/cstdint \
- /usr/include/c++/11/bits/localefwd.h \
- /usr/include/x86_64-linux-gnu/c++/11/bits/c++locale.h \
- /usr/include/c++/11/clocale /usr/include/locale.h \
- /usr/include/x86_64-linux-gnu/bits/locale.h /usr/include/c++/11/cctype \
- /usr/include/ctype.h /usr/include/x86_64-linux-gnu/bits/endian.h \
- /usr/include/x86_64-linux-gnu/bits/endianness.h \
- /usr/include/c++/11/bits/ios_base.h /usr/include/c++/11/ext/atomicity.h \
- /usr/include/x86_64-linux-gnu/c++/11/bits/gthr.h \
- /usr/include/x86_64-linux-gnu/c++/11/bits/gthr-default.h \
- /usr/include/pthread.h /usr/include/sched.h \
- /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
- /usr/include/x86_64-linux-gnu/bits/sched.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h \
- /usr/include/x86_64-linux-gnu/bits/cpu-set.h /usr/include/time.h \
- /usr/include/x86_64-linux-gnu/bits/time.h \
- /usr/include/x86_64-linux-gnu/bits/timex.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
+ /usr/include/x86_64-linux-gnu/sys/types.h \
+ /usr/include/x86_64-linux-gnu/bits/types.h \
+ /usr/include/x86_64-linux-gnu/bits/timesize.h \
+ /usr/include/x86_64-linux-gnu/bits/typesizes.h \
+ /usr/include/x86_64-linux-gnu/bits/time64.h \
  /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h \
  /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/timer_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
- /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
- /usr/include/x86_64-linux-gnu/bits/struct_mutex.h \
- /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h \
- /usr/include/x86_64-linux-gnu/bits/setjmp.h \
- /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h \
- /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h \
- /usr/include/x86_64-linux-gnu/c++/11/bits/atomic_word.h \
- /usr/include/x86_64-linux-gnu/sys/single_threaded.h \
- /usr/include/c++/11/bits/locale_classes.h /usr/include/c++/11/string \
- /usr/include/c++/11/bits/ostream_insert.h \
- /usr/include/c++/11/bits/cxxabi_forced.h \
- /usr/include/c++/11/bits/stl_algo.h /usr/include/c++/11/cstdlib \
- /usr/include/stdlib.h /usr/include/x86_64-linux-gnu/bits/waitflags.h \
- /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
- /usr/include/x86_64-linux-gnu/sys/types.h /usr/include/endian.h \
+ /usr/include/x86_64-linux-gnu/bits/stdint-intn.h /usr/include/endian.h \
+ /usr/include/x86_64-linux-gnu/bits/endian.h \
+ /usr/include/x86_64-linux-gnu/bits/endianness.h \
  /usr/include/x86_64-linux-gnu/bits/byteswap.h \
  /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
  /usr/include/x86_64-linux-gnu/sys/select.h \
  /usr/include/x86_64-linux-gnu/bits/select.h \
  /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/select2.h /usr/include/alloca.h \
+ /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
+ /usr/include/x86_64-linux-gnu/bits/select2.h \
+ /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
+ /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h \
+ /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
+ /usr/include/x86_64-linux-gnu/bits/struct_mutex.h \
+ /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h /usr/include/alloca.h \
  /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
  /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
  /usr/include/x86_64-linux-gnu/bits/stdlib.h \
  /usr/include/c++/11/bits/std_abs.h \
  /usr/include/c++/11/bits/algorithmfwd.h \
  /usr/include/c++/11/bits/stl_heap.h \
+ /usr/include/c++/11/bits/stl_tempbuf.h \
  /usr/include/c++/11/bits/uniform_int_dist.h \
+ /usr/include/c++/11/bits/ranges_algo.h \
+ /usr/include/c++/11/bits/ranges_algobase.h /usr/include/c++/11/iterator \
+ /usr/include/c++/11/iosfwd /usr/include/c++/11/bits/stringfwd.h \
+ /usr/include/c++/11/bits/postypes.h /usr/include/c++/11/cwchar \
+ /usr/include/wchar.h /usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h \
+ /usr/include/x86_64-linux-gnu/bits/wchar.h \
+ /usr/include/x86_64-linux-gnu/bits/types/wint_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
+ /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
+ /usr/include/x86_64-linux-gnu/bits/wchar2.h \
+ /usr/include/c++/11/bits/stream_iterator.h \
+ /usr/include/c++/11/bits/streambuf_iterator.h \
+ /usr/include/c++/11/streambuf /usr/include/c++/11/bits/localefwd.h \
+ /usr/include/x86_64-linux-gnu/c++/11/bits/c++locale.h \
+ /usr/include/c++/11/clocale /usr/include/locale.h \
+ /usr/include/x86_64-linux-gnu/bits/locale.h /usr/include/c++/11/cctype \
+ /usr/include/ctype.h /usr/include/c++/11/bits/ios_base.h \
+ /usr/include/c++/11/ext/atomicity.h \
+ /usr/include/x86_64-linux-gnu/c++/11/bits/gthr.h \
+ /usr/include/x86_64-linux-gnu/c++/11/bits/gthr-default.h \
+ /usr/include/pthread.h /usr/include/sched.h \
+ /usr/include/x86_64-linux-gnu/bits/sched.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h \
+ /usr/include/x86_64-linux-gnu/bits/cpu-set.h /usr/include/time.h \
+ /usr/include/x86_64-linux-gnu/bits/time.h \
+ /usr/include/x86_64-linux-gnu/bits/timex.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h \
+ /usr/include/x86_64-linux-gnu/bits/setjmp.h \
+ /usr/include/x86_64-linux-gnu/c++/11/bits/atomic_word.h \
+ /usr/include/c++/11/bits/locale_classes.h /usr/include/c++/11/string \
+ /usr/include/c++/11/bits/char_traits.h /usr/include/c++/11/cstdint \
+ /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h \
+ /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
+ /usr/include/c++/11/bits/ostream_insert.h \
+ /usr/include/c++/11/bits/cxxabi_forced.h \
+ /usr/include/c++/11/bits/stl_function.h \
+ /usr/include/c++/11/backward/binders.h \
  /usr/include/c++/11/bits/basic_string.h /usr/include/c++/11/string_view \
+ /usr/include/c++/11/bits/functional_hash.h \
+ /usr/include/c++/11/bits/hash_bytes.h \
  /usr/include/c++/11/bits/ranges_base.h \
  /usr/include/c++/11/bits/max_size_type.h /usr/include/c++/11/numbers \
  /usr/include/c++/11/bits/string_view.tcc \
@@ -148,6 +138,7 @@ src/parse/prelude.lo: src/parse/prelude.cc /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
  /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h \
  /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
+ /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
  /usr/include/x86_64-linux-gnu/bits/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/stdio2.h /usr/include/c++/11/cerrno \
  /usr/include/errno.h /usr/include/x86_64-linux-gnu/bits/errno.h \
@@ -159,70 +150,39 @@ src/parse/prelude.lo: src/parse/prelude.cc /usr/include/stdc-predef.h \
  /usr/include/c++/11/bits/locale_classes.tcc \
  /usr/include/c++/11/system_error \
  /usr/include/x86_64-linux-gnu/c++/11/bits/error_constants.h \
- /usr/include/c++/11/stdexcept /usr/include/c++/11/streambuf \
- /usr/include/c++/11/bits/streambuf.tcc \
+ /usr/include/c++/11/stdexcept /usr/include/c++/11/exception \
+ /usr/include/c++/11/bits/exception_ptr.h \
+ /usr/include/c++/11/bits/cxxabi_init_exception.h \
+ /usr/include/c++/11/typeinfo /usr/include/c++/11/bits/nested_exception.h \
+ /usr/include/c++/11/bits/streambuf.tcc /usr/include/c++/11/bits/invoke.h \
+ /usr/include/c++/11/bits/ranges_util.h \
+ /usr/include/c++/11/pstl/glue_algorithm_defs.h \
+ /usr/include/c++/11/functional /usr/include/c++/11/tuple \
+ /usr/include/c++/11/array /usr/include/c++/11/bits/uses_allocator.h \
+ /usr/include/c++/11/bits/refwrap.h \
+ /usr/include/c++/11/bits/std_function.h \
+ /usr/include/c++/11/unordered_map /usr/include/c++/11/bits/hashtable.h \
+ /usr/include/c++/11/bits/hashtable_policy.h \
+ /usr/include/c++/11/bits/node_handle.h \
+ /usr/include/c++/11/bits/unordered_map.h \
+ /usr/include/c++/11/bits/erase_if.h /usr/include/c++/11/vector \
+ /usr/include/c++/11/bits/stl_uninitialized.h \
+ /usr/include/c++/11/bits/stl_vector.h \
+ /usr/include/c++/11/bits/stl_bvector.h \
+ /usr/include/c++/11/bits/vector.tcc \
+ /usr/include/c++/11/pstl/execution_defs.h lib/misc/vector.hxx \
+ /usr/include/c++/11/ostream /usr/include/c++/11/ios \
  /usr/include/c++/11/bits/basic_ios.h \
  /usr/include/c++/11/bits/locale_facets.h /usr/include/c++/11/cwctype \
  /usr/include/wctype.h /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/ctype_base.h \
- /usr/include/c++/11/bits/streambuf_iterator.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/ctype_inline.h \
  /usr/include/c++/11/bits/locale_facets.tcc \
  /usr/include/c++/11/bits/basic_ios.tcc \
- /usr/include/c++/11/bits/ostream.tcc \
- /usr/include/c++/11/bits/shared_ptr.h \
- /usr/include/c++/11/bits/shared_ptr_base.h \
- /usr/include/c++/11/bits/allocated_ptr.h \
- /usr/include/c++/11/bits/refwrap.h /usr/include/c++/11/ext/concurrence.h \
- /usr/include/c++/11/bits/shared_ptr_atomic.h \
- /usr/include/c++/11/bits/atomic_base.h \
- /usr/include/c++/11/bits/atomic_lockfree_defines.h \
- /usr/include/c++/11/bits/atomic_wait.h /usr/include/c++/11/climits \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/syslimits.h \
- /usr/include/limits.h /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
- /usr/include/x86_64-linux-gnu/bits/local_lim.h \
- /usr/include/linux/limits.h \
- /usr/include/x86_64-linux-gnu/bits/posix2_lim.h \
- /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
- /usr/include/x86_64-linux-gnu/bits/uio_lim.h /usr/include/unistd.h \
- /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
- /usr/include/x86_64-linux-gnu/bits/environments.h \
- /usr/include/x86_64-linux-gnu/bits/confname.h \
- /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
- /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
- /usr/include/x86_64-linux-gnu/bits/unistd.h \
- /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
- /usr/include/linux/close_range.h /usr/include/syscall.h \
- /usr/include/x86_64-linux-gnu/sys/syscall.h \
- /usr/include/x86_64-linux-gnu/asm/unistd.h \
- /usr/include/x86_64-linux-gnu/asm/unistd_64.h \
- /usr/include/x86_64-linux-gnu/bits/syscall.h \
- /usr/include/c++/11/bits/std_mutex.h \
- /usr/include/c++/11/backward/auto_ptr.h \
- /usr/include/c++/11/bits/ranges_uninitialized.h \
- /usr/include/c++/11/bits/ranges_algobase.h /usr/include/c++/11/iterator \
- /usr/include/c++/11/bits/stream_iterator.h \
- /usr/include/c++/11/bits/uses_allocator_args.h \
- /usr/include/c++/11/pstl/glue_memory_defs.h \
- /usr/include/c++/11/pstl/execution_defs.h /usr/include/c++/11/stack \
- /usr/include/c++/11/deque /usr/include/c++/11/bits/stl_deque.h \
- /usr/include/c++/11/bits/deque.tcc /usr/include/c++/11/bits/stl_stack.h \
- src/ast/fwd.hh /usr/include/c++/11/list \
- /usr/include/c++/11/bits/stl_list.h /usr/include/c++/11/bits/list.tcc \
- /usr/include/c++/11/vector /usr/include/c++/11/bits/stl_vector.h \
- /usr/include/c++/11/bits/stl_bvector.h \
- /usr/include/c++/11/bits/vector.tcc lib/misc/fwd.hh lib/misc/vector.hh \
- /usr/include/c++/11/algorithm /usr/include/c++/11/bits/ranges_algo.h \
- /usr/include/c++/11/bits/ranges_util.h \
- /usr/include/c++/11/pstl/glue_algorithm_defs.h \
- /usr/include/c++/11/functional /usr/include/c++/11/bits/std_function.h \
- /usr/include/c++/11/unordered_map /usr/include/c++/11/bits/hashtable.h \
- /usr/include/c++/11/bits/hashtable_policy.h \
- /usr/include/c++/11/bits/unordered_map.h lib/misc/vector.hxx \
- lib/misc/contract.hh lib/range/v3/algorithm/find.hpp \
- lib/range/v3/range_fwd.hpp lib/meta/meta.hpp /usr/include/c++/11/cstddef \
- lib/meta/meta_fwd.hpp lib/concepts/concepts.hpp lib/concepts/swap.hpp \
+ /usr/include/c++/11/bits/ostream.tcc lib/misc/contract.hh \
+ lib/range/v3/algorithm/find.hpp lib/range/v3/range_fwd.hpp \
+ lib/meta/meta.hpp /usr/include/c++/11/cstddef lib/meta/meta_fwd.hpp \
+ lib/concepts/concepts.hpp lib/concepts/swap.hpp \
  lib/concepts/type_traits.hpp lib/range/v3/detail/config.hpp \
  /usr/include/c++/11/version /usr/include/c++/11/cassert \
  /usr/include/assert.h lib/range/v3/utility/static_const.hpp \
@@ -232,25 +192,65 @@ src/parse/prelude.lo: src/parse/prelude.cc /usr/include/stdc-predef.h \
  lib/range/v3/iterator/concepts.hpp \
  lib/range/v3/functional/comparisons.hpp \
  lib/range/v3/functional/concepts.hpp lib/range/v3/iterator/access.hpp \
- lib/std/detail/associated_types.hpp lib/range/v3/utility/move.hpp \
- lib/range/v3/utility/swap.hpp lib/range/v3/iterator/traits.hpp \
- lib/range/v3/utility/common_type.hpp lib/range/v3/range/access.hpp \
- /usr/include/c++/11/limits lib/range/v3/iterator/reverse_iterator.hpp \
+ lib/std/detail/associated_types.hpp /usr/include/c++/11/climits \
+ /usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h \
+ /usr/lib/gcc/x86_64-linux-gnu/11/include/syslimits.h \
+ /usr/include/limits.h /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
+ /usr/include/x86_64-linux-gnu/bits/local_lim.h \
+ /usr/include/linux/limits.h \
+ /usr/include/x86_64-linux-gnu/bits/posix2_lim.h \
+ /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
+ /usr/include/x86_64-linux-gnu/bits/uio_lim.h \
+ lib/range/v3/utility/move.hpp lib/range/v3/utility/swap.hpp \
+ lib/range/v3/iterator/traits.hpp lib/range/v3/utility/common_type.hpp \
+ lib/range/v3/range/access.hpp /usr/include/c++/11/limits \
+ lib/range/v3/iterator/reverse_iterator.hpp \
  lib/range/v3/iterator/basic_iterator.hpp \
  lib/range/v3/detail/range_access.hpp lib/range/v3/utility/addressof.hpp \
- lib/range/v3/utility/box.hpp lib/range/v3/utility/get.hpp \
- lib/range/v3/detail/adl_get.hpp lib/range/v3/utility/semiregular_box.hpp \
+ /usr/include/c++/11/memory \
+ /usr/include/c++/11/bits/stl_raw_storage_iter.h \
+ /usr/include/c++/11/bits/align.h /usr/include/c++/11/bit \
+ /usr/include/c++/11/bits/unique_ptr.h \
+ /usr/include/c++/11/bits/shared_ptr.h \
+ /usr/include/c++/11/bits/shared_ptr_base.h \
+ /usr/include/c++/11/ext/concurrence.h \
+ /usr/include/c++/11/bits/shared_ptr_atomic.h \
+ /usr/include/c++/11/bits/atomic_base.h \
+ /usr/include/c++/11/bits/atomic_lockfree_defines.h \
+ /usr/include/c++/11/bits/atomic_wait.h /usr/include/unistd.h \
+ /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
+ /usr/include/x86_64-linux-gnu/bits/environments.h \
+ /usr/include/x86_64-linux-gnu/bits/confname.h \
+ /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
+ /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
+ /usr/include/x86_64-linux-gnu/bits/unistd.h \
+ /usr/include/x86_64-linux-gnu/bits/unistd_ext.h /usr/include/syscall.h \
+ /usr/include/x86_64-linux-gnu/sys/syscall.h \
+ /usr/include/x86_64-linux-gnu/asm/unistd.h \
+ /usr/include/x86_64-linux-gnu/asm/unistd_64.h \
+ /usr/include/x86_64-linux-gnu/bits/syscall.h \
+ /usr/include/c++/11/bits/std_mutex.h \
+ /usr/include/c++/11/backward/auto_ptr.h \
+ /usr/include/c++/11/bits/ranges_uninitialized.h \
+ /usr/include/c++/11/bits/uses_allocator_args.h \
+ /usr/include/c++/11/pstl/glue_memory_defs.h lib/range/v3/utility/box.hpp \
+ lib/range/v3/utility/get.hpp lib/range/v3/detail/adl_get.hpp \
+ lib/range/v3/utility/semiregular_box.hpp \
  lib/range/v3/utility/in_place.hpp lib/range/v3/range/concepts.hpp \
  lib/range/v3/range/primitives.hpp lib/range/v3/range/traits.hpp \
  lib/range/v3/range/dangling.hpp src/common.hh lib/misc/error.hh \
  /usr/include/c++/11/sstream /usr/include/c++/11/istream \
  /usr/include/c++/11/bits/istream.tcc \
  /usr/include/c++/11/bits/sstream.tcc lib/misc/error.hxx \
- lib/misc/timer.hh /usr/include/c++/11/iostream lib/misc/timer.hxx \
- lib/misc/file-library.hh /usr/include/c++/11/filesystem \
- /usr/include/c++/11/bits/fs_fwd.h /usr/include/c++/11/chrono \
- /usr/include/c++/11/ratio /usr/include/c++/11/ctime \
- /usr/include/c++/11/bits/parse_numbers.h \
+ lib/misc/timer.hh /usr/include/c++/11/iostream /usr/include/c++/11/map \
+ /usr/include/c++/11/bits/stl_tree.h /usr/include/c++/11/bits/stl_map.h \
+ /usr/include/c++/11/bits/stl_multimap.h /usr/include/c++/11/stack \
+ /usr/include/c++/11/deque /usr/include/c++/11/bits/stl_deque.h \
+ /usr/include/c++/11/bits/deque.tcc /usr/include/c++/11/bits/stl_stack.h \
+ lib/misc/timer.hxx lib/misc/file-library.hh \
+ /usr/include/c++/11/filesystem /usr/include/c++/11/bits/fs_fwd.h \
+ /usr/include/c++/11/chrono /usr/include/c++/11/ratio \
+ /usr/include/c++/11/ctime /usr/include/c++/11/bits/parse_numbers.h \
  /usr/include/c++/11/bits/fs_path.h /usr/include/c++/11/locale \
  /usr/include/c++/11/bits/locale_facets_nonio.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/time_members.h \
@@ -342,6 +342,7 @@ src/parse/prelude.lo: src/parse/prelude.cc /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
  /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
  /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
+ /usr/include/x86_64-linux-gnu/bits/mathinline.h \
  /usr/include/c++/11/bits/specfun.h /usr/include/c++/11/tr1/gamma.tcc \
  /usr/include/c++/11/tr1/special_function_util.h \
  /usr/include/c++/11/tr1/bessel_function.tcc \
@@ -373,10 +374,11 @@ src/parse/prelude.lo: src/parse/prelude.cc /usr/include/stdc-predef.h \
  lib/range/v3/algorithm/aux_/sort_n_with_buffer.hpp lib/misc/separator.hh \
  lib/misc/separator.hxx lib/misc/deref.hh lib/misc/ref.hh \
  lib/misc/ref.hxx lib/misc/deref.hxx lib/misc/symbol.hh \
- /usr/include/c++/11/set /usr/include/c++/11/bits/stl_set.h \
- /usr/include/c++/11/bits/stl_multiset.h lib/misc/unique.hh \
- lib/misc/unique.hxx lib/misc/symbol.hxx src/parse/fwd.hh \
- lib/misc/variant.hh /usr/include/c++/11/variant \
+ lib/misc/unique.hh /usr/include/c++/11/set \
+ /usr/include/c++/11/bits/stl_set.h \
+ /usr/include/c++/11/bits/stl_multiset.h lib/misc/unique.hxx \
+ lib/misc/symbol.hxx src/parse/fwd.hh lib/misc/variant.hh \
+ /usr/include/c++/11/variant \
  /usr/include/c++/11/bits/enable_special_members.h lib/misc/variant.hxx \
  src/ast/exp.hh src/ast/ast.hh src/ast/location.hh src/parse/location.hh \
  src/ast/ast.hxx src/ast/exp.hxx src/ast/var.hh src/ast/var.hxx \
@@ -386,9 +388,10 @@ src/parse/prelude.lo: src/parse/prelude.cc /usr/include/stdc-predef.h \
  src/ast/field-init.hxx src/ast/function-dec.hh src/ast/chunk.hh \
  src/ast/chunk-interface.hh src/ast/chunk-interface.hxx src/ast/chunk.hxx \
  src/ast/visitor.hh lib/misc/select-const.hh src/ast/visitor.hxx \
- src/ast/var-dec.hh src/ast/var-dec.hxx src/ast/function-dec.hxx \
- src/ast/chunk-list.hh src/ast/chunk-list.hxx /usr/include/c++/11/cstring \
- /usr/include/string.h /usr/include/strings.h \
+ src/ast/var-dec.hh src/ast/escapable.hh src/ast/escapable.hxx \
+ src/ast/var-dec.hxx src/ast/function-dec.hxx src/ast/chunk-list.hh \
+ src/ast/chunk-list.hxx /usr/include/c++/11/cstring /usr/include/string.h \
+ /usr/include/strings.h \
  /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
  /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
  src/parse/location.hh src/parse/tiger-driver.hh src/ast/all.hh \
@@ -691,9 +694,8 @@ src/parse/prelude.lo: src/parse/prelude.cc /usr/include/stdc-predef.h \
  /usr/include/boost/iterator/advance.hpp \
  /usr/include/boost/lexical_cast/bad_lexical_cast.hpp \
  /usr/include/boost/throw_exception.hpp \
- /usr/include/boost/assert/source_location.hpp \
- /usr/include/boost/current_function.hpp \
  /usr/include/boost/exception/exception.hpp \
+ /usr/include/boost/current_function.hpp \
  /usr/include/boost/lexical_cast/try_lexical_convert.hpp \
  /usr/include/boost/type_traits/type_identity.hpp \
  /usr/include/boost/lexical_cast/detail/is_character.hpp \
@@ -747,7 +749,7 @@ src/parse/prelude.lo: src/parse/prelude.cc /usr/include/stdc-predef.h \
  /usr/include/boost/integer_traits.hpp \
  /usr/include/boost/lexical_cast/detail/widest_char.hpp \
  /usr/include/boost/array.hpp /usr/include/boost/swap.hpp \
- /usr/include/boost/core/swap.hpp \
+ /usr/include/boost/core/swap.hpp /usr/include/boost/detail/iterator.hpp \
  /usr/include/boost/container/container_fwd.hpp \
  /usr/include/boost/container/detail/std_fwd.hpp \
  /usr/include/boost/move/detail/std_ns_begin.hpp \
@@ -910,7 +912,7 @@ src/parse/prelude.lo: src/parse/prelude.cc /usr/include/stdc-predef.h \
  /usr/include/boost/predef/os/bsd/free.h \
  /usr/include/boost/predef/os/bsd/open.h \
  /usr/include/boost/predef/os/bsd/net.h \
- /usr/include/boost/predef/platform/android.h \
+ /usr/include/boost/predef/os/android.h \
  /usr/include/boost/math/special_functions/fpclassify.hpp \
  /usr/include/boost/math/tools/real_cast.hpp \
  /usr/include/boost/integer.hpp /usr/include/boost/integer_fwd.hpp \
@@ -918,16 +920,14 @@ src/parse/prelude.lo: src/parse/prelude.cc /usr/include/stdc-predef.h \
  src/parse/metavar-map.hh src/parse/metavar-map.hxx src/parse/tweast.hxx
 /usr/include/stdc-predef.h:
 src/parse/tiger-parser.hh:
-/usr/include/c++/11/map:
-/usr/include/c++/11/bits/stl_tree.h:
+src/ast/fwd.hh:
+/usr/include/c++/11/list:
 /usr/include/c++/11/bits/stl_algobase.h:
 /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h:
 /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h:
 /usr/include/features.h:
-/usr/include/features-time64.h:
-/usr/include/x86_64-linux-gnu/bits/wordsize.h:
-/usr/include/x86_64-linux-gnu/bits/timesize.h:
 /usr/include/x86_64-linux-gnu/sys/cdefs.h:
+/usr/include/x86_64-linux-gnu/bits/wordsize.h:
 /usr/include/x86_64-linux-gnu/bits/long-double.h:
 /usr/include/x86_64-linux-gnu/gnu/stubs.h:
 /usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
@@ -959,125 +959,58 @@ src/parse/tiger-parser.hh:
 /usr/include/x86_64-linux-gnu/c++/11/bits/c++allocator.h:
 /usr/include/c++/11/ext/new_allocator.h:
 /usr/include/c++/11/bits/memoryfwd.h:
-/usr/include/c++/11/bits/stl_function.h:
-/usr/include/c++/11/backward/binders.h:
+/usr/include/c++/11/bits/range_access.h:
+/usr/include/c++/11/initializer_list:
+/usr/include/c++/11/bits/stl_list.h:
 /usr/include/c++/11/ext/alloc_traits.h:
 /usr/include/c++/11/bits/alloc_traits.h:
 /usr/include/c++/11/bits/stl_construct.h:
+/usr/include/c++/11/bits/allocated_ptr.h:
 /usr/include/c++/11/ext/aligned_buffer.h:
-/usr/include/c++/11/bits/node_handle.h:
-/usr/include/c++/11/bits/stl_map.h:
-/usr/include/c++/11/initializer_list:
-/usr/include/c++/11/tuple:
+/usr/include/c++/11/bits/list.tcc:
+lib/misc/fwd.hh:
+lib/misc/vector.hh:
+/usr/include/c++/11/algorithm:
 /usr/include/c++/11/utility:
 /usr/include/c++/11/bits/stl_relops.h:
-/usr/include/c++/11/array:
-/usr/include/c++/11/bits/range_access.h:
-/usr/include/c++/11/bits/uses_allocator.h:
-/usr/include/c++/11/bits/invoke.h:
-/usr/include/c++/11/bits/stl_multimap.h:
-/usr/include/c++/11/bits/erase_if.h:
-/usr/include/c++/11/memory:
-/usr/include/c++/11/bits/stl_uninitialized.h:
-/usr/include/c++/11/bits/stl_tempbuf.h:
-/usr/include/c++/11/bits/stl_raw_storage_iter.h:
-/usr/include/c++/11/bits/align.h:
-/usr/include/c++/11/bit:
-/usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h:
-/usr/include/stdint.h:
-/usr/include/x86_64-linux-gnu/bits/libc-header-start.h:
-/usr/include/x86_64-linux-gnu/bits/types.h:
-/usr/include/x86_64-linux-gnu/bits/typesizes.h:
-/usr/include/x86_64-linux-gnu/bits/time64.h:
-/usr/include/x86_64-linux-gnu/bits/wchar.h:
-/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
-/usr/include/x86_64-linux-gnu/bits/stdint-uintn.h:
-/usr/include/c++/11/bits/unique_ptr.h:
-/usr/include/c++/11/bits/functional_hash.h:
-/usr/include/c++/11/bits/hash_bytes.h:
-/usr/include/c++/11/ostream:
-/usr/include/c++/11/ios:
-/usr/include/c++/11/iosfwd:
-/usr/include/c++/11/bits/stringfwd.h:
-/usr/include/c++/11/bits/postypes.h:
-/usr/include/c++/11/cwchar:
-/usr/include/wchar.h:
-/usr/include/x86_64-linux-gnu/bits/floatn.h:
-/usr/include/x86_64-linux-gnu/bits/floatn-common.h:
-/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h:
-/usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h:
-/usr/include/x86_64-linux-gnu/bits/types/wint_t.h:
-/usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h:
-/usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h:
-/usr/include/x86_64-linux-gnu/bits/types/__FILE.h:
-/usr/include/x86_64-linux-gnu/bits/types/FILE.h:
-/usr/include/x86_64-linux-gnu/bits/types/locale_t.h:
-/usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
-/usr/include/x86_64-linux-gnu/bits/wchar2.h:
-/usr/include/c++/11/exception:
-/usr/include/c++/11/bits/exception_ptr.h:
-/usr/include/c++/11/bits/cxxabi_init_exception.h:
-/usr/include/c++/11/typeinfo:
-/usr/include/c++/11/bits/nested_exception.h:
-/usr/include/c++/11/bits/char_traits.h:
-/usr/include/c++/11/cstdint:
-/usr/include/c++/11/bits/localefwd.h:
-/usr/include/x86_64-linux-gnu/c++/11/bits/c++locale.h:
-/usr/include/c++/11/clocale:
-/usr/include/locale.h:
-/usr/include/x86_64-linux-gnu/bits/locale.h:
-/usr/include/c++/11/cctype:
-/usr/include/ctype.h:
-/usr/include/x86_64-linux-gnu/bits/endian.h:
-/usr/include/x86_64-linux-gnu/bits/endianness.h:
-/usr/include/c++/11/bits/ios_base.h:
-/usr/include/c++/11/ext/atomicity.h:
-/usr/include/x86_64-linux-gnu/c++/11/bits/gthr.h:
-/usr/include/x86_64-linux-gnu/c++/11/bits/gthr-default.h:
-/usr/include/pthread.h:
-/usr/include/sched.h:
-/usr/include/x86_64-linux-gnu/bits/types/time_t.h:
-/usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h:
-/usr/include/x86_64-linux-gnu/bits/sched.h:
-/usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h:
-/usr/include/x86_64-linux-gnu/bits/cpu-set.h:
-/usr/include/time.h:
-/usr/include/x86_64-linux-gnu/bits/time.h:
-/usr/include/x86_64-linux-gnu/bits/timex.h:
-/usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h:
-/usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
-/usr/include/x86_64-linux-gnu/bits/types/struct_tm.h:
-/usr/include/x86_64-linux-gnu/bits/types/clockid_t.h:
-/usr/include/x86_64-linux-gnu/bits/types/timer_t.h:
-/usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h:
-/usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
-/usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
-/usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h:
-/usr/include/x86_64-linux-gnu/bits/struct_mutex.h:
-/usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
-/usr/include/x86_64-linux-gnu/bits/setjmp.h:
-/usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h:
-/usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h:
-/usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h:
-/usr/include/x86_64-linux-gnu/c++/11/bits/atomic_word.h:
-/usr/include/x86_64-linux-gnu/sys/single_threaded.h:
-/usr/include/c++/11/bits/locale_classes.h:
-/usr/include/c++/11/string:
-/usr/include/c++/11/bits/ostream_insert.h:
-/usr/include/c++/11/bits/cxxabi_forced.h:
 /usr/include/c++/11/bits/stl_algo.h:
 /usr/include/c++/11/cstdlib:
 /usr/include/stdlib.h:
+/usr/include/x86_64-linux-gnu/bits/libc-header-start.h:
+/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h:
 /usr/include/x86_64-linux-gnu/bits/waitflags.h:
 /usr/include/x86_64-linux-gnu/bits/waitstatus.h:
+/usr/include/x86_64-linux-gnu/bits/floatn.h:
+/usr/include/x86_64-linux-gnu/bits/floatn-common.h:
+/usr/include/x86_64-linux-gnu/bits/types/locale_t.h:
+/usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
 /usr/include/x86_64-linux-gnu/sys/types.h:
+/usr/include/x86_64-linux-gnu/bits/types.h:
+/usr/include/x86_64-linux-gnu/bits/timesize.h:
+/usr/include/x86_64-linux-gnu/bits/typesizes.h:
+/usr/include/x86_64-linux-gnu/bits/time64.h:
+/usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
+/usr/include/x86_64-linux-gnu/bits/types/clockid_t.h:
+/usr/include/x86_64-linux-gnu/bits/types/time_t.h:
+/usr/include/x86_64-linux-gnu/bits/types/timer_t.h:
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
 /usr/include/endian.h:
+/usr/include/x86_64-linux-gnu/bits/endian.h:
+/usr/include/x86_64-linux-gnu/bits/endianness.h:
 /usr/include/x86_64-linux-gnu/bits/byteswap.h:
 /usr/include/x86_64-linux-gnu/bits/uintn-identity.h:
 /usr/include/x86_64-linux-gnu/sys/select.h:
 /usr/include/x86_64-linux-gnu/bits/select.h:
 /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h:
+/usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h:
+/usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h:
+/usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h:
 /usr/include/x86_64-linux-gnu/bits/select2.h:
+/usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
+/usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
+/usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h:
+/usr/include/x86_64-linux-gnu/bits/struct_mutex.h:
+/usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
 /usr/include/alloca.h:
 /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h:
 /usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
@@ -1085,9 +1018,65 @@ src/parse/tiger-parser.hh:
 /usr/include/c++/11/bits/std_abs.h:
 /usr/include/c++/11/bits/algorithmfwd.h:
 /usr/include/c++/11/bits/stl_heap.h:
+/usr/include/c++/11/bits/stl_tempbuf.h:
 /usr/include/c++/11/bits/uniform_int_dist.h:
+/usr/include/c++/11/bits/ranges_algo.h:
+/usr/include/c++/11/bits/ranges_algobase.h:
+/usr/include/c++/11/iterator:
+/usr/include/c++/11/iosfwd:
+/usr/include/c++/11/bits/stringfwd.h:
+/usr/include/c++/11/bits/postypes.h:
+/usr/include/c++/11/cwchar:
+/usr/include/wchar.h:
+/usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h:
+/usr/include/x86_64-linux-gnu/bits/wchar.h:
+/usr/include/x86_64-linux-gnu/bits/types/wint_t.h:
+/usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h:
+/usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h:
+/usr/include/x86_64-linux-gnu/bits/types/__FILE.h:
+/usr/include/x86_64-linux-gnu/bits/types/FILE.h:
+/usr/include/x86_64-linux-gnu/bits/wchar2.h:
+/usr/include/c++/11/bits/stream_iterator.h:
+/usr/include/c++/11/bits/streambuf_iterator.h:
+/usr/include/c++/11/streambuf:
+/usr/include/c++/11/bits/localefwd.h:
+/usr/include/x86_64-linux-gnu/c++/11/bits/c++locale.h:
+/usr/include/c++/11/clocale:
+/usr/include/locale.h:
+/usr/include/x86_64-linux-gnu/bits/locale.h:
+/usr/include/c++/11/cctype:
+/usr/include/ctype.h:
+/usr/include/c++/11/bits/ios_base.h:
+/usr/include/c++/11/ext/atomicity.h:
+/usr/include/x86_64-linux-gnu/c++/11/bits/gthr.h:
+/usr/include/x86_64-linux-gnu/c++/11/bits/gthr-default.h:
+/usr/include/pthread.h:
+/usr/include/sched.h:
+/usr/include/x86_64-linux-gnu/bits/sched.h:
+/usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h:
+/usr/include/x86_64-linux-gnu/bits/cpu-set.h:
+/usr/include/time.h:
+/usr/include/x86_64-linux-gnu/bits/time.h:
+/usr/include/x86_64-linux-gnu/bits/timex.h:
+/usr/include/x86_64-linux-gnu/bits/types/struct_tm.h:
+/usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h:
+/usr/include/x86_64-linux-gnu/bits/setjmp.h:
+/usr/include/x86_64-linux-gnu/c++/11/bits/atomic_word.h:
+/usr/include/c++/11/bits/locale_classes.h:
+/usr/include/c++/11/string:
+/usr/include/c++/11/bits/char_traits.h:
+/usr/include/c++/11/cstdint:
+/usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h:
+/usr/include/stdint.h:
+/usr/include/x86_64-linux-gnu/bits/stdint-uintn.h:
+/usr/include/c++/11/bits/ostream_insert.h:
+/usr/include/c++/11/bits/cxxabi_forced.h:
+/usr/include/c++/11/bits/stl_function.h:
+/usr/include/c++/11/backward/binders.h:
 /usr/include/c++/11/bits/basic_string.h:
 /usr/include/c++/11/string_view:
+/usr/include/c++/11/bits/functional_hash.h:
+/usr/include/c++/11/bits/hash_bytes.h:
 /usr/include/c++/11/bits/ranges_base.h:
 /usr/include/c++/11/bits/max_size_type.h:
 /usr/include/c++/11/numbers:
@@ -1100,6 +1089,7 @@ src/parse/tiger-parser.hh:
 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
 /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h:
 /usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
+/usr/include/x86_64-linux-gnu/bits/sys_errlist.h:
 /usr/include/x86_64-linux-gnu/bits/stdio.h:
 /usr/include/x86_64-linux-gnu/bits/stdio2.h:
 /usr/include/c++/11/cerrno:
@@ -1116,87 +1106,46 @@ src/parse/tiger-parser.hh:
 /usr/include/c++/11/system_error:
 /usr/include/x86_64-linux-gnu/c++/11/bits/error_constants.h:
 /usr/include/c++/11/stdexcept:
-/usr/include/c++/11/streambuf:
+/usr/include/c++/11/exception:
+/usr/include/c++/11/bits/exception_ptr.h:
+/usr/include/c++/11/bits/cxxabi_init_exception.h:
+/usr/include/c++/11/typeinfo:
+/usr/include/c++/11/bits/nested_exception.h:
 /usr/include/c++/11/bits/streambuf.tcc:
+/usr/include/c++/11/bits/invoke.h:
+/usr/include/c++/11/bits/ranges_util.h:
+/usr/include/c++/11/pstl/glue_algorithm_defs.h:
+/usr/include/c++/11/functional:
+/usr/include/c++/11/tuple:
+/usr/include/c++/11/array:
+/usr/include/c++/11/bits/uses_allocator.h:
+/usr/include/c++/11/bits/refwrap.h:
+/usr/include/c++/11/bits/std_function.h:
+/usr/include/c++/11/unordered_map:
+/usr/include/c++/11/bits/hashtable.h:
+/usr/include/c++/11/bits/hashtable_policy.h:
+/usr/include/c++/11/bits/node_handle.h:
+/usr/include/c++/11/bits/unordered_map.h:
+/usr/include/c++/11/bits/erase_if.h:
+/usr/include/c++/11/vector:
+/usr/include/c++/11/bits/stl_uninitialized.h:
+/usr/include/c++/11/bits/stl_vector.h:
+/usr/include/c++/11/bits/stl_bvector.h:
+/usr/include/c++/11/bits/vector.tcc:
+/usr/include/c++/11/pstl/execution_defs.h:
+lib/misc/vector.hxx:
+/usr/include/c++/11/ostream:
+/usr/include/c++/11/ios:
 /usr/include/c++/11/bits/basic_ios.h:
 /usr/include/c++/11/bits/locale_facets.h:
 /usr/include/c++/11/cwctype:
 /usr/include/wctype.h:
 /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h:
 /usr/include/x86_64-linux-gnu/c++/11/bits/ctype_base.h:
-/usr/include/c++/11/bits/streambuf_iterator.h:
 /usr/include/x86_64-linux-gnu/c++/11/bits/ctype_inline.h:
 /usr/include/c++/11/bits/locale_facets.tcc:
 /usr/include/c++/11/bits/basic_ios.tcc:
 /usr/include/c++/11/bits/ostream.tcc:
-/usr/include/c++/11/bits/shared_ptr.h:
-/usr/include/c++/11/bits/shared_ptr_base.h:
-/usr/include/c++/11/bits/allocated_ptr.h:
-/usr/include/c++/11/bits/refwrap.h:
-/usr/include/c++/11/ext/concurrence.h:
-/usr/include/c++/11/bits/shared_ptr_atomic.h:
-/usr/include/c++/11/bits/atomic_base.h:
-/usr/include/c++/11/bits/atomic_lockfree_defines.h:
-/usr/include/c++/11/bits/atomic_wait.h:
-/usr/include/c++/11/climits:
-/usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h:
-/usr/lib/gcc/x86_64-linux-gnu/11/include/syslimits.h:
-/usr/include/limits.h:
-/usr/include/x86_64-linux-gnu/bits/posix1_lim.h:
-/usr/include/x86_64-linux-gnu/bits/local_lim.h:
-/usr/include/linux/limits.h:
-/usr/include/x86_64-linux-gnu/bits/posix2_lim.h:
-/usr/include/x86_64-linux-gnu/bits/xopen_lim.h:
-/usr/include/x86_64-linux-gnu/bits/uio_lim.h:
-/usr/include/unistd.h:
-/usr/include/x86_64-linux-gnu/bits/posix_opt.h:
-/usr/include/x86_64-linux-gnu/bits/environments.h:
-/usr/include/x86_64-linux-gnu/bits/confname.h:
-/usr/include/x86_64-linux-gnu/bits/getopt_posix.h:
-/usr/include/x86_64-linux-gnu/bits/getopt_core.h:
-/usr/include/x86_64-linux-gnu/bits/unistd.h:
-/usr/include/x86_64-linux-gnu/bits/unistd_ext.h:
-/usr/include/linux/close_range.h:
-/usr/include/syscall.h:
-/usr/include/x86_64-linux-gnu/sys/syscall.h:
-/usr/include/x86_64-linux-gnu/asm/unistd.h:
-/usr/include/x86_64-linux-gnu/asm/unistd_64.h:
-/usr/include/x86_64-linux-gnu/bits/syscall.h:
-/usr/include/c++/11/bits/std_mutex.h:
-/usr/include/c++/11/backward/auto_ptr.h:
-/usr/include/c++/11/bits/ranges_uninitialized.h:
-/usr/include/c++/11/bits/ranges_algobase.h:
-/usr/include/c++/11/iterator:
-/usr/include/c++/11/bits/stream_iterator.h:
-/usr/include/c++/11/bits/uses_allocator_args.h:
-/usr/include/c++/11/pstl/glue_memory_defs.h:
-/usr/include/c++/11/pstl/execution_defs.h:
-/usr/include/c++/11/stack:
-/usr/include/c++/11/deque:
-/usr/include/c++/11/bits/stl_deque.h:
-/usr/include/c++/11/bits/deque.tcc:
-/usr/include/c++/11/bits/stl_stack.h:
-src/ast/fwd.hh:
-/usr/include/c++/11/list:
-/usr/include/c++/11/bits/stl_list.h:
-/usr/include/c++/11/bits/list.tcc:
-/usr/include/c++/11/vector:
-/usr/include/c++/11/bits/stl_vector.h:
-/usr/include/c++/11/bits/stl_bvector.h:
-/usr/include/c++/11/bits/vector.tcc:
-lib/misc/fwd.hh:
-lib/misc/vector.hh:
-/usr/include/c++/11/algorithm:
-/usr/include/c++/11/bits/ranges_algo.h:
-/usr/include/c++/11/bits/ranges_util.h:
-/usr/include/c++/11/pstl/glue_algorithm_defs.h:
-/usr/include/c++/11/functional:
-/usr/include/c++/11/bits/std_function.h:
-/usr/include/c++/11/unordered_map:
-/usr/include/c++/11/bits/hashtable.h:
-/usr/include/c++/11/bits/hashtable_policy.h:
-/usr/include/c++/11/bits/unordered_map.h:
-lib/misc/vector.hxx:
 lib/misc/contract.hh:
 lib/range/v3/algorithm/find.hpp:
 lib/range/v3/range_fwd.hpp:
@@ -1221,6 +1170,16 @@ lib/range/v3/functional/comparisons.hpp:
 lib/range/v3/functional/concepts.hpp:
 lib/range/v3/iterator/access.hpp:
 lib/std/detail/associated_types.hpp:
+/usr/include/c++/11/climits:
+/usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h:
+/usr/lib/gcc/x86_64-linux-gnu/11/include/syslimits.h:
+/usr/include/limits.h:
+/usr/include/x86_64-linux-gnu/bits/posix1_lim.h:
+/usr/include/x86_64-linux-gnu/bits/local_lim.h:
+/usr/include/linux/limits.h:
+/usr/include/x86_64-linux-gnu/bits/posix2_lim.h:
+/usr/include/x86_64-linux-gnu/bits/xopen_lim.h:
+/usr/include/x86_64-linux-gnu/bits/uio_lim.h:
 lib/range/v3/utility/move.hpp:
 lib/range/v3/utility/swap.hpp:
 lib/range/v3/iterator/traits.hpp:
@@ -1231,6 +1190,36 @@ lib/range/v3/iterator/reverse_iterator.hpp:
 lib/range/v3/iterator/basic_iterator.hpp:
 lib/range/v3/detail/range_access.hpp:
 lib/range/v3/utility/addressof.hpp:
+/usr/include/c++/11/memory:
+/usr/include/c++/11/bits/stl_raw_storage_iter.h:
+/usr/include/c++/11/bits/align.h:
+/usr/include/c++/11/bit:
+/usr/include/c++/11/bits/unique_ptr.h:
+/usr/include/c++/11/bits/shared_ptr.h:
+/usr/include/c++/11/bits/shared_ptr_base.h:
+/usr/include/c++/11/ext/concurrence.h:
+/usr/include/c++/11/bits/shared_ptr_atomic.h:
+/usr/include/c++/11/bits/atomic_base.h:
+/usr/include/c++/11/bits/atomic_lockfree_defines.h:
+/usr/include/c++/11/bits/atomic_wait.h:
+/usr/include/unistd.h:
+/usr/include/x86_64-linux-gnu/bits/posix_opt.h:
+/usr/include/x86_64-linux-gnu/bits/environments.h:
+/usr/include/x86_64-linux-gnu/bits/confname.h:
+/usr/include/x86_64-linux-gnu/bits/getopt_posix.h:
+/usr/include/x86_64-linux-gnu/bits/getopt_core.h:
+/usr/include/x86_64-linux-gnu/bits/unistd.h:
+/usr/include/x86_64-linux-gnu/bits/unistd_ext.h:
+/usr/include/syscall.h:
+/usr/include/x86_64-linux-gnu/sys/syscall.h:
+/usr/include/x86_64-linux-gnu/asm/unistd.h:
+/usr/include/x86_64-linux-gnu/asm/unistd_64.h:
+/usr/include/x86_64-linux-gnu/bits/syscall.h:
+/usr/include/c++/11/bits/std_mutex.h:
+/usr/include/c++/11/backward/auto_ptr.h:
+/usr/include/c++/11/bits/ranges_uninitialized.h:
+/usr/include/c++/11/bits/uses_allocator_args.h:
+/usr/include/c++/11/pstl/glue_memory_defs.h:
 lib/range/v3/utility/box.hpp:
 lib/range/v3/utility/get.hpp:
 lib/range/v3/detail/adl_get.hpp:
@@ -1249,6 +1238,15 @@ lib/misc/error.hh:
 lib/misc/error.hxx:
 lib/misc/timer.hh:
 /usr/include/c++/11/iostream:
+/usr/include/c++/11/map:
+/usr/include/c++/11/bits/stl_tree.h:
+/usr/include/c++/11/bits/stl_map.h:
+/usr/include/c++/11/bits/stl_multimap.h:
+/usr/include/c++/11/stack:
+/usr/include/c++/11/deque:
+/usr/include/c++/11/bits/stl_deque.h:
+/usr/include/c++/11/bits/deque.tcc:
+/usr/include/c++/11/bits/stl_stack.h:
 lib/misc/timer.hxx:
 lib/misc/file-library.hh:
 /usr/include/c++/11/filesystem:
@@ -1379,6 +1377,7 @@ lib/range/v3/utility/random.hpp:
 /usr/include/x86_64-linux-gnu/bits/mathcalls.h:
 /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h:
 /usr/include/x86_64-linux-gnu/bits/iscanonical.h:
+/usr/include/x86_64-linux-gnu/bits/mathinline.h:
 /usr/include/c++/11/bits/specfun.h:
 /usr/include/c++/11/tr1/gamma.tcc:
 /usr/include/c++/11/tr1/special_function_util.h:
@@ -1420,10 +1419,10 @@ lib/misc/ref.hh:
 lib/misc/ref.hxx:
 lib/misc/deref.hxx:
 lib/misc/symbol.hh:
+lib/misc/unique.hh:
 /usr/include/c++/11/set:
 /usr/include/c++/11/bits/stl_set.h:
 /usr/include/c++/11/bits/stl_multiset.h:
-lib/misc/unique.hh:
 lib/misc/unique.hxx:
 lib/misc/symbol.hxx:
 src/parse/fwd.hh:
@@ -1460,6 +1459,8 @@ src/ast/visitor.hh:
 lib/misc/select-const.hh:
 src/ast/visitor.hxx:
 src/ast/var-dec.hh:
+src/ast/escapable.hh:
+src/ast/escapable.hxx:
 src/ast/var-dec.hxx:
 src/ast/function-dec.hxx:
 src/ast/chunk-list.hh:
@@ -1824,9 +1825,8 @@ lib/misc/map.hxx:
 /usr/include/boost/iterator/advance.hpp:
 /usr/include/boost/lexical_cast/bad_lexical_cast.hpp:
 /usr/include/boost/throw_exception.hpp:
-/usr/include/boost/assert/source_location.hpp:
-/usr/include/boost/current_function.hpp:
 /usr/include/boost/exception/exception.hpp:
+/usr/include/boost/current_function.hpp:
 /usr/include/boost/lexical_cast/try_lexical_convert.hpp:
 /usr/include/boost/type_traits/type_identity.hpp:
 /usr/include/boost/lexical_cast/detail/is_character.hpp:
@@ -1884,6 +1884,7 @@ lib/misc/map.hxx:
 /usr/include/boost/array.hpp:
 /usr/include/boost/swap.hpp:
 /usr/include/boost/core/swap.hpp:
+/usr/include/boost/detail/iterator.hpp:
 /usr/include/boost/container/container_fwd.hpp:
 /usr/include/boost/container/detail/std_fwd.hpp:
 /usr/include/boost/move/detail/std_ns_begin.hpp:
@@ -2060,7 +2061,7 @@ lib/misc/map.hxx:
 /usr/include/boost/predef/os/bsd/free.h:
 /usr/include/boost/predef/os/bsd/open.h:
 /usr/include/boost/predef/os/bsd/net.h:
-/usr/include/boost/predef/platform/android.h:
+/usr/include/boost/predef/os/android.h:
 /usr/include/boost/math/special_functions/fpclassify.hpp:
 /usr/include/boost/math/tools/real_cast.hpp:
 /usr/include/boost/integer.hpp:

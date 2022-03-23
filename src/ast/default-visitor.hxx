@@ -100,7 +100,7 @@ namespace ast
     e.condition_get().accept(*this);
     e.body_get().accept(*this);
     if (e.is_else_get())
-        e.else_clause_get();
+        e.else_clause_get().accept(*this);
   }
 
   template <template <typename> class Const>

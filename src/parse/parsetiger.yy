@@ -233,7 +233,7 @@
 // a unique TypeDec each, or a single TypeChunk containing two TypeDec.
 // We want the latter.
 
-%precedence "var" "function" "primitive"
+%precedence "function" "primitive"
 %precedence "of"
 %precedence "do" ":="
 %right "then" "else"
@@ -320,16 +320,20 @@ exp:
 record_r:
     record_r "," ID "=" exp     { $$ = $1; $$->emplace_back(tp.td_.make_FieldInit(@$, $3, $5)); }
   | ID "=" exp                  { $$ = tp.td_.make_fieldinits_type(); $$->emplace_back(tp.td_.make_FieldInit(@$, $1, $3)); }
+  /*| record_r error              { $$ = yyerrok; }
+  | ID "=" error                { $$ = yyerrok; }*/
+
 ;
 
 function_r:
     function_r "," exp     { $$ = $1; $$->emplace_back($3); }
   | exp                    { $$ = tp.td_.make_exps_type($1); }
+  /*| function_r error       { $$ = yyerrok; }*/
 ;
 
 %token LVALUE "_lvalue";
 lvalue:
-    ID                      { $$ = tp.td_.make_SimpleVar(@$, $1); }
+    ID                          { $$ = tp.td_.make_SimpleVar(@$, $1); }
   /* Record field access. */
   | lvalue "." ID               { $$ = tp.td_.make_FieldVar(@$, $1, $3); }
   /* Array subscript. */
