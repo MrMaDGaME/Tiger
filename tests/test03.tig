@@ -6,7 +6,7 @@ function _main() =
           print(s)
         else
           print("error")
-
+      var str := "salut mon pote"
     in
       print_conditional("foo", 1)
     end;

@@ -89,13 +89,13 @@ namespace parse
 
         // FIXME: Some code was deleted here (Enable scan traces and link the
         // scanner to the input).
-        scan_trace(true);
+        scanner_->set_debug(scan_trace_p_);
         scanner_->scan_open_(*in);
 
         // FIXME: Some code was deleted here (Initialize the parser and enable
         // parse traces).
         parser parser(*this);
-        parse_trace(true);
+        parser.set_debug_level(parse_trace_p_);
 
         // FIXME: Some code was deleted here (Run the parser and close the
         // scanner).
