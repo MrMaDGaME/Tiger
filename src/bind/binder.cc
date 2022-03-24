@@ -23,7 +23,13 @@ namespace bind
 
     void Binder::check_main(const ast::FunctionDec& e)
     {
-        // FIXME: Some code was deleted here.
+        if (e.name_get() != "_main")
+            error_ << misc::error::error_type::bind << e.location_get() << " : "
+                   << "cannot find reference to _main" << std::endl;
+        if (function_list_.is_unique("_main")){
+            error_ << misc::error::error_type::bind << e.location_get() << " : "
+                   << "redefinition of _main" << std::endl;
+        }
     }
 
     /*----------------.
@@ -86,41 +92,6 @@ namespace bind
         super_type::operator()(e);
     }
 
-    void Binder::operator()(ast::VarDec& e)
-    {
-        ast::VarDec* var = var_list_.get(e.name_get());
-        if (var != nullptr)
-        {
-            redefinition(*var, e);
-        }
-        var_list_.put(e.name_get(), &e);
-        super_type::operator()(e);
-    }
-
-    void Binder::operator()(ast::FunctionDec& e)
-    {
-        ast::FunctionDec* var = function_list_.get(e.name_get());
-        if (var != nullptr)
-        {
-            redefinition(*var, e);
-        }
-        function_list_.put(e.name_get(), &e);
-        scope_begin();
-        super_type::operator()(e);
-        scope_end();
-    }
-
-    void Binder::operator()(ast::TypeDec& e)
-    {
-        ast::TypeDec* var = type_list_.get(e.name_get());
-        if (var != nullptr)
-        {
-            redefinition(*var, e);
-        }
-        type_list_.put(e.name_get(), &e);
-        super_type::operator()(e);
-    }
-
     /*-------------------.
     | Visiting VarChunk. |
     `-------------------*/
@@ -149,10 +120,3 @@ namespace bind
     }
 
 } // namespace bind
-
-/*  卐   卐卐卐卐
- *  卐   卐
- *  卐卐卐卐卐卐卐
- *       卐   卐
- *  卐卐卐卐   卐
- */

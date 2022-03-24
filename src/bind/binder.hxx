@@ -49,23 +49,49 @@ namespace bind
         {
             visit_dec_body(elt);
         }
+        for (auto elt = e.begin(); elt != e.end() - 1; ++elt)
+        {
+            for (auto elt2 = elt + 1; elt2 != e.end(); ++elt2){
+                if (elt.name_get() == elt2.name_get())
+                    redefinition(elt, elt2);
+            }
+        }
     }
 
     /* These specializations are in bind/binder.hxx, so that derived
        visitors can use them (otherwise, they wouldn't see them).  */
 
-    template <class D>
-    void Binder::visit_dec_header(D& e){
-        scope_begin();
-        if (constexpr (std::is_same<ast::Dec, D>::value))
-            (*this)(e);
+    template <>
+    void Binder::visit_dec_header<ast::FunctionDec>(ast::FunctionDec& e){
+        function_list_.put(e.name_get(), &e);
     }
 
-    template <class D>
-    void Binder::visit_dec_body(D& e){
-        if (constexpr !(std::is_same<ast::Dec, D>::value))
-            (*this)(e);
+    template <>
+    void Binder::visit_dec_header<ast::VarDec>(ast::VarDec& e){
+        var_list_.put(e.name_get(), &e);
+    }
+
+    template <>
+    void Binder::visit_dec_header<ast::TypeDec>(ast::TypeDec& e){
+        type_list_.put(e.name_get(), &e);
+        super_type::operator()(e);
+    }
+
+    template <>
+    void Binder::visit_dec_body<ast::FunctionDec>(ast::FunctionDec& e){
+        scope_begin();
+        super_type::operator()(e);
         scope_end();
+    }
+
+    template <>
+    void Binder::visit_dec_body<ast::VarDec>(ast::VarDec& e){
+        super_type::operator()(e);
+    }
+
+    template <>
+    void Binder::visit_dec_body<ast::NameTy>(ast::NameTy& e){
+        super_type::operator()(e);
     }
 
 } // namespace bind
