@@ -17,9 +17,9 @@ namespace ast
         /** \name Ctor & dtor.
          ** \{ */
         /// Construct a Dec node.
-        Dec(const Location &location, misc::symbol name);
-        Dec(const Dec &) = delete;
-        Dec &operator=(const Dec &) = delete;
+        Dec(const Location& location, misc::symbol name);
+        Dec(const Dec&) = delete;
+        Dec& operator=(const Dec&) = delete;
         /// Destroy a Dec node.
         /** \} */
 

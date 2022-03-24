@@ -11,12 +11,12 @@
 
 namespace misc
 {
-    std::ostream &escaped::print(std::ostream &ostr) const
+    std::ostream& escaped::print(std::ostream& ostr) const
     {
         return escape_(ostr, pobj_str_);
     }
 
-    std::ostream &escaped::escape_(std::ostream &o, const std::string &es) const
+    std::ostream& escaped::escape_(std::ostream& o, const std::string& es) const
     {
         // For some reason yet to be found, when we use the locale for
         // std::isprint, Valgrind goes berzerk.  So we no longer do the
@@ -38,9 +38,9 @@ namespace misc
             { '\v', "\\v" },   { '\\', "\\\\" }, { '\"', "\\\"" }
         };
 
-        for (const auto &p : es)
+        for (const auto& p : es)
         {
-            if (const auto &&it = escapes.find(p); it != escapes.end())
+            if (const auto&& it = escapes.find(p); it != escapes.end())
                 o << it->second;
             else
             {

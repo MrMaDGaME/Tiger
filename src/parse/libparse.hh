@@ -35,23 +35,23 @@ namespace parse
   %newobject parse;
 #endif
 
-    std::pair<ast::ChunkList *, misc::error>
-    parse(const std::string &prelude, const std::string &fname,
-          misc::file_library &library, bool scan_trace_p, bool parse_trace_p,
+    std::pair<ast::ChunkList*, misc::error>
+    parse(const std::string& prelude, const std::string& fname,
+          misc::file_library& library, bool scan_trace_p, bool parse_trace_p,
           bool enable_object_extensions_p = false);
 
     /// \brief Parse a Tweast.
     ///
     /// Extensions are enabled.  Raises an exception on errors.
-    ast_type parse(Tweast &input);
+    ast_type parse(Tweast& input);
 
     /// Parse a std::string. Used for unit tests.
-    ast::Exp *parse(const std::string &str,
+    ast::Exp* parse(const std::string& str,
                     bool enable_object_extensions_p = false);
 
     /// Parse a std::string. Used for unit tests.
     /// The declaration of the _main function is automatically added.
-    ast::ChunkList *parse_unit(const std::string &str,
+    ast::ChunkList* parse_unit(const std::string& str,
                                bool enable_object_extensions_p = false);
 
     /// \brief Parse a set of declarations.
@@ -60,6 +60,6 @@ namespace parse
     /// to be found in the input (expected to contain ChunkList).
     ///
     /// Used by desugar::BoundsCheckingVisitor and object::ObjectDesugarVisitor.
-    ast::ChunkInterface *parse_chunks(Tweast &in);
+    ast::ChunkInterface* parse_chunks(Tweast& in);
 
 } // namespace parse

@@ -13,13 +13,13 @@ namespace task
     class StringTask : public ArgumentTask
     {
     public:
-        StringTask(std::string &var, const char *module_name, const char *desc,
-                   const char *name, std::string deps);
+        StringTask(std::string& var, const char* module_name, const char* desc,
+                   const char* name, std::string deps);
 
         void execute() const override;
 
     private:
-        std::string &var_;
+        std::string& var_;
     };
 
 } // namespace task

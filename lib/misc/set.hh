@@ -63,23 +63,23 @@ namespace misc
             \{ */
 
         /// Is \a k part of \a this set?
-        bool has(const Key &k) const;
+        bool has(const Key& k) const;
 
         /** \brief Return the addition of \a data into \a this.
             \a data must not yet be part of \a this. */
-        set operator+(const Key &data) const;
+        set operator+(const Key& data) const;
 
         /** \brief Insert \a data in \a this.
             \a data must not yet be part of \a this. */
-        set &operator+=(const Key &data);
+        set& operator+=(const Key& data);
 
         /** \brief Return the removal of \a data into \a this.
             \a data must be part of \a this. */
-        set operator-(const Key &data) const;
+        set operator-(const Key& data) const;
 
         /** \brief Remove \a data from \a this.
             \a data must be part of \a this. */
-        set &operator-=(const Key &data);
+        set& operator-=(const Key& data);
 
         /// \}
 
@@ -88,46 +88,46 @@ namespace misc
 
         /// Union with another set \a s.
         // FIXME: Deprecate this use, it ought to be direct sum.
-        set operator+(const set<Key, Compare, Allocator> &s) const;
+        set operator+(const set<Key, Compare, Allocator>& s) const;
 
         /// In place union with another set \a s.
-        set &operator+=(const set<Key, Compare, Allocator> &s);
+        set& operator+=(const set<Key, Compare, Allocator>& s);
 
         /// Subtraction with another set \a s.
-        set operator-(const set<Key, Compare, Allocator> &s) const;
+        set operator-(const set<Key, Compare, Allocator>& s) const;
 
         /// In place subtraction with another set \a s.
-        set &operator-=(const set<Key, Compare, Allocator> &s);
+        set& operator-=(const set<Key, Compare, Allocator>& s);
 
         /// Union with another set \a s.
-        set operator|(const set &s) const;
+        set operator|(const set& s) const;
 
         /// In place union with another set \a s.
-        set &operator|=(const set &s);
+        set& operator|=(const set& s);
 
         /// Intersection with another set \a s.
-        set operator&(const set &s) const;
+        set operator&(const set& s) const;
 
         /// In place intersection with another set \a s.
-        set &operator&=(const set &s);
+        set& operator&=(const set& s);
 
         /// \}
     }; // class set
 
     template <typename Key, typename Compare, typename Allocator>
     inline set<Key, Compare, Allocator>
-    set_difference(const set<Key, Compare, Allocator> &s1,
-                   const set<Key, Compare, Allocator> &s2);
+    set_difference(const set<Key, Compare, Allocator>& s1,
+                   const set<Key, Compare, Allocator>& s2);
 
     template <typename Key, typename Compare, typename Allocator>
     inline set<Key, Compare, Allocator>
-    set_intersection(const set<Key, Compare, Allocator> &s1,
-                     const set<Key, Compare, Allocator> &s2);
+    set_intersection(const set<Key, Compare, Allocator>& s1,
+                     const set<Key, Compare, Allocator>& s2);
 
     template <typename Key, typename Compare, typename Allocator>
     inline set<Key, Compare, Allocator>
-    set_union(const set<Key, Compare, Allocator> &s1,
-              const set<Key, Compare, Allocator> &s2);
+    set_union(const set<Key, Compare, Allocator>& s1,
+              const set<Key, Compare, Allocator>& s2);
 
     /* Print a human-dump for debugging.
 
@@ -135,11 +135,11 @@ namespace misc
     '<<'.  If it is not the case do it or remove set print method
     and << operator (see below).  */
     template <typename Key, typename Compare, typename Allocator>
-    inline std::ostream &operator<<(std::ostream &ostr,
-                                    const set<Key, Compare, Allocator> &s);
+    inline std::ostream& operator<<(std::ostream& ostr,
+                                    const set<Key, Compare, Allocator>& s);
 
     template <typename Key, typename Compare, typename Allocator>
-    inline bool operator%(const Key &k, const set<Key, Compare, Allocator> &s);
+    inline bool operator%(const Key& k, const set<Key, Compare, Allocator>& s);
 
 } // namespace misc
 

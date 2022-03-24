@@ -23,13 +23,13 @@ namespace object
        Variable `self' will have a meaningful definition after the object
        constructs have been desugared. */
 
-    void Binder::operator()(ast::SimpleVar &e)
+    void Binder::operator()(ast::SimpleVar& e)
     {
         // FIXME: Some code was deleted here.
     }
 
     // Handle the case of `Object'.
-    void Binder::operator()(ast::NameTy &e)
+    void Binder::operator()(ast::NameTy& e)
     {
         // FIXME: Some code was deleted here.
     }
@@ -38,7 +38,7 @@ namespace object
     | Visiting Exp.  |
     `---------------*/
 
-    void Binder::operator()(ast::ForExp &e)
+    void Binder::operator()(ast::ForExp& e)
     {
         bool saved_within_class_ty = within_class_ty_;
         within_class_ty_ = false;
@@ -50,7 +50,7 @@ namespace object
     | Visiting ClassTy.  |
     `-------------------*/
 
-    void Binder::operator()(ast::ClassTy &e)
+    void Binder::operator()(ast::ClassTy& e)
     {
         scope_begin();
         e.super_get().accept(*this);
@@ -68,7 +68,7 @@ namespace object
     | Visiting Dec.  |
     `---------------*/
 
-    void Binder::operator()(ast::VarDec &e)
+    void Binder::operator()(ast::VarDec& e)
     {
         if (within_class_ty_)
         {
@@ -86,13 +86,13 @@ namespace object
         }
     }
 
-    void Binder::operator()(ast::FunctionChunk &e)
+    void Binder::operator()(ast::FunctionChunk& e)
     {
         chunk_visit<ast::FunctionDec>(e);
     }
 
     template <class D>
-    void Binder::chunk_visit(ast::Chunk<D> &e)
+    void Binder::chunk_visit(ast::Chunk<D>& e)
     {
         // Shorthand.
         using chunk_type = ast::Chunk<D>;
@@ -103,14 +103,14 @@ namespace object
     // This trampoline is needed, since `virtual' and `template' cannot
     // be mixed.
     template <>
-    void Binder::visit_dec_header<ast::FunctionDec>(ast::FunctionDec &e)
+    void Binder::visit_dec_header<ast::FunctionDec>(ast::FunctionDec& e)
     {
         super_type::visit_dec_header<ast::FunctionDec>(e);
     }
 
     // Compute the bindings of this function's body.
     template <>
-    void Binder::visit_dec_body<ast::FunctionDec>(ast::FunctionDec &e)
+    void Binder::visit_dec_body<ast::FunctionDec>(ast::FunctionDec& e)
     {
         bool saved_within_class_ty = within_class_ty_;
         within_class_ty_ = false;
@@ -128,7 +128,7 @@ namespace object
        Note that as we defer the binding of methods to the
        type-checkimg, there is no need to visit method in two-pass (like
        bind::Binder does for functions for instance).  */
-    void Binder::operator()(ast::MethodDec &e)
+    void Binder::operator()(ast::MethodDec& e)
     {
         scope_begin();
         bool saved_within_class_ty = within_class_ty_;
@@ -137,7 +137,7 @@ namespace object
         within_method_dec_ = true;
         bool saved_overrided_self = overrided_self_;
         overrided_self_ = false;
-        ast::DefaultVisitor::operator()(static_cast<ast::FunctionDec &>(e));
+        ast::DefaultVisitor::operator()(static_cast<ast::FunctionDec&>(e));
         within_method_dec_ = saved_within_method_dec;
         within_class_ty_ = saved_within_class_ty;
         overrided_self_ = saved_overrided_self;

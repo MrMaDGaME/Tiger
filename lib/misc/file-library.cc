@@ -90,7 +90,7 @@ namespace misc
         return current_directory_.front();
     }
 
-    path file_library::find_file(const std::string &file)
+    path file_library::find_file(const std::string& file)
     {
         // Split file in two components, basename and basedir.
         path p = path(file);
@@ -114,19 +114,19 @@ namespace misc
         return directory;
     }
 
-    bool file_library::find_in_directory(const path &dir,
-                                         const std::string &file) const
+    bool file_library::find_in_directory(const path& dir,
+                                         const std::string& file) const
     {
         return std::filesystem::exists(path(dir / file));
     }
 
-    path file_library::find_in_search_path(const path &relative_path,
-                                           const std::string &filename) const
+    path file_library::find_in_search_path(const path& relative_path,
+                                           const std::string& filename) const
     {
         path checked_dir;
 
         // Otherwise start scanning the search path.
-        for (const path &p : search_path_)
+        for (const path& p : search_path_)
         {
             if (p.is_absolute())
                 checked_dir = p;
@@ -143,10 +143,10 @@ namespace misc
         return path();
     }
 
-    std::ostream &file_library::dump(std::ostream &ostr) const
+    std::ostream& file_library::dump(std::ostream& ostr) const
     {
         ostr << ".";
-        for (const path &p : search_path_)
+        for (const path& p : search_path_)
             ostr << ":" << p;
         return ostr;
     }

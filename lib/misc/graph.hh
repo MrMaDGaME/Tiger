@@ -27,10 +27,10 @@ namespace boost
               class VertexListS, class DirectedS, class VertexProperty,
               class EdgeProperty, class GraphProperty, class EdgeListS>
     inline Vertex
-    target(const detail::edge_base<Directed, Vertex> &e,
+    target(const detail::edge_base<Directed, Vertex>& e,
            const adjacency_list<OutEdgeListS, VertexListS, DirectedS,
                                 VertexProperty, EdgeProperty, GraphProperty,
-                                EdgeListS> &);
+                                EdgeListS>&);
 
 } // namespace boost
 
@@ -79,43 +79,43 @@ namespace misc
         /// \brief Add a vertex to the graph.
         ///
         /// Just a wrapper around boost::add_vertex.
-        vertex_descriptor vertex_add(const VertexLabel &l);
+        vertex_descriptor vertex_add(const VertexLabel& l);
         /// Add an edge between two vertices.
-        virtual void edge_add(const vertex_descriptor &v1,
-                              const vertex_descriptor &v2) = 0;
+        virtual void edge_add(const vertex_descriptor& v1,
+                              const vertex_descriptor& v2) = 0;
         /// \}
 
         /// Graph pretty printing.
         /// \{
     public:
-        virtual std::ostream &print(std::ostream &ostr) const;
-        virtual std::ostream &epilogue_print(std::ostream &ostr) const;
+        virtual std::ostream& print(std::ostream& ostr) const;
+        virtual std::ostream& epilogue_print(std::ostream& ostr) const;
         virtual void print(std::string file) const;
 
     private:
         /// Print the label of vertex of a graph.
-        virtual std::ostream &vertex_print(vertex_descriptor v,
-                                           std::ostream &ostr) const = 0;
+        virtual std::ostream& vertex_print(vertex_descriptor v,
+                                           std::ostream& ostr) const = 0;
         /// \}
 
         /// Graph name.
         /// \{
     public:
-        const std::string &name_get() const;
-        void name_set(const std::string &name);
+        const std::string& name_get() const;
+        void name_set(const std::string& name);
         /// \}
     };
 
     template <typename Orientation, typename VertexLabel, typename EdgeLabel>
-    std::ostream &
-    operator<<(std::ostream &ostr,
-               const graph<Orientation, VertexLabel, EdgeLabel> &g);
+    std::ostream&
+    operator<<(std::ostream& ostr,
+               const graph<Orientation, VertexLabel, EdgeLabel>& g);
 
     // An helper class when we do not want any data attached to vertex
     // or an edge.
     struct empty
     {};
-    inline std::ostream &operator<<(std::ostream &ostr, empty);
+    inline std::ostream& operator<<(std::ostream& ostr, empty);
 
     /*----------------------------------------------------.
     | Specialization for directed (bidirectional) graph.  |
@@ -149,8 +149,8 @@ namespace misc
         /// \brief Add an edge between two vertices.
         ///
         /// This is just a wrapper around boost::add_edge.
-        void edge_add(const vertex_descriptor &v1,
-                      const vertex_descriptor &v2) override;
+        void edge_add(const vertex_descriptor& v1,
+                      const vertex_descriptor& v2) override;
         /// \}
 
         /// \brief Topological sort.
@@ -183,8 +183,8 @@ namespace misc
         ///
         /// Use this method instead of boost::add_edge directly to keep
         /// the order between the ends of an edge.
-        void edge_add(const vertex_descriptor &v1,
-                      const vertex_descriptor &v2) override;
+        void edge_add(const vertex_descriptor& v1,
+                      const vertex_descriptor& v2) override;
     };
 
 } // namespace misc

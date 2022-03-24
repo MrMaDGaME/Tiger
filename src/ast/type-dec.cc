@@ -8,7 +8,7 @@
 
 namespace ast
 {
-    TypeDec::TypeDec(const Location &location, misc::symbol name, Ty *ty)
+    TypeDec::TypeDec(const Location& location, misc::symbol name, Ty* ty)
         : Dec(location, name)
         , ty_(ty)
     {}
@@ -18,12 +18,12 @@ namespace ast
         delete ty_;
     }
 
-    void TypeDec::accept(ConstVisitor &v) const
+    void TypeDec::accept(ConstVisitor& v) const
     {
         v(*this);
     }
 
-    void TypeDec::accept(Visitor &v)
+    void TypeDec::accept(Visitor& v)
     {
         v(*this);
     }

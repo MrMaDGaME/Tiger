@@ -31,13 +31,13 @@ namespace misc
     public:
         /** \brief Construct a symbol.
          ** \param s referenced string */
-        symbol(const std::string &s);
+        symbol(const std::string& s);
         /** \brief Construct a symbol.
          ** \param s referenced string */
-        symbol(const char *s = "");
+        symbol(const char* s = "");
         /** \brief Construct a symbol.
          ** \param s symbol to copy. */
-        constexpr symbol(const symbol &s) = default;
+        constexpr symbol(const symbol& s) = default;
         /** \} */
 
         /** \name Operators.
@@ -45,14 +45,14 @@ namespace misc
     public:
         /** \brief Assign a symbol to this symbol.
          ** \param rhs symbol to copy. */
-        symbol &operator=(const symbol &rhs);
+        symbol& operator=(const symbol& rhs);
 
         /** \brief Compare two symbol for equality.
          ** \param rhs string to compare with. */
-        bool operator==(const symbol &rhs) const;
+        bool operator==(const symbol& rhs) const;
         /** \brief Compare two symbol for inequality.
          ** \param rhs string to compare with. */
-        bool operator!=(const symbol &rhs) const;
+        bool operator!=(const symbol& rhs) const;
         /** \} */
 
     public:
@@ -61,7 +61,7 @@ namespace misc
         /** \brief Create a new unique symbol. */
         static symbol fresh();
         /** \brief Create a new unique symbol, forged from \a s. */
-        static symbol fresh(const symbol &s);
+        static symbol fresh(const symbol& s);
         /** \} */
     };
 
@@ -69,7 +69,7 @@ namespace misc
      ** \param ostr the destination output stream
      ** \param the a reference to the symbol to redirect
      */
-    std::ostream &operator<<(std::ostream &ostr, const symbol &the);
+    std::ostream& operator<<(std::ostream& ostr, const symbol& the);
 
 } // namespace misc
 

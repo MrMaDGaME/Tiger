@@ -10,7 +10,7 @@
 #include <stdexcept>
 #include <task/task-register.hh>
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
     program_name = argv[0];
 
@@ -35,16 +35,16 @@ int main(int argc, char **argv)
     }
 
     // Required to enable stack unwinding.
-    catch (const std::invalid_argument &e)
+    catch (const std::invalid_argument& e)
     {
         return 64;
     }
-    catch (const std::runtime_error &e)
+    catch (const std::runtime_error& e)
     {
         if (e.what() != std::string(""))
             std::cerr << e.what() << '\n';
     }
-    catch (const misc::error &e)
+    catch (const misc::error& e)
     {
         std::cerr << e;
         return e.status_get_value();

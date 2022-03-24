@@ -18,7 +18,7 @@ namespace misc
             } -> std::convertible_to<typename Container::const_iterator>;
         {
             *c.begin()
-            } -> std::convertible_to<const typename Container::value_type &>;
+            } -> std::convertible_to<const typename Container::value_type&>;
     };
 
     // Concept describing a Container through which you can iterate
@@ -31,7 +31,7 @@ namespace misc
             } -> std::same_as<typename Container::iterator>;
         {
             *c.begin()
-            } -> std::same_as<typename Container::value_type &>;
+            } -> std::same_as<typename Container::value_type&>;
     };
 
     // Concept discribing a map.

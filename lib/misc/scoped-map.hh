@@ -28,14 +28,15 @@ namespace misc
         std::ostream& dump(std::ostream& ostr) const;
         void scope_begin();
         void scope_end();
+
     protected:
         std::map<Key, Data> map_;
         std::vector<std::vector<Key>> scope_;
     };
 
     template <typename Key, typename Data>
-    std::ostream &operator<<(std::ostream &ostr,
-                             const scoped_map<Key, Data> &tbl);
+    std::ostream& operator<<(std::ostream& ostr,
+                             const scoped_map<Key, Data>& tbl);
 
     // FIXME: Some code was deleted here.
 

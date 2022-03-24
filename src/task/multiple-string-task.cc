@@ -7,9 +7,9 @@
 
 namespace task
 {
-    MultipleStringTask::MultipleStringTask(callback_type &cb,
-                                           const char *module_name,
-                                           const char *desc, const char *name,
+    MultipleStringTask::MultipleStringTask(callback_type& cb,
+                                           const char* module_name,
+                                           const char* desc, const char* name,
                                            std::string deps)
         : ArgumentTask(name, module_name, desc, "DIR", deps)
         , execute_(cb)

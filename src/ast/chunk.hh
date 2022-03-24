@@ -18,7 +18,7 @@ namespace ast
          ** \{ */
     public:
         /// Define shorthand type for list of D-declarations.
-        using Ds = std::vector<D *>;
+        using Ds = std::vector<D*>;
         /// Define value type
         using value_type = Ds::value_type;
         /// Define size type
@@ -40,8 +40,8 @@ namespace ast
         /** \brief Construct an Chunk node with a list of D-declarations.
          ** \param location scanner position informations
          ** \param decs list of D-declarations */
-        Chunk(const Location &location, Ds *decs);
-        explicit Chunk(const Location &location);
+        Chunk(const Location& location, Ds* decs);
+        explicit Chunk(const Location& location);
 
         /** \brief Destroys an Chunk node.
          **
@@ -54,10 +54,10 @@ namespace ast
          ** \{ */
     public:
         /// Accept a const visitor \a v.
-        void accept(Visitor &v) override;
+        void accept(Visitor& v) override;
 
         /// Accept a non-const visitor \a v.
-        void accept(ConstVisitor &v) const override;
+        void accept(ConstVisitor& v) const override;
 
         /** \} */
 
@@ -72,10 +72,10 @@ namespace ast
         constexpr const_reference operator[](size_type pos) const;
 
         /// Access to list of D-declarations (read and write).
-        Ds &decs_get();
+        Ds& decs_get();
 
         /// Access to list of D-declarations (read only).
-        const Ds &decs_get() const;
+        const Ds& decs_get() const;
 
         /** \} */
 
@@ -114,11 +114,11 @@ namespace ast
 
         /** \brief Push \a d in front.
          ** \param d declaration to push */
-        Chunk<D> &push_front(D &d);
+        Chunk<D>& push_front(D& d);
 
         /** \brief Push \a d in back.
          ** \param d declaration to push */
-        Chunk<D> &emplace_back(D &d);
+        Chunk<D>& emplace_back(D& d);
 
         /** \} */
 
@@ -126,7 +126,7 @@ namespace ast
         // member initializers.
 #ifndef SWIG
     private:
-        Ds *decs_ = new Ds();
+        Ds* decs_ = new Ds();
 #endif
     };
 

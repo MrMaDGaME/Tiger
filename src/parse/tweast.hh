@@ -26,23 +26,23 @@ namespace parse
     {
     public:
         Tweast();
-        Tweast(const std::string &str);
+        Tweast(const std::string& str);
 
         /// \brief Stream manipulator.
         ///
         /// Append Tiger expressions to the string to parse.
         template <typename T>
-        Tweast &operator<<(const T &t);
+        Tweast& operator<<(const T& t);
 
         /// Metavariables manipulator.
         template <typename T>
-        T *take(unsigned s);
+        T* take(unsigned s);
 
         /// Get the current input string.
         std::string input_get() const;
 
         /// Print the table
-        std::ostream &dump(std::ostream &ostr) const;
+        std::ostream& dump(std::ostream& ostr) const;
 
     protected:
         // Insert base class members in the current scope.
@@ -53,7 +53,7 @@ namespace parse
 
         /// Fake append (default case, i.e. when \a data is not a metavariable).
         template <typename T>
-        T &append_(unsigned &, T &data) const;
+        T& append_(unsigned&, T& data) const;
 
     protected:
         /// The next identifier suffix to create.
@@ -64,7 +64,7 @@ namespace parse
     };
 
     /// Display the content of the tweast.
-    std::ostream &operator<<(std::ostream &ostr, const Tweast &in);
+    std::ostream& operator<<(std::ostream& ostr, const Tweast& in);
 
 } // namespace parse
 

@@ -8,8 +8,8 @@
 
 namespace ast
 {
-    LetExp::LetExp(const Location &location, ChunkList *declarations,
-                   Exp *instructions)
+    LetExp::LetExp(const Location& location, ChunkList* declarations,
+                   Exp* instructions)
         : Exp(location)
         , declarations_(declarations)
         , instructions_(instructions)
@@ -21,12 +21,12 @@ namespace ast
         delete instructions_;
     }
 
-    void LetExp::accept(ConstVisitor &v) const
+    void LetExp::accept(ConstVisitor& v) const
     {
         v(*this);
     }
 
-    void LetExp::accept(Visitor &v)
+    void LetExp::accept(Visitor& v)
     {
         v(*this);
     }

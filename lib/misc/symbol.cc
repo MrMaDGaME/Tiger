@@ -9,11 +9,11 @@
 
 namespace misc
 {
-    symbol::symbol(const std::string &s)
+    symbol::symbol(const std::string& s)
         : unique<std::string>(s)
     {}
 
-    symbol::symbol(const char *s)
+    symbol::symbol(const char* s)
         : unique<std::string>(std::string(s))
     {}
 
@@ -22,7 +22,7 @@ namespace misc
         return fresh("a");
     }
 
-    symbol symbol::fresh(const symbol &s)
+    symbol symbol::fresh(const symbol& s)
     {
         /// Counter of unique symbols.
         static unsigned counter_ = 0;

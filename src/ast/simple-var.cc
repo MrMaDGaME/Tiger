@@ -8,17 +8,17 @@
 
 namespace ast
 {
-    SimpleVar::SimpleVar(const Location &location, misc::symbol name)
+    SimpleVar::SimpleVar(const Location& location, misc::symbol name)
         : Var(location)
         , name_(name)
     {}
 
-    void SimpleVar::accept(ConstVisitor &v) const
+    void SimpleVar::accept(ConstVisitor& v) const
     {
         v(*this);
     }
 
-    void SimpleVar::accept(Visitor &v)
+    void SimpleVar::accept(Visitor& v)
     {
         v(*this);
     }

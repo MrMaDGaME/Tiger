@@ -58,9 +58,9 @@ namespace ast
     using Visitor = GenVisitor<misc::id_traits>;
 
     // Collections of nodes.
-    using exps_type = std::vector<Exp *>;
-    using fieldinits_type = std::vector<FieldInit *>;
-    using fields_type = std::vector<Field *>;
+    using exps_type = std::vector<Exp*>;
+    using fieldinits_type = std::vector<FieldInit*>;
+    using fields_type = std::vector<Field*>;
 
     // From chunk-interface.hh.
     class ChunkInterface;

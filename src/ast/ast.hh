@@ -17,9 +17,9 @@ namespace ast
         /** \name Ctor & dtor.
          ** \{ */
         /// Construct an Ast node.
-        explicit Ast(const Location &location);
-        Ast(const Ast &) = delete;
-        Ast &operator=(const Ast &) = delete;
+        explicit Ast(const Location& location);
+        Ast(const Ast&) = delete;
+        Ast& operator=(const Ast&) = delete;
         /// Destroy an Ast node.
         virtual ~Ast() = default;
         /** \} */
@@ -27,17 +27,17 @@ namespace ast
         /// \name Visitors entry point.
         /// \{ */
         /// Accept a const visitor \a v.
-        virtual void accept(ConstVisitor &v) const = 0;
+        virtual void accept(ConstVisitor& v) const = 0;
         /// Accept a non-const visitor \a v.
-        virtual void accept(Visitor &v) = 0;
+        virtual void accept(Visitor& v) = 0;
         /// \}
 
         /** \name Accessors.
          ** \{ */
         /// Return scanner position information.
-        const Location &location_get() const;
+        const Location& location_get() const;
         /// Set scanner position information.
-        void location_set(const Location &);
+        void location_set(const Location&);
         /** \} */
 
     protected:

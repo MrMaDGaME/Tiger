@@ -56,11 +56,11 @@ namespace misc
         variant() = default;
 
         template <typename U>
-        requires ContainsTypeSet<U, T, Ts...> variant(const U &rhs);
+        requires ContainsTypeSet<U, T, Ts...> variant(const U& rhs);
         /// \}
 
         template <typename U>
-        requires ContainsTypeSet<U, T, Ts...> self_type &operator=(const U &);
+        requires ContainsTypeSet<U, T, Ts...> self_type& operator=(const U&);
 
         /// \brief Convert this variant to a value of type \a U.
         ///
@@ -68,12 +68,12 @@ namespace misc
         /// conversion fails, a std::bad_variant_access exception is thrown.
         template <typename U>
         requires ContainsTypeGet<U, T, Ts...>
-        operator U &();
+        operator U&();
 
         /// Likewise, const version.
         template <typename U>
         requires ContainsTypeGet<U, T, Ts...>
-        operator const U &() const;
+        operator const U&() const;
 
         /** \brief Visit variants of this class.
          ** std::visit does not handle classes inheriting from std::variant,
@@ -82,29 +82,29 @@ namespace misc
          ** \{ */
         template <typename V>
         requires Visits<V, T, Ts...>
-        auto visit(V &&visitor) const;
+        auto visit(V&& visitor) const;
 
         template <typename V, class... Variants>
-        static auto visit(V &&visitor, Variants &&...vars);
+        static auto visit(V&& visitor, Variants&&... vars);
         /** \} */
     };
 
     // Here add variadic template recursion on std::get
     template <typename T, typename... Ts>
-    std::ostream &operator<<(std::ostream &os, const variant<T, Ts...> &obj);
+    std::ostream& operator<<(std::ostream& os, const variant<T, Ts...>& obj);
 
     class PrintVisitor
     {
     public:
-        PrintVisitor(std::ostream &os)
+        PrintVisitor(std::ostream& os)
             : os_(os)
         {}
 
         template <typename T>
-        std::ostream &operator()(const T &value) const;
+        std::ostream& operator()(const T& value) const;
 
     private:
-        std::ostream &os_;
+        std::ostream& os_;
     };
 } // namespace misc
 

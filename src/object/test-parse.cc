@@ -8,12 +8,12 @@
 #include <object/libobject.hh>
 #include <parse/libparse.hh>
 
-const char *program_name = "test-parse";
+const char* program_name = "test-parse";
 
 int main()
 {
     // Canonical syntax.
-    ast::Exp *e1 = parse::parse(" let"
+    ast::Exp* e1 = parse::parse(" let"
                                 "   class C extends Object"
                                 "   {"
                                 "     var a := 42"
@@ -29,7 +29,7 @@ int main()
     delete e1;
 
     // Alternative syntax.
-    ast::Exp *e2 = parse::parse(" let"
+    ast::Exp* e2 = parse::parse(" let"
                                 "   type C = class extends Object"
                                 "   {"
                                 "     var a := 42"

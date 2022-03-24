@@ -8,7 +8,7 @@
 
 namespace ast
 {
-    Ast::Ast(const Location &location)
+    Ast::Ast(const Location& location)
         : location_(location)
     {}
 

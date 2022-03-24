@@ -17,9 +17,9 @@ namespace ast
         /** \name Ctor & dtor.
          ** \{ */
         /// Construct a ObjectExp node.
-        ObjectExp(const Location &location, NameTy *type_name);
-        ObjectExp(const ObjectExp &) = delete;
-        ObjectExp &operator=(const ObjectExp &) = delete;
+        ObjectExp(const Location& location, NameTy* type_name);
+        ObjectExp(const ObjectExp&) = delete;
+        ObjectExp& operator=(const ObjectExp&) = delete;
         /// Destroy a ObjectExp node.
         ~ObjectExp() override;
         /** \} */
@@ -27,22 +27,22 @@ namespace ast
         /// \name Visitors entry point.
         /// \{ */
         /// Accept a const visitor \a v.
-        void accept(ConstVisitor &v) const override;
+        void accept(ConstVisitor& v) const override;
         /// Accept a non-const visitor \a v.
-        void accept(Visitor &v) override;
+        void accept(Visitor& v) override;
         /// \}
 
         /** \name Accessors.
          ** \{ */
         /// Return declarations of the statement.
-        const NameTy &type_name_get() const;
+        const NameTy& type_name_get() const;
         /// Return declarations of the statement.
-        NameTy &type_name_get();
+        NameTy& type_name_get();
         /** \} */
 
     protected:
         /// High bound of the loop.
-        NameTy *type_name_;
+        NameTy* type_name_;
     };
 } // namespace ast
 #include <ast/object-exp.hxx>

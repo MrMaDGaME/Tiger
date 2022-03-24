@@ -13,13 +13,13 @@ namespace task
     class BooleanTask : public SimpleTask
     {
     public:
-        BooleanTask(bool &flag, const char *module_name, const char *desc,
-                    const char *name, std::string deps);
+        BooleanTask(bool& flag, const char* module_name, const char* desc,
+                    const char* name, std::string deps);
 
         void execute() const override;
 
     private:
-        bool &flag_;
+        bool& flag_;
     };
 
 } // namespace task

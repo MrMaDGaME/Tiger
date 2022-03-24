@@ -8,7 +8,7 @@
 
 namespace ast
 {
-    Var::Var(const Location &location)
+    Var::Var(const Location& location)
         : Exp(location)
     {}
 

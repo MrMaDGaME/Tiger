@@ -16,18 +16,18 @@ namespace ast
         /** \name Ctor & dtor.
          ** \{ */
         /// Construct an IntExp node.
-        IntExp(const Location &location, int value);
-        IntExp(const IntExp &) = delete;
-        IntExp &operator=(const IntExp &) = delete;
+        IntExp(const Location& location, int value);
+        IntExp(const IntExp&) = delete;
+        IntExp& operator=(const IntExp&) = delete;
         /// Destroy an IntExp node.
         /** \} */
 
         /// \name Visitors entry point.
         /// \{ */
         /// Accept a const visitor \a v.
-        void accept(ConstVisitor &v) const override;
+        void accept(ConstVisitor& v) const override;
         /// Accept a non-const visitor \a v.
-        void accept(Visitor &v) override;
+        void accept(Visitor& v) override;
         /// \}
 
         /** \name Accessors.

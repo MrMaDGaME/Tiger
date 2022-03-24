@@ -20,14 +20,14 @@
 namespace task
 {
     // Singleton stuff
-    TaskRegister &TaskRegister::instance()
+    TaskRegister& TaskRegister::instance()
     {
         static TaskRegister instance_;
         return instance_;
     }
 
     // Register this task.
-    void TaskRegister::register_task(const SimpleTask &task)
+    void TaskRegister::register_task(const SimpleTask& task)
     {
         auto it = register_task_(task);
         // The task was already registered.
@@ -46,7 +46,7 @@ namespace task
         it->second.add_options()(task.fullname_get(), v, task.desc_get());
     }
 
-    void TaskRegister::register_task(const ArgumentTask &task)
+    void TaskRegister::register_task(const ArgumentTask& task)
     {
         auto it = register_task_(task);
         // The taks was already registered.
@@ -54,7 +54,7 @@ namespace task
             return;
 
         // Callback when the option is parsed.
-        auto cb = [this, &task](const std::string &arg) {
+        auto cb = [this, &task](const std::string& arg) {
             task.arg_set(arg);
             enable_task(task.name_get());
         };
@@ -73,7 +73,7 @@ namespace task
     // the option belongs to. The module is created if needed.
     // In case something went wrong, the end of `modules_' is returned.
     TaskRegister::indexed_module_type::iterator
-    TaskRegister::register_task_(const Task &task)
+    TaskRegister::register_task_(const Task& task)
     {
         if (task_list_.find(task.name_get()) != task_list_.end())
         {
@@ -86,7 +86,7 @@ namespace task
 
         // Short-hands.
         namespace po = boost::program_options;
-        const std::string &module_name = task.module_name_get();
+        const std::string& module_name = task.module_name_get();
         auto it = modules_.find(module_name);
         if (it == modules_.end())
             it = modules_
@@ -97,7 +97,7 @@ namespace task
     }
 
     // Request the execution of the task task_name.
-    void TaskRegister::enable_task(const std::string &task_name)
+    void TaskRegister::enable_task(const std::string& task_name)
     {
         if (task_list_.find(task_name) == task_list_.end())
             task_error() << misc::error::error_type::failure << program_name
@@ -105,7 +105,7 @@ namespace task
                          << "): this task has not been registered.\n";
         else
         {
-            const Task *task = task_list_.find(task_name)->second;
+            const Task* task = task_list_.find(task_name)->second;
             resolve_dependencies(*task);
             // FIXME: for efficiency, resolve_dependency should be called once.
             // FIXME: detect cycle.
@@ -120,12 +120,12 @@ namespace task
     }
 
     // Resolve dependencies between tasks.
-    void TaskRegister::resolve_dependencies(const Task &task)
+    void TaskRegister::resolve_dependencies(const Task& task)
     {
         tasks_list_type enabled_tasks;
 
         // Retrieved already active tasks.
-        for (const std::string &s : task.dependencies_get())
+        for (const std::string& s : task.dependencies_get())
             if (task_list_.find(s) == task_list_.end())
             {
                 task_error() << misc::error::error_type::failure << program_name
@@ -135,7 +135,7 @@ namespace task
             }
             else
             {
-                const Task *task_dep = task_list_.find(s)->second;
+                const Task* task_dep = task_list_.find(s)->second;
                 if (misc::has(task_order_, task_dep))
                     enabled_tasks.emplace_back(task_dep);
             }
@@ -145,7 +145,7 @@ namespace task
             task.resolve_dependencies(enabled_tasks);
 
         // Activate them.
-        for (const std::string &s : dep_tasks)
+        for (const std::string& s : dep_tasks)
         {
             if (task_list_.find(s) != task_list_.end())
                 if (!misc::has(task_order_, task_list_.find(s)->second))
@@ -156,17 +156,17 @@ namespace task
     // Check whether one of the options in os has the string_key s.
     template <typename T>
     static bool
-    is_parsed(const std::string &s,
-              const std::vector<boost::program_options::basic_option<T>> &os)
+    is_parsed(const std::string& s,
+              const std::vector<boost::program_options::basic_option<T>>& os)
     {
         using option = boost::program_options::basic_option<T>;
 
         return ranges::find_if(
-                   os, [&s](const option &o) { return s == o.string_key; })
+                   os, [&s](const option& o) { return s == o.string_key; })
             != end(os);
     }
 
-    char *TaskRegister::parse_arg(int argc, char *argv[])
+    char* TaskRegister::parse_arg(int argc, char* argv[])
     {
         // Short-hand.
         namespace po = boost::program_options;
@@ -191,7 +191,7 @@ namespace task
         po::options_description visible_desc(program_doc);
 
         // Add each category to the top-level one.
-        for (const auto &i : modules_)
+        for (const auto& i : modules_)
             visible_desc.add(i.second);
         visible_desc.add(generic);
 
@@ -238,9 +238,9 @@ namespace task
                 {
                     using directory_iterator =
                         std::filesystem::directory_iterator;
-                    for (const auto &entry : directory_iterator(licenses))
+                    for (const auto& entry : directory_iterator(licenses))
                     {
-                        const auto &path = entry.path();
+                        const auto& path = entry.path();
 
                         if (!std::filesystem::is_regular_file(path)
                             || !path.has_extension()
@@ -264,7 +264,7 @@ namespace task
             {
                 // Replace the traditional calls to `vm.store()' and
                 // `vm.notify()'.
-                for (const auto &i : parsed.options)
+                for (const auto& i : parsed.options)
                 {
                     auto option = parsed.description->find(i.string_key, false);
 
@@ -278,7 +278,7 @@ namespace task
                     throw po::error("no file name");
             }
         }
-        catch (const po::error &e)
+        catch (const po::error& e)
         {
             std::cerr
                 << program_name << ": " << e.what()
@@ -286,12 +286,12 @@ namespace task
                    "Try `tc --help' or `tc --usage' for more information.\n";
             throw std::invalid_argument("command line parsing error");
         }
-        catch (const std::invalid_argument &e)
+        catch (const std::invalid_argument& e)
         {
             throw;
         }
 
-        char *input_file_ = nullptr;
+        char* input_file_ = nullptr;
         if (!input_file.empty())
         {
             input_file_ = new char[input_file.size() + 1];
@@ -301,16 +301,16 @@ namespace task
     }
 
     // Display registered Tasks.
-    std::ostream &TaskRegister::print_task_list(std::ostream &ostr)
+    std::ostream& TaskRegister::print_task_list(std::ostream& ostr)
     {
         ostr << "List of registered tasks:\n";
-        for (const tasks_by_name_type::value_type &i : task_list_)
+        for (const tasks_by_name_type::value_type& i : task_list_)
             ostr << "\t* " << i.first << '\n';
         return ostr << std::endl;
     }
 
     // Dump task graph.
-    std::ostream &TaskRegister::print_task_graph(std::ostream &ostr)
+    std::ostream& TaskRegister::print_task_graph(std::ostream& ostr)
     {
         ostr << "/* Task graph */\n"
              << "digraph Tasks {\n"
@@ -318,16 +318,16 @@ namespace task
              // Preserve the order of the children.
              << "  graph [ordering=out]\n";
 
-        for (const tasks_by_name_type::value_type &i : task_list_)
+        for (const tasks_by_name_type::value_type& i : task_list_)
         {
-            const Task &task = *i.second;
-            if (dynamic_cast<const DisjunctiveTask *>(&task))
+            const Task& task = *i.second;
+            if (dynamic_cast<const DisjunctiveTask*>(&task))
                 ostr << "  \"" << task.name_get() << "\" [shape=diamond]\n";
             ostr << "  \"" << task.name_get() << "\"";
             if (task.dependencies_get().size())
             {
                 ostr << " -> {";
-                for (const std::string &s : task.dependencies_get())
+                for (const std::string& s : task.dependencies_get())
                     ostr << " \"" << s << "\"";
                 ostr << " } ";
             }
@@ -338,10 +338,10 @@ namespace task
     }
 
     // Display registered Tasks execution order.
-    std::ostream &TaskRegister::print_task_order(std::ostream &ostr)
+    std::ostream& TaskRegister::print_task_order(std::ostream& ostr)
     {
         ostr << "List of Task Order:\n";
-        for (const Task *t : task_order_)
+        for (const Task* t : task_order_)
             ostr << "\t* " << t->name_get() << std::endl;
         return ostr << std::endl;
     }
@@ -350,7 +350,7 @@ namespace task
     void TaskRegister::execute()
     {
         // FIXME: should be the only one to call resolve_dependency.
-        for (const Task *t : task_order_)
+        for (const Task* t : task_order_)
         {
             std::string pref(t->module_name_get());
             if (!pref.empty())

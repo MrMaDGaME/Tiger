@@ -8,16 +8,16 @@
 
 namespace ast
 {
-    NilExp::NilExp(const Location &location)
+    NilExp::NilExp(const Location& location)
         : Exp(location)
     {}
 
-    void NilExp::accept(ConstVisitor &v) const
+    void NilExp::accept(ConstVisitor& v) const
     {
         v(*this);
     }
 
-    void NilExp::accept(Visitor &v)
+    void NilExp::accept(Visitor& v)
     {
         v(*this);
     }

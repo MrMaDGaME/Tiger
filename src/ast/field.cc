@@ -8,7 +8,7 @@
 
 namespace ast
 {
-    Field::Field(const Location &location, misc::symbol name, NameTy *type_name)
+    Field::Field(const Location& location, misc::symbol name, NameTy* type_name)
         : Ast(location)
         , name_(name)
         , type_name_(type_name)
@@ -19,12 +19,12 @@ namespace ast
         delete type_name_;
     }
 
-    void Field::accept(ConstVisitor &v) const
+    void Field::accept(ConstVisitor& v) const
     {
         v(*this);
     }
 
-    void Field::accept(Visitor &v)
+    void Field::accept(Visitor& v)
     {
         v(*this);
     }

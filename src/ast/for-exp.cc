@@ -8,7 +8,7 @@
 
 namespace ast
 {
-    ForExp::ForExp(const Location &location, VarDec *vardec, Exp *hi, Exp *body)
+    ForExp::ForExp(const Location& location, VarDec* vardec, Exp* hi, Exp* body)
         : Exp(location)
         , vardec_(vardec)
         , hi_(hi)
@@ -22,12 +22,12 @@ namespace ast
         delete body_;
     }
 
-    void ForExp::accept(ConstVisitor &v) const
+    void ForExp::accept(ConstVisitor& v) const
     {
         v(*this);
     }
 
-    void ForExp::accept(Visitor &v)
+    void ForExp::accept(Visitor& v)
     {
         v(*this);
     }

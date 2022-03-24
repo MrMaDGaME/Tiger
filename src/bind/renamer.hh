@@ -33,7 +33,7 @@ namespace bind
         /// Take into account the fact that _main and primitive are
         /// not to be renamed.
         template <typename Def>
-        misc::symbol new_name_compute(const Def &e);
+        misc::symbol new_name_compute(const Def& e);
 
         /// \brief Get the new name of this declaration, possibly create it.
         ///
@@ -42,7 +42,7 @@ namespace bind
         /// recursive functions), in which case we must compute the
         /// new name of that function on the fly.
         template <typename Def>
-        misc::symbol new_name(const Def &e);
+        misc::symbol new_name(const Def& e);
         /// \}
 
         // Visit methods.
@@ -51,7 +51,7 @@ namespace bind
         /// \a def is the definition site of \e (must be equal to
         /// \a e if it is a Dec node).
         template <class E, class Def>
-        void visit(E &e, const Def *def);
+        void visit(E& e, const Def* def);
 
         /// \name Visiting definition sites.
         /// \{
@@ -67,7 +67,7 @@ namespace bind
         /// \name New names.
         /// \{
         /// New names associated to original declared entities.
-        using new_names_type = std::map<const ast::Dec *, misc::symbol>;
+        using new_names_type = std::map<const ast::Dec*, misc::symbol>;
         /// Dictionary mapping old declarations to their new names.
         new_names_type new_names_;
         /// \}

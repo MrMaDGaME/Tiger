@@ -16,9 +16,9 @@ namespace ast
         /** \name Ctor & dtor.
          ** \{ */
         /// Construct a Var node.
-        explicit Var(const Location &location);
-        Var(const Var &) = delete;
-        Var &operator=(const Var &) = delete;
+        explicit Var(const Location& location);
+        Var(const Var&) = delete;
+        Var& operator=(const Var&) = delete;
         /// Destroy a Var node.
         /** \} */
     };

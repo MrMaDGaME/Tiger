@@ -16,9 +16,9 @@ namespace ast
         /** \name Ctor & dtor.
          ** \{ */
         /// Construct an Exp node.
-        explicit Exp(const Location &location);
-        Exp(const Exp &) = delete;
-        Exp &operator=(const Exp &) = delete;
+        explicit Exp(const Location& location);
+        Exp(const Exp&) = delete;
+        Exp& operator=(const Exp&) = delete;
         /// Destroy an Exp node.
         /** \} */
     };

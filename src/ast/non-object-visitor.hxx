@@ -11,52 +11,57 @@
 
 namespace ast
 {
-  template <template <typename> class Const>
-  GenNonObjectVisitor<Const>::GenNonObjectVisitor()
-    : GenVisitor<Const>()
-  {}
+    template <template <typename> class Const>
+    GenNonObjectVisitor<Const>::GenNonObjectVisitor()
+        : GenVisitor<Const>()
+    {}
 
-  template <template <typename> class Const>
-  GenNonObjectVisitor<Const>::~GenNonObjectVisitor()
-  {}
+    template <template <typename> class Const>
+    GenNonObjectVisitor<Const>::~GenNonObjectVisitor()
+    {}
 
-  /*-----------------------------------------.
-  | Object-related visit methods, disabled.  |
-  `-----------------------------------------*/
+    /*-----------------------------------------.
+    | Object-related visit methods, disabled.  |
+    `-----------------------------------------*/
 
-  template <template <typename> class Const>
-  void GenNonObjectVisitor<Const>::operator()(const_t<ClassTy>&)
-  {
-    // We must not be here (there should be no object feature in plain Tiger).
-    unreachable();
-  }
+    template <template <typename> class Const>
+    void GenNonObjectVisitor<Const>::operator()(const_t<ClassTy>&)
+    {
+        // We must not be here (there should be no object feature in plain
+        // Tiger).
+        unreachable();
+    }
 
-  template <template <typename> class Const>
-  void GenNonObjectVisitor<Const>::operator()(const_t<MethodChunk>&)
-  {
-    // We must not be here (there should be no object feature in plain Tiger).
-    unreachable();
-  }
+    template <template <typename> class Const>
+    void GenNonObjectVisitor<Const>::operator()(const_t<MethodChunk>&)
+    {
+        // We must not be here (there should be no object feature in plain
+        // Tiger).
+        unreachable();
+    }
 
-  template <template <typename> class Const>
-  void GenNonObjectVisitor<Const>::operator()(const_t<MethodDec>&)
-  {
-    // We must not be here (there should be no object feature in plain Tiger).
-    unreachable();
-  }
+    template <template <typename> class Const>
+    void GenNonObjectVisitor<Const>::operator()(const_t<MethodDec>&)
+    {
+        // We must not be here (there should be no object feature in plain
+        // Tiger).
+        unreachable();
+    }
 
-  template <template <typename> class Const>
-  void GenNonObjectVisitor<Const>::operator()(const_t<MethodCallExp>&)
-  {
-    // We must not be here (there should be no object feature in plain Tiger).
-    unreachable();
-  }
+    template <template <typename> class Const>
+    void GenNonObjectVisitor<Const>::operator()(const_t<MethodCallExp>&)
+    {
+        // We must not be here (there should be no object feature in plain
+        // Tiger).
+        unreachable();
+    }
 
-  template <template <typename> class Const>
-  void GenNonObjectVisitor<Const>::operator()(const_t<ObjectExp>&)
-  {
-    // We must not be here (there should be no object feature in plain Tiger).
-    unreachable();
-  }
+    template <template <typename> class Const>
+    void GenNonObjectVisitor<Const>::operator()(const_t<ObjectExp>&)
+    {
+        // We must not be here (there should be no object feature in plain
+        // Tiger).
+        unreachable();
+    }
 
 } // namespace ast

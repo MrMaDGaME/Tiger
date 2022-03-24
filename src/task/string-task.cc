@@ -8,8 +8,8 @@
 
 namespace task
 {
-    StringTask::StringTask(std::string &var, const char *module_name,
-                           const char *desc, const char *name, std::string deps)
+    StringTask::StringTask(std::string& var, const char* module_name,
+                           const char* desc, const char* name, std::string deps)
         : ArgumentTask(name, module_name, desc, "STRING", deps)
         , var_(var)
     {}

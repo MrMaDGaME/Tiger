@@ -8,7 +8,7 @@
 
 namespace ast
 {
-    SubscriptVar::SubscriptVar(const Location &location, Var *var, Exp *index)
+    SubscriptVar::SubscriptVar(const Location& location, Var* var, Exp* index)
         : Var(location)
         , var_(var)
         , index_(index)
@@ -20,12 +20,12 @@ namespace ast
         delete index_;
     }
 
-    void SubscriptVar::accept(ConstVisitor &v) const
+    void SubscriptVar::accept(ConstVisitor& v) const
     {
         v(*this);
     }
 
-    void SubscriptVar::accept(Visitor &v)
+    void SubscriptVar::accept(Visitor& v)
     {
         v(*this);
     }

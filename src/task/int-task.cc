@@ -11,15 +11,15 @@
 
 namespace task
 {
-    IntTask::IntTask(int &var, int min, int max, const char *module_name,
-                     const char *desc, const char *name, std::string deps)
+    IntTask::IntTask(int& var, int min, int max, const char* module_name,
+                     const char* desc, const char* name, std::string deps)
         : ArgumentTask(name, module_name, desc, "NUM", deps)
         , var_(var)
         , min_(min)
         , max_(max)
     {}
 
-    void IntTask::arg_set(const std::string &arg) const
+    void IntTask::arg_set(const std::string& arg) const
     {
         arg_ = arg;
 
@@ -27,7 +27,7 @@ namespace task
         {
             var_ = stol(arg);
         }
-        catch (const std::invalid_argument &e)
+        catch (const std::invalid_argument& e)
         {
             std::cerr << program_name << ": expected an integer: " << arg
                       << '\n';

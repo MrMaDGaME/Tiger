@@ -16,7 +16,7 @@ namespace ast
          ** \{ */
     public:
         /// Construct a ChunkInterface
-        explicit ChunkInterface(const Location &location);
+        explicit ChunkInterface(const Location& location);
         /** \} */
     };
 

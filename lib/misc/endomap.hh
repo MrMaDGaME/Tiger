@@ -40,7 +40,7 @@ namespace misc
         /// \}
 
         /// Return a duplicate of \a this.
-        endomap *clone() const override;
+        endomap* clone() const override;
 
         /// Return a reference to the value associated to \a t.
         ///
@@ -49,10 +49,10 @@ namespace misc
         /// spares the construction of a new T, which may have nasty
         /// effects if this constructor has side effects (e.g.,
         /// incrementing a counter).
-        virtual T &operator[](const T &t);
+        virtual T& operator[](const T& t);
 
         /// Lookup for \a t, returning it if unknown.
-        T operator()(const T &t) const override;
+        T operator()(const T& t) const override;
 
     protected:
         /// If strict, queries for an unknown (unmapped) Identifier is an error.

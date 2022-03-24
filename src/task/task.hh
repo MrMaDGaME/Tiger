@@ -29,8 +29,8 @@ namespace task
         \param desc      description of this task
         \param deps            optional space separated list of task names
         */
-        Task(const char *name, const char *module_name, const char *desc,
-             const std::string &deps = "");
+        Task(const char* name, const char* module_name, const char* desc,
+             const std::string& deps = "");
 
         /// Destroy this Task.
         virtual ~Task() = default;
@@ -48,7 +48,7 @@ namespace task
         using deps_type = std::vector<std::string>;
 
         virtual deps_type
-        resolve_dependencies(tasks_list_type &active_tasks) const;
+        resolve_dependencies(tasks_list_type& active_tasks) const;
 
         /** \name Accessors.
          ** \{ */
@@ -59,19 +59,19 @@ namespace task
         calls function requiring 'const char*'.
         The use of 'std::string::c_str()' is so forbidden and a call to
         'strdup(std::string::c_str())' would imply dummy memory leaks. */
-        const char *name_get() const;
+        const char* name_get() const;
 
         /// Access to 'module_name'.
-        const char *module_name_get() const;
+        const char* module_name_get() const;
 
         /// Access to 'fullname'.
-        const char *fullname_get() const;
+        const char* fullname_get() const;
 
         /// Access to 'desc'.
-        const char *desc_get() const;
+        const char* desc_get() const;
 
         /// Access to tasks dependencies.
-        const deps_type &dependencies_get() const;
+        const deps_type& dependencies_get() const;
 
         /** \} */
 
@@ -81,7 +81,7 @@ namespace task
 
     public:
         /// Normalize the name of a task.
-        static std::string normalize(const std::string &task_name);
+        static std::string normalize(const std::string& task_name);
 
     protected:
         /// Task name.
@@ -89,9 +89,9 @@ namespace task
         /// Task name plus short name.
         std::string fullname_;
         /// Module name to which the task belongs.
-        const char *module_name_;
+        const char* module_name_;
         /// A short description of this task (displayed in program usage).
-        const char *desc_;
+        const char* desc_;
         /// Contains the name of the tasks on which this one depends.
         deps_type dependencies_;
     };

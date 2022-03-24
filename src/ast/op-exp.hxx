@@ -10,12 +10,27 @@
 namespace ast
 {
 
-  inline const Exp& OpExp::left_get() const { return *left_; }
-  inline Exp& OpExp::left_get() { return *left_; }
+    inline const Exp& OpExp::left_get() const
+    {
+        return *left_;
+    }
+    inline Exp& OpExp::left_get()
+    {
+        return *left_;
+    }
 
-  inline OpExp::Oper OpExp::oper_get() const { return oper_; }
+    inline OpExp::Oper OpExp::oper_get() const
+    {
+        return oper_;
+    }
 
-  inline const Exp& OpExp::right_get() const { return *right_; }
-  inline Exp& OpExp::right_get() { return *right_; }
+    inline const Exp& OpExp::right_get() const
+    {
+        return *right_;
+    }
+    inline Exp& OpExp::right_get()
+    {
+        return *right_;
+    }
 
 } // namespace ast

@@ -14,7 +14,7 @@ namespace parse
         : Tweast("")
     {}
 
-    Tweast::Tweast(const std::string &str)
+    Tweast::Tweast(const std::string& str)
         : MetavarMap<ast::Exp>::MetavarMap("exp")
         , MetavarMap<ast::Var>::MetavarMap("lvalue")
         , MetavarMap<ast::NameTy>::MetavarMap("namety")
@@ -27,7 +27,7 @@ namespace parse
         return input_.str();
     }
 
-    std::ostream &Tweast::dump(std::ostream &ostr) const
+    std::ostream& Tweast::dump(std::ostream& ostr) const
     {
         return ostr << "Exp map:" << misc::incendl << MetavarMap<ast::Exp>::map_
                     << misc::decendl << "Var map:" << misc::incendl
@@ -40,7 +40,7 @@ namespace parse
                     << misc::decendl;
     }
 
-    std::ostream &operator<<(std::ostream &ostr, const Tweast &in)
+    std::ostream& operator<<(std::ostream& ostr, const Tweast& in)
     {
         return in.dump(ostr);
     }

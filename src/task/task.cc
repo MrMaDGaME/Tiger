@@ -12,8 +12,8 @@
 
 namespace task
 {
-    Task::Task(const char *name, const char *module_name, const char *desc,
-               const std::string &deps)
+    Task::Task(const char* name, const char* module_name, const char* desc,
+               const std::string& deps)
         : name_(normalize(name))
         , fullname_(name_)
         , module_name_(module_name)
@@ -41,7 +41,7 @@ namespace task
         }
     }
 
-    Task::deps_type Task::resolve_dependencies(tasks_list_type &) const
+    Task::deps_type Task::resolve_dependencies(tasks_list_type&) const
     {
         // By default, consider that all dependencies are required.
         return dependencies_;
@@ -51,12 +51,12 @@ namespace task
     void Task::print_dependencies() const
     {
         std::cout << "Dependencies for task " << name_ << ":\n";
-        for (const std::string &s : dependencies_)
+        for (const std::string& s : dependencies_)
             std::cout << "\t" << s << '\n';
         std::cout << std::flush;
     }
 
-    std::string Task::normalize(const std::string &task_name)
+    std::string Task::normalize(const std::string& task_name)
     {
         std::string normalized_name;
         ranges::replace_copy(

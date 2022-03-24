@@ -8,7 +8,7 @@
 
 namespace ast
 {
-    Dec::Dec(const Location &location, misc::symbol name)
+    Dec::Dec(const Location& location, misc::symbol name)
         : Ast(location)
         , name_(name)
     {}

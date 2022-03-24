@@ -18,12 +18,12 @@ namespace misc
         : status_(error_type::success)
     {}
 
-    error::error(const error &e)
+    error::error(const error& e)
     {
         *this = e;
     }
 
-    error &error::operator=(const error &rhs)
+    error& error::operator=(const error& rhs)
     {
         status_ = rhs.status_get();
         stream_.str(rhs.stream_get().str());
@@ -34,7 +34,7 @@ namespace misc
     | Filling the error handler.  |
     `----------------------------*/
 
-    error &error::operator<<(error_type e)
+    error& error::operator<<(error_type e)
     {
         auto status_value = static_cast<unsigned>(status_);
         auto e_value = static_cast<unsigned>(e);
@@ -44,13 +44,13 @@ namespace misc
     }
 
     // Import errors.
-    error &error::operator<<(const error &rhs)
+    error& error::operator<<(const error& rhs)
     {
         *this << rhs.status_get() << rhs.stream_get().str();
         return *this;
     }
 
-    error &error::operator<<(std::ostream &(*f)(std::ostream &))
+    error& error::operator<<(std::ostream& (*f)(std::ostream&))
     {
         stream_ << f;
         return *this;
@@ -71,13 +71,13 @@ namespace misc
             exit();
     }
 
-    void error::ice(const char *file, int line) const
+    void error::ice(const char* file, int line) const
     {
         std::cerr << stream_.str();
         __Terminate(file, line, "Internal Compiler error");
     }
 
-    void error::ice_on_error(const char *file, int line) const
+    void error::ice_on_error(const char* file, int line) const
     {
         if (static_cast<unsigned>(status_))
             ice(file, line);
@@ -108,12 +108,12 @@ namespace misc
         return static_cast<unsigned>(status_);
     }
 
-    const std::ostringstream &error::stream_get() const
+    const std::ostringstream& error::stream_get() const
     {
         return stream_;
     }
 
-    std::ostream &operator<<(std::ostream &o, const error &e)
+    std::ostream& operator<<(std::ostream& o, const error& e)
     {
         return o << e.stream_get().str();
     }

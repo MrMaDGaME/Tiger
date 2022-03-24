@@ -11,7 +11,7 @@
 #include <parse/libparse.hh>
 #include <type/libtype.hh>
 
-const char *program_name = "test-desugar";
+const char* program_name = "test-desugar";
 
 int main()
 {

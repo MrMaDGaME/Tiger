@@ -57,10 +57,10 @@ namespace bind
         using super_type::operator();
 
         /// The error handler.
-        const misc::error &error_get() const;
+        const misc::error& error_get() const;
 
         /* The visiting methods. */
-        void operator()(ast::LetExp &e) override;
+        void operator()(ast::LetExp& e) override;
 
         void operator()(ast::SimpleVar& e) override;
         void operator()(ast::CallExp& e) override;
@@ -73,8 +73,6 @@ namespace bind
         void operator()(ast::VarChunk& e) override;
         void operator()(ast::FunctionChunk& e) override;
         void operator()(ast::TypeChunk& e) override;
-
-        // FIXME: Some code was deleted here.
 
         // ---------------- //
         // Visiting /Dec/.  //
@@ -113,15 +111,15 @@ namespace bind
         /// Check a set of definitions: unique names, browse headers, then
         /// bodies.
         template <class D>
-        void chunk_visit(ast::Chunk<D> &e);
+        void chunk_visit(ast::Chunk<D>& e);
 
         /// Check a Function or Type declaration header.
         template <class D>
-        void visit_dec_header(D &e);
+        void visit_dec_header(D& e);
 
         /// Check a Function or Type declaration body.
         template <class D>
-        void visit_dec_body(D &e);
+        void visit_dec_body(D& e);
 
         // FIXME: Some code was deleted here.
         /// \}
@@ -130,24 +128,24 @@ namespace bind
         /// \{
     protected:
         /// Report an error.
-        void error(const ast::Ast &loc, const std::string &msg);
+        void error(const ast::Ast& loc, const std::string& msg);
 
         /// Check _main definition.
-        void check_main(const ast::FunctionDec &e);
+        void check_main(const ast::FunctionDec& e);
 
         /// Report an undefined symbol.
         ///
         /// \param k   the kind of this node (function, variable, type)
         /// \param e   the node using an undefined name
         template <typename T>
-        void undeclared(const std::string &k, const T &e);
+        void undeclared(const std::string& k, const T& e);
 
         /// Report a symbol redefinition.
         ///
         /// \param e1   the first occurrence, the original
         /// \param e2   the invalid duplicate
         template <typename T>
-        void redefinition(const T &e1, const T &e2);
+        void redefinition(const T& e1, const T& e2);
         /// \}
 
         /** \name Handling the environment
@@ -161,12 +159,10 @@ namespace bind
         /// Binding errors handler.
         misc::error error_;
 
-        // FIXME: Some code was deleted here (More members).
         misc::scoped_map<misc::symbol, ast::TypeDec*> type_list_;
         misc::scoped_map<misc::symbol, ast::FunctionDec*> function_list_;
         misc::scoped_map<misc::symbol, ast::VarDec*> var_list_;
     };
-
 
 } // namespace bind
 

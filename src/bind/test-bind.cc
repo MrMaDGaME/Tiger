@@ -7,12 +7,12 @@
 #include <iostream>
 #include <parse/libparse.hh>
 
-const char *program_name = "test-parse";
+const char* program_name = "test-parse";
 
 // Return true on correct binding.
-static bool bound(const std::string &s)
+static bool bound(const std::string& s)
 {
-    ast::ChunkList *d = parse::parse_unit(s);
+    ast::ChunkList* d = parse::parse_unit(s);
     misc::error e = bind::bind(*d);
     std::cout << *d << '\n';
     if (e)

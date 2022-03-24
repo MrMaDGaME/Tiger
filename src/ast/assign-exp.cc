@@ -8,7 +8,7 @@
 
 namespace ast
 {
-    AssignExp::AssignExp(const Location &location, Var *var, Exp *exp)
+    AssignExp::AssignExp(const Location& location, Var* var, Exp* exp)
         : Exp(location)
         , var_(var)
         , exp_(exp)
@@ -20,12 +20,12 @@ namespace ast
         delete exp_;
     }
 
-    void AssignExp::accept(ConstVisitor &v) const
+    void AssignExp::accept(ConstVisitor& v) const
     {
         v(*this);
     }
 
-    void AssignExp::accept(Visitor &v)
+    void AssignExp::accept(Visitor& v)
     {
         v(*this);
     }

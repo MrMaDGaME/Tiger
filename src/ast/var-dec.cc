@@ -9,8 +9,8 @@
 namespace ast
 {
 
-    VarDec::VarDec(const Location &location, misc::symbol name,
-                   NameTy *type_name, Exp *init)
+    VarDec::VarDec(const Location& location, misc::symbol name,
+                   NameTy* type_name, Exp* init)
         : Dec(location, name)
         , Escapable()
         , type_name_(type_name)
@@ -23,12 +23,12 @@ namespace ast
         delete init_;
     }
 
-    void VarDec::accept(ConstVisitor &v) const
+    void VarDec::accept(ConstVisitor& v) const
     {
         v(*this);
     }
 
-    void VarDec::accept(Visitor &v)
+    void VarDec::accept(Visitor& v)
     {
         v(*this);
     }

@@ -11,8 +11,8 @@ using namespace misc;
 class graph_type : public undirected_graph<int, std::string>
 {
 public:
-    virtual std::ostream &vertex_print(vertex_descriptor v,
-                                       std::ostream &ostr) const
+    virtual std::ostream& vertex_print(vertex_descriptor v,
+                                       std::ostream& ostr) const
     {
         return ostr << (*this)[v];
     }
@@ -23,7 +23,7 @@ static unsigned urand(unsigned max)
     return rand() % max;
 }
 
-static bool consistency(graph_type &g)
+static bool consistency(graph_type& g)
 {
     unsigned nb_states = 1 + urand(10);
     unsigned nb_edges = 1 + urand(20);

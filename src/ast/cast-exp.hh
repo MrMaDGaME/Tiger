@@ -25,9 +25,9 @@ namespace ast
         /** \name Ctor & dtor.
          ** \{ */
         /// Construct a CastExp node.
-        CastExp(const Location &location, Exp *exp, Ty *ty);
-        CastExp(const CastExp &) = delete;
-        CastExp &operator=(const CastExp &) = delete;
+        CastExp(const Location& location, Exp* exp, Ty* ty);
+        CastExp(const CastExp&) = delete;
+        CastExp& operator=(const CastExp&) = delete;
         /// Destroy a CastExp node.
         ~CastExp() override;
         /** \} */
@@ -35,28 +35,28 @@ namespace ast
         /// \name Visitors entry point.
         /// \{ */
         /// Accept a const visitor \a v.
-        void accept(ConstVisitor &v) const override;
+        void accept(ConstVisitor& v) const override;
         /// Accept a non-const visitor \a v.
-        void accept(Visitor &v) override;
+        void accept(Visitor& v) override;
         /// \}
 
         /** \name Accessors.
          ** \{ */
         /// Return the cast expression.
-        const Exp &exp_get() const;
+        const Exp& exp_get() const;
         /// Return the cast expression.
-        Exp &exp_get();
+        Exp& exp_get();
         /// Return the target type.
-        const Ty &ty_get() const;
+        const Ty& ty_get() const;
         /// Return the target type.
-        Ty &ty_get();
+        Ty& ty_get();
         /** \} */
 
     protected:
         /// The cast expression.
-        Exp *exp_;
+        Exp* exp_;
         /// The target type.
-        Ty *ty_;
+        Ty* ty_;
     };
 } // namespace ast
 #include <ast/cast-exp.hxx>

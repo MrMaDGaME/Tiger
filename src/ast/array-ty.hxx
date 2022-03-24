@@ -10,7 +10,13 @@
 namespace ast
 {
 
-  inline const NameTy& ArrayTy::base_type_get() const { return *base_type_; }
-  inline NameTy& ArrayTy::base_type_get() { return *base_type_; }
+    inline const NameTy& ArrayTy::base_type_get() const
+    {
+        return *base_type_;
+    }
+    inline NameTy& ArrayTy::base_type_get()
+    {
+        return *base_type_;
+    }
 
 } // namespace ast

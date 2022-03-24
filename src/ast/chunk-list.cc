@@ -30,34 +30,34 @@ namespace ast
         return chunks_.end();
     }
 
-    void ChunkList::push_front(ChunkInterface *d)
+    void ChunkList::push_front(ChunkInterface* d)
     {
         chunks_.emplace_front(d);
         location_.begin = d->location_get().begin;
     }
 
-    void ChunkList::emplace_back(ChunkInterface *d)
+    void ChunkList::emplace_back(ChunkInterface* d)
     {
         chunks_.emplace_back(d);
         location_.end = d->location_get().end;
     }
 
-    void ChunkList::splice_front(ChunkList &ds)
+    void ChunkList::splice_front(ChunkList& ds)
     {
         chunks_.splice(chunks_.begin(), ds.chunks_get());
     }
 
-    void ChunkList::splice_back(ChunkList &ds)
+    void ChunkList::splice_back(ChunkList& ds)
     {
         chunks_.splice(chunks_.end(), ds.chunks_get());
     }
 
-    ChunkList::ChunkList(const Location &location)
+    ChunkList::ChunkList(const Location& location)
         : Ast(location)
     {}
 
-    ChunkList::ChunkList(const Location &location,
-                         const ChunkList::list_type &chunks)
+    ChunkList::ChunkList(const Location& location,
+                         const ChunkList::list_type& chunks)
         : Ast(location)
         , chunks_(chunks)
     {}
@@ -67,12 +67,12 @@ namespace ast
         misc::deep_clear(chunks_);
     }
 
-    void ChunkList::accept(ConstVisitor &v) const
+    void ChunkList::accept(ConstVisitor& v) const
     {
         v(*this);
     }
 
-    void ChunkList::accept(Visitor &v)
+    void ChunkList::accept(Visitor& v)
     {
         v(*this);
     }

@@ -8,8 +8,8 @@
 
 namespace task
 {
-    FunctionTask::FunctionTask(callback_type &callback, const char *module_name,
-                               const char *desc, const char *name,
+    FunctionTask::FunctionTask(callback_type& callback, const char* module_name,
+                               const char* desc, const char* name,
                                std::string deps)
         : SimpleTask(name, module_name, desc, deps)
         , execute_(callback)

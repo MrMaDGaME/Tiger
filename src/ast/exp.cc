@@ -8,7 +8,7 @@
 
 namespace ast
 {
-    Exp::Exp(const Location &location)
+    Exp::Exp(const Location& location)
         : Ast(location)
     {}
 

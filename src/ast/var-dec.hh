@@ -21,10 +21,10 @@ namespace ast
         /** \name Ctor & dtor.
          ** \{ */
         /// Construct a VarDec node.
-        VarDec(const Location &location, misc::symbol name, NameTy *type_name,
-               Exp *init);
-        VarDec(const VarDec &) = delete;
-        VarDec &operator=(const VarDec &) = delete;
+        VarDec(const Location& location, misc::symbol name, NameTy* type_name,
+               Exp* init);
+        VarDec(const VarDec&) = delete;
+        VarDec& operator=(const VarDec&) = delete;
         /// Destroy a VarDec node.
         ~VarDec() override;
         /** \} */
@@ -32,28 +32,28 @@ namespace ast
         /// \name Visitors entry point.
         /// \{ */
         /// Accept a const visitor \a v.
-        void accept(ConstVisitor &v) const override;
+        void accept(ConstVisitor& v) const override;
         /// Accept a non-const visitor \a v.
-        void accept(Visitor &v) override;
+        void accept(Visitor& v) override;
         /// \}
 
         /** \name Accessors.
          ** \{ */
         /// Return optional type of the declared variable.
-        const NameTy *type_name_get() const;
+        const NameTy* type_name_get() const;
         /// Return optional type of the declared variable.
-        NameTy *type_name_get();
+        NameTy* type_name_get();
         /// Return the initial value (expression) assigned to the variable.
-        const Exp *init_get() const;
+        const Exp* init_get() const;
         /// Return the initial value (expression) assigned to the variable.
-        Exp *init_get();
+        Exp* init_get();
         /** \} */
 
     protected:
         /// Optional type of the declared variable.
-        NameTy *type_name_;
+        NameTy* type_name_;
         /// The initial value (expression) assigned to the variable.
-        Exp *init_;
+        Exp* init_;
     };
 } // namespace ast
 #include <ast/var-dec.hxx>

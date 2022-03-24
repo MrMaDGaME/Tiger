@@ -13,7 +13,7 @@ int main()
     std::ostringstream s2;
 
     int i = 123;
-    const int &ic = i;
+    const int& ic = i;
 
     s1 << deref << i << deref << &i << deref << ic << deref << &ic;
     s2 << i << i << ic << ic;

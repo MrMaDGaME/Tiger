@@ -23,19 +23,19 @@ namespace ast
         /** \name Ctor & dtor.
          ** \{ */
         /// Construct a MethodDec node.
-        MethodDec(const Location &location, misc::symbol name,
-                  VarChunk *formals, NameTy *result, Exp *body);
-        MethodDec(const MethodDec &) = delete;
-        MethodDec &operator=(const MethodDec &) = delete;
+        MethodDec(const Location& location, misc::symbol name,
+                  VarChunk* formals, NameTy* result, Exp* body);
+        MethodDec(const MethodDec&) = delete;
+        MethodDec& operator=(const MethodDec&) = delete;
         /// Destroy a MethodDec node.
         /** \} */
 
         /// \name Visitors entry point.
         /// \{ */
         /// Accept a const visitor \a v.
-        void accept(ConstVisitor &v) const override;
+        void accept(ConstVisitor& v) const override;
         /// Accept a non-const visitor \a v.
-        void accept(Visitor &v) override;
+        void accept(Visitor& v) override;
         /// \}
     };
 } // namespace ast

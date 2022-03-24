@@ -50,15 +50,15 @@ namespace misc
             necessary.
 
             \return Directory containing \a file, or "" if not found. */
-        path find_file(const std::string &file);
+        path find_file(const std::string& file);
 
         /// \brief Check if \a file exists in directory \a dir.
-        bool find_in_directory(const path &dir, const std::string &file) const;
+        bool find_in_directory(const path& dir, const std::string& file) const;
         /// \}
 
         /// \name Printing.
         /// \{
-        std::ostream &dump(std::ostream &ostr) const;
+        std::ostream& dump(std::ostream& ostr) const;
         /// \}
 
     private:
@@ -68,8 +68,8 @@ namespace misc
         /** \brief Find file "\a relative_path / \a filename" using include
            path. \return Absolute path where the file lies or empty path
                     if the file does not exist. */
-        path find_in_search_path(const path &relative_path,
-                                 const std::string &filename) const;
+        path find_in_search_path(const path& relative_path,
+                                 const std::string& filename) const;
 
         /** \brief Split the string with character ':', and insert each
             resultant string as a new search path. */
@@ -88,10 +88,10 @@ namespace misc
         path_list_type current_directory_;
     };
 
-    std::ostream &operator<<(std::ostream &ostr, const file_library &l);
+    std::ostream& operator<<(std::ostream& ostr, const file_library& l);
 
-    std::filesystem::path operator+(std::filesystem::path &p1,
-                                    std::filesystem::path &p2);
+    std::filesystem::path operator+(std::filesystem::path& p1,
+                                    std::filesystem::path& p2);
 
 } // namespace misc
 

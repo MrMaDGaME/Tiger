@@ -17,9 +17,9 @@
 namespace parse
 {
     // Parse a Tiger file, return the corresponding abstract syntax.
-    std::pair<ast::ChunkList *, misc::error>
-    parse(const std::string &prelude, const std::string &fname,
-          misc::file_library &library, bool scan_trace_p, bool parse_trace_p,
+    std::pair<ast::ChunkList*, misc::error>
+    parse(const std::string& prelude, const std::string& fname,
+          misc::file_library& library, bool scan_trace_p, bool parse_trace_p,
           bool enable_object_extensions_p)
     {
         // Current directory must be that of the file currently processed.
@@ -29,12 +29,12 @@ namespace parse
         tp.scan_trace(scan_trace_p).parse_trace(parse_trace_p);
         tp.enable_object_extensions(enable_object_extensions_p);
 
-        ast::ChunkList *res = nullptr;
+        ast::ChunkList* res = nullptr;
 
         ast_type tree = tp.parse_file(fname);
 
-        ast::Exp **exp = std::get_if<ast::Exp *>(&tree);
-        ast::ChunkList **chunks = std::get_if<ast::ChunkList *>(&tree);
+        ast::Exp** exp = std::get_if<ast::Exp*>(&tree);
+        ast::ChunkList** chunks = std::get_if<ast::ChunkList*>(&tree);
 
         // Try to parse the program as an expression, and check that the
         // parsing did not fail in that case.
@@ -44,9 +44,9 @@ namespace parse
 
             if (!prelude.empty())
             {
-                ast::ChunkList *prelude_chunks =
+                ast::ChunkList* prelude_chunks =
                     (prelude == "builtin"
-                         ? std::get<ast::ChunkList *>(tp.parse(tp.prelude()))
+                         ? std::get<ast::ChunkList*>(tp.parse(tp.prelude()))
                          : tp.parse_import(prelude, location()));
                 if (prelude_chunks)
                     in << prelude_chunks;
@@ -70,7 +70,7 @@ namespace parse
         return std::pair(res, tp.error_get());
     }
 
-    ast_type parse(Tweast &input)
+    ast_type parse(Tweast& input)
     {
         TigerParser tp;
         tp.enable_extensions();
@@ -85,32 +85,32 @@ namespace parse
         return res;
     }
 
-    ast::Exp *parse(const std::string &str, bool enable_object_extensions_p)
+    ast::Exp* parse(const std::string& str, bool enable_object_extensions_p)
     {
         TigerParser tp;
         tp.enable_object_extensions(enable_object_extensions_p);
-        ast::Exp *res = tp.parse(str);
+        ast::Exp* res = tp.parse(str);
         tp.error_get().ice_on_error_here();
         return res;
     }
 
-    ast::ChunkList *parse_unit(const std::string &str,
+    ast::ChunkList* parse_unit(const std::string& str,
                                bool enable_object_extensions_p)
     {
         TigerParser tp;
         tp.enable_object_extensions(enable_object_extensions_p);
         std::string rewrite = "function _main() = (" + str + "; ())";
-        ast::ChunkList *res = tp.parse(rewrite);
+        ast::ChunkList* res = tp.parse(rewrite);
         tp.error_get().ice_on_error_here();
         return res;
     }
 
     // Parse a set of declarations.
-    ast::ChunkInterface *parse_chunks(Tweast &in)
+    ast::ChunkInterface* parse_chunks(Tweast& in)
     {
-        ast::ChunkList *dl = parse(in);
+        ast::ChunkList* dl = parse(in);
         assertion(dl->chunks_get().size() == 1);
-        ast::ChunkInterface *res = dl->chunks_get().front();
+        ast::ChunkInterface* res = dl->chunks_get().front();
         dl->chunks_get().pop_front();
         delete dl;
         return res;

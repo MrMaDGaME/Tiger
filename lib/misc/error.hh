@@ -30,10 +30,10 @@ namespace misc
     {
     public:
         error();
-        error(const error &e);
+        error(const error& e);
 
         /// Copy an error.
-        error &operator=(const error &e);
+        error& operator=(const error& e);
 
         /// \name Filling the error handler.
         /// \{
@@ -57,16 +57,16 @@ namespace misc
 
         /// General method: put the parameter in stream_.
         template <typename T>
-        error &operator<<(const T &t);
+        error& operator<<(const T& t);
 
         /// Set the status if \a e is lower than the current status.
-        error &operator<<(error_type e);
+        error& operator<<(error_type e);
 
         /// Accept std::endl etc.
-        error &operator<<(std::ostream &(*f)(std::ostream &));
+        error& operator<<(std::ostream& (*f)(std::ostream&));
 
         /// Import errors.
-        error &operator<<(const error &rhs);
+        error& operator<<(const error& rhs);
 
         /// Member manipulator signature.
         using member_manip_type = void (error::*)();
@@ -74,9 +74,9 @@ namespace misc
         using const_member_manip_type = void (error::*)() const;
 
         /// Hook for member manipulators.
-        error &operator<<(member_manip_type f);
+        error& operator<<(member_manip_type f);
         /// Hooks for const member manipulators.
-        error &operator<<(const_member_manip_type f);
+        error& operator<<(const_member_manip_type f);
 
         /// \}
 
@@ -90,11 +90,11 @@ namespace misc
         void exit_on_error() const;
 
         /// Throw an Internal Compiler Error.
-        void ice(const char *file, int line) const;
+        void ice(const char* file, int line) const;
 
         /// If the error status is set, consider that an Internal Compiler
         /// Error has happened and abort.
-        void ice_on_error(const char *file, int line) const;
+        void ice_on_error(const char* file, int line) const;
 
         /// Reset to no error.
         void clear();
@@ -114,7 +114,7 @@ namespace misc
         unsigned status_get_value() const;
 
         /// Get the stream associated with the class.
-        const std::ostringstream &stream_get() const;
+        const std::ostringstream& stream_get() const;
 
         /// \}
 
@@ -127,7 +127,7 @@ namespace misc
     };
 
     /// Display the error message on the given ostream.
-    std::ostream &operator<<(std::ostream &o, const error &e);
+    std::ostream& operator<<(std::ostream& o, const error& e);
 
 } // namespace misc
 

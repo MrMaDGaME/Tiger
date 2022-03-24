@@ -9,6 +9,12 @@
 
 namespace ast
 {
-    inline const Var& MethodCallExp::object_get() const { return *object_; }
-    inline Var& MethodCallExp::object_get() { return *object_; }
+    inline const Var& MethodCallExp::object_get() const
+    {
+        return *object_;
+    }
+    inline Var& MethodCallExp::object_get()
+    {
+        return *object_;
+    }
 } // namespace ast

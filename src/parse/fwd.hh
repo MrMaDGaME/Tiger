@@ -36,6 +36,6 @@ namespace parse
     class Tweast;
 
     /// Result of a parse: an Exp (*.tig) or a ChunkList (*.tih).
-    using ast_type = misc::variant<ast::Exp *, ast::ChunkList *>;
+    using ast_type = misc::variant<ast::Exp*, ast::ChunkList*>;
 
 } // namespace parse

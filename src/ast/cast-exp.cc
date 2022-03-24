@@ -8,7 +8,7 @@
 
 namespace ast
 {
-    CastExp::CastExp(const Location &location, Exp *exp, Ty *ty)
+    CastExp::CastExp(const Location& location, Exp* exp, Ty* ty)
         : Exp(location)
         , exp_(exp)
         , ty_(ty)
@@ -20,12 +20,12 @@ namespace ast
         delete ty_;
     }
 
-    void CastExp::accept(ConstVisitor &v) const
+    void CastExp::accept(ConstVisitor& v) const
     {
         v(*this);
     }
 
-    void CastExp::accept(Visitor &v)
+    void CastExp::accept(Visitor& v)
     {
         v(*this);
     }

@@ -17,9 +17,9 @@ namespace ast
         /** \name Ctor & dtor.
          ** \{ */
         /// Construct a SubscriptVar node.
-        SubscriptVar(const Location &location, Var *var, Exp *index);
-        SubscriptVar(const SubscriptVar &) = delete;
-        SubscriptVar &operator=(const SubscriptVar &) = delete;
+        SubscriptVar(const Location& location, Var* var, Exp* index);
+        SubscriptVar(const SubscriptVar&) = delete;
+        SubscriptVar& operator=(const SubscriptVar&) = delete;
         /// Destroy a SubscriptVar node.
         ~SubscriptVar() override;
         /** \} */
@@ -27,28 +27,28 @@ namespace ast
         /// \name Visitors entry point.
         /// \{ */
         /// Accept a const visitor \a v.
-        void accept(ConstVisitor &v) const override;
+        void accept(ConstVisitor& v) const override;
         /// Accept a non-const visitor \a v.
-        void accept(Visitor &v) override;
+        void accept(Visitor& v) override;
         /// \}
 
         /** \name Accessors.
          ** \{ */
         /// Return the mother variable.
-        const Var &var_get() const;
+        const Var& var_get() const;
         /// Return the mother variable.
-        Var &var_get();
+        Var& var_get();
         /// Return the offset expression.
-        const Exp &index_get() const;
+        const Exp& index_get() const;
         /// Return the offset expression.
-        Exp &index_get();
+        Exp& index_get();
         /** \} */
 
     protected:
         /// The mother variable.
-        Var *var_;
+        Var* var_;
         /// The offset expression.
-        Exp *index_;
+        Exp* index_;
     };
 } // namespace ast
 #include <ast/subscript-var.hxx>

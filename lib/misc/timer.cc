@@ -60,14 +60,14 @@ namespace misc
     {}
 
     // Duplicate a timer.  No tasks should be running.
-    timer::timer(const timer &rhs)
+    timer::timer(const timer& rhs)
         : intmap(rhs.intmap)
         , total(rhs.total)
         , dump_stream(rhs.dump_stream)
     {
         precondition(rhs.tasks.empty());
 
-        for (const task_map_type::value_type &p : rhs.tasksmap)
+        for (const task_map_type::value_type& p : rhs.tasksmap)
             if (tasksmap.find(p.first) == tasksmap.end())
                 tasksmap[p.first] = new time_var(*p.second);
     }
@@ -90,16 +90,16 @@ namespace misc
         }
 
         // Deallocate all our time_var's.
-        for (task_map_type::value_type &p : tasksmap)
+        for (task_map_type::value_type& p : tasksmap)
             delete p.second;
     }
 
-    void timer::name(int i, const std::string &task_name)
+    void timer::name(int i, const std::string& task_name)
     {
         intmap[i] = task_name;
     }
 
-    void timer::timeinfo(long time, long total_time, std::ostream &out)
+    void timer::timeinfo(long time, long total_time, std::ostream& out)
     {
         out << std::setiosflags(std::ios::left) << std::setw(6)
             << std::setprecision(6) << float(time) / clocks_per_sec
@@ -109,10 +109,10 @@ namespace misc
             << "%) ";
     }
 
-    void timer::dump(std::ostream &out)
+    void timer::dump(std::ostream& out)
     {
         out << "Execution times (seconds)\n";
-        for (const task_map_type::value_type &p : tasksmap)
+        for (const task_map_type::value_type& p : tasksmap)
         {
             if (!p.second->is_zero())
             {
@@ -129,7 +129,7 @@ namespace misc
         out << '\n';
 
         out << "Cumulated times (seconds)\n";
-        for (const task_map_type::value_type &p : tasksmap)
+        for (const task_map_type::value_type& p : tasksmap)
         {
             if (p.second->last.wall != p.second->first.wall)
             {
@@ -163,9 +163,9 @@ namespace misc
             << std::resetiosflags(std::ios::left) << std::endl;
     }
 
-    void timer::push(const std::string &task_name)
+    void timer::push(const std::string& task_name)
     {
-        time_var *current;
+        time_var* current;
 
         // If the stack is not empty, set the elapsed time for the current
         // task.
@@ -193,12 +193,12 @@ namespace misc
             tasks.top()->start();
     }
 
-    timer &timer::operator<<(const timer &rhs)
+    timer& timer::operator<<(const timer& rhs)
     {
         // No task should be running when merging timers.
         precondition(rhs.tasks.empty());
 
-        for (const task_map_type::value_type &p : rhs.tasksmap)
+        for (const task_map_type::value_type& p : rhs.tasksmap)
             if (tasksmap.find(p.first) == tasksmap.end())
                 tasksmap[p.first] = new time_var(*p.second);
 

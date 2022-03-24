@@ -21,7 +21,7 @@ namespace ast
     const misc::xalloc<bool> bindings_display;
 
     // Print the TREE on OSTR.
-    std::ostream &operator<<(std::ostream &ostr, const Ast &tree)
+    std::ostream& operator<<(std::ostream& ostr, const Ast& tree)
     {
         PrettyPrinter print(ostr);
         print(tree);
@@ -29,7 +29,7 @@ namespace ast
     }
 
     /// Dump \a a on \a ostr.
-    std::ostream &dump_dot(const Ast &tree, std::ostream &ostr)
+    std::ostream& dump_dot(const Ast& tree, std::ostream& ostr)
     {
         DumperDot dump_dot(ostr);
         ostr << misc::resetindent << "digraph structs {" << misc::incendl;

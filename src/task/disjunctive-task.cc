@@ -8,8 +8,8 @@
 
 namespace task
 {
-    DisjunctiveTask::DisjunctiveTask(const char *module_name, const char *desc,
-                                     const char *name, std::string deps)
+    DisjunctiveTask::DisjunctiveTask(const char* module_name, const char* desc,
+                                     const char* name, std::string deps)
         : SimpleTask(name, module_name, desc, deps)
     {}
 
@@ -19,7 +19,7 @@ namespace task
     }
 
     Task::deps_type
-    DisjunctiveTask::resolve_dependencies(tasks_list_type &active_tasks) const
+    DisjunctiveTask::resolve_dependencies(tasks_list_type& active_tasks) const
     {
         if (!active_tasks.empty() || dependencies_.empty())
             return Task::deps_type();

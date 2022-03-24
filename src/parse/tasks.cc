@@ -16,7 +16,7 @@
 
 namespace parse::tasks
 {
-    const char *tc_pkgdatadir = getenv("TC_PKGDATADIR");
+    const char* tc_pkgdatadir = getenv("TC_PKGDATADIR");
     misc::file_library l =
         misc::file_library(tc_pkgdatadir ? tc_pkgdatadir : PKGDATADIR);
 
@@ -30,7 +30,7 @@ namespace parse::tasks
         precondition(filename != nullptr);
         bool scan_trace = scan_trace_p || getenv("SCAN");
         bool parse_trace = parse_trace_p || getenv("PARSE");
-        std::pair<ast::ChunkList *, misc::error> result =
+        std::pair<ast::ChunkList*, misc::error> result =
             ::parse::parse(prelude, filename, l, scan_trace, parse_trace,
                            object::tasks::enable_object_extensions_p);
 
@@ -48,12 +48,12 @@ namespace parse::tasks
         std::cout << l << '\n';
     }
 
-    void library_append(const std::string &dir)
+    void library_append(const std::string& dir)
     {
         l.append_dir(dir);
     }
 
-    void library_prepend(const std::string &dir)
+    void library_prepend(const std::string& dir)
     {
         l.prepend_dir(dir);
     }

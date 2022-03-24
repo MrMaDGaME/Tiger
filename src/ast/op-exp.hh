@@ -36,10 +36,10 @@ namespace ast
         /** \name Ctor & dtor.
          ** \{ */
         /// Construct an OpExp node.
-        OpExp(const Location &location, Exp *left, OpExp::Oper oper,
-              Exp *right);
-        OpExp(const OpExp &) = delete;
-        OpExp &operator=(const OpExp &) = delete;
+        OpExp(const Location& location, Exp* left, OpExp::Oper oper,
+              Exp* right);
+        OpExp(const OpExp&) = delete;
+        OpExp& operator=(const OpExp&) = delete;
         /// Destroy an OpExp node.
         ~OpExp() override;
         /** \} */
@@ -47,32 +47,32 @@ namespace ast
         /// \name Visitors entry point.
         /// \{ */
         /// Accept a const visitor \a v.
-        void accept(ConstVisitor &v) const override;
+        void accept(ConstVisitor& v) const override;
         /// Accept a non-const visitor \a v.
-        void accept(Visitor &v) override;
+        void accept(Visitor& v) override;
         /// \}
 
         /** \name Accessors.
          ** \{ */
         /// Return left operand.
-        const Exp &left_get() const;
+        const Exp& left_get() const;
         /// Return left operand.
-        Exp &left_get();
+        Exp& left_get();
         /// Return operator.
         OpExp::Oper oper_get() const;
         /// Return right operand.
-        const Exp &right_get() const;
+        const Exp& right_get() const;
         /// Return right operand.
-        Exp &right_get();
+        Exp& right_get();
         /** \} */
 
     protected:
         /// Left operand.
-        Exp *left_;
+        Exp* left_;
         /// Operator.
         OpExp::Oper oper_;
         /// Right operand.
-        Exp *right_;
+        Exp* right_;
     };
 } // namespace ast
 

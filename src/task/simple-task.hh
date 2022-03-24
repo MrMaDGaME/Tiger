@@ -22,7 +22,7 @@ namespace task
         /** \{ */
     public:
         /// Construct and register a SimpleTask.
-        SimpleTask(const char *name, const char *module_name, const char *desc,
+        SimpleTask(const char* name, const char* module_name, const char* desc,
                    std::string deps = "");
 
         /** \} */

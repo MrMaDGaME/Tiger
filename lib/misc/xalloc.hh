@@ -14,7 +14,7 @@ namespace misc
     struct iomanipulator
     {
         virtual ~iomanipulator() = default;
-        virtual void operator()(std::ostream &o) const = 0;
+        virtual void operator()(std::ostream& o) const = 0;
     };
 
     /** \brief Launch the iomanipulator action on o.
@@ -22,7 +22,7 @@ namespace misc
      ** Call the operator() of g (so set, get or swap the
      ** xalloced data with data_).
      */
-    std::ostream &operator<<(std::ostream &o, const iomanipulator &g);
+    std::ostream& operator<<(std::ostream& o, const iomanipulator& g);
 
     /** \brief Allocate slots in std::ostreams.
      **
@@ -50,15 +50,15 @@ namespace misc
         {
         public:
             /// Set data_ to data.
-            set_type(const xalloc &slot, StoredType &data);
+            set_type(const xalloc& slot, StoredType& data);
             /// Set the data in the xalloced place.
-            void operator()(std::ostream &ostr) const override;
+            void operator()(std::ostream& ostr) const override;
 
         private:
             /// The xalloced data.
-            const xalloc &slot_;
+            const xalloc& slot_;
             /// Data to put in the stream.
-            StoredType &data_;
+            StoredType& data_;
         };
 
         /** \brief Handle the data to get from the xalloced place.
@@ -69,16 +69,16 @@ namespace misc
         {
         public:
             /// Set data_ to data.
-            get_type(const xalloc &slot, StoredType &data);
+            get_type(const xalloc& slot, StoredType& data);
 
             /// Get the data from the xalloced place.
-            void operator()(std::ostream &ostr) const override;
+            void operator()(std::ostream& ostr) const override;
 
         private:
             /// The xalloced data.
-            const xalloc &slot_;
+            const xalloc& slot_;
             /// Variable in which we return the xalloc data.
-            StoredType &data_;
+            StoredType& data_;
         };
 
         /** \brief Swap the data stored in the stream for a given one.
@@ -89,16 +89,16 @@ namespace misc
         {
         public:
             /// Set data_ to data.
-            swap_type(const xalloc &slot, StoredType &data);
+            swap_type(const xalloc& slot, StoredType& data);
 
             /// Swap the data from the xalloced place for a given one.
-            void operator()(std::ostream &ostr) const override;
+            void operator()(std::ostream& ostr) const override;
 
         private:
             /// The xalloced data.
-            const xalloc &slot_;
+            const xalloc& slot_;
             /// Variable in which we store the data to be swapped.
-            StoredType &data_;
+            StoredType& data_;
         };
 
         /// The index of the slot.
@@ -109,27 +109,27 @@ namespace misc
     public:
         /// Allocates the slot.
         template <typename... Args>
-        xalloc(Args &&...args);
+        xalloc(Args&&... args);
 
-        static void deallocate(std::ios_base::event type, std::ios_base &ios,
+        static void deallocate(std::ios_base::event type, std::ios_base& ios,
                                int index);
 
         /// The xalloc index.
         long int index() const;
         /// The stored data as an lvalue.
-        StoredType &operator()(std::ostream &ostr) const;
+        StoredType& operator()(std::ostream& ostr) const;
 
         /// A setter.
         /// \param data where to find the value when the setter is executed.
-        set_type set(StoredType &data) const;
+        set_type set(StoredType& data) const;
 
         /// A getter.
         /// \param data where to store the value when the getter is executed.
-        get_type get(StoredType &data) const;
+        get_type get(StoredType& data) const;
 
         /// A swapper.
         /// \param data value to exchange when the swapper is executed.
-        swap_type swap(StoredType &data) const;
+        swap_type swap(StoredType& data) const;
     };
 
 } // namespace misc

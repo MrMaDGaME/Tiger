@@ -11,7 +11,7 @@
 
 namespace parse
 {
-    TigerParser::TigerParser(const misc::file_library &lib)
+    TigerParser::TigerParser(const misc::file_library& lib)
         : scanner_(new yyFlexLexer)
         , library_(lib)
     {}
@@ -25,28 +25,28 @@ namespace parse
     TigerParser::~TigerParser() = default;
 
     /// Set the scanner traces.
-    TigerParser &TigerParser::scan_trace(bool b)
+    TigerParser& TigerParser::scan_trace(bool b)
     {
         scan_trace_p_ = b;
         return *this;
     }
 
     /// Set the parser traces.
-    TigerParser &TigerParser::parse_trace(bool b)
+    TigerParser& TigerParser::parse_trace(bool b)
     {
         parse_trace_p_ = b;
         return *this;
     }
 
     /// Enable object extensions.
-    TigerParser &TigerParser::enable_object_extensions(bool b)
+    TigerParser& TigerParser::enable_object_extensions(bool b)
     {
         enable_object_extensions_p_ = b;
         return *this;
     }
 
     /// Enable syntax extensions.
-    TigerParser &TigerParser::enable_extensions(bool b)
+    TigerParser& TigerParser::enable_extensions(bool b)
     {
         enable_extensions_p_ = b;
         return *this;
@@ -55,7 +55,7 @@ namespace parse
     /// Parse a Tiger file or string.
     ast_type TigerParser::parse_()
     {
-        std::string *fn = std::get_if<std::string>(&input_);
+        std::string* fn = std::get_if<std::string>(&input_);
 
         /* The (address of) the string behind the symbol FILENAME is
            guaranteed to remain valid even after the symbol has been
@@ -72,7 +72,7 @@ namespace parse
         if (fn == nullptr)
             // Parse a Tweast.
             in = (std::make_shared<std::stringstream>(
-                std::get<Tweast *>(input_)->input_get()));
+                std::get<Tweast*>(input_)->input_get()));
         else if (*fn == "-")
             // Parse from the standard input.
             in.reset(&std::cin, [](...) {});
@@ -103,7 +103,7 @@ namespace parse
         scanner_->scan_close_();
 
         ast_type res = ast_;
-        ast_ = static_cast<ast::Exp *>(nullptr);
+        ast_ = static_cast<ast::Exp*>(nullptr);
 
         return res;
     }
@@ -112,7 +112,7 @@ namespace parse
     | Parse a file.  |
     `---------------*/
 
-    ast_type TigerParser::parse_file(const misc::path &name)
+    ast_type TigerParser::parse_file(const misc::path& name)
     {
         if (parse_trace_p_)
             std::cerr << "Parsing file: " << name << '\n';
@@ -124,7 +124,7 @@ namespace parse
     | Parse a Tweast. |
     `----------------*/
 
-    ast_type TigerParser::parse_input(Tweast &s, bool extensions)
+    ast_type TigerParser::parse_input(Tweast& s, bool extensions)
     {
         std::swap(extensions, enable_extensions_p_);
         if (parse_trace_p_)
@@ -135,7 +135,7 @@ namespace parse
         return res;
     }
 
-    ast_type TigerParser::parse(Tweast &s)
+    ast_type TigerParser::parse(Tweast& s)
     {
         return parse_input(s, true);
     }
@@ -144,7 +144,7 @@ namespace parse
     | Parse a string.  |
     `-----------------*/
 
-    ast_type TigerParser::parse(const std::string &s)
+    ast_type TigerParser::parse(const std::string& s)
     {
         Tweast in(s);
         return parse_input(in, false);
@@ -154,8 +154,8 @@ namespace parse
     | Parse a Tiger import.  |
     `-----------------------*/
 
-    ast::ChunkList *TigerParser::parse_import(const std::string &name,
-                                              const location &loc)
+    ast::ChunkList* TigerParser::parse_import(const std::string& name,
+                                              const location& loc)
     {
         // Try to find directory containing the file to import.
         misc::path directory_path = library_.find_file(name);
@@ -187,12 +187,12 @@ namespace parse
         input_type saved_input = input_;
         location saved_location = location_;
         // Parse the imported file.
-        ast::ChunkList *res = nullptr;
+        ast::ChunkList* res = nullptr;
         try
         {
             res = parse_file(absolute_path);
         }
-        catch (const std::bad_variant_access &e)
+        catch (const std::bad_variant_access& e)
         {
             error_ << misc::error::error_type::parse << absolute_path
                    << ": imported from " << loc
@@ -208,7 +208,7 @@ namespace parse
         return res;
     }
 
-    const misc::error &TigerParser::error_get() const
+    const misc::error& TigerParser::error_get() const
     {
         return error_;
     }

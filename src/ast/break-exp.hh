@@ -16,9 +16,9 @@ namespace ast
         /** \name Ctor & dtor.
          ** \{ */
         /// Construct a BreakExp node.
-        BreakExp(const Location &location);
-        BreakExp(const BreakExp &) = delete;
-        BreakExp &operator=(const BreakExp &) = delete;
+        BreakExp(const Location& location);
+        BreakExp(const BreakExp&) = delete;
+        BreakExp& operator=(const BreakExp&) = delete;
         /// Destroy a BreakExp node.
         ~BreakExp() override;
         /** \} */
@@ -26,17 +26,17 @@ namespace ast
         /// \name Visitors entry point.
         /// \{ */
         /// Accept a const visitor \a v.
-        void accept(ConstVisitor &v) const override;
+        void accept(ConstVisitor& v) const override;
         /// Accept a non-const visitor \a v.
-        void accept(Visitor &v) override;
+        void accept(Visitor& v) override;
         /// \}
 
         /** \name Accessors.
          ** \{ */
         /// Return condition of the statement.
-        const Exp &break_str_get() const;
+        const Exp& break_str_get() const;
         /// Return condition of the statement.
-        Exp &break_str_get();
+        Exp& break_str_get();
         /** \} */
 
     protected:

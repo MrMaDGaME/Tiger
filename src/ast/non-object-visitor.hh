@@ -69,13 +69,13 @@ namespace ast
         /// The methods should not be used, since this visitor is for the
         /// non-object flavor of the language.
         /// \{
-        void operator()(const_t<ClassTy> &e) override;
+        void operator()(const_t<ClassTy>& e) override;
 
-        void operator()(const_t<MethodChunk> &e) override;
-        void operator()(const_t<MethodDec> &e) override;
+        void operator()(const_t<MethodChunk>& e) override;
+        void operator()(const_t<MethodDec>& e) override;
 
-        void operator()(const_t<MethodCallExp> &e) override;
-        void operator()(const_t<ObjectExp> &e) override;
+        void operator()(const_t<MethodCallExp>& e) override;
+        void operator()(const_t<ObjectExp>& e) override;
         /// \}
     };
 

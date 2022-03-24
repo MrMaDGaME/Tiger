@@ -18,9 +18,9 @@ namespace ast
         /** \name Ctor & dtor.
          ** \{ */
         /// Construct a Field node.
-        Field(const Location &location, misc::symbol name, NameTy *type_name);
-        Field(const Field &) = delete;
-        Field &operator=(const Field &) = delete;
+        Field(const Location& location, misc::symbol name, NameTy* type_name);
+        Field(const Field&) = delete;
+        Field& operator=(const Field&) = delete;
         /// Destroy a Field node.
         ~Field() override;
         /** \} */
@@ -28,9 +28,9 @@ namespace ast
         /// \name Visitors entry point.
         /// \{ */
         /// Accept a const visitor \a v.
-        void accept(ConstVisitor &v) const override;
+        void accept(ConstVisitor& v) const override;
         /// Accept a non-const visitor \a v.
-        void accept(Visitor &v) override;
+        void accept(Visitor& v) override;
         /// \}
 
         /** \name Accessors.
@@ -40,16 +40,16 @@ namespace ast
         /// Set the field name.
         void name_set(misc::symbol);
         /// Return the field type name.
-        const NameTy &type_name_get() const;
+        const NameTy& type_name_get() const;
         /// Return the field type name.
-        NameTy &type_name_get();
+        NameTy& type_name_get();
         /** \} */
 
     protected:
         /// The field name.
         misc::symbol name_;
         /// The field type name.
-        NameTy *type_name_;
+        NameTy* type_name_;
     };
 } // namespace ast
 #include <ast/field.hxx>

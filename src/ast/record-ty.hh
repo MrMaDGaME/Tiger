@@ -17,9 +17,9 @@ namespace ast
         /** \name Ctor & dtor.
          ** \{ */
         /// Construct a RecordTy node.
-        RecordTy(const Location &location, fields_type *fields);
-        RecordTy(const RecordTy &) = delete;
-        RecordTy &operator=(const RecordTy &) = delete;
+        RecordTy(const Location& location, fields_type* fields);
+        RecordTy(const RecordTy&) = delete;
+        RecordTy& operator=(const RecordTy&) = delete;
         /// Destroy a RecordTy node.
         ~RecordTy() override;
         /** \} */
@@ -27,21 +27,21 @@ namespace ast
         /// \name Visitors entry point.
         /// \{ */
         /// Accept a const visitor \a v.
-        void accept(ConstVisitor &v) const override;
+        void accept(ConstVisitor& v) const override;
         /// Accept a non-const visitor \a v.
-        void accept(Visitor &v) override;
+        void accept(Visitor& v) override;
         /// \}
 
         /** \name Accessors.
          ** \{ */
         /// Return instructions executed in the statement.
-        const fields_type &fields_get() const;
+        const fields_type& fields_get() const;
         /// Return instructions executed in the statement.
-        fields_type &fields_get();
+        fields_type& fields_get();
         /** \} */
 
     protected:
-        fields_type *fields_;
+        fields_type* fields_;
     };
 } // namespace ast
 #include <ast/record-ty.hxx>

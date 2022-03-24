@@ -16,9 +16,9 @@ namespace ast
         /** \name Ctor & dtor.
          ** \{ */
         /// Construct a Ty node.
-        explicit Ty(const Location &location);
-        Ty(const Ty &) = delete;
-        Ty &operator=(const Ty &) = delete;
+        explicit Ty(const Location& location);
+        Ty(const Ty&) = delete;
+        Ty& operator=(const Ty&) = delete;
         /// Destroy a Ty node.
         /** \} */
     };

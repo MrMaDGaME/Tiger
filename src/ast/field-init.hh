@@ -18,9 +18,9 @@ namespace ast
         /** \name Ctor & dtor.
          ** \{ */
         /// Construct a FieldInit node.
-        FieldInit(const Location &location, misc::symbol name, Exp *init);
-        FieldInit(const FieldInit &) = delete;
-        FieldInit &operator=(const FieldInit &) = delete;
+        FieldInit(const Location& location, misc::symbol name, Exp* init);
+        FieldInit(const FieldInit&) = delete;
+        FieldInit& operator=(const FieldInit&) = delete;
         /// Destroy a FieldInit node.
         ~FieldInit() override;
         /** \} */
@@ -28,9 +28,9 @@ namespace ast
         /// \name Visitors entry point.
         /// \{ */
         /// Accept a const visitor \a v.
-        void accept(ConstVisitor &v) const override;
+        void accept(ConstVisitor& v) const override;
         /// Accept a non-const visitor \a v.
-        void accept(Visitor &v) override;
+        void accept(Visitor& v) override;
         /// \}
 
         /** \name Accessors.
@@ -40,16 +40,16 @@ namespace ast
         /// Set name of the field.
         void name_set(misc::symbol);
         /// Return initial value of the field.
-        const Exp &init_get() const;
+        const Exp& init_get() const;
         /// Return initial value of the field.
-        Exp &init_get();
+        Exp& init_get();
         /** \} */
 
     protected:
         /// Name of the field.
         misc::symbol name_;
         /// Initial value of the field.
-        Exp *init_;
+        Exp* init_;
     };
 } // namespace ast
 #include <ast/field-init.hxx>

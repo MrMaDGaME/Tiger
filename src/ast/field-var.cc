@@ -8,7 +8,7 @@
 
 namespace ast
 {
-    FieldVar::FieldVar(const Location &location, Var *var, misc::symbol name)
+    FieldVar::FieldVar(const Location& location, Var* var, misc::symbol name)
         : Var(location)
         , var_(var)
         , name_(name)
@@ -19,12 +19,12 @@ namespace ast
         delete var_;
     }
 
-    void FieldVar::accept(ConstVisitor &v) const
+    void FieldVar::accept(ConstVisitor& v) const
     {
         v(*this);
     }
 
-    void FieldVar::accept(Visitor &v)
+    void FieldVar::accept(Visitor& v)
     {
         v(*this);
     }

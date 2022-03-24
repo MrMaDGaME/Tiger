@@ -65,13 +65,13 @@ namespace ast
 
         /// \name Object-related visits.
         /// \{
-        void operator()(const_t<ClassTy> &e) override;
+        void operator()(const_t<ClassTy>& e) override;
 
-        void operator()(const_t<MethodChunk> &e) override;
-        void operator()(const_t<MethodDec> &e) override;
+        void operator()(const_t<MethodChunk>& e) override;
+        void operator()(const_t<MethodDec>& e) override;
 
-        void operator()(const_t<MethodCallExp> &e) override;
-        void operator()(const_t<ObjectExp> &e) override;
+        void operator()(const_t<MethodCallExp>& e) override;
+        void operator()(const_t<ObjectExp>& e) override;
         /// \}
     };
 

@@ -17,9 +17,9 @@ namespace ast
         /** \name Ctor & dtor.
          ** \{ */
         /// Construct a FieldVar node.
-        FieldVar(const Location &location, Var *var, misc::symbol name);
-        FieldVar(const FieldVar &) = delete;
-        FieldVar &operator=(const FieldVar &) = delete;
+        FieldVar(const Location& location, Var* var, misc::symbol name);
+        FieldVar(const FieldVar&) = delete;
+        FieldVar& operator=(const FieldVar&) = delete;
         /// Destroy a FieldVar node.
         ~FieldVar() override;
         /** \} */
@@ -27,17 +27,17 @@ namespace ast
         /// \name Visitors entry point.
         /// \{ */
         /// Accept a const visitor \a v.
-        void accept(ConstVisitor &v) const override;
+        void accept(ConstVisitor& v) const override;
         /// Accept a non-const visitor \a v.
-        void accept(Visitor &v) override;
+        void accept(Visitor& v) override;
         /// \}
 
         /** \name Accessors.
          ** \{ */
         /// Return declarations of the statement.
-        const Var &var_get() const;
+        const Var& var_get() const;
         /// Return declarations of the statement.
-        Var &var_get();
+        Var& var_get();
         /// Return instructions executed in the statement.
         const misc::symbol name_get() const;
         /// Return instructions executed in the statement.
@@ -46,7 +46,7 @@ namespace ast
 
     protected:
         /// High bound of the loop.
-        Var *var_;
+        Var* var_;
         /// Instructions executed in the loop.
         misc::symbol name_;
     };

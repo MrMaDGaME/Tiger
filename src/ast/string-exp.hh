@@ -17,18 +17,18 @@ namespace ast
         /** \name Ctor & dtor.
          ** \{ */
         /// Construct an StringExp node.
-        StringExp(const Location &location, std::string value);
-        StringExp(const StringExp &) = delete;
-        StringExp &operator=(const StringExp &) = delete;
+        StringExp(const Location& location, std::string value);
+        StringExp(const StringExp&) = delete;
+        StringExp& operator=(const StringExp&) = delete;
         /// Destroy an StringExp node.
         /** \} */
 
         /// \name Visitors entry point.
         /// \{ */
         /// Accept a const visitor \a v.
-        void accept(ConstVisitor &v) const override;
+        void accept(ConstVisitor& v) const override;
         /// Accept a non-const visitor \a v.
-        void accept(Visitor &v) override;
+        void accept(Visitor& v) override;
         /// \}
 
         /** \name Accessors.

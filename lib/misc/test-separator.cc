@@ -31,7 +31,7 @@ int main()
 
     {
         int p = 51;
-        std::vector<int *> v(4);
+        std::vector<int*> v(4);
         ranges::fill(v, &p);
 
         std::ostringstream s;

@@ -29,20 +29,20 @@ namespace object
         // Visiting /Exp/.  //
         // ---------------- //
 
-        void operator()(ast::ForExp &e) override;
+        void operator()(ast::ForExp& e) override;
 
         /// Visit a Variable instantiation.
-        void operator()(ast::SimpleVar &e) override;
+        void operator()(ast::SimpleVar& e) override;
 
         // ---------------- //
         // Visiting /Ty/.  //
         // ---------------- //
 
         /// Visit a type name.
-        void operator()(ast::NameTy &e) override;
+        void operator()(ast::NameTy& e) override;
 
         /// Visit a class definition.
-        void operator()(ast::ClassTy &e) override;
+        void operator()(ast::ClassTy& e) override;
 
         // ---------------- //
         // Visiting /Dec/.  //
@@ -51,24 +51,24 @@ namespace object
         /// Check a set of definitions: unique names, browse headers, then
         /// bodies.
         template <class D>
-        void chunk_visit(ast::Chunk<D> &e);
+        void chunk_visit(ast::Chunk<D>& e);
 
         /// Check a Function declaration header.
         template <class D>
-        void visit_dec_header(D &e);
+        void visit_dec_header(D& e);
 
         /// Check a Function declaration body.
         template <class D>
-        void visit_dec_body(D &e);
+        void visit_dec_body(D& e);
 
         // Visit a variable declaration.
-        void operator()(ast::VarDec &) override;
+        void operator()(ast::VarDec&) override;
 
         /// Visit a chunk of Function declarations.
-        void operator()(ast::FunctionChunk &) override;
+        void operator()(ast::FunctionChunk&) override;
 
         /// No longer used.
-        void operator()(ast::MethodDec &) override;
+        void operator()(ast::MethodDec&) override;
 
     private:
         /// Are we (immediately) within a class definition?

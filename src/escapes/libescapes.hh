@@ -12,6 +12,6 @@
 namespace escapes
 {
     /// Compute the escaping variables.
-    void escapes_compute(ast::Ast &tree);
+    void escapes_compute(ast::Ast& tree);
 
 } // namespace escapes

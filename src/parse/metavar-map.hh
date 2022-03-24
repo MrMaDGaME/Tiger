@@ -16,7 +16,7 @@ namespace parse
     {
     public:
         /// Build a map of metavariables of kind \a name.
-        MetavarMap(const std::string &name);
+        MetavarMap(const std::string& name);
         virtual ~MetavarMap();
 
         /// Generate a (concrete syntax) Tiger statement for metavariable
@@ -25,14 +25,14 @@ namespace parse
 
     protected:
         /// Append a metavariable to the map.
-        virtual std::string append_(unsigned &key, Data *data);
+        virtual std::string append_(unsigned& key, Data* data);
         /// Extract a metavariable.
-        virtual Data *take_(unsigned key);
+        virtual Data* take_(unsigned key);
 
         /// Name of the kind of variable.
         const std::string name_;
         /// Metavariables.
-        using map_type = misc::map<unsigned, Data *>;
+        using map_type = misc::map<unsigned, Data*>;
         map_type map_;
     };
 

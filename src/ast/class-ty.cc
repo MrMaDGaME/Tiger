@@ -8,7 +8,7 @@
 
 namespace ast
 {
-    ClassTy::ClassTy(const Location &location, NameTy *super, ChunkList *chunks)
+    ClassTy::ClassTy(const Location& location, NameTy* super, ChunkList* chunks)
         : Ty(location)
         , super_(super)
         , chunks_(chunks)
@@ -19,12 +19,12 @@ namespace ast
         delete chunks_;
     }
 
-    void ClassTy::accept(ConstVisitor &v) const
+    void ClassTy::accept(ConstVisitor& v) const
     {
         v(*this);
     }
 
-    void ClassTy::accept(Visitor &v)
+    void ClassTy::accept(Visitor& v)
     {
         v(*this);
     }

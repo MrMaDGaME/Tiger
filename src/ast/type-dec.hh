@@ -17,9 +17,9 @@ namespace ast
         /** \name Ctor & dtor.
          ** \{ */
         /// Construct a TypeDec node.
-        TypeDec(const Location &location, misc::symbol name, Ty *ty);
-        TypeDec(const TypeDec &) = delete;
-        TypeDec &operator=(const TypeDec &) = delete;
+        TypeDec(const Location& location, misc::symbol name, Ty* ty);
+        TypeDec(const TypeDec&) = delete;
+        TypeDec& operator=(const TypeDec&) = delete;
         /// Destroy a TypeDec node.
         ~TypeDec() override;
         /** \} */
@@ -27,22 +27,22 @@ namespace ast
         /// \name Visitors entry point.
         /// \{ */
         /// Accept a const visitor \a v.
-        void accept(ConstVisitor &v) const override;
+        void accept(ConstVisitor& v) const override;
         /// Accept a non-const visitor \a v.
-        void accept(Visitor &v) override;
+        void accept(Visitor& v) override;
         /// \}
 
         /** \name Accessors.
          ** \{ */
         /// Return type definition.
-        const Ty &ty_get() const;
+        const Ty& ty_get() const;
         /// Return type definition.
-        Ty &ty_get();
+        Ty& ty_get();
         /** \} */
 
     protected:
         /// Type definition.
-        Ty *ty_;
+        Ty* ty_;
     };
 } // namespace ast
 #include <ast/type-dec.hxx>

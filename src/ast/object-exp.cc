@@ -8,7 +8,7 @@
 
 namespace ast
 {
-    ObjectExp::ObjectExp(const Location &location, NameTy *type_name)
+    ObjectExp::ObjectExp(const Location& location, NameTy* type_name)
         : Exp(location)
         , type_name_(type_name)
     {}
@@ -18,12 +18,12 @@ namespace ast
         delete type_name_;
     }
 
-    void ObjectExp::accept(ConstVisitor &v) const
+    void ObjectExp::accept(ConstVisitor& v) const
     {
         v(*this);
     }
 
-    void ObjectExp::accept(Visitor &v)
+    void ObjectExp::accept(Visitor& v)
     {
         v(*this);
     }

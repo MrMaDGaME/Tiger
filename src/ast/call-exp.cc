@@ -9,8 +9,8 @@
 
 namespace ast
 {
-    CallExp::CallExp(const Location &location, misc::symbol name,
-                     exps_type *args)
+    CallExp::CallExp(const Location& location, misc::symbol name,
+                     exps_type* args)
         : Exp(location)
         , name_(name)
         , args_(args)
@@ -21,12 +21,12 @@ namespace ast
         delete args_;
     }
 
-    void CallExp::accept(ConstVisitor &v) const
+    void CallExp::accept(ConstVisitor& v) const
     {
         v(*this);
     }
 
-    void CallExp::accept(Visitor &v)
+    void CallExp::accept(Visitor& v)
     {
         v(*this);
     }

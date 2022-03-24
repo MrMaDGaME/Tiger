@@ -8,8 +8,8 @@
 
 namespace ast
 {
-    FunctionDec::FunctionDec(const Location &location, misc::symbol name,
-                             VarChunk *formals, NameTy *result, Exp *body)
+    FunctionDec::FunctionDec(const Location& location, misc::symbol name,
+                             VarChunk* formals, NameTy* result, Exp* body)
         : Dec(location, name)
         , formals_(formals)
         , result_(result)
@@ -23,12 +23,12 @@ namespace ast
         delete body_;
     }
 
-    void FunctionDec::accept(ConstVisitor &v) const
+    void FunctionDec::accept(ConstVisitor& v) const
     {
         v(*this);
     }
 
-    void FunctionDec::accept(Visitor &v)
+    void FunctionDec::accept(Visitor& v)
     {
         v(*this);
     }

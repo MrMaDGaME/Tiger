@@ -25,10 +25,10 @@ namespace ast
         /** \name Ctor & dtor.
          ** \{ */
         /// Construct a MethodCallExp node.
-        MethodCallExp(const Location &location, misc::symbol name,
-                      exps_type *args, Var *object);
-        MethodCallExp(const MethodCallExp &) = delete;
-        MethodCallExp &operator=(const MethodCallExp &) = delete;
+        MethodCallExp(const Location& location, misc::symbol name,
+                      exps_type* args, Var* object);
+        MethodCallExp(const MethodCallExp&) = delete;
+        MethodCallExp& operator=(const MethodCallExp&) = delete;
         /// Destroy a MethodCallExp node.
         ~MethodCallExp() override;
         /** \} */
@@ -36,21 +36,21 @@ namespace ast
         /// \name Visitors entry point.
         /// \{ */
         /// Accept a const visitor \a v.
-        void accept(ConstVisitor &v) const override;
+        void accept(ConstVisitor& v) const override;
         /// Accept a non-const visitor \a v.
-        void accept(Visitor &v) override;
+        void accept(Visitor& v) override;
         /// \}
 
         /** \name Accessors.
          ** \{ */
         /// Return instructions executed in the statement.
-        const Var &object_get() const;
+        const Var& object_get() const;
         /// Return instructions executed in the statement.
-        Var &object_get();
+        Var& object_get();
         /** \} */
 
     protected:
-        Var *object_;
+        Var* object_;
     };
 } // namespace ast
 #include <ast/method-call-exp.hxx>

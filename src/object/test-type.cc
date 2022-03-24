@@ -8,7 +8,7 @@
 #include <object/libobject.hh>
 #include <parse/libparse.hh>
 
-const char *program_name = "test-type";
+const char* program_name = "test-type";
 
 int main()
 {}

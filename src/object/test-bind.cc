@@ -8,12 +8,12 @@
 #include <object/libobject.hh>
 #include <parse/libparse.hh>
 
-const char *program_name = "test-bind";
+const char* program_name = "test-bind";
 
 // Return true on correct binding.
-inline static bool bound(const std::string &s)
+inline static bool bound(const std::string& s)
 {
-    ast::ChunkList *d = parse::parse_unit(s, true);
+    ast::ChunkList* d = parse::parse_unit(s, true);
     misc::error e = object::bind(*d);
     std::cout << *d << '\n';
     if (e)

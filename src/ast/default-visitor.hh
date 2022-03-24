@@ -57,33 +57,33 @@ namespace ast
            This behavior seems to come from the mix between diamond
            inheritance and templates.  We redefine the following operator
            (delegating to GenVisitor's operator()) as a workaround.  */
-        void operator()(const_t<Ast> &e) override;
+        void operator()(const_t<Ast>& e) override;
 
         /** \name Visit Variable related nodes.
          ** \{ */
-        void operator()(const_t<SimpleVar> &e) override;
-        void operator()(const_t<FieldVar> &e) override;
-        void operator()(const_t<SubscriptVar> &e) override;
+        void operator()(const_t<SimpleVar>& e) override;
+        void operator()(const_t<FieldVar>& e) override;
+        void operator()(const_t<SubscriptVar>& e) override;
         /** \} */
 
         /** \name Visit Expression related nodes.
          ** \{ */
-        void operator()(const_t<NilExp> &e) override;
-        void operator()(const_t<IntExp> &e) override;
-        void operator()(const_t<StringExp> &e) override;
-        void operator()(const_t<CallExp> &e) override;
-        void operator()(const_t<OpExp> &e) override;
-        void operator()(const_t<RecordExp> &e) override;
-        void operator()(const_t<SeqExp> &e) override;
-        void operator()(const_t<AssignExp> &e) override;
-        void operator()(const_t<IfExp> &e) override;
-        void operator()(const_t<WhileExp> &e) override;
-        void operator()(const_t<ForExp> &e) override;
-        void operator()(const_t<BreakExp> &) override;
-        void operator()(const_t<LetExp> &e) override;
-        void operator()(const_t<ArrayExp> &e) override;
-        void operator()(const_t<CastExp> &e) override;
-        void operator()(const_t<FieldInit> &e) override;
+        void operator()(const_t<NilExp>& e) override;
+        void operator()(const_t<IntExp>& e) override;
+        void operator()(const_t<StringExp>& e) override;
+        void operator()(const_t<CallExp>& e) override;
+        void operator()(const_t<OpExp>& e) override;
+        void operator()(const_t<RecordExp>& e) override;
+        void operator()(const_t<SeqExp>& e) override;
+        void operator()(const_t<AssignExp>& e) override;
+        void operator()(const_t<IfExp>& e) override;
+        void operator()(const_t<WhileExp>& e) override;
+        void operator()(const_t<ForExp>& e) override;
+        void operator()(const_t<BreakExp>&) override;
+        void operator()(const_t<LetExp>& e) override;
+        void operator()(const_t<ArrayExp>& e) override;
+        void operator()(const_t<CastExp>& e) override;
+        void operator()(const_t<FieldInit>& e) override;
         /** \} */
 
         /** \name Visit Declaration related nodes.
@@ -99,10 +99,10 @@ namespace ast
          ** \{ */
 
         /// Visit a list of function, type and/or variables declarations.
-        void operator()(const_t<ChunkList> &e) override;
+        void operator()(const_t<ChunkList>& e) override;
 
         /// Visit a ChunkInterface chunks.
-        virtual void operator()(const_t<ChunkInterface> &e);
+        virtual void operator()(const_t<ChunkInterface>& e);
 
         template <typename ChunkType>
         /** \brief Visit a chunk (i.e., a list of Function, Var, and Type
@@ -110,31 +110,31 @@ namespace ast
          **
          ** It is exactly the same in the three cases, so the code is
          ** factored via a template method. */
-        void chunk_visit(const_t<ChunkType> &e);
+        void chunk_visit(const_t<ChunkType>& e);
 
         /// Visit Var declarations.
-        void operator()(const_t<VarChunk> &e) override;
-        void operator()(const_t<VarDec> &e) override;
+        void operator()(const_t<VarChunk>& e) override;
+        void operator()(const_t<VarDec>& e) override;
 
         /// Visit Function declarations.
-        void operator()(const_t<FunctionChunk> &e) override;
-        void operator()(const_t<FunctionDec> &e) override;
+        void operator()(const_t<FunctionChunk>& e) override;
+        void operator()(const_t<FunctionDec>& e) override;
 
         /// Visit Type declarations.
-        void operator()(const_t<TypeChunk> &e) override;
-        void operator()(const_t<TypeDec> &e) override;
+        void operator()(const_t<TypeChunk>& e) override;
+        void operator()(const_t<TypeDec>& e) override;
 
         /** \} */
 
         /** \name Visit Type related nodes.
          ** \{ */
-        void operator()(const_t<NameTy> &e) override;
-        void operator()(const_t<RecordTy> &e) override;
-        void operator()(const_t<ArrayTy> &e) override;
+        void operator()(const_t<NameTy>& e) override;
+        void operator()(const_t<RecordTy>& e) override;
+        void operator()(const_t<ArrayTy>& e) override;
         /** \} */
 
         /** \name Visit Field related nodes. */
-        void operator()(const_t<Field> &e) override;
+        void operator()(const_t<Field>& e) override;
     };
 
     /// Shorthand for a const visitor.

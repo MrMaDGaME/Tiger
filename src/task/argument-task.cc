@@ -8,8 +8,8 @@
 
 namespace task
 {
-    ArgumentTask::ArgumentTask(const char *name, const char *module_name,
-                               const char *desc, const char *argname,
+    ArgumentTask::ArgumentTask(const char* name, const char* module_name,
+                               const char* desc, const char* argname,
                                std::string deps)
         : Task(name, module_name, desc, deps)
         , argname_(argname)
@@ -18,17 +18,17 @@ namespace task
         TaskRegister::instance().register_task(*this);
     }
 
-    const std::string &ArgumentTask::arg_get() const
+    const std::string& ArgumentTask::arg_get() const
     {
         return arg_;
     }
 
-    void ArgumentTask::arg_set(const std::string &arg) const
+    void ArgumentTask::arg_set(const std::string& arg) const
     {
         arg_ = arg;
     }
 
-    const char *ArgumentTask::argname_get() const
+    const char* ArgumentTask::argname_get() const
     {
         return argname_;
     }

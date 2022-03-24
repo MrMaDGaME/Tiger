@@ -8,7 +8,7 @@
 
 namespace ast
 {
-    WhileExp::WhileExp(const Location &location, Exp *test, Exp *body)
+    WhileExp::WhileExp(const Location& location, Exp* test, Exp* body)
         : Exp(location)
         , test_(test)
         , body_(body)
@@ -20,12 +20,12 @@ namespace ast
         delete body_;
     }
 
-    void WhileExp::accept(ConstVisitor &v) const
+    void WhileExp::accept(ConstVisitor& v) const
     {
         v(*this);
     }
 
-    void WhileExp::accept(Visitor &v)
+    void WhileExp::accept(Visitor& v)
     {
         v(*this);
     }

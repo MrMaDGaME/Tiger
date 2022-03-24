@@ -24,8 +24,8 @@ namespace task
          ** \{ */
     public:
         /// Construct and register an ArgumentTask.
-        ArgumentTask(const char *name, const char *module_name,
-                     const char *desc, const char *argname,
+        ArgumentTask(const char* name, const char* module_name,
+                     const char* desc, const char* argname,
                      std::string deps = "");
 
         /** \} */
@@ -34,13 +34,13 @@ namespace task
          ** \{ */
     public:
         /// Access to 'arg'.
-        const std::string &arg_get() const;
+        const std::string& arg_get() const;
 
         /// Access to `arg'.
-        virtual void arg_set(const std::string &arg) const;
+        virtual void arg_set(const std::string& arg) const;
 
         /// Access to `argname'.
-        const char *argname_get() const;
+        const char* argname_get() const;
 
         /** \} */
 
@@ -49,7 +49,7 @@ namespace task
         mutable std::string arg_;
 
         /// Argument name to be displayed when printing.
-        const char *argname_;
+        const char* argname_;
     };
 
 } // namespace task

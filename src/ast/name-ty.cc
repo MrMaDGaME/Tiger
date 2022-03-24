@@ -8,17 +8,17 @@
 
 namespace ast
 {
-    NameTy::NameTy(const Location &location, misc::symbol name)
+    NameTy::NameTy(const Location& location, misc::symbol name)
         : Ty(location)
         , name_(name)
     {}
 
-    void NameTy::accept(ConstVisitor &v) const
+    void NameTy::accept(ConstVisitor& v) const
     {
         v(*this);
     }
 
-    void NameTy::accept(Visitor &v)
+    void NameTy::accept(Visitor& v)
     {
         v(*this);
     }

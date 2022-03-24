@@ -27,9 +27,9 @@ namespace misc
         /** \brief Construct a new reference to the value pointed to by \a
          *other.
          ** The new reference shares the property of the object with \a other.
-        */
+         */
         template <typename U>
-        ref(const ref<U> &other);
+        ref(const ref<U>& other);
 
         /** \brief Copy constructor.
          **
@@ -38,24 +38,24 @@ namespace misc
          ** signature.  Otherwise, the compiler will provide a default
          ** implementation, which is of course wrong.  Note that the
          ** same applies for the assignment operator. */
-        ref(const ref<T> &other);
+        ref(const ref<T>& other);
 
         /** \brief Construct a counted reference to a newly allocated object.
          ** The new reference takes the property of the object pointed to
          ** by \a p.  If \a p is null, then the reference is invalid and
          ** must be \c reset() before use. */
-        ref(T *p = nullptr);
+        ref(T* p = nullptr);
 
         /// \name Equality operators.
         /// \{
 
         /** \brief Reference comparison.
          ** Returns true if this points to \a p. */
-        bool operator==(const T *p) const;
+        bool operator==(const T* p) const;
 
         /** \brief Reference comparison.
          ** Returns false if this points to \a p. */
-        bool operator!=(const T *p) const;
+        bool operator!=(const T* p) const;
 
         /// \}
 
@@ -63,7 +63,7 @@ namespace misc
         /// \{
 
         /** \brief Use default copy-assignment operator. */
-        ref<T> &operator=(const ref<T> &r) = default;
+        ref<T>& operator=(const ref<T>& r) = default;
 
         /// \}
 

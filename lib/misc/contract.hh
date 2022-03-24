@@ -13,10 +13,10 @@
 #    endif
 #endif
 
-[[noreturn]] void __FailedCondition(const char *condType, const char *condText,
-                                    const char *fileName, int fileLine);
+[[noreturn]] void __FailedCondition(const char* condType, const char* condText,
+                                    const char* fileName, int fileLine);
 
-[[noreturn]] void __Terminate(const char *, int, const char *);
+[[noreturn]] void __Terminate(const char*, int, const char*);
 
 #define die(Reason) __Terminate(__FILE__, __LINE__, Reason)
 #define unreachable() die("unreachable code reached")

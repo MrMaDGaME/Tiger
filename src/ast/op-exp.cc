@@ -8,8 +8,8 @@
 
 namespace ast
 {
-    OpExp::OpExp(const Location &location, Exp *left, OpExp::Oper oper,
-                 Exp *right)
+    OpExp::OpExp(const Location& location, Exp* left, OpExp::Oper oper,
+                 Exp* right)
         : Exp(location)
         , left_(left)
         , oper_(oper)
@@ -22,12 +22,12 @@ namespace ast
         delete right_;
     }
 
-    void OpExp::accept(ConstVisitor &v) const
+    void OpExp::accept(ConstVisitor& v) const
     {
         v(*this);
     }
 
-    void OpExp::accept(Visitor &v)
+    void OpExp::accept(Visitor& v)
     {
         v(*this);
     }

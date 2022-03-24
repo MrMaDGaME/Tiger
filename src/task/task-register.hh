@@ -25,8 +25,8 @@ namespace task
     class TaskRegister
     {
         // Make it non-copyable.
-        TaskRegister(const TaskRegister &) = delete;
-        TaskRegister &operator=(const TaskRegister &) = delete;
+        TaskRegister(const TaskRegister&) = delete;
+        TaskRegister& operator=(const TaskRegister&) = delete;
 
         /// \name Ctor & dtor.
     private:
@@ -35,15 +35,15 @@ namespace task
 
     public:
         /// Access to the unique TaskRegister.
-        static TaskRegister &instance();
+        static TaskRegister& instance();
 
         /** \name Tasks registering.
          ** \{ */
         /// Register task \a task.
-        void register_task(const SimpleTask &task);
-        void register_task(const ArgumentTask &task);
+        void register_task(const SimpleTask& task);
+        void register_task(const ArgumentTask& task);
         /// Register the task \a task_name for execution.
-        void enable_task(const std::string &task_name);
+        void enable_task(const std::string& task_name);
 
         /// Return the number of tasks to execute.
         int nb_of_task_to_execute_get();
@@ -56,22 +56,22 @@ namespace task
          ** Resolve dependencies on tasks registered for execution.
          ** Make a depth first search of implicit tasks graph,
          ** check cycles and build an ordered list of tasks. */
-        void resolve_dependencies(const Task &task);
+        void resolve_dependencies(const Task& task);
 
     public:
         /** \brief Parse \a argv and determine which tasks to execute.
          **
          ** Use boost::program_options. */
-        char *parse_arg(int argc, char *argv[]);
+        char* parse_arg(int argc, char* argv[]);
 
         /** \name Display TaskRegister content.
          ** \{ */
         /// Display registered Tasks.
-        std::ostream &print_task_list(std::ostream &ostr);
+        std::ostream& print_task_list(std::ostream& ostr);
         /// Display task graph.
-        std::ostream &print_task_graph(std::ostream &ostr);
+        std::ostream& print_task_graph(std::ostream& ostr);
         /// Display registered Tasks execution order.
-        std::ostream &print_task_order(std::ostream &ostr);
+        std::ostream& print_task_order(std::ostream& ostr);
 
         /** \name Using registered Tasks.
          ** \{ */
@@ -82,22 +82,22 @@ namespace task
         /** \name Time management.
          ** \{ */
         /// Access to the tasks timer.
-        const misc::timer &timer_get() const;
+        const misc::timer& timer_get() const;
         /** \} */
 
         /// Ordered vector of tasks.
-        using tasks_list_type = std::vector<const Task *>;
+        using tasks_list_type = std::vector<const Task*>;
 
     private:
         /// Associate a task name to a task.
-        using tasks_by_name_type = std::map<const std::string, Task const *>;
+        using tasks_by_name_type = std::map<const std::string, Task const*>;
         /// Associate a module name to a task module.
         using indexed_module_type =
             std::map<const std::string,
                      boost::program_options::options_description>;
 
         // Common code between the two overload of `register_task'.
-        indexed_module_type::iterator register_task_(const Task &task);
+        indexed_module_type::iterator register_task_(const Task& task);
 
         /// 'string to task' map.
         tasks_by_name_type task_list_;

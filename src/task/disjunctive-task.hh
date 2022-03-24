@@ -14,12 +14,12 @@ namespace task
     class DisjunctiveTask : public SimpleTask
     {
     public:
-        DisjunctiveTask(const char *module_name, const char *desc,
-                        const char *name, std::string deps);
+        DisjunctiveTask(const char* module_name, const char* desc,
+                        const char* name, std::string deps);
 
         void execute() const override;
         deps_type
-        resolve_dependencies(tasks_list_type &active_tasks) const override;
+        resolve_dependencies(tasks_list_type& active_tasks) const override;
     };
 
 } // namespace task

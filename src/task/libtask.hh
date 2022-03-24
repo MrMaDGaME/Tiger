@@ -89,7 +89,7 @@ namespace task
 #else // !DEFINE_TASKS
 
 /// Define the current Task group name.
-#    define TASK_GROUP(Name) extern const char *group_name
+#    define TASK_GROUP(Name) extern const char* group_name
 /// Instantiate a FunctionTask.
 #    define TASK_DECLARE(Name, Help, Routine, Deps) extern void(Routine)()
 /// Instantiate a BooleanTask.

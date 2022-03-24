@@ -14,7 +14,7 @@
 #include <parse/location.hh>
 #include <parse/tweast.hh>
 
-const char *program_name = "test-tweast";
+const char* program_name = "test-tweast";
 
 int main()
 {
