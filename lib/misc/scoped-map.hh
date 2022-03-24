@@ -28,10 +28,10 @@ namespace misc
         std::ostream& dump(std::ostream& ostr) const;
         void scope_begin();
         void scope_end();
+        bool is_unique(const Key& key);
 
     protected:
-        std::map<Key, Data> map_;
-        std::vector<std::vector<Key>> scope_;
+        std::vector<std::map<Key, Data>> scope_;
     };
 
     template <typename Key, typename Data>
