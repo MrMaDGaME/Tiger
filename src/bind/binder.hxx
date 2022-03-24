@@ -56,13 +56,16 @@ namespace bind
 
     template <class D>
     void Binder::visit_dec_header(D& e){
-        if (D == ast::Dec)
-        (*this)(e);
+        scope_begin();
+        if (constexpr (std::is_same<ast::Dec, D>::value))
+            (*this)(e);
     }
 
     template <class D>
     void Binder::visit_dec_body(D& e){
-        // FIXME
+        if (constexpr !(std::is_same<ast::Dec, D>::value))
+            (*this)(e);
+        scope_end();
     }
 
 } // namespace bind

@@ -149,3 +149,10 @@ namespace bind
     }
 
 } // namespace bind
+
+/*  卐   卐卐卐卐
+ *  卐   卐
+ *  卐卐卐卐卐卐卐
+ *       卐   卐
+ *  卐卐卐卐   卐
+ */
