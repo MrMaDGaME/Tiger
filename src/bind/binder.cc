@@ -23,9 +23,11 @@ namespace bind
 
     void Binder::check_main(const ast::FunctionDec& e)
     {
-        if (e.name_get() != "_main")
+        if (e.name_get() != "_main") {
             error_ << misc::error::error_type::bind << e.location_get() << " : "
                    << "cannot find reference to _main" << std::endl;
+            error_.exit_on_error();
+        }
         if (!function_list_.is_unique("_main")){
             error_ << misc::error::error_type::bind << e.location_get() << " : "
                    << "redefinition of _main" << std::endl;
