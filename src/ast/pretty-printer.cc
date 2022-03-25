@@ -117,6 +117,8 @@ namespace ast
     void PrettyPrinter::operator()(const BreakExp& e)
     {
         ostr_ << "break"; // e.break_str_get();
+        if (bindings_display(ostr_))
+            ostr_ << " /* " << &e<< " */";
     }
 
     // NilExp printer
@@ -138,8 +140,12 @@ namespace ast
         ostr_ << "for ";
         if (bindings_display(ostr_))
             ostr_ << "/* " << &e << " */ ";
-        ostr_ << e.vardec_get().name_get()
-              << " := " << *(e.vardec_get().init_get()) << " to " << e.hi_get()
+
+        ostr_ << e.vardec_get().name_get();
+        if (bindings_display(ostr_))
+            ostr_ << " /* " << &e.vardec_get() << " */";
+
+        ostr_ << " := " << *(e.vardec_get().init_get()) << " to " << e.hi_get()
               << " do " << misc::incendl << e.body_get() << misc::decindent;
     }
 
@@ -189,7 +195,7 @@ namespace ast
     {
         ostr_ << e.name_get();
         if (bindings_display(ostr_))
-            ostr_ << " /* " << &e << " */";
+            ostr_ << " /* " << e.def_get() << " */";
         ostr_ << "(";
         for (size_t i = 0; i < e.args_get().size() - 1; i++)
         {
@@ -247,7 +253,7 @@ namespace ast
     {
         ostr_ << e.name_get();
         if (bindings_display(ostr_))
-            ostr_ << " /* " << &e << " */";
+            ostr_ << " /* " << e.def_get() << " */";
     }
 
     void PrettyPrinter::operator()(const ObjectExp& e)
@@ -268,7 +274,10 @@ namespace ast
 
     void PrettyPrinter::operator()(const TypeDec& e)
     {
-        ostr_ << "type " << e.name_get() << " = " << e.ty_get()
+        ostr_ << "type " << e.name_get();
+        if (bindings_display(ostr_))
+            ostr_ << " /* " << &e << " */";
+        ostr_ << " = " << e.ty_get()
               << misc::iendl /*<< ";"*/;
     }
 

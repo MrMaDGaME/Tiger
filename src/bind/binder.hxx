@@ -75,7 +75,7 @@ namespace bind
     template <>
     inline void Binder::visit_dec_header<ast::TypeDec>(ast::TypeDec& e){
         type_list_.put(e.name_get(), &e);
-        //super_type::operator()(e);
+        //  super_type::operator()(e);
     }
 
     template <>

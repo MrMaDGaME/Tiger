@@ -61,6 +61,7 @@ namespace bind
 
         /* The visiting methods. */
         void operator()(ast::LetExp& e) override;
+        //void operator()(ast::ForExp& e) override;
 
         void operator()(ast::SimpleVar& e) override;
         void operator()(ast::CallExp& e) override;
