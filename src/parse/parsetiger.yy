@@ -233,7 +233,7 @@
 // a unique TypeDec each, or a single TypeChunk containing two TypeDec.
 // We want the latter.
 
-%precedence "function" "primitive"
+
 %precedence "of"
 %precedence "do" ":="
 %right "then" "else"
@@ -245,6 +245,7 @@
 
 %precedence CHUNKS
 %precedence TYPE
+%precedence "function" "primitive"
 
 %start program
 

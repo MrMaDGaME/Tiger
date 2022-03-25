@@ -10,11 +10,11 @@
 // Hint: this needs to be done at TC-3.
 
 namespace ast {
-    void BreakExp::loop_set(Exp *loop) {
+    inline void BreakExp::loop_set(Exp *loop) {
         loop_ = loop;
     }
 
-    Exp *BreakExp::loop_get() const {
+    inline Exp *BreakExp::loop_get() const {
         return loop_;
     }
 } // namespace ast

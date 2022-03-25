@@ -39,7 +39,7 @@ namespace bind
     template <class D>
     void Binder::chunk_visit(ast::Chunk<D>& e)
     {
-        std::set<std::string> fun_list;
+        std::set<misc::symbol> fun_list;
         // Shorthand.
         using chunk_type = ast::Chunk<D>;
         // on bodies).

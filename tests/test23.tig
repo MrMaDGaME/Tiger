@@ -1,0 +1,6 @@
+let
+  var me := 0
+  var me := 1
+in
+  me
+end

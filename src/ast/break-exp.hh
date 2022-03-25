@@ -39,7 +39,7 @@ namespace ast
         Exp& break_str_get();
         /** \} */
         void loop_set(ast::Exp* loop);
-        Exp * loop_get() const
+        Exp * loop_get() const;
 
     protected:
         /// String break
