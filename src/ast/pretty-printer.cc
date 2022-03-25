@@ -297,7 +297,11 @@ namespace ast
         for (auto it = e.formals_get().begin(); it != e.formals_get().end();
              ++it)
         {
-            ostr_ << (*it)->name_get() << " : " << *((*it)->type_name_get());
+            ostr_ << (*it)->name_get();
+            if (bindings_display(ostr_))
+                ostr_ << " /* " << *it << " */";
+
+            ostr_ << " : " << *((*it)->type_name_get());
             if (it != (e.formals_get().end() - 1))
                 ostr_ << ", ";
         }

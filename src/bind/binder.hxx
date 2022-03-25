@@ -17,6 +17,7 @@ namespace bind
     {
         error_ << misc::error::error_type::bind << loc.location_get() << " : "
                << msg << std::endl;
+        error_.exit_on_error();
     }
 
     template <typename T>
