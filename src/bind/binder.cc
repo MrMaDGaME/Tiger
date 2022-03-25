@@ -26,7 +26,7 @@ namespace bind
         if (e.name_get() != "_main")
             error_ << misc::error::error_type::bind << e.location_get() << " : "
                    << "cannot find reference to _main" << std::endl;
-        if (function_list_.is_unique("_main")){
+        if (!function_list_.is_unique("_main")){
             error_ << misc::error::error_type::bind << e.location_get() << " : "
                    << "redefinition of _main" << std::endl;
         }

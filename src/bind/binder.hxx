@@ -50,13 +50,13 @@ namespace bind
         {
             visit_dec_body(*elt);
         }
-        /*for (auto elt = e.begin(); elt != e.end() - 1; ++elt)
+        for (auto elt = e.begin(); elt != e.end() - 1; ++elt)
         {
             for (auto elt2 = elt + 1; elt2 != e.end(); ++elt2){
                 if ((**elt).name_get() == (**elt2).name_get())
                     redefinition(**elt, **elt2);
             }
-        }*/
+        }
     }
 
     /* These specializations are in bind/binder.hxx, so that derived
