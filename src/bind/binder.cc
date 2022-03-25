@@ -62,21 +62,28 @@ namespace bind
         scope_end();
     }
 
-    /*void Binder::operator()(ast::ForExp& e)
+    void Binder::operator()(ast::WhileExp& e)
     {
-        (*this)(e.vardec_get());
-        (*this)(e.hi_get());
         scope_begin();
+        (*this)(e.test_get());
         (*this)(e.body_get());
         scope_end();
-    }*/
+    }
+
+    void Binder::operator()(ast::ForExp& e)
+    {
+        scope_begin();
+        var_list_.put(e.vardec_get().name_get(), &e.vardec_get());
+        (*this)(e.hi_get());
+        (*this)(e.body_get());
+        scope_end();
+    }
 
     void Binder::operator()(ast::SimpleVar& e)
     {
         ast::VarDec* var = var_list_.get(e.name_get());
         if (var == nullptr)
         {
-            std::cout << e.name_get();
             undeclared("SimpleVar", e);
         }
         e.def_set(var);
