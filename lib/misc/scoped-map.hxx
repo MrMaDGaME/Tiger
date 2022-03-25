@@ -16,6 +16,16 @@
 
 namespace misc
 {
+    template<typename Key, typename Data>
+    scoped_map<Key, Data>::scoped_map() {
+        scope_begin();
+    }
+
+    template<typename Key, typename Data>
+    scoped_map<Key, Data>::~scoped_map() {
+        scope_end();
+    }
+
     template <typename Key, typename Data>
     inline void scoped_map<Key, Data>::put(const Key& key, const Data& value)
     {

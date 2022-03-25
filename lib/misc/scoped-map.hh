@@ -21,8 +21,8 @@ namespace misc
     class scoped_map
     {
     public:
-        scoped_map() = default;
-
+        scoped_map();
+        ~scoped_map();
         void put(const Key& key, const Data& value);
         Data get(const Key& key) const;
         std::ostream& dump(std::ostream& ostr) const;
