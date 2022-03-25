@@ -119,8 +119,7 @@ namespace bind
         template <class D>
         inline void visit_dec_body(D& e);
 
-        // FIXME: Some code was deleted here.
-        /// \}
+        std::vector<ast::Ast*> loops_get();
 
         /// \name Error handling
         /// \{
@@ -160,6 +159,7 @@ namespace bind
         misc::scoped_map<misc::symbol, ast::TypeDec*> type_list_;
         misc::scoped_map<misc::symbol, ast::FunctionDec*> function_list_;
         misc::scoped_map<misc::symbol, ast::VarDec*> var_list_;
+        static std::vector<ast::Ast*> loops_;
     };
 
 } // namespace bind

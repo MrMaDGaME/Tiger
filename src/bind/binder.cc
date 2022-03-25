@@ -52,6 +52,10 @@ namespace bind
         var_list_.scope_end();
     }
 
+    static std::vector<ast::Ast*> Binder::loops_get()
+    {
+        return loops_;
+    }
     /*---------.
     | Visits.  |
     `---------*/
@@ -67,18 +71,27 @@ namespace bind
     void Binder::operator()(ast::WhileExp& e)
     {
         scope_begin();
+        loops_.push_back(&e);
         (*this)(e.test_get());
         (*this)(e.body_get());
+        loops_.pop_back();
         scope_end();
     }
 
     void Binder::operator()(ast::ForExp& e)
     {
         scope_begin();
+        loops_.push_back(&e);
         var_list_.put(e.vardec_get().name_get(), &e.vardec_get());
         (*this)(e.hi_get());
         (*this)(e.body_get());
+        loops_.pop_back();
         scope_end();
+    }
+
+    void Binder::operator()(ast::BreakExp& e)
+    {
+        
     }
 
     void Binder::operator()(ast::SimpleVar& e)
@@ -102,6 +115,7 @@ namespace bind
         e.def_set(var);
         super_type::operator()(e);
     }
+
 
     void Binder::operator()(ast::CallExp& e)
     {

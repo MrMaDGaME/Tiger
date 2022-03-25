@@ -118,7 +118,7 @@ namespace ast
     {
         ostr_ << "break"; // e.break_str_get();
         if (bindings_display(ostr_))
-            ostr_ << " /* " << &e<< " */";
+            ostr_ << " /* " << Binder::loops_get().at(Binder::loops_get().size() - 1) << " */";
     }
 
     // NilExp printer

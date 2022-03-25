@@ -39,24 +39,32 @@ namespace bind
     template <class D>
     void Binder::chunk_visit(ast::Chunk<D>& e)
     {
+        std::set<std::string> fun_list;
         // Shorthand.
         using chunk_type = ast::Chunk<D>;
         // on bodies).
         for (auto elt : e)
         {
+            if (fun_list.contains(elt->name_get()))
+            {
+                redefinition(*elt, *elt);
+            }
+            fun_list.insert(elt->name_get());
             visit_dec_header(*elt);
         }
         for (auto elt : e)
         {
             visit_dec_body(*elt);
         }
-        for (auto elt = e.begin(); elt != e.end() - 1; ++elt)
+        /*for (auto elt = e.begin(); elt != e.end(); ++elt)
         {
-            for (auto elt2 = elt + 1; elt2 != e.end(); ++elt2){
-                if ((**elt).name_get() == (**elt2).name_get())
-                    redefinition(**elt, **elt2);
+            for (auto elt2 = e.begin(); elt2 != e.end(); ++elt2){
+                if (elt != elt2) {
+                    if ((*elt)->name_get() == (*elt2)->name_get())
+                        redefinition(**elt, **elt2);
+                }
             }
-        }
+        }*/
     }
 
     /* These specializations are in bind/binder.hxx, so that derived
