@@ -327,6 +327,7 @@ namespace parse {
     union union_type
     {
       // chunks
+      // classfields
       char dummy1[sizeof (ast::ChunkList*)];
 
       // exp
@@ -341,50 +342,56 @@ namespace parse {
       // fundec
       char dummy5[sizeof (ast::FunctionDec*)];
 
+      // methchunk
+      char dummy6[sizeof (ast::MethodChunk*)];
+
+      // methdec
+      char dummy7[sizeof (ast::MethodDec*)];
+
       // typeid
-      char dummy6[sizeof (ast::NameTy*)];
+      char dummy8[sizeof (ast::NameTy*)];
 
       // ty
-      char dummy7[sizeof (ast::Ty*)];
+      char dummy9[sizeof (ast::Ty*)];
 
       // tychunk
-      char dummy8[sizeof (ast::TypeChunk*)];
+      char dummy10[sizeof (ast::TypeChunk*)];
 
       // tydec
-      char dummy9[sizeof (ast::TypeDec*)];
+      char dummy11[sizeof (ast::TypeDec*)];
 
       // lvalue
-      char dummy10[sizeof (ast::Var*)];
+      char dummy12[sizeof (ast::Var*)];
 
       // varchunk
       // tyfieldsbis
       // tyfieldsbis.1
-      char dummy11[sizeof (ast::VarChunk*)];
+      char dummy13[sizeof (ast::VarChunk*)];
 
       // vardec
       // tyfieldbis
-      char dummy12[sizeof (ast::VarDec*)];
+      char dummy14[sizeof (ast::VarDec*)];
 
       // exps
       // exps.1
       // function_r
-      char dummy13[sizeof (ast::exps_type*)];
+      char dummy15[sizeof (ast::exps_type*)];
 
       // record_r
-      char dummy14[sizeof (ast::fieldinits_type*)];
+      char dummy16[sizeof (ast::fieldinits_type*)];
 
       // tyfields
       // tyfields.1
-      char dummy15[sizeof (ast::fields_type*)];
+      char dummy17[sizeof (ast::fields_type*)];
 
       // "integer"
-      char dummy16[sizeof (int)];
+      char dummy18[sizeof (int)];
 
       // "identifier"
-      char dummy17[sizeof (misc::symbol)];
+      char dummy19[sizeof (misc::symbol)];
 
       // "string"
-      char dummy18[sizeof (std::string)];
+      char dummy20[sizeof (std::string)];
     };
 
     /// The size of the largest semantic type.
@@ -573,10 +580,13 @@ namespace parse {
         S_tyfields = 73,                         // tyfields
         S_74_tyfields_1 = 74,                    // tyfields.1
         S_tyfield = 75,                          // tyfield
-        S_tyfieldsbis = 76,                      // tyfieldsbis
-        S_77_tyfieldsbis_1 = 77,                 // tyfieldsbis.1
-        S_tyfieldbis = 78,                       // tyfieldbis
-        S_typeid = 79                            // typeid
+        S_classfields = 76,                      // classfields
+        S_methchunk = 77,                        // methchunk
+        S_methdec = 78,                          // methdec
+        S_tyfieldsbis = 79,                      // tyfieldsbis
+        S_80_tyfieldsbis_1 = 80,                 // tyfieldsbis.1
+        S_tyfieldbis = 81,                       // tyfieldbis
+        S_typeid = 82                            // typeid
       };
     };
 
@@ -614,6 +624,7 @@ namespace parse {
         switch (this->kind ())
     {
       case symbol_kind::S_chunks: // chunks
+      case symbol_kind::S_classfields: // classfields
         value.move< ast::ChunkList* > (std::move (that.value));
         break;
 
@@ -631,6 +642,14 @@ namespace parse {
 
       case symbol_kind::S_fundec: // fundec
         value.move< ast::FunctionDec* > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_methchunk: // methchunk
+        value.move< ast::MethodChunk* > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_methdec: // methdec
+        value.move< ast::MethodDec* > (std::move (that.value));
         break;
 
       case symbol_kind::S_typeid: // typeid
@@ -655,7 +674,7 @@ namespace parse {
 
       case symbol_kind::S_varchunk: // varchunk
       case symbol_kind::S_tyfieldsbis: // tyfieldsbis
-      case symbol_kind::S_77_tyfieldsbis_1: // tyfieldsbis.1
+      case symbol_kind::S_80_tyfieldsbis_1: // tyfieldsbis.1
         value.move< ast::VarChunk* > (std::move (that.value));
         break;
 
@@ -778,6 +797,34 @@ namespace parse {
       {}
 #else
       basic_symbol (typename Base::kind_type t, const ast::FunctionDec*& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+
+#if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, ast::MethodChunk*&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const ast::MethodChunk*& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+
+#if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, ast::MethodDec*&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const ast::MethodDec*& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -980,6 +1027,7 @@ namespace parse {
         switch (this->kind ())
     {
       case symbol_kind::S_chunks: // chunks
+      case symbol_kind::S_classfields: // classfields
         value.copy< ast::ChunkList* > (that.value);
         break;
 
@@ -997,6 +1045,14 @@ namespace parse {
 
       case symbol_kind::S_fundec: // fundec
         value.copy< ast::FunctionDec* > (that.value);
+        break;
+
+      case symbol_kind::S_methchunk: // methchunk
+        value.copy< ast::MethodChunk* > (that.value);
+        break;
+
+      case symbol_kind::S_methdec: // methdec
+        value.copy< ast::MethodDec* > (that.value);
         break;
 
       case symbol_kind::S_typeid: // typeid
@@ -1021,7 +1077,7 @@ namespace parse {
 
       case symbol_kind::S_varchunk: // varchunk
       case symbol_kind::S_tyfieldsbis: // tyfieldsbis
-      case symbol_kind::S_77_tyfieldsbis_1: // tyfieldsbis.1
+      case symbol_kind::S_80_tyfieldsbis_1: // tyfieldsbis.1
         value.copy< ast::VarChunk* > (that.value);
         break;
 
@@ -1072,6 +1128,7 @@ namespace parse {
         switch (this->kind ())
     {
       case symbol_kind::S_chunks: // chunks
+      case symbol_kind::S_classfields: // classfields
         value.move< ast::ChunkList* > (std::move (that.value));
         break;
 
@@ -1089,6 +1146,14 @@ namespace parse {
 
       case symbol_kind::S_fundec: // fundec
         value.move< ast::FunctionDec* > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_methchunk: // methchunk
+        value.move< ast::MethodChunk* > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_methdec: // methdec
+        value.move< ast::MethodDec* > (std::move (that.value));
         break;
 
       case symbol_kind::S_typeid: // typeid
@@ -1113,7 +1178,7 @@ namespace parse {
 
       case symbol_kind::S_varchunk: // varchunk
       case symbol_kind::S_tyfieldsbis: // tyfieldsbis
-      case symbol_kind::S_77_tyfieldsbis_1: // tyfieldsbis.1
+      case symbol_kind::S_80_tyfieldsbis_1: // tyfieldsbis.1
         value.move< ast::VarChunk* > (std::move (that.value));
         break;
 
@@ -1168,93 +1233,111 @@ namespace parse {
         switch (yykind)
         {
       case symbol_kind::S_exps: // exps
-#line 220 "parse/parsetiger.yy"
+#line 223 "parse/parsetiger.yy"
                                       { delete (yysym.value.template as < ast::exps_type* > ()); }
-#line 1174 "parse/parsetiger.hh"
+#line 1239 "parse/parsetiger.hh"
         break;
 
       case symbol_kind::S_exp: // exp
-#line 225 "parse/parsetiger.yy"
+#line 231 "parse/parsetiger.yy"
                                       { delete (yysym.value.template as < ast::Exp* > ()); }
-#line 1180 "parse/parsetiger.hh"
+#line 1245 "parse/parsetiger.hh"
         break;
 
       case symbol_kind::S_lvalue: // lvalue
-#line 221 "parse/parsetiger.yy"
+#line 224 "parse/parsetiger.yy"
                                       { delete (yysym.value.template as < ast::Var* > ()); }
-#line 1186 "parse/parsetiger.hh"
+#line 1251 "parse/parsetiger.hh"
         break;
 
       case symbol_kind::S_chunks: // chunks
-#line 224 "parse/parsetiger.yy"
+#line 227 "parse/parsetiger.yy"
                                       { delete (yysym.value.template as < ast::ChunkList* > ()); }
-#line 1192 "parse/parsetiger.hh"
+#line 1257 "parse/parsetiger.hh"
         break;
 
       case symbol_kind::S_varchunk: // varchunk
-#line 214 "parse/parsetiger.yy"
+#line 217 "parse/parsetiger.yy"
                                       { delete (yysym.value.template as < ast::VarChunk* > ()); }
-#line 1198 "parse/parsetiger.hh"
+#line 1263 "parse/parsetiger.hh"
         break;
 
       case symbol_kind::S_funchunk: // funchunk
-#line 215 "parse/parsetiger.yy"
+#line 218 "parse/parsetiger.yy"
                                       { delete (yysym.value.template as < ast::FunctionChunk* > ()); }
-#line 1204 "parse/parsetiger.hh"
+#line 1269 "parse/parsetiger.hh"
         break;
 
       case symbol_kind::S_vardec: // vardec
-#line 219 "parse/parsetiger.yy"
+#line 222 "parse/parsetiger.yy"
                                       { delete (yysym.value.template as < ast::VarDec* > ()); }
-#line 1210 "parse/parsetiger.hh"
+#line 1275 "parse/parsetiger.hh"
         break;
 
       case symbol_kind::S_fundec: // fundec
-#line 217 "parse/parsetiger.yy"
+#line 220 "parse/parsetiger.yy"
                                       { delete (yysym.value.template as < ast::FunctionDec* > ()); }
-#line 1216 "parse/parsetiger.hh"
+#line 1281 "parse/parsetiger.hh"
         break;
 
       case symbol_kind::S_tychunk: // tychunk
-#line 216 "parse/parsetiger.yy"
+#line 219 "parse/parsetiger.yy"
                                       { delete (yysym.value.template as < ast::TypeChunk* > ()); }
-#line 1222 "parse/parsetiger.hh"
+#line 1287 "parse/parsetiger.hh"
         break;
 
       case symbol_kind::S_tydec: // tydec
-#line 218 "parse/parsetiger.yy"
+#line 221 "parse/parsetiger.yy"
                                       { delete (yysym.value.template as < ast::TypeDec* > ()); }
-#line 1228 "parse/parsetiger.hh"
+#line 1293 "parse/parsetiger.hh"
         break;
 
       case symbol_kind::S_ty: // ty
-#line 222 "parse/parsetiger.yy"
+#line 225 "parse/parsetiger.yy"
                                       { delete (yysym.value.template as < ast::Ty* > ()); }
-#line 1234 "parse/parsetiger.hh"
+#line 1299 "parse/parsetiger.hh"
         break;
 
       case symbol_kind::S_tyfields: // tyfields
-#line 227 "parse/parsetiger.yy"
+#line 233 "parse/parsetiger.yy"
                                       { delete (yysym.value.template as < ast::fields_type* > ()); }
-#line 1240 "parse/parsetiger.hh"
+#line 1305 "parse/parsetiger.hh"
         break;
 
       case symbol_kind::S_74_tyfields_1: // tyfields.1
-#line 227 "parse/parsetiger.yy"
+#line 233 "parse/parsetiger.yy"
                                       { delete (yysym.value.template as < ast::fields_type* > ()); }
-#line 1246 "parse/parsetiger.hh"
+#line 1311 "parse/parsetiger.hh"
         break;
 
       case symbol_kind::S_tyfield: // tyfield
-#line 226 "parse/parsetiger.yy"
+#line 232 "parse/parsetiger.yy"
                                       { delete (yysym.value.template as < ast::Field* > ()); }
-#line 1252 "parse/parsetiger.hh"
+#line 1317 "parse/parsetiger.hh"
+        break;
+
+      case symbol_kind::S_classfields: // classfields
+#line 228 "parse/parsetiger.yy"
+                                      { delete (yysym.value.template as < ast::ChunkList* > ()); }
+#line 1323 "parse/parsetiger.hh"
+        break;
+
+      case symbol_kind::S_methchunk: // methchunk
+#line 229 "parse/parsetiger.yy"
+                                      { delete (yysym.value.template as < ast::MethodChunk* > ()); }
+#line 1329 "parse/parsetiger.hh"
+        break;
+
+      case symbol_kind::S_methdec: // methdec
+#line 230 "parse/parsetiger.yy"
+                                      { delete (yysym.value.template as < ast::MethodDec* > ()); }
+#line 1335 "parse/parsetiger.hh"
         break;
 
       case symbol_kind::S_typeid: // typeid
-#line 223 "parse/parsetiger.yy"
+#line 226 "parse/parsetiger.yy"
                                       { delete (yysym.value.template as < ast::NameTy* > ()); }
-#line 1258 "parse/parsetiger.hh"
+#line 1341 "parse/parsetiger.hh"
         break;
 
        default:
@@ -1265,6 +1348,7 @@ namespace parse {
 switch (yykind)
     {
       case symbol_kind::S_chunks: // chunks
+      case symbol_kind::S_classfields: // classfields
         value.template destroy< ast::ChunkList* > ();
         break;
 
@@ -1282,6 +1366,14 @@ switch (yykind)
 
       case symbol_kind::S_fundec: // fundec
         value.template destroy< ast::FunctionDec* > ();
+        break;
+
+      case symbol_kind::S_methchunk: // methchunk
+        value.template destroy< ast::MethodChunk* > ();
+        break;
+
+      case symbol_kind::S_methdec: // methdec
+        value.template destroy< ast::MethodDec* > ();
         break;
 
       case symbol_kind::S_typeid: // typeid
@@ -1306,7 +1398,7 @@ switch (yykind)
 
       case symbol_kind::S_varchunk: // varchunk
       case symbol_kind::S_tyfieldsbis: // tyfieldsbis
-      case symbol_kind::S_77_tyfieldsbis_1: // tyfieldsbis.1
+      case symbol_kind::S_80_tyfieldsbis_1: // tyfieldsbis.1
         value.template destroy< ast::VarChunk* > ();
         break;
 
@@ -2499,6 +2591,7 @@ switch (yykind)
     switch (this->kind ())
     {
       case symbol_kind::S_chunks: // chunks
+      case symbol_kind::S_classfields: // classfields
         value.copy< ast::ChunkList* > (YY_MOVE (that.value));
         break;
 
@@ -2516,6 +2609,14 @@ switch (yykind)
 
       case symbol_kind::S_fundec: // fundec
         value.copy< ast::FunctionDec* > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_methchunk: // methchunk
+        value.copy< ast::MethodChunk* > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_methdec: // methdec
+        value.copy< ast::MethodDec* > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_typeid: // typeid
@@ -2540,7 +2641,7 @@ switch (yykind)
 
       case symbol_kind::S_varchunk: // varchunk
       case symbol_kind::S_tyfieldsbis: // tyfieldsbis
-      case symbol_kind::S_77_tyfieldsbis_1: // tyfieldsbis.1
+      case symbol_kind::S_80_tyfieldsbis_1: // tyfieldsbis.1
         value.copy< ast::VarChunk* > (YY_MOVE (that.value));
         break;
 
@@ -2601,6 +2702,7 @@ switch (yykind)
     switch (this->kind ())
     {
       case symbol_kind::S_chunks: // chunks
+      case symbol_kind::S_classfields: // classfields
         value.move< ast::ChunkList* > (YY_MOVE (s.value));
         break;
 
@@ -2618,6 +2720,14 @@ switch (yykind)
 
       case symbol_kind::S_fundec: // fundec
         value.move< ast::FunctionDec* > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_methchunk: // methchunk
+        value.move< ast::MethodChunk* > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_methdec: // methdec
+        value.move< ast::MethodDec* > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_typeid: // typeid
@@ -2642,7 +2752,7 @@ switch (yykind)
 
       case symbol_kind::S_varchunk: // varchunk
       case symbol_kind::S_tyfieldsbis: // tyfieldsbis
-      case symbol_kind::S_77_tyfieldsbis_1: // tyfieldsbis.1
+      case symbol_kind::S_80_tyfieldsbis_1: // tyfieldsbis.1
         value.move< ast::VarChunk* > (YY_MOVE (s.value));
         break;
 
@@ -2754,7 +2864,7 @@ switch (yykind)
 
 
 } // parse
-#line 2758 "parse/parsetiger.hh"
+#line 2868 "parse/parsetiger.hh"
 
 
 // "%code provides" blocks.
@@ -2766,7 +2876,7 @@ switch (yykind)
     (Prefix parselex)(::parse::TigerParser& tp)
   # define YY_DECL YY_DECL_(yyFlexLexer::)
 
-#line 2770 "parse/parsetiger.hh"
+#line 2880 "parse/parsetiger.hh"
 
 
 #endif // !YY_PARSE_SRC_PARSE_PARSETIGER_HH_INCLUDED

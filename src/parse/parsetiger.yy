@@ -225,6 +225,9 @@
 %destructor                   { delete ($$); }    ty
 %destructor                   { delete ($$); }    typeid
 %destructor                   { delete ($$); }    chunks
+%destructor                   { delete ($$); }    classfields
+%destructor                   { delete ($$); }    methchunk
+%destructor                   { delete ($$); }    methdec
 %destructor                   { delete ($$); }    exp
 %destructor                   { delete ($$); }    tyfield
 %destructor                   { delete ($$); }    tyfields tyfields.1
@@ -404,8 +407,8 @@ tychunk:
 
 tydec:
   "type" ID "=" ty                                      { $$ = tp.td_.make_TypeDec(@$, $2, $4); }
-  | "class" ID "{" classfields "}"                      { $$ = tp.td_.make_ClassTy(@$, nullptr, $4)} /* FIXME : cannot convert ‘ast::ClassTy*’ to ‘ast::TypeDec*’ */
-  | "class" ID "extends" typeid "{" classfields "}"     { $$ = tp.td_.make_ClassTy(@$, $4, $6)} /* idem */
+  | "class" ID "{" classfields "}"                      { $$ = tp.td_.make_TypeDec(@$, $2, tp.td_.make_ClassTy(@$, nullptr, $4)); }
+  | "class" ID "extends" typeid "{" classfields "}"     { $$ =  tp.td_.make_TypeDec(@$, $2, tp.td_.make_ClassTy(@$, $4, $6)); }
 ;
 
 ty:
@@ -438,7 +441,7 @@ tyfield:
 classfields:
   %empty                                    { $$ = tp.td_.make_ChunkList(@$); }
   /* Attribute declaration (varchunk). */
-  | vardec classfields                      { $$ = $2; $$->push_front(*$1); }
+  | varchunk classfields                      { $$ = $2; $$->push_front($1); }
   /* Method declaration (methchunk). */
   | methchunk classfields                   { $$ = $2; $$->push_front($1); }
 ;
