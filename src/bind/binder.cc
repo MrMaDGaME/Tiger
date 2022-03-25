@@ -76,7 +76,7 @@ namespace bind
     void Binder::operator()(ast::NameTy& e)
     {
         ast::TypeDec* var = type_list_.get(e.name_get());
-        if (var == nullptr)
+        if (var == nullptr && e.name_get() != "int" && e.name_get() != "string")
         {
             undeclared("NameTy", e);
         }

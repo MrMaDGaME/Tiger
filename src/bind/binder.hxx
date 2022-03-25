@@ -29,7 +29,7 @@ namespace bind
     template <typename T>
     void Binder::redefinition(const T& e1, const T& e2)
     {
-        error(e1    , "redefinition ");
+        error(e1, "redefinition of ");
     }
 
     /*----------------------------.
