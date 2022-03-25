@@ -52,10 +52,6 @@ namespace bind
         var_list_.scope_end();
     }
 
-    static std::vector<ast::Ast*> Binder::loops_get()
-    {
-        return loops_;
-    }
     /*---------.
     | Visits.  |
     `---------*/
@@ -91,7 +87,10 @@ namespace bind
 
     void Binder::operator()(ast::BreakExp& e)
     {
-        
+        if (loops_.empty()){
+            error(e, "break outside loop");
+        }
+        e.loop_set(loops_.at(loops_.size() - 1));
     }
 
     void Binder::operator()(ast::SimpleVar& e)

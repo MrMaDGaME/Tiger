@@ -38,10 +38,13 @@ namespace ast
         /// Return condition of the statement.
         Exp& break_str_get();
         /** \} */
+        void loop_set(ast::Exp* loop);
+        Exp * loop_get() const
 
     protected:
         /// String break
         std::string break_str_;
+        ast::Exp* loop_;
     };
 } // namespace ast
 #include <ast/break-exp.hxx>

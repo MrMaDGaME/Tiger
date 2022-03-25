@@ -22,8 +22,7 @@ namespace ast
         v(*this);
     }
 
-    void BreakExp::accept(Visitor& v)
-    {
+    void BreakExp::accept(Visitor& v) {
         v(*this);
     }
 } // namespace ast
