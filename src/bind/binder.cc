@@ -69,6 +69,7 @@ namespace bind
         {
             undeclared("SimpleVar", e);
         }
+        e.def_set(var);
         super_type::operator()(e);
     }
 
@@ -79,6 +80,7 @@ namespace bind
         {
             undeclared("NameTy", e);
         }
+        e.def_set(var);
         super_type::operator()(e);
     }
 
@@ -89,6 +91,7 @@ namespace bind
         {
             undeclared("CallExp", e);
         }
+        e.def_set(var);
         super_type::operator()(e);
     }
 

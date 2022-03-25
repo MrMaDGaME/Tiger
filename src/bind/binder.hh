@@ -111,11 +111,11 @@ namespace bind
 
         /// Check a Function or Type declaration header.
         template <class D>
-        void visit_dec_header(D& e);
+        inline void visit_dec_header(D& e);
 
         /// Check a Function or Type declaration body.
         template <class D>
-        void visit_dec_body(D& e);
+        inline void visit_dec_body(D& e);
 
         // FIXME: Some code was deleted here.
         /// \}

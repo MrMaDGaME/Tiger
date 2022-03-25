@@ -25,9 +25,9 @@ namespace misc
     template <typename Key, typename Data>
     inline Data scoped_map<Key, Data>::get(const Key& key) const
     {
-        for (auto it = scope_.end(); it != scope_.begin(); it--){
-            if (*it.contains(key))
-                return *it.find(key)->second;
+        for (auto it = scope_.end() - 1; it != scope_.begin() - 1; it--){
+            if ((*it).contains(key))
+                return (*it).find(key)->second;
         }
         if (std::is_pointer<Data>::value)
             return nullptr;
@@ -62,9 +62,9 @@ namespace misc
 
     template<typename Key, typename Data>
     bool scoped_map<Key, Data>::is_unique(const Key &key) {
-        int count = 0
-        for (auto it = scope_.end(); it != scope_.begin(); it--){
-            if (*it.contains(key))
+        int count = 0;
+        for (auto it = scope_.end() - 1; it != scope_.begin() - 1; it--){
+            if ((*it).contains(key))
                 count++;
         }
         return count == 1;
