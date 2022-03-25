@@ -319,11 +319,11 @@ exp:
   | EXP "(" INT ")"                    { $$ = metavar<ast::Exp>(tp, $3); }
 
   /* Object creation. */
-  |  "new" typeid                        { $$ = tp.td_.make_ObjectExp(@$, $2) }
+  |  "new" typeid                        { $$ = tp.td_.make_ObjectExp(@$, $2); }
 
   /* Method call. */
-  | lvalue "." ID "(" ")"               { $$ = make_MethodCall(@$, $3, nullptr, $1) }
-  | lvalue "." ID "(" function_r ")"    { $$ = make_MethodCall(@$, $3, $5, $1) }
+  | lvalue "." ID "(" ")"               { $$ = tp.td_.make_MethodCallExp(@$, $3, nullptr, $1); }
+  | lvalue "." ID "(" function_r ")"    { $$ = tp.td_.make_MethodCallExp(@$, $3, $5, $1); }
 ;
 
 record_r:
@@ -404,16 +404,16 @@ tychunk:
 
 tydec:
   "type" ID "=" ty                                      { $$ = tp.td_.make_TypeDec(@$, $2, $4); }
-  | "class" ID "{" classfields "}"                      { $$ = tp.td_.make_ClassTy(@$, nullptr, $4)}
-  | "class" ID "extends" typeid "{" classfields "}"     { $$ = tp.td_.make_ClassTy(@$, $4, $6)}
+  | "class" ID "{" classfields "}"                      { $$ = tp.td_.make_ClassTy(@$, nullptr, $4)} /* FIXME : cannot convert ‘ast::ClassTy*’ to ‘ast::TypeDec*’ */
+  | "class" ID "extends" typeid "{" classfields "}"     { $$ = tp.td_.make_ClassTy(@$, $4, $6)} /* idem */
 ;
 
 ty:
   typeid                                            { $$ = $1; }
 | "{" tyfields "}"                                  { $$ = tp.td_.make_RecordTy(@$, $2); }
 | "array" "of" typeid                               { $$ = tp.td_.make_ArrayTy(@$, $3); }
-| "class" "{" classfields "}"                       { $$ = tp.td_.make_ClassTy(@$, nullptr, $3)}
-| "class" "extends" typeid "{" classfields "}"      { $$ = tp.td_.make_ClassTy(@$, $3, $5)}
+| "class" "{" classfields "}"                       { $$ = tp.td_.make_ClassTy(@$, nullptr, $3); }
+| "class" "extends" typeid "{" classfields "}"      { $$ = tp.td_.make_ClassTy(@$, $3, $5); }
 ;
 
 tyfields:
@@ -438,7 +438,7 @@ tyfield:
 classfields:
   %empty                                    { $$ = tp.td_.make_ChunkList(@$); }
   /* Attribute declaration (varchunk). */
-  | vardec classfields                      { $$ = $2; $$->push_front($1); }
+  | vardec classfields                      { $$ = $2; $$->push_front(*$1); }
   /* Method declaration (methchunk). */
   | methchunk classfields                   { $$ = $2; $$->push_front($1); }
 ;
@@ -449,8 +449,8 @@ methchunk:
 ;
 
 methdec:
-    "method" ID "(" tyfieldsbis ")" "=" exp                { $$ = tp.td_.make_MethodDec(@$, $2, $4, nullptr, $7) }
-   | "method" ID "(" tyfieldsbis ")" ":" typeid "=" exp    { $$ = tp.td_.make_MethodDec(@$, $2, $4, $7, $9) }
+    "method" ID "(" tyfieldsbis ")" "=" exp                { $$ = tp.td_.make_MethodDec(@$, $2, $4, nullptr, $7); }
+   | "method" ID "(" tyfieldsbis ")" ":" typeid "=" exp    { $$ = tp.td_.make_MethodDec(@$, $2, $4, $7, $9); }
 ;
 
 
