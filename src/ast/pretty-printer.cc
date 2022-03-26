@@ -224,7 +224,7 @@ namespace ast
     }
 
     void PrettyPrinter::operator()(const ObjectExp &e) {
-        ostr_ << e.type_name_get();
+        ostr_ << "new " << e.type_name_get();
     }
 
     void PrettyPrinter::operator()(const RecordTy &e) {

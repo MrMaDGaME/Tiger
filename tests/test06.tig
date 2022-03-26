@@ -1,5 +1,5 @@
 let
-      class X extends Object
+      class B extends Object
       {
         var a := 42
         method m() : int =
@@ -8,5 +8,5 @@ let
       }
       var b := new B
 in
-      (b.a := 51)
+
 end
