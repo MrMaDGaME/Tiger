@@ -28,14 +28,14 @@ test -n "$srcdir" && test -z "$VERBOSE" && exec >/dev/null 2>&1
 # Darwin needs some help in figuring out where non-installed libtool
 # libraries are (on this platform libtool encodes the expected final
 # path of dependent libraries in each library).
-modpath='.libs:/Users/matheo/local_doc/info_ing1/tiger/github/build/src/.libs'
+modpath='.libs:/home/arthur/Documents/ING1/TIGER/pensive_hugle-tiger-2024/build/src/.libs'
 
-# `/Users/matheo/local_doc/info_ing1/tiger/github/build/tcsh/python' and `/Users/matheo/local_doc/info_ing1/tiger/github/tcsh/python' are for the *.py
-# files, and `/Users/matheo/local_doc/info_ing1/tiger/github/build/tcsh/python/.libs' for the *.so files.  We
+# `/home/arthur/Documents/ING1/TIGER/pensive_hugle-tiger-2024/build/tcsh/python' and `/home/arthur/Documents/ING1/TIGER/pensive_hugle-tiger-2024/tcsh/python' are for the *.py
+# files, and `/home/arthur/Documents/ING1/TIGER/pensive_hugle-tiger-2024/build/tcsh/python/.libs' for the *.so files.  We
 # used to rely on a module called `ltihooks' to teach the `import'
 # statement how to load a Libtool library, but it started to cause
 # issues with Python 2.6.
-pypath='/Users/matheo/local_doc/info_ing1/tiger/github/build/tcsh/python:/Users/matheo/local_doc/info_ing1/tiger/github/build/tcsh/python/.libs:/Users/matheo/local_doc/info_ing1/tiger/github/tcsh/python':"$PYTHONPATH"
+pypath='/home/arthur/Documents/ING1/TIGER/pensive_hugle-tiger-2024/build/tcsh/python:/home/arthur/Documents/ING1/TIGER/pensive_hugle-tiger-2024/build/tcsh/python/.libs:/home/arthur/Documents/ING1/TIGER/pensive_hugle-tiger-2024/tcsh/python':"$PYTHONPATH"
 
 # Likewise for Ruby: as some of our SWIG interfaces import other SWIG
 # interfaces (with the `%import' keyword), we must add the `.libs'
@@ -43,7 +43,7 @@ pypath='/Users/matheo/local_doc/info_ing1/tiger/github/build/tcsh/python:/Users/
 # the corresponding dynamic module(s) (SWIG's `%import' statements
 # generate code in dynamic modules that bypass Ruby's `Kernel.require'
 # mechanism).
-rbpath='/Users/matheo/local_doc/info_ing1/tiger/github/build/tcsh/ruby:/Users/matheo/local_doc/info_ing1/tiger/github/build/tcsh/ruby/.libs:/Users/matheo/local_doc/info_ing1/tiger/github/tcsh/ruby'
+rbpath='/home/arthur/Documents/ING1/TIGER/pensive_hugle-tiger-2024/build/tcsh/ruby:/home/arthur/Documents/ING1/TIGER/pensive_hugle-tiger-2024/build/tcsh/ruby/.libs:/home/arthur/Documents/ING1/TIGER/pensive_hugle-tiger-2024/tcsh/ruby'
 
 case $1 in
   *.py)

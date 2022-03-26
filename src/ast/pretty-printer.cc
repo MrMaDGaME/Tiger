@@ -208,8 +208,8 @@ namespace ast
     void PrettyPrinter::operator()(const ClassTy &e) {
         ostr_ << "class";
         ostr_ << " extends " << e.super_get();
-        ostr_ << "{" << misc::incendl << e.chunks_get() <<  misc::decendl << "}";
-
+        ostr_ << "{" << misc::incendl << e.chunks_get() << misc::decendl << "}";
+    }
 
     void PrettyPrinter::operator()(const Field& e)
     {

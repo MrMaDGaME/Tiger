@@ -152,8 +152,8 @@ FULL_PATH_NAMES        = YES
 # will be relative from the directory where doxygen is started.
 # This tag requires that the tag FULL_PATH_NAMES is set to YES.
 
-STRIP_FROM_PATH        = /Users/matheo/local_doc/info_ing1/tiger/github/lib \
-                         /Users/matheo/local_doc/info_ing1/tiger/github/src \
+STRIP_FROM_PATH        = /home/arthur/Documents/ING1/TIGER/pensive_hugle-tiger-2024/lib \
+                         /home/arthur/Documents/ING1/TIGER/pensive_hugle-tiger-2024/src \
                          ../src
 
 # The STRIP_FROM_INC_PATH tag can be used to strip a user-defined part of the
@@ -773,8 +773,8 @@ WARN_LOGFILE           =
 # spaces. See also FILE_PATTERNS and EXTENSION_MAPPING
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  = /Users/matheo/local_doc/info_ing1/tiger/github/lib \
-                         /Users/matheo/local_doc/info_ing1/tiger/github/src \
+INPUT                  = /home/arthur/Documents/ING1/TIGER/pensive_hugle-tiger-2024/lib \
+                         /home/arthur/Documents/ING1/TIGER/pensive_hugle-tiger-2024/src \
                          ../src
 
 # This tag can be used to specify the character encoding of the source files
@@ -817,8 +817,8 @@ RECURSIVE              = YES
 # Note that relative paths are relative to the directory from which doxygen is
 # run.
 
-EXCLUDE                = /Users/matheo/local_doc/info_ing1/tiger/github/src/parse/parsetiger.hh \
-                         /Users/matheo/local_doc/info_ing1/tiger/github/src/parse/parsetiger.cc \
+EXCLUDE                = /home/arthur/Documents/ING1/TIGER/pensive_hugle-tiger-2024/src/parse/parsetiger.hh \
+                         /home/arthur/Documents/ING1/TIGER/pensive_hugle-tiger-2024/src/parse/parsetiger.cc \
                          ../src/parse/scantiger.cc \
                          ../src/target/ia32/codegen.cc.dir \
                          ../src/target/mips/codegen.cc.dir \

@@ -25,7 +25,6 @@ namespace bind
     {
         if (e.name_get() == "_main")
         {
-            std::cout << "Cross\n";
             if (!function_list_.is_unique("_main"))
             {
                 error_ << misc::error::error_type::bind << e.location_get() << " : "
