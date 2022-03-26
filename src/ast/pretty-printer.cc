@@ -205,11 +205,11 @@ namespace ast
         ostr_ << ")";
     }
 
-    void PrettyPrinter::operator()(const ClassTy& e)
-    {
-        ostr_ << "class" << e.super_get() << "{" << misc::incendl << misc::iendl
-              << e.chunks_get() << misc::decendl << misc::iendl << "};";
-    }
+    void PrettyPrinter::operator()(const ClassTy &e) {
+        ostr_ << "class";
+        ostr_ << " extends " << e.super_get();
+        ostr_ << "{" << misc::incendl << e.chunks_get() <<  misc::decendl << "}";
+
 
     void PrettyPrinter::operator()(const Field& e)
     {
@@ -256,9 +256,8 @@ namespace ast
             ostr_ << " /* " << e.def_get() << " */";
     }
 
-    void PrettyPrinter::operator()(const ObjectExp& e)
-    {
-        ostr_ << e.type_name_get();
+    void PrettyPrinter::operator()(const ObjectExp &e) {
+        ostr_ << "new " << e.type_name_get();
     }
 
     void PrettyPrinter::operator()(const RecordTy& e)

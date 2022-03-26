@@ -1,23 +1,12 @@
 let
-  class X
-  {
-    var i := 1
-
-    method m() : int = self.o()
-    method n() = self.p()
-    method o() : int = self.i
-
-    var j := 2
-
-    method p() = ()
-
-    var y := new Y
-    method q() = self.y.r()
-  }
-
-  class Y
-  {
-    method r() = ()
-  }
+      class B extends Object
+      {
+        var a := 42
+        method m() : int =
+          self.a
+        var y := 69
+      }
+      var b := new B
 in
+
 end

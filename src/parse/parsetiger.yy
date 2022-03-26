@@ -190,7 +190,7 @@
        EOF 0        "end of file"
 
 %type <ast::Exp*>             exp
-%type <ast::ChunkList*>       chunks
+%type <ast::ChunkList*>       chunks classfields
 
 %type <ast::TypeChunk*>       tychunk
 %type <ast::TypeDec*>         tydec
@@ -204,12 +204,15 @@
 %type <ast::Var*>             lvalue
 %type <ast::exps_type*>       exps exps.1
 %type <ast::fieldinits_type*> record_r
-%type <ast::exps_type*>         function_r
+%type <ast::exps_type*>       function_r
 
 %type <ast::Field*>           tyfield
 %type <ast::fields_type*>     tyfields tyfields.1
 %type <ast::VarDec*>          tyfieldbis
 %type <ast::VarChunk*>        tyfieldsbis tyfieldsbis.1
+
+%type <ast::MethodDec*>       methdec
+%type <ast::MethodChunk*>     methchunk
 
 %destructor                   { delete ($$); }    varchunk
 %destructor                   { delete ($$); }    funchunk
@@ -222,6 +225,9 @@
 %destructor                   { delete ($$); }    ty
 %destructor                   { delete ($$); }    typeid
 %destructor                   { delete ($$); }    chunks
+%destructor                   { delete ($$); }    classfields
+%destructor                   { delete ($$); }    methchunk
+%destructor                   { delete ($$); }    methdec
 %destructor                   { delete ($$); }    exp
 %destructor                   { delete ($$); }    tyfield
 %destructor                   { delete ($$); }    tyfields tyfields.1
@@ -232,7 +238,6 @@
 // which can be understood as a list of two TypeChunk containing
 // a unique TypeDec each, or a single TypeChunk containing two TypeDec.
 // We want the latter.
-
 
 %precedence "of"
 %precedence "do" ":="
@@ -261,7 +266,6 @@ program:
 exps:
     %empty          { $$ = tp.td_.make_exps_type(); }
   | exps.1          { $$ = $1; }
-  /*| error ";"       { $$ = printf("Error on \"exp ; exps\"\n"); }*/
 ;
 
 exps.1:
@@ -310,12 +314,19 @@ exp:
   | "while" exp "do" exp                    { $$ = tp.td_.make_WhileExp(@$, $2, $4); }
   | "for" ID ":=" exp "to" exp "do" exp     { $$ = tp.td_.make_ForExp(@$, tp.td_.make_VarDec(@2, $2, nullptr, $4), $6, $8); }
   | "break"                                 { $$ = tp.td_.make_BreakExp(@$); }
-  | "let" chunks "in" exps "end"             { $$ = tp.td_.make_LetExp(@$, $2, tp.td_.make_SeqExp(@$,$4)); }
+  | "let" chunks "in" exps "end"            { $$ = tp.td_.make_LetExp(@$, $2, tp.td_.make_SeqExp(@$,$4)); }
 
   /* Cast of an expression to a given type */
 
   /* An expression metavariable */
   | EXP "(" INT ")"                    { $$ = metavar<ast::Exp>(tp, $3); }
+
+  /* Object creation. */
+  |  "new" typeid                        { $$ = tp.td_.make_ObjectExp(@$, $2); }
+
+  /* Method call. */
+  | lvalue "." ID "(" ")"               { $$ = tp.td_.make_MethodCallExp(@$, $3, nullptr, $1); }
+  | lvalue "." ID "(" function_r ")"    { $$ = tp.td_.make_MethodCallExp(@$, $3, $5, $1); }
 ;
 
 record_r:
@@ -339,7 +350,6 @@ lvalue:
   | lvalue "." ID               { $$ = tp.td_.make_FieldVar(@$, $1, $3); }
   /* Array subscript. */
   | lvalue "[" exp "]"          { $$ = tp.td_.make_SubscriptVar(@$, $1, $3); }
-   /*| lvalue "[" error "]"     { $$ = printf("Error on \"\lvalue [ exp ]\"\n"); free($1);}*/
   | LVALUE "(" INT ")"          { $$ = metavar<ast::Var>(tp, $3); }
 ;
 
@@ -399,13 +409,17 @@ tychunk:
 ;
 
 tydec:
-  "type" ID "=" ty { $$ = tp.td_.make_TypeDec(@$, $2, $4); }
+  "type" ID "=" ty                                      { $$ = tp.td_.make_TypeDec(@$, $2, $4); }
+  | "class" ID "{" classfields "}"                      { $$ = tp.td_.make_TypeDec(@$, $2, tp.td_.make_ClassTy(@$, nullptr, $4)); }
+  | "class" ID "extends" typeid "{" classfields "}"     { $$ =  tp.td_.make_TypeDec(@$, $2, tp.td_.make_ClassTy(@$, $4, $6)); }
 ;
 
 ty:
-  typeid               { $$ = $1; }
-| "{" tyfields "}"     { $$ = tp.td_.make_RecordTy(@$, $2); }
-| "array" "of" typeid  { $$ = tp.td_.make_ArrayTy(@$, $3); }
+  typeid                                            { $$ = $1; }
+| "{" tyfields "}"                                  { $$ = tp.td_.make_RecordTy(@$, $2); }
+| "array" "of" typeid                               { $$ = tp.td_.make_ArrayTy(@$, $3); }
+| "class" "{" classfields "}"                       { $$ = tp.td_.make_ClassTy(@$, nullptr, $3); }
+| "class" "extends" typeid "{" classfields "}"      { $$ = tp.td_.make_ClassTy(@$, $3, $5); }
 ;
 
 tyfields:
@@ -421,7 +435,33 @@ tyfields.1:
 tyfield:
   ID ":" typeid     { $$ = tp.td_.make_Field(@$, $1, $3); }
 ;
+
+/*-------------------.
+| Oriented object    |
+`-------------------*/
+
+/* Class fields. */
+classfields:
+  %empty                                    { $$ = tp.td_.make_ChunkList(@$); }
+  /* Attribute declaration (varchunk). */
+  | varchunk classfields                      { $$ = $2; $$->push_front($1); }
+  /* Method declaration (methchunk). */
+  | methchunk classfields                   { $$ = $2; $$->push_front($1); }
+;
+
+methchunk:
+    methdec %prec CHUNKS        { $$ = tp.td_.make_MethodChunk(@1); $$->push_front(*$1); }
+  | methdec methchunk           { $$ = $2; $$->push_front(*$1); }
+;
+
+methdec:
+    "method" ID "(" tyfieldsbis ")" "=" exp                { $$ = tp.td_.make_MethodDec(@$, $2, $4, nullptr, $7); }
+   | "method" ID "(" tyfieldsbis ")" ":" typeid "=" exp    { $$ = tp.td_.make_MethodDec(@$, $2, $4, $7, $9); }
+;
+
+
 /*********************************************************************/
+
 tyfieldsbis:
   %empty               { $$ = tp.td_.make_VarChunk(@$); }
 | tyfieldsbis.1        { $$ = $1; }
