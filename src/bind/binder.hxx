@@ -23,13 +23,13 @@ namespace bind
     template <typename T>
     void Binder::undeclared(const std::string& k, const T& e)
     {
-        error(e, "undeclared " + k);
+        error(e, "undeclared type:" + k);
     }
 
     template <typename T>
     void Binder::redefinition(const T& e1, const T& e2)
     {
-        error(e1, "redefinition of ");
+        error(e1, "redefinition: " + (std::string)(e1.name_get()));
     }
 
     /*----------------------------.
@@ -56,15 +56,6 @@ namespace bind
         {
             visit_dec_body(*elt);
         }
-        /*for (auto elt = e.begin(); elt != e.end(); ++elt)
-        {
-            for (auto elt2 = e.begin(); elt2 != e.end(); ++elt2){
-                if (elt != elt2) {
-                    if ((*elt)->name_get() == (*elt2)->name_get())
-                        redefinition(**elt, **elt2);
-                }
-            }
-        }*/
     }
 
     /* These specializations are in bind/binder.hxx, so that derived
@@ -89,6 +80,7 @@ namespace bind
     template <>
     inline void Binder::visit_dec_body<ast::FunctionDec>(ast::FunctionDec& e){
         scope_begin();
+        check_main(e);
         super_type::operator()(e);
         scope_end();
     }

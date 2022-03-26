@@ -23,15 +23,19 @@ namespace bind
 
     void Binder::check_main(const ast::FunctionDec& e)
     {
-        if (e.name_get() != "_main") {
+        if (e.name_get() == "_main")
+        {
+            std::cout << "Cross\n";
+            if (!function_list_.is_unique("_main"))
+            {
+                error_ << misc::error::error_type::bind << e.location_get() << " : "
+                       << "redefinition of _main" << std::endl;
+            }
+        }
+        /*if (e.name_get() != "_main") {
             error_ << misc::error::error_type::bind << e.location_get() << " : "
                    << "cannot find reference to _main" << std::endl;
-            error_.exit_on_error();
-        }
-        if (!function_list_.is_unique("_main")){
-            error_ << misc::error::error_type::bind << e.location_get() << " : "
-                   << "redefinition of _main" << std::endl;
-        }
+            error_.exit_on_error();*/
     }
 
     /*----------------.
@@ -98,7 +102,7 @@ namespace bind
         ast::VarDec* var = var_list_.get(e.name_get());
         if (var == nullptr)
         {
-            undeclared("SimpleVar", e);
+            undeclared(" " + (std::string)(e.name_get()), e);
         }
         e.def_set(var);
         super_type::operator()(e);
@@ -109,7 +113,7 @@ namespace bind
         ast::TypeDec* var = type_list_.get(e.name_get());
         if (var == nullptr && e.name_get() != "int" && e.name_get() != "string")
         {
-            undeclared("NameTy", e);
+            undeclared(" " + (std::string)(e.name_get()), e);
         }
         e.def_set(var);
         super_type::operator()(e);
@@ -121,7 +125,7 @@ namespace bind
         ast::FunctionDec* var = function_list_.get(e.name_get());
         if (var == nullptr)
         {
-            undeclared("CallExp", e);
+            undeclared(" " + (std::string)(e.name_get()), e);
         }
         e.def_set(var);
         super_type::operator()(e);
