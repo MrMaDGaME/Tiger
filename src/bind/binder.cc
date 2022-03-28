@@ -25,7 +25,8 @@ namespace bind
     {
         if (e.name_get() == "_main")
         {
-            if (!function_list_.is_unique("_main"))
+           /* if (!function_list_.is_unique("_main"))*/
+           if (!function_list_.is_initial_scope() || function_list_.get("_main") != nullptr)
             {
                 error_ << misc::error::error_type::bind << e.location_get() << " : "
                        << "redefinition of _main" << std::endl;

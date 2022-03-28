@@ -3,6 +3,7 @@
  ** \brief Bind module tasks implementation.
  */
 #include <ast/libast.hh>
+#include <common.hh>
 #include <ast/tasks.hh>
 #include <bind/libbind.hh>
 #include <ostream>
@@ -20,7 +21,10 @@ namespace bind::tasks
 
     void bind_compute()
     {
-        bind::bind_compute(*ast::tasks::the_program);
+        misc::error err = bind::bind_compute(*ast::tasks::the_program);
+        task_error() << err;
+        if (err)
+            task_error().exit();
     }
 
     void bindings_display()

@@ -29,6 +29,7 @@ namespace misc
         void scope_begin();
         void scope_end();
         bool is_unique(const Key& key);
+        bool is_initial_scope();
 
     protected:
         std::vector<std::map<Key, Data>> scope_;

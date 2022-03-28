@@ -73,13 +73,13 @@ namespace misc
     template<typename Key, typename Data>
     bool scoped_map<Key, Data>::is_unique(const Key &key) {
 
-        std::cout << "{\n";
-        for_each(scope_.begin(), scope_.end(), [this, &ostr](std::map<Key, Data> map_){
-            for_each(map_.begin(), map_.end(), [this, &ostr](Key elt) {
+       /* std::cout << "{\n";
+        for_each(scope_.begin(), scope_.end(), [this](std::map<Key, Data> map_){
+            for_each(map_.begin(), map_.end(), [this](Key elt) {
                 std::cout << elt << " -> " << get(elt) << "\n";
             });
         });
-        std::cout << "}\n";
+        std::cout << "}\n";*/
 
         int count = 0;
         for (auto it = scope_.begin(); it != scope_.end(); ++it){
@@ -90,8 +90,7 @@ namespace misc
     }
 
     template<typename Key, typename Data>
-    bool scoped_map<Key, Data>::is_initial_scope(const Key &key) {
-
+    bool scoped_map<Key, Data>::is_initial_scope() {
         return scope_.size() == 1;
     }
 
