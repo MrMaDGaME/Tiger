@@ -131,7 +131,6 @@ namespace bind
 
     void Binder::operator()(ast::FunctionDec& e)
     {
-        check_main(e);
         super_type::operator()(e);
     }
 

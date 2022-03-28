@@ -63,6 +63,7 @@ namespace bind
 
     template <>
     inline void Binder::visit_dec_header<ast::FunctionDec>(ast::FunctionDec& e){
+        check_main(e);
         function_list_.put(e.name_get(), &e);
     }
 
@@ -80,7 +81,6 @@ namespace bind
     template <>
     inline void Binder::visit_dec_body<ast::FunctionDec>(ast::FunctionDec& e){
         scope_begin();
-        check_main(e);
         super_type::operator()(e);
         scope_end();
     }
