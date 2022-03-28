@@ -66,8 +66,10 @@ namespace bind
         void operator()(ast::BreakExp& e) override;
 
         void operator()(ast::SimpleVar& e) override;
-        void operator()(ast::CallExp& e) override;
         void operator()(ast::NameTy& e) override;
+        void operator()(ast::CallExp& e) override;
+
+        void operator()(ast::FunctionDec& e) override;
 
         void operator()(ast::VarChunk& e) override;
         void operator()(ast::FunctionChunk& e) override;

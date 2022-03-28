@@ -118,7 +118,6 @@ namespace bind
         super_type::operator()(e);
     }
 
-
     void Binder::operator()(ast::CallExp& e)
     {
         ast::FunctionDec* var = function_list_.get(e.name_get());
@@ -127,6 +126,12 @@ namespace bind
             undeclared(" " + (std::string)(e.name_get()), e);
         }
         e.def_set(var);
+        super_type::operator()(e);
+    }
+
+    void Binder::operator()(ast::FunctionDec& e)
+    {
+        check_main(e);
         super_type::operator()(e);
     }
 

@@ -200,7 +200,6 @@ namespace ast
     template <template <typename> class Const>
     void GenDefaultVisitor<Const>::operator()(const_t<FunctionDec>& e)
     {
-        check_main(e);
         e.formals_get().accept(*this);
         this->accept(e.result_get());
         this->accept(e.body_get());
