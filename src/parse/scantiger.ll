@@ -47,6 +47,15 @@
                 << misc::escape(yytext) << "'\n";       \
   } while (false)
 
+# define CHECK_OBJECT_EXTENSION()                             \
+    do {                                                      \
+        if (!tp.enable_object_extensions_p_)                  \
+            tp.error_ <<  misc::error::error_type::scan       \
+                      << tp.location_                         \
+                      << ": invalid identifier: `"            \
+                      << misc::escape(yytext) << "'\n";       \
+    } while (false)
+
 
 YY_FLEX_NAMESPACE_BEGIN
 %}
@@ -75,13 +84,13 @@ white_character [\t ]
 %}
 
  /* The rules.  */
-"_chunks"       return TOKEN(CHUNKS);
+"_chunks"       CHECK_EXTENSION(); return TOKEN(CHUNKS);
 
-"_exp"          return TOKEN(EXP);
+"_exp"          CHECK_EXTENSION(); return TOKEN(EXP);
 
-"_lvalue"       return TOKEN(LVALUE);
+"_lvalue"       CHECK_EXTENSION(); return TOKEN(LVALUE);
 
-"_namety"       return TOKEN(NAMETY);
+"_namety"       CHECK_EXTENSION(); return TOKEN(NAMETY);
 
 "if"            return TOKEN(IF);
 
@@ -91,9 +100,9 @@ white_character [\t ]
 
 "break"         return TOKEN(BREAK);
 
-"_cast"         return TOKEN(CAST);
+"_cast"         CHECK_EXTENSION(); return TOKEN(CAST);
 
-"class"         return TOKEN(CLASS);
+"class"         CHECK_OBJECT_EXTENSION(); return TOKEN(CLASS);
 
 "&"             return TOKEN(AND);
 
@@ -113,7 +122,7 @@ white_character [\t ]
 
 "="             return TOKEN(EQ);
 
-"extends"       return TOKEN(EXTENDS);
+"extends"       CHECK_OBJECT_EXTENSION(); return TOKEN(EXTENDS);
 
 "for"           return TOKEN(FOR);
 
@@ -141,11 +150,11 @@ white_character [\t ]
 
 "-"             return TOKEN(MINUS);
 
-"method"        return TOKEN(METHOD);
+"method"        CHECK_OBJECT_EXTENSION(); return TOKEN(METHOD);
 
 "<>"            return TOKEN(NE);
 
-"new"           return TOKEN(NEW);
+"new"           CHECK_OBJECT_EXTENSION(); return TOKEN(NEW);
 
 "nil"           return TOKEN(NIL);
 

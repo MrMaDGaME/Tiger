@@ -48,7 +48,7 @@ namespace misc
     std::ostream& scoped_map<Key, Data>::dump(std::ostream& ostr) const
     {
         ostr << "{\n";
-        for_each(scope_.begin(), scope_.end(), [this, &ostr](map<Key, Data> map_){
+        for_each(scope_.begin(), scope_.end(), [this, &ostr](std::map<Key, Data> map_){
             for_each(map_.begin(), map_.end(), [this, &ostr](Key elt) {
                 ostr << elt << " -> " << get(elt) << "\n";
             });
@@ -72,6 +72,7 @@ namespace misc
 
     template<typename Key, typename Data>
     bool scoped_map<Key, Data>::is_unique(const Key &key) {
+        dump(std::cout);
         int count = 0;
         for (auto it = scope_.begin(); it != scope_.end(); ++it){
             if ((*it).contains(key))

@@ -1,4 +1,1 @@
-let
-  function _main() = ()
-in
-end
+function _main() = ()
