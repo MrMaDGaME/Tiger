@@ -73,7 +73,7 @@ namespace misc
     template<typename Key, typename Data>
     bool scoped_map<Key, Data>::is_unique(const Key &key) {
         int count = 0;
-        for (auto it = scope_.end() - 1; it != scope_.begin() - 1; it--){
+        for (auto it = scope_.begin(); it != scope_.end(); ++it){
             if ((*it).contains(key))
                 count++;
         }
