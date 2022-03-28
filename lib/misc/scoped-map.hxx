@@ -89,6 +89,12 @@ namespace misc
         return count == 1;
     }
 
+    template<typename Key, typename Data>
+    bool scoped_map<Key, Data>::is_initial_scope(const Key &key) {
+
+        return scope_.size() == 1;
+    }
+
     template <typename Key, typename Data>
     inline std::ostream& operator<<(std::ostream& ostr,
                                     const scoped_map<Key, Data>& tbl)
