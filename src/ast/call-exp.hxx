@@ -39,4 +39,8 @@ namespace ast
     {
         def_ = def;
     }
+    inline void CallExp::name_set(misc::symbol name)
+    {
+        name_ = name;
+    }
 } // namespace ast

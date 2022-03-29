@@ -14,4 +14,6 @@ namespace bind
     /// Compute the escaping variables.
     misc::error bind_compute(ast::Ast& tree);
 
+    void rename_compute(ast::Ast& tree);
+
 } // namespace escapes

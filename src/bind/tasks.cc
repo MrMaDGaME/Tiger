@@ -32,5 +32,10 @@ namespace bind::tasks
         ast::bindings_display(std::cout) = true;
     }
 
+    void rename_compute()
+    {
+        bind::rename_compute(*ast::tasks::the_program);
+    }
+
 } // namespace bind::tasks
 

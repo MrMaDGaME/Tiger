@@ -16,10 +16,14 @@ namespace bind::tasks
     TASK_DECLARE("b|bindings-compute",
     "compute the binding variables "
     "and the functions requiring a static link",
-    bind_compute, "parse");//changer le bound certainement
+    bind_compute, "parse");
 
     /// Display binded variables.
     TASK_DECLARE("B|bindings-display", "enable binding display in the AST",
     bindings_display, "");
 
-} // namespace escapes::tasks
+
+    TASK_DECLARE("rename", "rename each var according "
+                           "to the order of declaration", rename_compute, "bindings-compute");
+
+} // namespace bind::tasks

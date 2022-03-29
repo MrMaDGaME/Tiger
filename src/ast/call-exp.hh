@@ -39,6 +39,7 @@ namespace ast
         const misc::symbol name_get() const;
         /// Return declarations of the statement.
         misc::symbol name_get();
+        void name_set(misc::symbol name);
         /// Return instructions executed in the statement.
         const exps_type& args_get() const;
         /// Return instructions executed in the statement.

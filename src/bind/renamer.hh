@@ -53,15 +53,14 @@ namespace bind
         template <class E, class Def>
         void visit(E& e, const Def* def);
 
-        /// \name Visiting definition sites.
-        /// \{
-        // FIXME: Some code was deleted here.
-        /// \}
+        void operator()(ast::VarDec& e) override;
+        void operator()(ast::FunctionDec& e) override;
+        void operator()(ast::TypeDec& e) override;
 
-        /// \name Visiting usage sites.
-        /// \{
-        // FIXME: Some code was deleted here.
-        /// \}
+        void operator()(ast::CallExp& e) override;
+        void operator()(ast::NameTy& e) override;
+        void operator()(ast::SimpleVar& e) override;
+
 
     private:
         /// \name New names.
@@ -70,6 +69,7 @@ namespace bind
         using new_names_type = std::map<const ast::Dec*, misc::symbol>;
         /// Dictionary mapping old declarations to their new names.
         new_names_type new_names_;
+        int count_ = 0;
         /// \}
     };
 

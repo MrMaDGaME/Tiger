@@ -203,31 +203,6 @@ namespace ast
             }
             ostr_ << *e.args_get().at(e.args_get().size() - 1);
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         ostr_ << ")";
     }
 
@@ -317,6 +292,8 @@ namespace ast
         if (bindings_display(ostr_))
             ostr_ << " /* " << &e << " */";
 
+        if (e.type_name_get())
+            ostr_ << " : " << *e.type_name_get();
         ostr_ << " := " << *(e.init_get())
               << misc::iendl;
     }
