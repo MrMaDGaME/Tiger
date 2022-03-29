@@ -1,0 +1,5 @@
+let
+    function arouf(value : int): int =
+    (nil)
+in
+end

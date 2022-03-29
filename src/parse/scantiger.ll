@@ -188,8 +188,11 @@ white_character [\t ]
 
 
 {int}         {
-                int val = std::stoi(yytext);
-                if (val < INT_MIN || val > INT_MAX)
+                int val = 0;
+                try {
+                    val = std::stoi(yytext);
+                }
+                catch (std::out_of_range e)
                 {
                     tp.error_ << misc::error::error_type::scan << tp.location_ << ": int out_of_bound: " << misc::escape(yytext) << '\n';
                 }

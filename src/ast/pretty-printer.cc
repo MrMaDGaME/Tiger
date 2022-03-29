@@ -197,11 +197,37 @@ namespace ast
         if (bindings_display(ostr_))
             ostr_ << " /* " << e.def_get() << " */";
         ostr_ << "(";
-        for (size_t i = 0; i < e.args_get().size() - 1; i++)
-        {
-            ostr_ << *e.args_get().at(i) << ", ";
+        if (e.args_get().size() > 0) {
+            for (size_t i = 0; i < e.args_get().size() - 1; i++) {
+                ostr_ << *e.args_get().at(i) << ", ";
+            }
+            ostr_ << *e.args_get().at(e.args_get().size() - 1);
         }
-        ostr_ << *e.args_get().at(e.args_get().size() - 1);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         ostr_ << ")";
     }
 
@@ -233,11 +259,13 @@ namespace ast
             ostr_ << " /* " << &e << " */";
 
         ostr_ << "." << e.name_get() << "(";
-        for (size_t i = 0; i < e.args_get().size() - 1; i++)
+        if (e.args_get().size() > 0)
         {
-            ostr_ << *e.args_get().at(i) << ", ";
+            for (size_t i = 0; i < e.args_get().size() - 1; i++) {
+                ostr_ << *e.args_get().at(i) << ", ";
+            }
+            ostr_ << *e.args_get().at(e.args_get().size() - 1);
         }
-        ostr_ << *e.args_get().at(e.args_get().size() - 1);
         ostr_ << ")" << misc::iendl;
     }
 
@@ -263,11 +291,14 @@ namespace ast
     void PrettyPrinter::operator()(const RecordTy& e)
     {
         ostr_ << "{";
-        for (size_t i = 0; i < e.fields_get().size() - 1; ++i)
+        if (e.fields_get().size() > 0)
         {
-            ostr_ << *e.fields_get().at(i) << ", ";
+            for (size_t i = 0; i < e.fields_get().size() - 1; ++i) {
+                ostr_ << *e.fields_get().at(i) << ", ";
+            }
+
+            ostr_ << *e.fields_get().at(e.fields_get().size() - 1);
         }
-        ostr_ << *e.fields_get().at(e.fields_get().size() - 1);
         ostr_ << "}";
     }
 

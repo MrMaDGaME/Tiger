@@ -1,6 +1,5 @@
 let
   type me = {}
-  type me = {}
   function twice(a: int, a: int) : int = a + a
 in
   me {} = me {}
