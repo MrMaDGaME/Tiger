@@ -1,0 +1,89 @@
+#!/bin/python3
+import subprocess as sp, sys, difflib, glob
+from termcolor import colored
+
+def execute_good(file):
+	one = sp.run("./../src/tc -A "+ file, shell=True, capture_output=True)
+	two =  sp.run("./../src/tc -A " + file +" | ./../src/tc -A " + file, shell=True, capture_output=True)
+	assert(one.returncode == 0), \
+        f"First Iteration return code : got {one.returncode} expected 0"
+	assert(two.returncode == 0), \
+        f"Second Iteration return code : got {two.returncode} expected 0"
+	assert(one.stderr == b''), \
+	f"First Iteration stderr:\n{one.stderr}"
+	assert(two.stderr == b''), \
+        f"Second Iteration stderr:\n{two.stderr}"
+	assert(one.stdout == two.stdout), \
+	f"diff :\n{diff(one.stdout, two.stdout)}"
+
+def execute_binder(file):
+        one = sp.run("./../src/tc -A "+ file, shell=True, capture_output=True)
+        two =  sp.run("./../src/tc -bBA " + file +" | ./../src/tc -A " + file, shell=True, capture_output=True)
+        assert(one.returncode == 0), \
+        f"First Iteration return code : got {one.returncode} expected 0"
+        assert(two.returncode == 0), \
+        f"Second Iteration return code : got {two.returncode} expected 0"
+        assert(one.stderr == b''), \
+        f"First Iteration stderr:\n{one.stderr}"
+        assert(two.stderr == b''), \
+        f"Second Iteration stderr:\n{two.stderr}"
+        assert(one.stdout == two.stdout), \
+        f"diff :\n{diff(one.stdout, two.stdout)}"
+
+def execute_object(file):
+        one = sp.run("./../src/tc -oA "+ file, shell=True, capture_output=True)
+        two =  sp.run("./../src/tc -oA " + file +" | ./../src/tc -oA " + file, shell=True, capture_output=True)
+        assert(one.returncode == 0), \
+        f"First Iteration return code : got {one.returncode} expected 0"
+        assert(two.returncode == 0), \
+        f"Second Iteration return code : got {two.returncode} expected 0"
+        assert(one.stderr == two.stderr), \
+        f"First Iteration stderr:\n{one.stderr} \n Second Iteration stderr:\n{two.stderr}\n"
+        assert(one.stdout == two.stdout), \
+        f"diff :\n{diff(one.stdout, two.stdout)}"
+
+def execute_fail(file):
+        one = sp.run("./../src/tc -A "+ file, shell=True, capture_output=True)
+        two =  sp.run("./../src/tc -A " + file +" | ./../src/tc -A " + file, shell=True, capture_output=True)
+        assert(one.returncode != 0), \
+        f"First Iteration return code : got {one.returncode} expected != 0"
+        assert(two.returncode != 0),\
+        f"Second Iteration return code : got {two.stderr} expected != 0"
+        assert(one.stderr == two.stderr), \
+        f"diff :\n{diff(one.stderr, two.stderr)}"
+
+def diff(expected: str, actual: str) -> str:
+	expected_lines = expected.splitlines(keepends=True)
+	actual_lines = actual.splitlines(keepends=True)
+	return ''.join(difflib.unified_diff(expected_lines, actual_lines, fromfile='expected', tofile='actual'))
+
+
+if __name__ == "__main__" :
+	print("================= All =================")
+	for f in glob.glob('test[0-9]*.tig'):
+		try :
+			execute_good(f)
+		except AssertionError as Failed:
+			print(f"{f} {colored('failed', 'red')}\n{Failed}")
+
+	print("================= Object =================")
+	for f in glob.glob('testObject*.tig'):
+		try :
+			execute_object(f)
+		except AssertionError as Failed:
+			print(f"{f} {colored('failed', 'red')}\n{Failed}")
+
+
+	print("================= Binder =================")
+	for f in glob.glob('test[0-9]*.tig'):
+		try :
+			execute_binder(f)
+		except AssertionError as Failed:
+			print(f"{f} {colored('failed', 'red')}\n{Failed}")
+
+	print("================= Invalid =================")
+	for f in glob.glob('testFail[0-9]*.tig'):
+		try :
+			execute_binder(f)
+		except AssertionError as Failed:
+			print(f"{f} {colored('Successfully failed', 'green')}\n{Failed}")
