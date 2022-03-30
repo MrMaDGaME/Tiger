@@ -52,7 +52,13 @@ namespace escapes
         /// Import all the overloaded visit methods.
         using super_type::operator();
 
-        // FIXME: Some code was deleted here.
+        void operator()(ast::SimpleVar& e) override;
+        void operator()(ast::VarDec& e) override;
+        void operator()(ast::FunctionDec& e) override;
+
+    private:
+        std::map<ast::VarDec*, int> vars_;
+        int depth_;
     };
 
 } // namespace escapes

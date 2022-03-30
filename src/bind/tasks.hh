@@ -26,4 +26,6 @@ namespace bind::tasks
     TASK_DECLARE("rename", "rename each var according "
                            "to the order of declaration", rename_compute, "bindings-compute");
 
+    DISJUNCTIVE_TASK_DECLARE("bound", "default the computation of bindings to Tiger (without objects nor overloading)", "bindings-compute");
+
 } // namespace bind::tasks
