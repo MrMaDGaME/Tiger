@@ -1,0 +1,6 @@
+let
+  import "test30.tih"
+  import "test30-1.tih"
+in
+    b & a
+end

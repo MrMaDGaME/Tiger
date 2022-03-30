@@ -371,7 +371,7 @@ chunks:
 | tychunk   chunks                      { $$ = $2; $$->push_front($1); }
 | funchunk   chunks                     { $$ = $2; $$->push_front($1); }
 | varchunk   chunks                     { $$ = $2; $$->push_front($1); }
-| "import" STRING chunks                { $$ = tp.parse_import($2, @$); }
+| "import" STRING chunks                { $$ = $3; auto imp = tp.parse_import($2.substr(1, $2.size() -2), @$); if (imp != nullptr) {$$->splice_front(*imp);} }
 | CHUNKS "(" INT ")" chunks             { $$ = $5; $$->splice_front(*(metavar<ast::ChunkList>(tp, $3))); }
 ;
 

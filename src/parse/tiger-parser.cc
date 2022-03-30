@@ -158,10 +158,12 @@ namespace parse
                                               const location& loc)
     {
         // Try to find directory containing the file to import.
+
         misc::path directory_path = library_.find_file(name);
 
         if (directory_path.empty())
         {
+
             error_ << misc::error::error_type::failure << loc << ": " << name
                    << ": file not found.\n";
             return nullptr;
@@ -188,6 +190,7 @@ namespace parse
         location saved_location = location_;
         // Parse the imported file.
         ast::ChunkList* res = nullptr;
+
         try
         {
             res = parse_file(absolute_path);
