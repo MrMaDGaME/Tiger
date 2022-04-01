@@ -11,19 +11,19 @@
 namespace ast
 {
   /** \class ast::CastExp
-     ** \brief Cast the type of an expression to a given type.
-     **
-     ** This node is only used in the bounds checking transformation
-     ** (see desugar::bounds_checks_add).  You don't need to worry
-     ** about it (nor about the `cast' keyword) if you don't implement
-     ** this option.
-     */
+   ** \brief Cast the type of an expression to a given type.
+   **
+   ** This node is only used in the bounds checking transformation
+   ** (see desugar::bounds_checks_add).  You don't need to worry
+   ** about it (nor about the `cast' keyword) if you don't implement
+   ** this option.
+   */
 
   class CastExp : public Exp
   {
   public:
     /** \name Ctor & dtor.
-         ** \{ */
+     ** \{ */
     /// Construct a CastExp node.
     CastExp(const Location& location, Exp* exp, Ty* ty);
     CastExp(const CastExp&) = delete;
@@ -41,7 +41,7 @@ namespace ast
     /// \}
 
     /** \name Accessors.
-         ** \{ */
+     ** \{ */
     /// Return the cast expression.
     const Exp& exp_get() const;
     /// Return the cast expression.

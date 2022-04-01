@@ -21,8 +21,8 @@ namespace ast
   {}
 
   /*-------------------------------.
-    | Object-related visit methods.  |
-    `-------------------------------*/
+  | Object-related visit methods.  |
+  `-------------------------------*/
 
   template <template <typename> class Const>
   void GenObjectVisitor<Const>::operator()(const_t<ClassTy>& e)

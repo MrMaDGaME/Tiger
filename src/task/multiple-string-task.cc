@@ -18,4 +18,4 @@ namespace task
 
   void MultipleStringTask::execute() const { execute_(arg_get()); }
 
-} // namespace task
+} //namespace task

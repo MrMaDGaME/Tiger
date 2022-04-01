@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <iterator>
+
 #include <range/v3/algorithm/replace_copy.hpp>
 #include <range/v3/iterator.hpp>
 #include <task/task.hh>

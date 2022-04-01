@@ -9,6 +9,7 @@
 #include <set>
 #include <string>
 #include <vector>
+
 #include <boost/functional/hash.hpp> // Required by boost/graph/detail/edge.hpp.
 /* Forward declarations to help the compiler not to mix up the
    namespace `target' with `boost::target'.  This happens in the
@@ -48,14 +49,15 @@ namespace boost
 } // namespace boost
 
 #include <boost/graph/adjacency_list.hpp>
+
 #include <misc/set.hh>
 
 /// Handling of generic, oriented or undirected, graph.
 namespace misc
 {
   /*--------.
-    | Graph.  |
-    `--------*/
+  | Graph.  |
+  `--------*/
 
   /// Graph property: name.
   using name_prop_type = boost::property<boost::graph_name_t, std::string>;
@@ -137,14 +139,14 @@ namespace misc
   inline std::ostream& operator<<(std::ostream& ostr, empty);
 
   /*----------------------------------------------------.
-    | Specialization for directed (bidirectional) graph.  |
-    `----------------------------------------------------*/
+  | Specialization for directed (bidirectional) graph.  |
+  `----------------------------------------------------*/
 
   /* Note that boost::bidirectionalS is like boost::directedS, except
-       that it provides access to both in-edges and out-edges, whereas
-       boost::directedS gives us only out-edges.  The consequence is
-       that a bidirectional graph is twice as large as its directed
-       version.  */
+     that it provides access to both in-edges and out-edges, whereas
+     boost::directedS gives us only out-edges.  The consequence is
+     that a bidirectional graph is twice as large as its directed
+     version.  */
   template <typename VertexLabel = empty, typename EdgeLabel = empty>
   class directed_graph
     : public graph<boost::bidirectionalS, VertexLabel, EdgeLabel>
@@ -186,8 +188,8 @@ namespace misc
   };
 
   /*--------------------------------------.
-    | Specialization for undirected graph.  |
-    `--------------------------------------*/
+  | Specialization for undirected graph.  |
+  `--------------------------------------*/
 
   template <typename VertexLabel = empty, typename EdgeLabel = empty>
   class undirected_graph

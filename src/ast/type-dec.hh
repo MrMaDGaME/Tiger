@@ -7,15 +7,18 @@
 
 #include <ast/dec.hh>
 #include <ast/ty.hh>
+#include <ast/type-constructor.hh>
 
 namespace ast
 {
   /// TypeDec.
-  class TypeDec : public Dec
+  class TypeDec
+    : public Dec
+    , public TypeConstructor
   {
   public:
     /** \name Ctor & dtor.
-         ** \{ */
+     ** \{ */
     /// Construct a TypeDec node.
     TypeDec(const Location& location, misc::symbol name, Ty* ty);
     TypeDec(const TypeDec&) = delete;
@@ -33,7 +36,7 @@ namespace ast
     /// \}
 
     /** \name Accessors.
-         ** \{ */
+     ** \{ */
     /// Return type definition.
     const Ty& ty_get() const;
     /// Return type definition.

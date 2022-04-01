@@ -8,6 +8,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <common.hh>
+
 #include <task/task-register.hh>
 
 int main(int argc, char** argv)

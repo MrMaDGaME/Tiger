@@ -9,6 +9,7 @@
 #include <fstream>
 #include <sstream>
 #include <tuple>
+
 #include <misc/algorithm.hh>
 #include <misc/contract.hh>
 #include <misc/deref.hh>
@@ -16,8 +17,8 @@
 namespace misc
 {
   /*--------.
-    | Graph.  |
-    `--------*/
+  | Graph.  |
+  `--------*/
 
   template <typename Orientation, typename VertexLabel, typename EdgeLabel>
   typename graph<Orientation, VertexLabel, EdgeLabel>::vertex_descriptor
@@ -27,19 +28,19 @@ namespace misc
   }
 
   /*-----------------------------------------------------------------.
-    | graph::print.                                                    |
-    |                                                                  |
-    | For oriented graph, keeping edges bound to the source node looks |
-    | nicer, while an edge oriented dump is more appropriate for       |
-    | unoriented graphs.  In the latter case, be sure not to output    |
-    | each edge twice.                                                 |
-    |                                                                  |
-    | FIXME: We do lack something similar to Escape when "deref"ing,   |
-    | for if there are strings in there, they should be escaped for    |
-    | dotty.                                                           |
-    |                                                                  |
-    | FIXME: Enforce the order by sorting before outputting.           |
-    `-----------------------------------------------------------------*/
+  | graph::print.                                                    |
+  |                                                                  |
+  | For oriented graph, keeping edges bound to the source node looks |
+  | nicer, while an edge oriented dump is more appropriate for       |
+  | unoriented graphs.  In the latter case, be sure not to output    |
+  | each edge twice.                                                 |
+  |                                                                  |
+  | FIXME: We do lack something similar to Escape when "deref"ing,   |
+  | for if there are strings in there, they should be escaped for    |
+  | dotty.                                                           |
+  |                                                                  |
+  | FIXME: Enforce the order by sorting before outputting.           |
+  `-----------------------------------------------------------------*/
 
   template <typename Orientation, typename VertexLabel, typename EdgeLabel>
   std::ostream&
@@ -132,8 +133,8 @@ namespace misc
   inline std::ostream& operator<<(std::ostream& ostr, empty) { return ostr; }
 
   /*----------------.
-    | DirectedGraph.  |
-    `----------------*/
+  | DirectedGraph.  |
+  `----------------*/
 
   template <typename VertexLabel, typename EdgeLabel>
   void
@@ -153,8 +154,8 @@ namespace misc
   }
 
   /*------------------.
-    | UndirectedGraph.  |
-    `------------------*/
+  | UndirectedGraph.  |
+  `------------------*/
 
   template <typename VertexLabel, typename EdgeLabel>
   void undirected_graph<VertexLabel, EdgeLabel>::edge_add(

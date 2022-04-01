@@ -5,6 +5,7 @@
 
 #include <cstdlib>
 #include <fstream>
+
 #include <parse/parsetiger.hh>
 #include <parse/scantiger.hh>
 #include <parse/tiger-parser.hh>
@@ -58,11 +59,11 @@ namespace parse
     std::string* fn = std::get_if<std::string>(&input_);
 
     /* The (address of) the string behind the symbol FILENAME is
-           guaranteed to remain valid even after the symbol has been
-           destroyed, so we can safely pass `&filename.name_get()' to
-           `location_.initialize()'.  As for other symbols, the
-           corresponding string will be deallocated at the end of the
-           program.  */
+       guaranteed to remain valid even after the symbol has been
+       destroyed, so we can safely pass `&filename.name_get()' to
+       `location_.initialize()'.  As for other symbols, the
+       corresponding string will be deallocated at the end of the
+       program.  */
     misc::symbol filename(fn == nullptr  ? ""
                             : *fn == "-" ? "standard input"
                                          : *fn);
@@ -109,8 +110,8 @@ namespace parse
   }
 
   /*---------------.
-    | Parse a file.  |
-    `---------------*/
+  | Parse a file.  |
+  `---------------*/
 
   ast_type TigerParser::parse_file(const misc::path& name)
   {
@@ -121,12 +122,14 @@ namespace parse
   }
 
   /*----------------.
-    | Parse a Tweast. |
-    `----------------*/
+  | Parse a Tweast. |
+  `----------------*/
 
   ast_type TigerParser::parse_input(Tweast& s, bool extensions)
   {
     std::swap(extensions, enable_extensions_p_);
+    // Merge all aggregated Tweasts into a single one.
+    s.flatten();
     if (parse_trace_p_)
       std::cerr << "Parsing string: " << s.input_get() << '\n';
     input_ = &s;
@@ -138,8 +141,8 @@ namespace parse
   ast_type TigerParser::parse(Tweast& s) { return parse_input(s, true); }
 
   /*-----------------.
-    | Parse a string.  |
-    `-----------------*/
+  | Parse a string.  |
+  `-----------------*/
 
   ast_type TigerParser::parse(const std::string& s)
   {
@@ -148,14 +151,13 @@ namespace parse
   }
 
   /*-----------------------.
-    | Parse a Tiger import.  |
-    `-----------------------*/
+  | Parse a Tiger import.  |
+  `-----------------------*/
 
   ast::ChunkList* TigerParser::parse_import(const std::string& name,
                                             const location& loc)
   {
     // Try to find directory containing the file to import.
-
     misc::path directory_path = library_.find_file(name);
 
     if (directory_path.empty())
@@ -186,7 +188,6 @@ namespace parse
     location saved_location = location_;
     // Parse the imported file.
     ast::ChunkList* res = nullptr;
-
     try
       {
         res = parse_file(absolute_path);

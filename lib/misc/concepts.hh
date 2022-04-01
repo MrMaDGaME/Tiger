@@ -56,8 +56,8 @@ namespace misc
                  std::pair<typename M::key_type, typename M::mapped_type>>;
   };
 
-  // Concept describing a ConstIterable but adds a constraint on the
-  // value_type the held type should be convertible into T
+  // Concept describing a ConstIterable but adds a constraint on the value_type
+  // the held type should be convertible into T
   template <typename Container, typename T>
   concept ConstIterableType = ConstIterable<
     Container> && std::convertible_to<typename Container::value_type, T>;

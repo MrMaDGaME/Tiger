@@ -16,7 +16,7 @@ namespace ast
   {
   public:
     /** \name Ctor & dtor.
-         ** \{ */
+     ** \{ */
     /// Construct a NameTy node.
     NameTy(const Location& location, misc::symbol name);
     NameTy(const NameTy&) = delete;
@@ -33,7 +33,7 @@ namespace ast
     /// \}
 
     /** \name Accessors.
-         ** \{ */
+     ** \{ */
     /// Return the name of the type.
     misc::symbol name_get() const;
     /// Set the name of the type.

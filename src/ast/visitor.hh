@@ -12,12 +12,12 @@
 namespace ast
 {
   /** \brief Root class of all Ast visitors.
-     **
-     ** GenVisitor<CONSTIFY> is the root class of all Ast visitors. */
+   **
+   ** GenVisitor<CONSTIFY> is the root class of all Ast visitors. */
   template <template <typename> class Const> class GenVisitor
   {
     /** \name Ctor & dtor.
-         ** \{ */
+     ** \{ */
   public:
     /// Convenient abbreviation.
     template <typename Type> using const_t = typename Const<Type>::type;
@@ -71,34 +71,34 @@ namespace ast
   protected:
     /** A convenient shortcut for recurring code like this:
 
-            \code
-            if (e)
-              e->accept(*this);
-            \endcode
+        \code
+        if (e)
+          e->accept(*this);
+        \endcode
 
-            However, the drawback of this approach is that it doesn't take
-            care of the constness, and any \a const violation will be
-            reported \em within the body of this method, not at its
-            corresponding call site.
+        However, the drawback of this approach is that it doesn't take
+        care of the constness, and any \a const violation will be
+        reported \em within the body of this method, not at its
+        corresponding call site.
 
-            We cannot use the misc/select_const.hh approach here, since
-            the compiler cannot resolve a function overloaded or
-            specialized on an associated type of a template.  E.g., writing
-            \a accept like this:
+        We cannot use the misc/select_const.hh approach here, since
+        the compiler cannot resolve a function overloaded or
+        specialized on an associated type of a template.  E.g., writing
+        \a accept like this:
 
-            \code
-            template <typename E>
-            void accept(const_t<E>* e);
-            \endcode
+        \code
+        template <typename E>
+        void accept(const_t<E>* e);
+        \endcode
 
-            won't work directly.  Of course, one can help the compiler,
-            providing it with \a E
+        won't work directly.  Of course, one can help the compiler,
+        providing it with \a E
 
-            \code
-            accept<ast::NameTy>(e.result_get());
-            \endcode
+        \code
+        accept<ast::NameTy>(e.result_get());
+        \endcode
 
-            but this is painful.  */
+        but this is painful.  */
     template <typename E> void accept(E* e);
   };
 

@@ -10,37 +10,37 @@
 namespace ast
 {
   /** GenObjectVisitor<CONSTNESS-SELECTOR> provides default visit
-        methods for object-related nodes.  This class is meant to factor
-        the code visiting object-related nodes.
+      methods for object-related nodes.  This class is meant to factor
+      the code visiting object-related nodes.
 
-        ast::GenObjectVisitor inherits virtually from ast::GenVisitor
-        to allow diamond inheritance, notably for a ``compatibility''
-        purpose with ast::GenDefaultVisitor.
+      ast::GenObjectVisitor inherits virtually from ast::GenVisitor
+      to allow diamond inheritance, notably for a ``compatibility''
+      purpose with ast::GenDefaultVisitor.
 
-        For instance, bind::Binder, a visitor that handles bindings for
-        an AST without objects, inherits from ast::DefaultVisitor to
-        factor default (``empty'') traversal implementations for
-        non-object-related nodes, and from ast::ObjectVisitor for
-        object-related nodes.
+      For instance, bind::Binder, a visitor that handles bindings for
+      an AST without objects, inherits from ast::DefaultVisitor to
+      factor default (``empty'') traversal implementations for
+      non-object-related nodes, and from ast::ObjectVisitor for
+      object-related nodes.
 
-        \verbatim
+      \verbatim
 
-                               /ast::Visitor/
-                                     ^
-                  (virtual)          |          (virtual)
-                      ,--------------+--------------.
-                      |                             |
-                      |                             |
-            /ast::DefaultVisitor/         /ast::ObjectVisitor/
-                      ^                             ^
-                      |                             |
-                      `--------------+--------------'
-                                     |
-                                     |
-                                bind::Binder
+                             /ast::Visitor/
+                                   ^
+                (virtual)          |          (virtual)
+                    ,--------------+--------------.
+                    |                             |
+                    |                             |
+          /ast::DefaultVisitor/         /ast::ObjectVisitor/
+                    ^                             ^
+                    |                             |
+                    `--------------+--------------'
+                                   |
+                                   |
+                              bind::Binder
 
-        \endverbatim
-    */
+      \endverbatim
+  */
   template <template <typename> class Const>
   class GenObjectVisitor : virtual public GenVisitor<Const>
   {
@@ -55,7 +55,7 @@ namespace ast
     template <typename Type> using const_t = typename Const<Type>::type;
 
     /** \name Ctor & dtor.
-         ** \{ */
+     ** \{ */
     /// Construct an object visitor.
     GenObjectVisitor();
     /// Destroy an object visitor.

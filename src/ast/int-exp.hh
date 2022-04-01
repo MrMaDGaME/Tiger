@@ -14,7 +14,7 @@ namespace ast
   {
   public:
     /** \name Ctor & dtor.
-         ** \{ */
+     ** \{ */
     /// Construct an IntExp node.
     IntExp(const Location& location, int value);
     IntExp(const IntExp&) = delete;
@@ -31,7 +31,7 @@ namespace ast
     /// \}
 
     /** \name Accessors.
-         ** \{ */
+     ** \{ */
     /// Return stored integer value.
     int value_get() const;
     /** \} */

@@ -10,38 +10,38 @@
 namespace ast
 {
   /** GenNonObjectVisitor<CONSTNESS-SELECTOR> provides aborting visit
-        methods for object-related nodes.  This class is meant to factor
-        the code visiting object-related nodes in visitors bound to
-        process AST \em without objects.
+      methods for object-related nodes.  This class is meant to factor
+      the code visiting object-related nodes in visitors bound to
+      process AST \em without objects.
 
-        ast::GenNonObjectVisitor inherits virtually from ast::GenVisitor
-        to allow diamond inheritance, notably for a ``compatibility''
-        purpose with ast::GenDefaultVisitor.
+      ast::GenNonObjectVisitor inherits virtually from ast::GenVisitor
+      to allow diamond inheritance, notably for a ``compatibility''
+      purpose with ast::GenDefaultVisitor.
 
-        For instance, type::TypeChecker, a visitor that checks the types
-        of an AST without objects, inherits from ast::DefaultVisitor to
-        factor default (``empty'') traversal implementations, and from
-        ast::NonObjectVisitor to get an aborting behavior for
-        object-related nodes.
+      For instance, type::TypeChecker, a visitor that checks the types
+      of an AST without objects, inherits from ast::DefaultVisitor to
+      factor default (``empty'') traversal implementations, and from
+      ast::NonObjectVisitor to get an aborting behavior for
+      object-related nodes.
 
-        \verbatim
+      \verbatim
 
-                               /ast::Visitor/
-                                     ^
-                  (virtual)          |          (virtual)
-                      ,--------------+--------------.
-                      |                             |
-                      |                             |
-            /ast::DefaultVisitor/         /ast::NonObjectVisitor/
-                      ^                             ^
-                      |                             |
-                      `--------------+--------------'
-                                     |
-                                     |
-                             type::TypeChecker
+                             /ast::Visitor/
+                                   ^
+                (virtual)          |          (virtual)
+                    ,--------------+--------------.
+                    |                             |
+                    |                             |
+          /ast::DefaultVisitor/         /ast::NonObjectVisitor/
+                    ^                             ^
+                    |                             |
+                    `--------------+--------------'
+                                   |
+                                   |
+                           type::TypeChecker
 
-        \endverbatim
-    */
+      \endverbatim
+  */
   template <template <typename> class Const>
   class GenNonObjectVisitor : virtual public GenVisitor<Const>
   {
@@ -56,7 +56,7 @@ namespace ast
     template <typename Type> using const_t = typename Const<Type>::type;
 
     /** \name Ctor & dtor.
-         ** \{ */
+     ** \{ */
     /// Construct a non-object visitor.
     GenNonObjectVisitor();
     /// Destroy a non-object visitor.

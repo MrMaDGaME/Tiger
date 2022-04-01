@@ -15,7 +15,7 @@ namespace ast
   {
   public:
     /** \name Ctor & dtor.
-         ** \{ */
+     ** \{ */
     /// Construct a SubscriptVar node.
     SubscriptVar(const Location& location, Var* var, Exp* index);
     SubscriptVar(const SubscriptVar&) = delete;
@@ -33,7 +33,7 @@ namespace ast
     /// \}
 
     /** \name Accessors.
-         ** \{ */
+     ** \{ */
     /// Return the mother variable.
     const Var& var_get() const;
     /// Return the mother variable.

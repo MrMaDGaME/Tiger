@@ -76,10 +76,9 @@ namespace misc
     operator const U&() const;
 
     /** \brief Visit variants of this class.
-         ** std::visit does not handle classes inheriting from std::variant,
-         *hence
-         ** these wrappers.
-         ** \{ */
+     ** std::visit does not handle classes inheriting from std::variant, hence
+     ** these wrappers.
+     ** \{ */
     template <typename V>
     requires Visits<V, T, Ts...>
     auto visit(V&& visitor) const;

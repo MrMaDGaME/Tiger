@@ -9,6 +9,7 @@
 #include <filesystem>
 #include <fstream>
 #include <map>
+
 #include <common.hh>
 #include <misc/algorithm.hh>
 #include <range/v3/algorithm/find_if.hpp>
@@ -196,16 +197,16 @@ namespace task
     // Give control to boost.
     try
       {
-        // Sadly we can't use `boost::program_options::variables_map'. By
-        // doing so, we would lose the chronological order of the tasks,
-        // which is capital for TC to work.
+        // Sadly we can't use `boost::program_options::variables_map'. By doing
+        // so, we would lose the chronological order of the tasks, which is
+        // capital for TC to work.
         auto parsed = po::command_line_parser(argc, argv)
                         .options(all_opts)
                         .positional(positional)
                         .run();
 
-        // We don't want to fail if these options are present. So we take
-        // care of them right now.
+        // We don't want to fail if these options are present. So we take care
+        // of them right now.
         if (is_parsed("help", parsed.options))
           std::cout << visible_desc;
         else if (is_parsed("version", parsed.options))
@@ -253,8 +254,7 @@ namespace task
           }
         else
           {
-            // Replace the traditional calls to `vm.store()' and
-            // `vm.notify()'.
+            // Replace the traditional calls to `vm.store()' and `vm.notify()'.
             for (const auto& i : parsed.options)
               {
                 auto option = parsed.description->find(i.string_key, false);

@@ -6,6 +6,7 @@
 #pragma once
 
 #include <ostream>
+
 #include <misc/deref.hh>
 #include <misc/separator.hh>
 

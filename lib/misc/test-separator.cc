@@ -5,6 +5,7 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
+
 #include <misc/contract.hh>
 #include <misc/separator.hh>
 #include <range/v3/algorithm/fill.hpp>

@@ -25,4 +25,4 @@ namespace task
     std::string& var_;
   };
 
-} // namespace task
+} //namespace task

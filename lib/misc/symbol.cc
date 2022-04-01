@@ -5,6 +5,7 @@
 
 #include <sstream>
 #include <string>
+
 #include <misc/symbol.hh>
 
 namespace misc

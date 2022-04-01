@@ -6,13 +6,14 @@
 #pragma once
 
 #include <typeinfo>
+
 #include <misc/ref.hh>
 
 namespace misc
 {
   /*-----------------.
-    | Ctors and dtor.  |
-    `-----------------*/
+  | Ctors and dtor.  |
+  `-----------------*/
 
   template <typename T>
   template <typename U>
@@ -31,8 +32,8 @@ namespace misc
   {}
 
   /*---------------------.
-    | Equality operators.  |
-    `---------------------*/
+  | Equality operators.  |
+  `---------------------*/
 
   template <typename T> bool ref<T>::operator==(const T* other) const
   {
@@ -45,8 +46,8 @@ namespace misc
   }
 
   /*--------.
-    | Casts.  |
-    `--------*/
+  | Casts.  |
+  `--------*/
 
   template <typename T> template <typename U> ref<U> ref<T>::unsafe_cast() const
   {

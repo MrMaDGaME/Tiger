@@ -7,7 +7,9 @@
 
 #include <iostream>
 #include <sstream>
+
 #include <boost/lexical_cast.hpp>
+
 #include <misc/contract.hh>
 #include <misc/indent.hh>
 #include <misc/map.hh>

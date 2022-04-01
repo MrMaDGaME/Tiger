@@ -7,6 +7,7 @@
 #include <iomanip>
 #include <ios>
 #include <unordered_map>
+
 #include <misc/escape.hh>
 
 namespace misc
@@ -29,9 +30,9 @@ namespace misc
     char fill = o.fill('0');
 
     /* The GNU Assembler does not recognize `\a' as a valid
-           escape sequence, hence this explicit conversion to the
-           007 octal character.  For more information, see
-           http://sourceware.org/binutils/docs/as/Strings.html.  */
+       escape sequence, hence this explicit conversion to the
+       007 octal character.  For more information, see
+       http://sourceware.org/binutils/docs/as/Strings.html.  */
     static const std::unordered_map<char, std::string> escapes = {
       {'\a', "\\007"}, {'\b', "\\b"},  {'\f', "\\f"},
       {'\n', "\\n"},   {'\r', "\\r"},  {'\t', "\\t"},

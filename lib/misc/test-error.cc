@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <sstream>
+
 #include <misc/contract.hh>
 #include <misc/error.hh>
 

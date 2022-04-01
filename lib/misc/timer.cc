@@ -6,14 +6,15 @@
 #include <iomanip>
 #include <sys/times.h>
 #include <unistd.h>
+
 #include <misc/contract.hh>
 #include <misc/timer.hh>
 
 namespace misc
 {
   /*-----------------.
-    | timer::time_var.  |
-    `-----------------*/
+  | timer::time_var.  |
+  `-----------------*/
 
   timer::time_var::time_var()
     : initial(true)
@@ -52,8 +53,8 @@ namespace misc
   }
 
   /*--------.
-    | timer.  |
-    `--------*/
+  | timer.  |
+  `--------*/
 
   timer::timer()
     : dump_stream(nullptr)

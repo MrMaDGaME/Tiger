@@ -7,14 +7,15 @@
 
 #include <list>
 #include <map>
+
 #include <misc/map.hh>
 
 namespace misc
 {
   /** \brief A renaming mapping defaulting to identity:
-        Mapping a class with itself (endomorphism).
-        Unless a value is already mapped onto another, map it to itself
-        if nonstrict. This is a special case of std::map. */
+      Mapping a class with itself (endomorphism).
+      Unless a value is already mapped onto another, map it to itself
+      if nonstrict. This is a special case of std::map. */
   template <class T> class endomap : public map<T, T>
   {
   public:

@@ -7,6 +7,7 @@
 
 #include <functional>
 #include <ostream>
+
 #include <misc/algorithm.hh>
 #include <range/v3/algorithm.hpp>
 

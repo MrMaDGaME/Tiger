@@ -6,6 +6,7 @@
 
 #include <exception>
 #include <iostream>
+
 #include <common.hh>
 #include <task/int-task.hh>
 
@@ -51,4 +52,4 @@ namespace task
     // Assignment done in arg_set.
   }
 
-} // namespace task
+} //namespace task

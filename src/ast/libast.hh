@@ -6,8 +6,10 @@
 #pragma once
 
 #include <iosfwd>
-#include <ast/fwd.hh>
+
 #include <misc/xalloc.hh>
+
+#include <ast/fwd.hh>
 
 /// Ast management.
 namespace ast

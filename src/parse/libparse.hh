@@ -8,6 +8,7 @@
 #include <set>
 #include <string>
 #include <utility>
+
 #include <ast/fwd.hh>
 #include <misc/error.hh>
 #include <misc/file-library.hh>
@@ -16,8 +17,7 @@
 /// Parsing the input, delivering an ast::Ast.
 namespace parse
 {
-  /// \brief Parse a Tiger file, return the corresponding abstract syntax
-  /// tree.
+  /// \brief Parse a Tiger file, return the corresponding abstract syntax tree.
   ///
   /// \param prelude                    name of the prelude file.
   /// \param fname                      path and name of the tiger file.

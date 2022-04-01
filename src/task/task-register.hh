@@ -10,7 +10,9 @@
 #include <map>
 #include <string>
 #include <vector>
+
 #include <boost/program_options.hpp>
+
 #include <misc/timer.hh>
 #include <task/fwd.hh>
 
@@ -18,10 +20,10 @@ namespace task
 {
   /** \brief Register Tasks.
 
-    The purpose of the TaskRegister class is to collect tasks
-    and organize their execution using their dependencies (like 'make').
-    For modeling details, see Design Patterns: singleton.
-    */
+  The purpose of the TaskRegister class is to collect tasks
+  and organize their execution using their dependencies (like 'make').
+  For modeling details, see Design Patterns: singleton.
+  */
   class TaskRegister
   {
     // Make it non-copyable.
@@ -38,7 +40,7 @@ namespace task
     static TaskRegister& instance();
 
     /** \name Tasks registering.
-         ** \{ */
+     ** \{ */
     /// Register task \a task.
     void register_task(const SimpleTask& task);
     void register_task(const ArgumentTask& task);
@@ -52,20 +54,20 @@ namespace task
     /// \name Task reordering.
   private:
     /** \brief Resolve dependencies between tasks.
-         **
-         ** Resolve dependencies on tasks registered for execution.
-         ** Make a depth first search of implicit tasks graph,
-         ** check cycles and build an ordered list of tasks. */
+     **
+     ** Resolve dependencies on tasks registered for execution.
+     ** Make a depth first search of implicit tasks graph,
+     ** check cycles and build an ordered list of tasks. */
     void resolve_dependencies(const Task& task);
 
   public:
     /** \brief Parse \a argv and determine which tasks to execute.
-         **
-         ** Use boost::program_options. */
+     **
+     ** Use boost::program_options. */
     char* parse_arg(int argc, char* argv[]);
 
     /** \name Display TaskRegister content.
-         ** \{ */
+     ** \{ */
     /// Display registered Tasks.
     std::ostream& print_task_list(std::ostream& ostr);
     /// Display task graph.
@@ -74,13 +76,13 @@ namespace task
     std::ostream& print_task_order(std::ostream& ostr);
 
     /** \name Using registered Tasks.
-         ** \{ */
+     ** \{ */
     /// Execute tasks, checking dependencies.
     void execute();
     /** \} */
 
     /** \name Time management.
-         ** \{ */
+     ** \{ */
     /// Access to the tasks timer.
     const misc::timer& timer_get() const;
     /** \} */

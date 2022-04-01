@@ -6,22 +6,23 @@
 #pragma once
 
 #include <string>
+
 #include <task/task.hh>
 
 namespace task
 {
   /** \brief A `Task' expecting arguments prior to be executed.
 
-    This class embodies tasks which need an additional parameter for their
-    `execute()' method. Therefore a call to `arg_set()' must be made prior to
-    the `execute()' method, to set the value of this expected argument.
-    This class also automates the registering of its derived classes, as does
-    its sibling class `SimpleTask' for tasks without additional argument.
-    */
+  This class embodies tasks which need an additional parameter for their
+  `execute()' method. Therefore a call to `arg_set()' must be made prior to
+  the `execute()' method, to set the value of this expected argument.
+  This class also automates the registering of its derived classes, as does its
+  sibling class `SimpleTask' for tasks without additional argument.
+  */
   class ArgumentTask : public Task
   {
     /** \name Ctor & dtor.
-         ** \{ */
+     ** \{ */
   public:
     /// Construct and register an ArgumentTask.
     ArgumentTask(const char* name,
@@ -33,7 +34,7 @@ namespace task
     /** \} */
 
     /** \name Accessors.
-         ** \{ */
+     ** \{ */
   public:
     /// Access to 'arg'.
     const std::string& arg_get() const;

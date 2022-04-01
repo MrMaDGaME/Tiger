@@ -34,7 +34,7 @@ namespace ast
 
   public:
     /** \name Ctor & dtor.
-         ** \{ */
+     ** \{ */
     /// Construct an OpExp node.
     OpExp(const Location& location, Exp* left, OpExp::Oper oper, Exp* right);
     OpExp(const OpExp&) = delete;
@@ -52,7 +52,7 @@ namespace ast
     /// \}
 
     /** \name Accessors.
-         ** \{ */
+     ** \{ */
     /// Return left operand.
     const Exp& left_get() const;
     /// Return left operand.

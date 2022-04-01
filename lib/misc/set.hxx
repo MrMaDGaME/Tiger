@@ -7,6 +7,7 @@
 
 #include <algorithm>
 #include <ostream>
+
 #include <misc/contract.hh>
 #include <misc/set.hh>
 
@@ -36,7 +37,7 @@ namespace misc
   }
 
   /* \brief Return the addition of \a data into \a this.
-        \a data must not yet be part of \a this. */
+      \a data must not yet be part of \a this. */
   template <class Key, class Compare, class Allocator>
   inline set<Key, Compare, Allocator>
   set<Key, Compare, Allocator>::operator+(const Key& data) const
@@ -48,7 +49,7 @@ namespace misc
   }
 
   /* \brief Insert \a data in \a this.
-        \a data must not yet be part of \a this. */
+      \a data must not yet be part of \a this. */
   template <class Key, class Compare, class Allocator>
   inline set<Key, Compare, Allocator>&
   set<Key, Compare, Allocator>::operator+=(const Key& data)
@@ -59,7 +60,7 @@ namespace misc
   }
 
   /* \brief Return the removal of \a data into \a this.
-        \a data must be part of \a this. */
+      \a data must be part of \a this. */
   template <class Key, class Compare, class Allocator>
   inline set<Key, Compare, Allocator>
   set<Key, Compare, Allocator>::operator-(const Key& data) const
@@ -71,7 +72,7 @@ namespace misc
   }
 
   /* \brief Remove \a data from \a this.
-        \a data must be part of \a this. */
+      \a data must be part of \a this. */
   template <class Key, class Compare, class Allocator>
   inline set<Key, Compare, Allocator>&
   set<Key, Compare, Allocator>::operator-=(const Key& data)

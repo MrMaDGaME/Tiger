@@ -6,13 +6,14 @@
 #pragma once
 
 #include <utility>
+
 #include <misc/xalloc.hh>
 
 namespace misc
 {
   /*----------------.
-    | iomanipulator.  |
-    `----------------*/
+  | iomanipulator.  |
+  `----------------*/
 
   inline std::ostream& operator<<(std::ostream& o, const iomanipulator& g)
   {
@@ -21,8 +22,8 @@ namespace misc
   }
 
   /*---------------------.
-    | xalloc<StoredType>.  |
-    `---------------------*/
+  | xalloc<StoredType>.  |
+  `---------------------*/
 
   template <class StoredType>
   template <typename... Args>
@@ -63,8 +64,8 @@ namespace misc
   }
 
   /*-----------.
-    | set_type.  |
-    `-----------*/
+  | set_type.  |
+  `-----------*/
 
   template <class StoredType>
   xalloc<StoredType>::set_type::set_type(const xalloc& slot, StoredType& data)
@@ -86,8 +87,8 @@ namespace misc
   }
 
   /*-----------.
-    | get_type.  |
-    `-----------*/
+  | get_type.  |
+  `-----------*/
 
   template <class StoredType>
   xalloc<StoredType>::get_type::get_type(const xalloc& slot, StoredType& data)
@@ -109,8 +110,8 @@ namespace misc
   }
 
   /*------------.
-    | swap_type.  |
-    `------------*/
+  | swap_type.  |
+  `------------*/
 
   template <class StoredType>
   xalloc<StoredType>::swap_type::swap_type(const xalloc& slot, StoredType& data)

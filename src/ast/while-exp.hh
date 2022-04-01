@@ -14,7 +14,7 @@ namespace ast
   {
   public:
     /** \name Ctor & dtor.
-         ** \{ */
+     ** \{ */
     /// Construct a WhileExp node.
     WhileExp(const Location& location, Exp* test, Exp* body);
     WhileExp(const WhileExp&) = delete;
@@ -32,7 +32,7 @@ namespace ast
     /// \}
 
     /** \name Accessors.
-         ** \{ */
+     ** \{ */
     /// Return exit condition of the loop.
     const Exp& test_get() const;
     /// Return exit condition of the loop.

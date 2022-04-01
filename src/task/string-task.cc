@@ -19,4 +19,4 @@ namespace task
 
   void StringTask::execute() const { var_ = arg_get(); }
 
-} // namespace task
+} //namespace task

@@ -30,4 +30,4 @@ namespace task
     int max_;
   };
 
-} // namespace task
+} //namespace task

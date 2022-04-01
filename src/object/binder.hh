@@ -10,11 +10,11 @@
 namespace object
 {
   /** \brief Computing bindings with support for objects.
-     **
-     ** Inheritance is declared virtual to enable diamond inheritance with
-     ** the combine::Binder (src/combine/binder.hh), inheriting from
-     ** overload::Binder and object::Binder, both inheriting from bind::Binder.
-     **/
+   **
+   ** Inheritance is declared virtual to enable diamond inheritance with
+   ** the combine::Binder (src/combine/binder.hh), inheriting from
+   ** overload::Binder and object::Binder, both inheriting from bind::Binder.
+   **/
   class Binder : virtual public bind::Binder
   {
   public:
@@ -48,8 +48,7 @@ namespace object
     // Visiting /Dec/.  //
     // ---------------- //
 
-    /// Check a set of definitions: unique names, browse headers, then
-    /// bodies.
+    /// Check a set of definitions: unique names, browse headers, then bodies.
     template <class D> void chunk_visit(ast::Chunk<D>& e);
 
     /// Check a Function declaration header.
@@ -87,8 +86,8 @@ namespace object
     /// ClassTy subtrees, which ``reset'' the context.
     bool within_method_dec_ = false;
 
-    /// Is the implicit `self' formal of the current MethodDec overrided by
-    /// an other variable named `self' local to the current method?
+    /// Is the implicit `self' formal of the current MethodDec overrided by an
+    /// other variable named `self' local to the current method?
     ///
     /// This predicate is used to determine whether a SimpleVar named `self`
     /// should be bound to its potential definition or if it is bound to

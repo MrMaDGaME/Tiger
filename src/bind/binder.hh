@@ -6,8 +6,10 @@
 #pragma once
 
 #include <unordered_map>
+
 #include <ast/default-visitor.hh>
 #include <ast/object-visitor.hh>
+
 #include <misc/error.hh>
 #include <misc/fwd.hh>
 #include <misc/scoped-map.hh>
@@ -15,37 +17,37 @@
 namespace bind
 {
   /** \brief Binding identifier uses to their definitions.
-     **
-     ** When the \c Binder finds a declaration (of a variable/formal, function,
-     ** or type), it keeps a pointer to it.  When it finds a use, it binds it
-     ** to its definition, i.e., it annotates it with a pointer to the
-     ** declaration.
-     **
-     ** The \c Binder diagnoses identifier use errors (invalid multiple
-     ** definitions, unbound identifiers etc.).
-     **
-     ** Since identifier bindings depend on scopes, it needs an environment.
-     **
-     ** In the original Tiger by A. Appel, there are two namespaces: on
-     ** the one hand types, and on the other hand functions and variables.
-     ** Here, at EPITA, we will use three name spaces: we will allow
-     ** variables and functions with the same name.
-     **
-     ** Moreover, object constructs make use of two additional name
-     ** spaces: one for class attributes and one for methods (actually
-     ** these two name spaces only live within the scope of a class).
-     **
-     ** \c Env models this full environment, i.e., the collection of three
-     ** tables of symbols: one for functions, one for types, and one for
-     ** variables.  The `scope_begin()', `scope_end()', `*get_()' and
-     ** `*put_()' are then just handy wrappers around accesses to the
-     ** tables of symbols.
-     **
-     ** Note that this Binder is mainly doing nothing: it is just
-     ** interested in declarations and uses.  To avoid writing
-     ** all the methods that `do nothing but walk', it derives
-     ** from \c ast::DefaultVisitor.
-     **/
+   **
+   ** When the \c Binder finds a declaration (of a variable/formal, function,
+   ** or type), it keeps a pointer to it.  When it finds a use, it binds it
+   ** to its definition, i.e., it annotates it with a pointer to the
+   ** declaration.
+   **
+   ** The \c Binder diagnoses identifier use errors (invalid multiple
+   ** definitions, unbound identifiers etc.).
+   **
+   ** Since identifier bindings depend on scopes, it needs an environment.
+   **
+   ** In the original Tiger by A. Appel, there are two namespaces: on
+   ** the one hand types, and on the other hand functions and variables.
+   ** Here, at EPITA, we will use three name spaces: we will allow
+   ** variables and functions with the same name.
+   **
+   ** Moreover, object constructs make use of two additional name
+   ** spaces: one for class attributes and one for methods (actually
+   ** these two name spaces only live within the scope of a class).
+   **
+   ** \c Env models this full environment, i.e., the collection of three
+   ** tables of symbols: one for functions, one for types, and one for
+   ** variables.  The `scope_begin()', `scope_end()', `*get_()' and
+   ** `*put_()' are then just handy wrappers around accesses to the
+   ** tables of symbols.
+   **
+   ** Note that this Binder is mainly doing nothing: it is just
+   ** interested in declarations and uses.  To avoid writing
+   ** all the methods that `do nothing but walk', it derives
+   ** from \c ast::DefaultVisitor.
+   **/
   class Binder
     : public ast::DefaultVisitor
     , public ast::ObjectVisitor
@@ -142,7 +144,7 @@ namespace bind
     /// \}
 
     /** \name Handling the environment
-         ** \{ */
+     ** \{ */
     /// Open a new var, fun, and type scope.
     virtual void scope_begin();
     /// Close the latest var, fun, and type scope.

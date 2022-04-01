@@ -16,7 +16,7 @@ namespace ast
   {
   public:
     /** \name Ctor & dtor.
-         ** \{ */
+     ** \{ */
     /// Construct a SimpleVar node.
     SimpleVar(const Location& location, misc::symbol name);
     SimpleVar(const SimpleVar&) = delete;
@@ -33,7 +33,7 @@ namespace ast
     /// \}
 
     /** \name Accessors.
-         ** \{ */
+     ** \{ */
     /// Return variable's name.
     misc::symbol name_get() const;
     /// Set variable's name.

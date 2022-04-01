@@ -19,7 +19,7 @@ namespace ast
   {
   public:
     /** \name Ctor & dtor.
-         ** \{ */
+     ** \{ */
     /// Construct a VarDec node.
     VarDec(const Location& location,
            misc::symbol name,
@@ -40,7 +40,7 @@ namespace ast
     /// \}
 
     /** \name Accessors.
-         ** \{ */
+     ** \{ */
     /// Return optional type of the declared variable.
     const NameTy* type_name_get() const;
     /// Return optional type of the declared variable.

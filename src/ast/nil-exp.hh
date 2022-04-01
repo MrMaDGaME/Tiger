@@ -6,15 +6,18 @@
 #pragma once
 
 #include <ast/exp.hh>
+#include <ast/type-constructor.hh>
 
 namespace ast
 {
   /// NilExp.
-  class NilExp : public Exp
+  class NilExp
+    : public Exp
+    , public TypeConstructor
   {
   public:
     /** \name Ctor & dtor.
-         ** \{ */
+     ** \{ */
     /// Construct a NilExp node.
     explicit NilExp(const Location& location);
     NilExp(const NilExp&) = delete;

@@ -37,7 +37,7 @@ namespace ast
 
   public:
     /** \name Ctor & dtor.
-         ** \{ */
+     ** \{ */
     /// Construct a ChunkList node.
     ChunkList(const Location& location, const ChunkList::list_type& chunks);
     ChunkList(const ChunkList&) = delete;
@@ -55,7 +55,7 @@ namespace ast
     /// \}
 
     /** \name Accessors.
-         ** \{ */
+     ** \{ */
     /// Return declarations.
     const ChunkList::list_type& chunks_get() const;
     /// Return declarations.

@@ -5,6 +5,7 @@
 
 #include <iomanip>
 #include <ostream>
+
 #include <misc/contract.hh>
 #include <misc/indent.hh>
 

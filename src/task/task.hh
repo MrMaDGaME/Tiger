@@ -7,16 +7,17 @@
 
 #include <string>
 #include <vector>
+
 #include <task/task-register.hh>
 
 namespace task
 {
   /** \brief A function bound to a command line option.
 
-    The purpose of the Task class is to abstract the execution of a module
-    and the tasks on which its execution depends.  This is an implementation
-    of the Command Design Pattern.
-    */
+  The purpose of the Task class is to abstract the execution of a module
+  and the tasks on which its execution depends.  This is an implementation
+  of the Command Design Pattern.
+  */
   class Task
   {
     /** \name Ctor & dtor. */
@@ -24,11 +25,11 @@ namespace task
   public:
     /** \brief Construct a Task.
 
-        \param name      name of this task (used for long option)
-        \param module_name     name of the module to which the task belongs.
-        \param desc      description of this task
-        \param deps            optional space separated list of task names
-        */
+    \param name      name of this task (used for long option)
+    \param module_name     name of the module to which the task belongs.
+    \param desc      description of this task
+    \param deps            optional space separated list of task names
+    */
     Task(const char* name,
          const char* module_name,
          const char* desc,
@@ -39,7 +40,7 @@ namespace task
     /** \}*/
 
     /** \name Abstract methods.
-         ** \{ */
+     ** \{ */
   public:
     /// Execute this task.
     virtual void execute() const = 0;
@@ -52,14 +53,14 @@ namespace task
     virtual deps_type resolve_dependencies(tasks_list_type& active_tasks) const;
 
     /** \name Accessors.
-         ** \{ */
+     ** \{ */
   public:
     /** Access to 'name'.
 
-        'const char*' is preferred to 'std::string' because TaskRegister
-        calls function requiring 'const char*'.
-        The use of 'std::string::c_str()' is so forbidden and a call to
-        'strdup(std::string::c_str())' would imply dummy memory leaks. */
+    'const char*' is preferred to 'std::string' because TaskRegister
+    calls function requiring 'const char*'.
+    The use of 'std::string::c_str()' is so forbidden and a call to
+    'strdup(std::string::c_str())' would imply dummy memory leaks. */
     const char* name_get() const;
 
     /// Access to 'module_name'.

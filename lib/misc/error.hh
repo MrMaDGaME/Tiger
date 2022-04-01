@@ -17,14 +17,14 @@
 namespace misc
 {
   /** \brief Handle errors in the whole project.
-     **
-     ** Each task has an error status depending on its exit code
-     ** described in the enum below.
-     **
-     ** Several versions of operator<< are used to fill the handler.
-     **
-     ** A global variable is defined to centralize all the error uses.
-     */
+   **
+   ** Each task has an error status depending on its exit code
+   ** described in the enum below.
+   **
+   ** Several versions of operator<< are used to fill the handler.
+   **
+   ** A global variable is defined to centralize all the error uses.
+   */
 
   class error
   {

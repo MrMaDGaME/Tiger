@@ -5,14 +5,15 @@
 
 #include <iostream>
 #include <stdexcept>
+
 #include <misc/contract.hh>
 #include <misc/error.hh>
 
 namespace misc
 {
   /*--------.
-    | error.  |
-    `--------*/
+  | error.  |
+  `--------*/
 
   error::error()
     : status_(error_type::success)
@@ -28,8 +29,8 @@ namespace misc
   }
 
   /*----------------------------.
-    | Filling the error handler.  |
-    `----------------------------*/
+  | Filling the error handler.  |
+  `----------------------------*/
 
   error& error::operator<<(error_type e)
   {
@@ -54,8 +55,8 @@ namespace misc
   }
 
   /*---------------.
-    | Manipulators.  |
-    `---------------*/
+  | Manipulators.  |
+  `---------------*/
 
   void error::exit() const { throw *this; }
 
@@ -84,8 +85,8 @@ namespace misc
   }
 
   /*------------.
-    | Accessors.  |
-    `------------*/
+  | Accessors.  |
+  `------------*/
 
   error::operator bool() const { return status_ != error_type::success; }
 

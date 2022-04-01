@@ -14,7 +14,7 @@ namespace ast
   {
   public:
     /** \name Ctor & dtor.
-         ** \{ */
+     ** \{ */
     /// Construct a Var node.
     explicit Var(const Location& location);
     Var(const Var&) = delete;

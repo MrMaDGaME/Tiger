@@ -10,18 +10,18 @@
 namespace ast
 {
   /** \class ast::MethodDec
-     ** \brief Method declaration.
-     **
-     ** A method declaration is \em not a function in the strict
-     ** sense of object-oriented programming.  Inheritance is used
-     ** as a factoring tool here.
-     */
+   ** \brief Method declaration.
+   **
+   ** A method declaration is \em not a function in the strict
+   ** sense of object-oriented programming.  Inheritance is used
+   ** as a factoring tool here.
+   */
 
   class MethodDec : public FunctionDec
   {
   public:
     /** \name Ctor & dtor.
-         ** \{ */
+     ** \{ */
     /// Construct a MethodDec node.
     MethodDec(const Location& location,
               misc::symbol name,

@@ -4,6 +4,7 @@
 
 #include <cstdlib>
 #include <string>
+
 #include <misc/variant.hh>
 
 int main()

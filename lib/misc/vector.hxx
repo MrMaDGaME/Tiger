@@ -6,6 +6,7 @@
 #pragma once
 
 #include <ostream>
+
 #include <misc/contract.hh>
 #include <range/v3/algorithm/find.hpp>
 

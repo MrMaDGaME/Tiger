@@ -21,12 +21,10 @@ namespace misc
   /// Print an end of line, then set the indentation.
   std::ostream& iendl(std::ostream& o);
 
-  /// Increment the indentation, print an end of line, and set the
-  /// indentation.
+  /// Increment the indentation, print an end of line, and set the indentation.
   std::ostream& incendl(std::ostream& o);
 
-  /// Decrement the indentation, print an end of line, and set the
-  /// indentation.
+  /// Decrement the indentation, print an end of line, and set the indentation.
   std::ostream& decendl(std::ostream& o);
 
 } // namespace misc

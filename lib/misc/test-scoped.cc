@@ -3,6 +3,7 @@
  */
 
 #include <ostream>
+
 #include <misc/contract.hh>
 #include <misc/scoped-map.hh>
 

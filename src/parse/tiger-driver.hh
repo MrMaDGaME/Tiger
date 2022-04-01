@@ -95,8 +95,7 @@ namespace parse
                                          ast::Var* var,
                                          ast::Exp* index) const;
 
-    /* Use expansion parameter pack to handle when we have one or empty
-         * arguments */
+    /* Use expansion parameter pack to handle when we have one or empty arguments */
     template <class... T> ast::exps_type* make_exps_type(T... exps) const;
 
     ast::ChunkList* make_ChunkList(const location& location) const;

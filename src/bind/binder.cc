@@ -5,13 +5,14 @@
 
 #include <ast/all.hh>
 #include <bind/binder.hh>
+
 #include <misc/contract.hh>
 
 namespace bind
 {
   /*-----------------.
-    | Error handling.  |
-    `-----------------*/
+  | Error handling.  |
+  `-----------------*/
 
   /// The error handler.
   const misc::error& Binder::error_get() const { return error_; }

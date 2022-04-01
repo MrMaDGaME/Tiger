@@ -16,7 +16,7 @@ namespace ast
   {
   public:
     /** \name Ctor & dtor.
-         ** \{ */
+     ** \{ */
     /// Construct a ClassTy node.
     ClassTy(const Location& location, NameTy* super, ChunkList* chunks);
     ClassTy(const ClassTy&) = delete;
@@ -34,7 +34,7 @@ namespace ast
     /// \}
 
     /** \name Accessors.
-         ** \{ */
+     ** \{ */
     /// Return super class.
     const NameTy& super_get() const;
     /// Return super class.

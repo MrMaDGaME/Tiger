@@ -13,7 +13,7 @@ namespace ast
   class ChunkInterface : public Ast
   {
     /** \name Ctors and dtors.
-         ** \{ */
+     ** \{ */
   public:
     /// Construct a ChunkInterface
     explicit ChunkInterface(const Location& location);

@@ -9,16 +9,19 @@
 #include <ast/dec.hh>
 #include <ast/exp.hh>
 #include <ast/name-ty.hh>
+#include <ast/type-constructor.hh>
 #include <ast/var-dec.hh>
 
 namespace ast
 {
   /// FunctionDec.
-  class FunctionDec : public Dec
+  class FunctionDec
+    : public Dec
+    , public TypeConstructor
   {
   public:
     /** \name Ctor & dtor.
-         ** \{ */
+     ** \{ */
     /// Construct a FunctionDec node.
     FunctionDec(const Location& location,
                 misc::symbol name,
@@ -40,7 +43,7 @@ namespace ast
     /// \}
 
     /** \name Accessors.
-         ** \{ */
+     ** \{ */
     /// Return formal arguments.
     const VarChunk& formals_get() const;
     /// Return formal arguments.

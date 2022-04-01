@@ -4,6 +4,7 @@
 
 #include <cstdlib>
 #include <iostream>
+
 #include <misc/contract.hh>
 
 void __FailedCondition(const char* condType,

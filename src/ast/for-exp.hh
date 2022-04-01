@@ -15,7 +15,7 @@ namespace ast
   {
   public:
     /** \name Ctor & dtor.
-         ** \{ */
+     ** \{ */
     /// Construct a ForExp node.
     ForExp(const Location& location, VarDec* vardec, Exp* hi, Exp* body);
     ForExp(const ForExp&) = delete;
@@ -33,7 +33,7 @@ namespace ast
     /// \}
 
     /** \name Accessors.
-         ** \{ */
+     ** \{ */
     /// Return implicit variable declaration.
     const VarDec& vardec_get() const;
     /// Return implicit variable declaration.

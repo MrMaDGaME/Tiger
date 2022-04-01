@@ -3,6 +3,7 @@
  */
 
 #include <iostream>
+
 #include <misc/contract.hh>
 #include <misc/unique.hh>
 

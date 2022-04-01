@@ -67,7 +67,7 @@ namespace misc
                                                   Iterator it);
 
     /** \brief Remove \a data from \a this.
-            \a data must be part of \a this. */
+        \a data must be part of \a this. */
     vector& remove(const Ident_& data);
     /// \}
 

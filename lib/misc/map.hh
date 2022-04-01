@@ -13,7 +13,7 @@
 namespace misc
 {
   /** \brief Wrapper around std::map providing syntactic sugar
-        for any mapping of types manipulation. */
+      for any mapping of types manipulation. */
   template <class T, class N> class map
   {
   protected:

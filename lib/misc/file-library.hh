@@ -15,8 +15,8 @@ namespace misc
 
   /** \brief Manage search path.
 
-        Store search path and all informations used for handling
-        paths when processing import directives. */
+      Store search path and all informations used for handling
+      paths when processing import directives. */
 
   class file_library
   {
@@ -46,10 +46,10 @@ namespace misc
     /// \{
     /** \brief Search a file.
 
-            Determine real path of \a file, by looking in search path if
-            necessary.
+        Determine real path of \a file, by looking in search path if
+        necessary.
 
-            \return Directory containing \a file, or "" if not found. */
+        \return Directory containing \a file, or "" if not found. */
     path find_file(const std::string& file);
 
     /// \brief Check if \a file exists in directory \a dir.
@@ -65,18 +65,18 @@ namespace misc
     /// Push the working directory on the stack.
     void push_cwd();
 
-    /** \brief Find file "\a relative_path / \a filename" using include
-           path. \return Absolute path where the file lies or empty path
-                    if the file does not exist. */
+    /** \brief Find file "\a relative_path / \a filename" using include path.
+        \return Absolute path where the file lies or empty path
+                if the file does not exist. */
     path find_in_search_path(const path& relative_path,
                              const std::string& filename) const;
 
     /** \brief Split the string with character ':', and insert each
-            resultant string as a new search path. */
+        resultant string as a new search path. */
     void append_dir_list(std::string path_list);
 
     /** \brief Ensure that path is absolute by prepending current
-            directory if necessary */
+        directory if necessary */
     path ensure_absolute_path(path p) const;
 
     using path_list_type = std::vector<path>;

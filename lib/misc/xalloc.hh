@@ -18,33 +18,33 @@ namespace misc
   };
 
   /** \brief Launch the iomanipulator action on o.
-     **
-     ** Call the operator() of g (so set, get or swap the
-     ** xalloced data with data_).
-     */
+   **
+   ** Call the operator() of g (so set, get or swap the
+   ** xalloced data with data_).
+   */
   std::ostream& operator<<(std::ostream& o, const iomanipulator& g);
 
   /** \brief Allocate slots in std::ostreams.
-     **
-     ** Used to store flags in streams so that calling print
-     ** with additional parameters is no longer required (for
-     ** example in ast/libast.hh).
-     **
-     ** Set, get or swap data.
-     ** The idea is to build the right inner class with set, get or
-     ** swap methods, then use this class as a parameter of operator<<.
-     **
-     ** `StoredType` must be `CopyConstructible`. If it's not
-     ** `DefaultConstructible`, then arguments for its constructor are
-     ** to be passed to the `xalloc` constructor.
-     */
+   **
+   ** Used to store flags in streams so that calling print
+   ** with additional parameters is no longer required (for
+   ** example in ast/libast.hh).
+   **
+   ** Set, get or swap data.
+   ** The idea is to build the right inner class with set, get or
+   ** swap methods, then use this class as a parameter of operator<<.
+   **
+   ** `StoredType` must be `CopyConstructible`. If it's not
+   ** `DefaultConstructible`, then arguments for its constructor are
+   ** to be passed to the `xalloc` constructor.
+   */
   template <class StoredType> class xalloc
   {
   private:
     /** \brief Handle the data to put in the xalloced place.
-         **
-         ** This inner class is used only with the set method.
-         */
+     **
+     ** This inner class is used only with the set method.
+     */
     class set_type : public iomanipulator
     {
     public:
@@ -61,9 +61,9 @@ namespace misc
     };
 
     /** \brief Handle the data to get from the xalloced place.
-         **
-         ** This inner class is used only with the get method.
-         */
+     **
+     ** This inner class is used only with the get method.
+     */
     class get_type : public iomanipulator
     {
     public:
@@ -81,9 +81,9 @@ namespace misc
     };
 
     /** \brief Swap the data stored in the stream for a given one.
-         **
-         ** This inner class is used only with the swap method.
-         */
+     **
+     ** This inner class is used only with the swap method.
+     */
     class swap_type : public iomanipulator
     {
     public:

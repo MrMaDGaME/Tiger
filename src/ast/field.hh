@@ -16,7 +16,7 @@ namespace ast
   {
   public:
     /** \name Ctor & dtor.
-         ** \{ */
+     ** \{ */
     /// Construct a Field node.
     Field(const Location& location, misc::symbol name, NameTy* type_name);
     Field(const Field&) = delete;
@@ -34,7 +34,7 @@ namespace ast
     /// \}
 
     /** \name Accessors.
-         ** \{ */
+     ** \{ */
     /// Return the field name.
     misc::symbol name_get() const;
     /// Set the field name.

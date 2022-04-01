@@ -22,26 +22,27 @@
 #pragma once
 
 #include <map>
+
 #include <ast/default-visitor.hh>
 #include <ast/non-object-visitor.hh>
 
 namespace escapes
 {
   /** \brief Compute the escapes.
-     **
-     ** The EscapeVisitor is extremely similar to type::TypeChecker:
-     ** in its course of operation it must relate uses to
-     ** definitions.  Therefore it will be run after the bind::Binder.
-     ** It also needs auxiliary information about the definitions (their
-     ** depth): a simple map suffices, since scoping issues were handled
-     ** by the bind::Binder.
-     **
-     ** Note that this EscapesVisitor is mainly doing nothing: it is just
-     ** interested in declaration and uses of variables/formals (and, of
-     ** course, function declaration...).  It would be somewhat stupid to
-     ** write all the methods that `do nothing but walk'.  This is why we
-     ** will inherit from the non const ast::DefaultVisitor.
-     **/
+   **
+   ** The EscapeVisitor is extremely similar to type::TypeChecker:
+   ** in its course of operation it must relate uses to
+   ** definitions.  Therefore it will be run after the bind::Binder.
+   ** It also needs auxiliary information about the definitions (their
+   ** depth): a simple map suffices, since scoping issues were handled
+   ** by the bind::Binder.
+   **
+   ** Note that this EscapesVisitor is mainly doing nothing: it is just
+   ** interested in declaration and uses of variables/formals (and, of
+   ** course, function declaration...).  It would be somewhat stupid to
+   ** write all the methods that `do nothing but walk'.  This is why we
+   ** will inherit from the non const ast::DefaultVisitor.
+   **/
   class EscapesVisitor
     : public ast::DefaultVisitor
     , public ast::NonObjectVisitor

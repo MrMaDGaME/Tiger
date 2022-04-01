@@ -5,9 +5,10 @@
 
 #pragma once
 
-#include <boost/lexical_cast.hpp>
 #include <misc/contract.hh>
 #include <misc/escape.hh>
+
+#include <boost/lexical_cast.hpp>
 
 namespace misc
 {

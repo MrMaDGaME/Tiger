@@ -24,4 +24,4 @@ namespace task
     resolve_dependencies(tasks_list_type& active_tasks) const override;
   };
 
-} // namespace task
+} //namespace task

@@ -16,7 +16,7 @@ namespace ast
   {
   public:
     /** \name Ctor & dtor.
-         ** \{ */
+     ** \{ */
     /// Construct a FieldInit node.
     FieldInit(const Location& location, misc::symbol name, Exp* init);
     FieldInit(const FieldInit&) = delete;
@@ -34,7 +34,7 @@ namespace ast
     /// \}
 
     /** \name Accessors.
-         ** \{ */
+     ** \{ */
     /// Return name of the field.
     misc::symbol name_get() const;
     /// Set name of the field.

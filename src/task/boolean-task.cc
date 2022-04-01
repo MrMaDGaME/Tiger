@@ -19,4 +19,4 @@ namespace task
 
   void BooleanTask::execute() const { flag_ = true; }
 
-} // namespace task
+} //namespace task

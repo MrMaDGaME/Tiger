@@ -9,19 +9,19 @@
 namespace object
 {
   /*---------.
-    | Visits.  |
-    `---------*/
+  | Visits.  |
+  `---------*/
 
   /* Handle the case of `self'. If the variable is not named `self', handle it
-       like the normal `Binder'.  If it is `self', it must be bound to a
-  definiton site, unless:
-       * it is inside a method,
-       * AND `self` is not overridden.
-       If those conditions are met, `self' is an implicitly defined instance of
-       the class.
-  ￼
-       Variable `self' will have a meaningful definition after the object
-       constructs have been desugared. */
+     like the normal `Binder'.  If it is `self', it must be bound to a definiton
+     site, unless:
+     * it is inside a method,
+     * AND `self` is not overridden.
+     If those conditions are met, `self' is an implicitly defined instance of
+     the class.
+￼
+     Variable `self' will have a meaningful definition after the object
+     constructs have been desugared. */
 
   void Binder::operator()(ast::SimpleVar& e)
   {
@@ -35,8 +35,8 @@ namespace object
   }
 
   /*---------------.
-    | Visiting Exp.  |
-    `---------------*/
+  | Visiting Exp.  |
+  `---------------*/
 
   void Binder::operator()(ast::ForExp& e)
   {
@@ -47,8 +47,8 @@ namespace object
   }
 
   /*-------------------.
-    | Visiting ClassTy.  |
-    `-------------------*/
+  | Visiting ClassTy.  |
+  `-------------------*/
 
   void Binder::operator()(ast::ClassTy& e)
   {
@@ -65,8 +65,8 @@ namespace object
   }
 
   /*---------------.
-    | Visiting Dec.  |
-    `---------------*/
+  | Visiting Dec.  |
+  `---------------*/
 
   void Binder::operator()(ast::VarDec& e)
   {
@@ -95,8 +95,7 @@ namespace object
   {
     // Shorthand.
     using chunk_type = ast::Chunk<D>;
-    // FIXME: Some code was deleted here (Two passes: once on headers, then
-    // on bodies).
+    // FIXME: Some code was deleted here (Two passes: once on headers, then on bodies).
   }
 
   // This trampoline is needed, since `virtual' and `template' cannot
@@ -120,12 +119,12 @@ namespace object
   }
 
   /* We can't bind methods definitions without types, so we don't
-       store them.  Nonetheless, object::Binder must still recurse
-       through the children of ast::MethodChunk to bind other names.
+     store them.  Nonetheless, object::Binder must still recurse
+     through the children of ast::MethodChunk to bind other names.
 
-       Note that as we defer the binding of methods to the
-       type-checkimg, there is no need to visit method in two-pass (like
-       bind::Binder does for functions for instance).  */
+     Note that as we defer the binding of methods to the
+     type-checkimg, there is no need to visit method in two-pass (like
+     bind::Binder does for functions for instance).  */
   void Binder::operator()(ast::MethodDec& e)
   {
     scope_begin();

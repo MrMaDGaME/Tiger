@@ -19,4 +19,4 @@ namespace task
 
   void FunctionTask::execute() const { execute_(); }
 
-} // namespace task
+} //namespace task

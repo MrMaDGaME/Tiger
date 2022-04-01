@@ -12,33 +12,33 @@ Incomplete classes are tagged with a `*'.
 
   /Exp/             ()
     /Var/           ()
-*     FieldVar//DONE(Var var, misc::symbol name)
+*     FieldVar
       SimpleVar     (symbol name)
       SubscriptVar  (Var var, Exp index)
 
-*   ArrayExp //DONE
-*   AssignExp //DONE()
-*   BreakExp //DONE ()
-*   CallExp //DONE ()
-*     MethodCallExp // DONE
+*   ArrayExp
+*   AssignExp
+*   BreakExp
+*   CallExp
+*     MethodCallExp
     CastExp         (Exp exp, Ty ty)
-    ForExp          (VarDec vardec, xpE hi, Exp body)
-*   IfExp // DONE   (Exp condition, Exp body, Exp else_clause)
+    ForExp          (VarDec vardec, Exp hi, Exp body)
+*   IfExp
     IntExp          (int value)
-*   LetExp // DONE  (Exp declarations, Exp instructions)
+*   LetExp
     NilExp          ()
-*   ObjectExp //DONE
+*   ObjectExp
     OpExp           (Exp left, Oper oper, Exp right)
-*   RecordExp // DONE
-*   SeqExp //DONE   (exps_type exps)
-*   StringExp//DONE (string value)
+*   RecordExp
+*   SeqExp
+*   StringExp
     WhileExp        (Exp test, Exp body)
 
   /Ty/              ()
     ArrayTy         (NameTy base_type)
     ClassTy         (NameTy super, ChunkList chunks)
     NameTy          (symbol name)
-*   RecordTy //DONE
+*   RecordTy
 
   ChunkList         (list_type chunks)
 
@@ -51,4 +51,15 @@ Some of these classes also inherit from other classes.
 
 /Escapable/
   VarDec            (NameTy type_name, Exp init)
+
+/Typable/
+  /Dec/             (symbol name)
+  /Exp/             ()
+  /Ty/              ()
+
+/TypeConstructor/
+  /Ty/              ()
+  FunctionDec       (VarChunk formals, NameTy result, Exp body)
+  NilExp            ()
+  TypeDec           (Ty ty)
 

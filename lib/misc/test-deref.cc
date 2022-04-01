@@ -3,6 +3,7 @@
  */
 
 #include <sstream>
+
 #include <misc/deref.hh>
 
 using misc::deref;

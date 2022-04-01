@@ -8,8 +8,8 @@
 namespace misc
 {
   /*------------------.
-    | const selectors.  |
-    `------------------*/
+  | const selectors.  |
+  `------------------*/
 
   /// Return \a T constified.
   template <typename T> struct constify_traits
@@ -24,8 +24,8 @@ namespace misc
   };
 
   /*------------------.
-    | select_iterator.  |
-    `------------------*/
+  | select_iterator.  |
+  `------------------*/
 
   /// The iterator over a non const structure is plain iterator.
   template <typename T> struct select_iterator
@@ -39,4 +39,4 @@ namespace misc
     using type = typename T::const_iterator;
   };
 
-} // namespace misc
+} //namespace misc
