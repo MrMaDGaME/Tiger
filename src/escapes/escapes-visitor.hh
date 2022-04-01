@@ -21,13 +21,13 @@
 
 #pragma once
 
+#include <map>
 #include <ast/default-visitor.hh>
 #include <ast/non-object-visitor.hh>
-#include <map>
 
 namespace escapes
 {
-    /** \brief Compute the escapes.
+  /** \brief Compute the escapes.
      **
      ** The EscapeVisitor is extremely similar to type::TypeChecker:
      ** in its course of operation it must relate uses to
@@ -42,23 +42,23 @@ namespace escapes
      ** write all the methods that `do nothing but walk'.  This is why we
      ** will inherit from the non const ast::DefaultVisitor.
      **/
-    class EscapesVisitor
-        : public ast::DefaultVisitor
-        , public ast::NonObjectVisitor
-    {
-    public:
-        /// Super class type.
-        using super_type = ast::DefaultVisitor;
-        /// Import all the overloaded visit methods.
-        using super_type::operator();
+  class EscapesVisitor
+    : public ast::DefaultVisitor
+    , public ast::NonObjectVisitor
+  {
+  public:
+    /// Super class type.
+    using super_type = ast::DefaultVisitor;
+    /// Import all the overloaded visit methods.
+    using super_type::operator();
 
-        void operator()(ast::SimpleVar& e) override;
-        void operator()(ast::VarDec& e) override;
-        void operator()(ast::FunctionDec& e) override;
+    void operator()(ast::SimpleVar& e) override;
+    void operator()(ast::VarDec& e) override;
+    void operator()(ast::FunctionDec& e) override;
 
-    private:
-        std::map<ast::VarDec*, int> vars_;
-        int depth_;
-    };
+  private:
+    std::map<ast::VarDec*, int> vars_;
+    int depth_;
+  };
 
 } // namespace escapes

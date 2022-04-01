@@ -8,21 +8,15 @@
 
 namespace ast
 {
-    BreakExp::BreakExp(const Location& location)
-        : Exp(location)
-    {
-        break_str_ = "break";
-    }
+  BreakExp::BreakExp(const Location& location)
+    : Exp(location)
+  {
+    break_str_ = "break";
+  }
 
-    BreakExp::~BreakExp()
-    {}
+  BreakExp::~BreakExp() {}
 
-    void BreakExp::accept(ConstVisitor& v) const
-    {
-        v(*this);
-    }
+  void BreakExp::accept(ConstVisitor& v) const { v(*this); }
 
-    void BreakExp::accept(Visitor& v) {
-        v(*this);
-    }
+  void BreakExp::accept(Visitor& v) { v(*this); }
 } // namespace ast

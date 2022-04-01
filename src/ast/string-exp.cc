@@ -8,18 +8,12 @@
 
 namespace ast
 {
-    StringExp::StringExp(const Location& location, std::string value)
-        : Exp(location)
-        , value_(value)
-    {}
+  StringExp::StringExp(const Location& location, std::string value)
+    : Exp(location)
+    , value_(value)
+  {}
 
-    void StringExp::accept(ConstVisitor& v) const
-    {
-        v(*this);
-    }
+  void StringExp::accept(ConstVisitor& v) const { v(*this); }
 
-    void StringExp::accept(Visitor& v)
-    {
-        v(*this);
-    }
+  void StringExp::accept(Visitor& v) { v(*this); }
 } // namespace ast

@@ -10,22 +10,30 @@
 /// The Tasks of the binding module.
 namespace bind::tasks
 {
-    TASK_GROUP("3. Binder");
+  TASK_GROUP("3. Binder");
 
-    /// Compute variables binding.
-    TASK_DECLARE("b|bindings-compute",
-    "compute the binding variables "
-    "and the functions requiring a static link",
-    bind_compute, "parse");
+  /// Compute variables binding.
+  TASK_DECLARE("b|bindings-compute",
+               "compute the binding variables "
+               "and the functions requiring a static link",
+               bind_compute,
+               "parse");
 
-    /// Display binded variables.
-    TASK_DECLARE("B|bindings-display", "enable binding display in the AST",
-    bindings_display, "");
+  /// Display binded variables.
+  TASK_DECLARE("B|bindings-display",
+               "enable binding display in the AST",
+               bindings_display,
+               "");
 
+  TASK_DECLARE("rename",
+               "rename each var according "
+               "to the order of declaration",
+               rename_compute,
+               "bindings-compute");
 
-    TASK_DECLARE("rename", "rename each var according "
-                           "to the order of declaration", rename_compute, "bindings-compute");
-
-    DISJUNCTIVE_TASK_DECLARE("bound", "default the computation of bindings to Tiger (without objects nor overloading)", "bindings-compute");
+  DISJUNCTIVE_TASK_DECLARE("bound",
+                           "default the computation of bindings to Tiger "
+                           "(without objects nor overloading)",
+                           "bindings-compute");
 
 } // namespace bind::tasks

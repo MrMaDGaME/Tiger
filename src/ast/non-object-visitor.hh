@@ -9,7 +9,7 @@
 
 namespace ast
 {
-    /** GenNonObjectVisitor<CONSTNESS-SELECTOR> provides aborting visit
+  /** GenNonObjectVisitor<CONSTNESS-SELECTOR> provides aborting visit
         methods for object-related nodes.  This class is meant to factor
         the code visiting object-related nodes in visitors bound to
         process AST \em without objects.
@@ -42,51 +42,50 @@ namespace ast
 
         \endverbatim
     */
-    template <template <typename> class Const>
-    class GenNonObjectVisitor : virtual public GenVisitor<Const>
-    {
-    public:
-        /// Super class type.
-        using super_type = GenVisitor<Const>;
+  template <template <typename> class Const>
+  class GenNonObjectVisitor : virtual public GenVisitor<Const>
+  {
+  public:
+    /// Super class type.
+    using super_type = GenVisitor<Const>;
 
-        // Import overloaded virtual functions.
-        using super_type::operator();
+    // Import overloaded virtual functions.
+    using super_type::operator();
 
-        /// Convenient abbreviation.
-        template <typename Type>
-        using const_t = typename Const<Type>::type;
+    /// Convenient abbreviation.
+    template <typename Type> using const_t = typename Const<Type>::type;
 
-        /** \name Ctor & dtor.
+    /** \name Ctor & dtor.
          ** \{ */
-        /// Construct a non-object visitor.
-        GenNonObjectVisitor();
-        /// Destroy a non-object visitor.
-        virtual ~GenNonObjectVisitor();
-        /** \} */
+    /// Construct a non-object visitor.
+    GenNonObjectVisitor();
+    /// Destroy a non-object visitor.
+    virtual ~GenNonObjectVisitor();
+    /** \} */
 
-        /// \name Object-related visits.
-        ///
-        /// The methods should not be used, since this visitor is for the
-        /// non-object flavor of the language.
-        /// \{
-        void operator()(const_t<ClassTy>& e) override;
+    /// \name Object-related visits.
+    ///
+    /// The methods should not be used, since this visitor is for the
+    /// non-object flavor of the language.
+    /// \{
+    void operator()(const_t<ClassTy>& e) override;
 
-        void operator()(const_t<MethodChunk>& e) override;
-        void operator()(const_t<MethodDec>& e) override;
+    void operator()(const_t<MethodChunk>& e) override;
+    void operator()(const_t<MethodDec>& e) override;
 
-        void operator()(const_t<MethodCallExp>& e) override;
-        void operator()(const_t<ObjectExp>& e) override;
-        /// \}
-    };
+    void operator()(const_t<MethodCallExp>& e) override;
+    void operator()(const_t<ObjectExp>& e) override;
+    /// \}
+  };
 
-    /// Shorthand for a const visitor.
-    using NonObjectConstVisitor = GenNonObjectVisitor<misc::constify_traits>;
-    /// Shorthand for a non const visitor.
+  /// Shorthand for a const visitor.
+  using NonObjectConstVisitor = GenNonObjectVisitor<misc::constify_traits>;
+  /// Shorthand for a non const visitor.
 #ifdef SWIG
   %template() GenVisitor<misc::id_traits>;
   %template() GenNonObjectVisitor<misc::id_traits>;
 #endif
-    using NonObjectVisitor = GenNonObjectVisitor<misc::id_traits>;
+  using NonObjectVisitor = GenNonObjectVisitor<misc::id_traits>;
 
 } // namespace ast
 

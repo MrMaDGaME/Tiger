@@ -17,29 +17,28 @@
 
 namespace misc
 {
-    template <typename Key, typename Data>
-    class scoped_map
-    {
-    public:
-        scoped_map();
-        ~scoped_map();
-        void put(const Key& key, const Data& value);
-        Data get(const Key& key) const;
-        std::ostream& dump(std::ostream& ostr) const;
-        void scope_begin();
-        void scope_end();
-        bool is_unique(const Key& key);
-        bool is_initial_scope();
+  template <typename Key, typename Data> class scoped_map
+  {
+  public:
+    scoped_map();
+    ~scoped_map();
+    void put(const Key& key, const Data& value);
+    Data get(const Key& key) const;
+    std::ostream& dump(std::ostream& ostr) const;
+    void scope_begin();
+    void scope_end();
+    bool is_unique(const Key& key);
+    bool is_initial_scope();
 
-    protected:
-        std::vector<std::map<Key, Data>> scope_;
-    };
+  protected:
+    std::vector<std::map<Key, Data>> scope_;
+  };
 
-    template <typename Key, typename Data>
-    std::ostream& operator<<(std::ostream& ostr,
-                             const scoped_map<Key, Data>& tbl);
+  template <typename Key, typename Data>
+  std::ostream& operator<<(std::ostream& ostr,
+                           const scoped_map<Key, Data>& tbl);
 
-    // FIXME: Some code was deleted here.
+  // FIXME: Some code was deleted here.
 
 } // namespace misc
 

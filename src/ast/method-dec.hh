@@ -9,7 +9,7 @@
 
 namespace ast
 {
-    /** \class ast::MethodDec
+  /** \class ast::MethodDec
      ** \brief Method declaration.
      **
      ** A method declaration is \em not a function in the strict
@@ -17,26 +17,29 @@ namespace ast
      ** as a factoring tool here.
      */
 
-    class MethodDec : public FunctionDec
-    {
-    public:
-        /** \name Ctor & dtor.
+  class MethodDec : public FunctionDec
+  {
+  public:
+    /** \name Ctor & dtor.
          ** \{ */
-        /// Construct a MethodDec node.
-        MethodDec(const Location& location, misc::symbol name,
-                  VarChunk* formals, NameTy* result, Exp* body);
-        MethodDec(const MethodDec&) = delete;
-        MethodDec& operator=(const MethodDec&) = delete;
-        /// Destroy a MethodDec node.
-        /** \} */
+    /// Construct a MethodDec node.
+    MethodDec(const Location& location,
+              misc::symbol name,
+              VarChunk* formals,
+              NameTy* result,
+              Exp* body);
+    MethodDec(const MethodDec&) = delete;
+    MethodDec& operator=(const MethodDec&) = delete;
+    /// Destroy a MethodDec node.
+    /** \} */
 
-        /// \name Visitors entry point.
-        /// \{ */
-        /// Accept a const visitor \a v.
-        void accept(ConstVisitor& v) const override;
-        /// Accept a non-const visitor \a v.
-        void accept(Visitor& v) override;
-        /// \}
-    };
+    /// \name Visitors entry point.
+    /// \{ */
+    /// Accept a const visitor \a v.
+    void accept(ConstVisitor& v) const override;
+    /// Accept a non-const visitor \a v.
+    void accept(Visitor& v) override;
+    /// \}
+  };
 } // namespace ast
 #include <ast/method-dec.hxx>

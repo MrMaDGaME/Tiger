@@ -8,25 +8,19 @@
 
 namespace ast
 {
-    WhileExp::WhileExp(const Location& location, Exp* test, Exp* body)
-        : Exp(location)
-        , test_(test)
-        , body_(body)
-    {}
+  WhileExp::WhileExp(const Location& location, Exp* test, Exp* body)
+    : Exp(location)
+    , test_(test)
+    , body_(body)
+  {}
 
-    WhileExp::~WhileExp()
-    {
-        delete test_;
-        delete body_;
-    }
+  WhileExp::~WhileExp()
+  {
+    delete test_;
+    delete body_;
+  }
 
-    void WhileExp::accept(ConstVisitor& v) const
-    {
-        v(*this);
-    }
+  void WhileExp::accept(ConstVisitor& v) const { v(*this); }
 
-    void WhileExp::accept(Visitor& v)
-    {
-        v(*this);
-    }
+  void WhileExp::accept(Visitor& v) { v(*this); }
 } // namespace ast

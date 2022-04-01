@@ -8,10 +8,10 @@
 
 namespace object
 {
-    /*-------.
+  /*-------.
     | Bind.  |
     `-------*/
 
-    // FIXME: Some code was deleted here.
+  // FIXME: Some code was deleted here.
 
 } // namespace object

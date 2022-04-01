@@ -11,9 +11,9 @@
 /// Computing escape and static link related information.
 namespace bind
 {
-    /// Compute the escaping variables.
-    misc::error bind_compute(ast::Ast& tree);
+  /// Compute the escaping variables.
+  misc::error bind_compute(ast::Ast& tree);
 
-    void rename_compute(ast::Ast& tree);
+  void rename_compute(ast::Ast& tree);
 
-} // namespace escapes
+} // namespace bind

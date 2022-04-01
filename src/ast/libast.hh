@@ -5,20 +5,20 @@
 
 #pragma once
 
-#include <ast/fwd.hh>
 #include <iosfwd>
+#include <ast/fwd.hh>
 #include <misc/xalloc.hh>
 
 /// Ast management.
 namespace ast
 {
-    extern const misc::xalloc<bool> escapes_display;
-    extern const misc::xalloc<bool> bindings_display;
+  extern const misc::xalloc<bool> escapes_display;
+  extern const misc::xalloc<bool> bindings_display;
 
-    /// Output \a a on \a ostr.
-    std::ostream& operator<<(std::ostream& ostr, const Ast& tree);
+  /// Output \a a on \a ostr.
+  std::ostream& operator<<(std::ostream& ostr, const Ast& tree);
 
-    /// Dump \a a on \a ostr.
-    std::ostream& dump_dot(const Ast& tree, std::ostream& ostr);
+  /// Dump \a a on \a ostr.
+  std::ostream& dump_dot(const Ast& tree, std::ostream& ostr);
 
 } // namespace ast

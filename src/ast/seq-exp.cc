@@ -9,26 +9,20 @@
 
 namespace ast
 {
-    SeqExp::SeqExp(const Location& location, exps_type* exps)
-        : Exp(location)
-        , exps_(exps)
-    {}
+  SeqExp::SeqExp(const Location& location, exps_type* exps)
+    : Exp(location)
+    , exps_(exps)
+  {}
 
-    SeqExp::~SeqExp()
-    {
-        for (Exp* exp : *exps_)
-        {
-            delete exp;
-        }
-    }
+  SeqExp::~SeqExp()
+  {
+    for (Exp* exp : *exps_)
+      {
+        delete exp;
+      }
+  }
 
-    void SeqExp::accept(ConstVisitor& v) const
-    {
-        v(*this);
-    }
+  void SeqExp::accept(ConstVisitor& v) const { v(*this); }
 
-    void SeqExp::accept(Visitor& v)
-    {
-        v(*this);
-    }
+  void SeqExp::accept(Visitor& v) { v(*this); }
 } // namespace ast

@@ -9,8 +9,8 @@
 
 namespace ast
 {
-    inline ChunkInterface::ChunkInterface(const Location& location)
-        : Ast(location)
-    {}
+  inline ChunkInterface::ChunkInterface(const Location& location)
+    : Ast(location)
+  {}
 
 } // namespace ast

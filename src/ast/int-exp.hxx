@@ -10,9 +10,6 @@
 namespace ast
 {
 
-    inline int IntExp::value_get() const
-    {
-        return value_;
-    }
+  inline int IntExp::value_get() const { return value_; }
 
 } // namespace ast

@@ -11,46 +11,46 @@
 
 namespace ast
 {
-    /// SimpleVar.
-    class SimpleVar : public Var
-    {
-    public:
-        /** \name Ctor & dtor.
+  /// SimpleVar.
+  class SimpleVar : public Var
+  {
+  public:
+    /** \name Ctor & dtor.
          ** \{ */
-        /// Construct a SimpleVar node.
-        SimpleVar(const Location& location, misc::symbol name);
-        SimpleVar(const SimpleVar&) = delete;
-        SimpleVar& operator=(const SimpleVar&) = delete;
-        /// Destroy a SimpleVar node.
-        /** \} */
+    /// Construct a SimpleVar node.
+    SimpleVar(const Location& location, misc::symbol name);
+    SimpleVar(const SimpleVar&) = delete;
+    SimpleVar& operator=(const SimpleVar&) = delete;
+    /// Destroy a SimpleVar node.
+    /** \} */
 
-        /// \name Visitors entry point.
-        /// \{ */
-        /// Accept a const visitor \a v.
-        void accept(ConstVisitor& v) const override;
-        /// Accept a non-const visitor \a v.
-        void accept(Visitor& v) override;
-        /// \}
+    /// \name Visitors entry point.
+    /// \{ */
+    /// Accept a const visitor \a v.
+    void accept(ConstVisitor& v) const override;
+    /// Accept a non-const visitor \a v.
+    void accept(Visitor& v) override;
+    /// \}
 
-        /** \name Accessors.
+    /** \name Accessors.
          ** \{ */
-        /// Return variable's name.
-        misc::symbol name_get() const;
-        /// Set variable's name.
-        void name_set(misc::symbol);
-        /// Return definition site.
-        const VarDec* def_get() const;
-        /// Return definition site.
-        VarDec* def_get();
-        /// Set definition site.
-        void def_set(VarDec*);
-        /** \} */
+    /// Return variable's name.
+    misc::symbol name_get() const;
+    /// Set variable's name.
+    void name_set(misc::symbol);
+    /// Return definition site.
+    const VarDec* def_get() const;
+    /// Return definition site.
+    VarDec* def_get();
+    /// Set definition site.
+    void def_set(VarDec*);
+    /** \} */
 
-    protected:
-        /// Variable's name.
-        misc::symbol name_;
-        /// Definition site.
-        VarDec* def_ = nullptr;
-    };
+  protected:
+    /// Variable's name.
+    misc::symbol name_;
+    /// Definition site.
+    VarDec* def_ = nullptr;
+  };
 } // namespace ast
 #include <ast/simple-var.hxx>

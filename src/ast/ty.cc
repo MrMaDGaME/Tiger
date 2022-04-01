@@ -8,8 +8,8 @@
 
 namespace ast
 {
-    Ty::Ty(const Location& location)
-        : Ast(location)
-    {}
+  Ty::Ty(const Location& location)
+    : Ast(location)
+  {}
 
 } // namespace ast

@@ -2,15 +2,15 @@
  ** Checking ast::Ast and ast::PrettyPrinter.
  */
 
+#include <ostream>
 #include <ast/all.hh>
 #include <ast/libast.hh>
-#include <ostream>
 
 using namespace ast;
 
 int main()
 {
-    /*const Location& loc = Location();
+  /*const Location& loc = Location();
 
     std::cout << "First test...\n";
     {
@@ -66,5 +66,5 @@ int main()
       Exp* exp = new LetExp(loc, chunks, new CallExp(loc, "f", new
     exps_type())); std::cout << *exp << '\n'; delete exp;
     }*/
-    return 0;
+  return 0;
 }

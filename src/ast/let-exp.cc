@@ -8,26 +8,21 @@
 
 namespace ast
 {
-    LetExp::LetExp(const Location& location, ChunkList* declarations,
-                   Exp* instructions)
-        : Exp(location)
-        , declarations_(declarations)
-        , instructions_(instructions)
-    {}
+  LetExp::LetExp(const Location& location,
+                 ChunkList* declarations,
+                 Exp* instructions)
+    : Exp(location)
+    , declarations_(declarations)
+    , instructions_(instructions)
+  {}
 
-    LetExp::~LetExp()
-    {
-        delete declarations_;
-        delete instructions_;
-    }
+  LetExp::~LetExp()
+  {
+    delete declarations_;
+    delete instructions_;
+  }
 
-    void LetExp::accept(ConstVisitor& v) const
-    {
-        v(*this);
-    }
+  void LetExp::accept(ConstVisitor& v) const { v(*this); }
 
-    void LetExp::accept(Visitor& v)
-    {
-        v(*this);
-    }
+  void LetExp::accept(Visitor& v) { v(*this); }
 } // namespace ast

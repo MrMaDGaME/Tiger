@@ -7,7 +7,7 @@
 
 namespace misc
 {
-    /** \brief Allows to build a visitor from lambdas to use with std::visit.
+  /** \brief Allows to build a visitor from lambdas to use with std::visit.
      **
      ** This allows to use a syntax such as
      ** std::visit(
@@ -63,10 +63,9 @@ namespace misc
      ** values of the variants used as arguments! You won't be able to compile
      ** otherwise.
      **/
-    template <class... Ts>
-    struct LambdaVisitor : Ts...
-    {
-        /** C++ actually desugars lambdas to some kind of struct functors.
+  template <class... Ts> struct LambdaVisitor : Ts...
+  {
+    /** C++ actually desugars lambdas to some kind of struct functors.
          ** For instance, the following lambda could be desugared to the
          *following
          ** struct:
@@ -83,13 +82,12 @@ namespace misc
          *used
          ** to create the LambdaVisitor.
          **/
-        using Ts::operator()...;
-    };
+    using Ts::operator()...;
+  };
 
-    /// Class template argument deduction. This allows to implicitly deduce the
-    /// templated type of the visitor created from the types of the arguments
-    /// it is constructed with, without having to explicitly fill the template.
-    template <class... Ts>
-    LambdaVisitor(Ts...) -> LambdaVisitor<Ts...>;
+  /// Class template argument deduction. This allows to implicitly deduce the
+  /// templated type of the visitor created from the types of the arguments
+  /// it is constructed with, without having to explicitly fill the template.
+  template <class... Ts> LambdaVisitor(Ts...) -> LambdaVisitor<Ts...>;
 
 } // namespace misc

@@ -11,53 +11,53 @@
 
 namespace ast
 {
-    /// CallExp.
-    class CallExp : public Exp
-    {
-    public:
-        /** \name Ctor & dtor.
+  /// CallExp.
+  class CallExp : public Exp
+  {
+  public:
+    /** \name Ctor & dtor.
          ** \{ */
-        /// Construct a CallExp node.
-        CallExp(const Location& location, misc::symbol name, exps_type* args);
-        CallExp(const CallExp&) = delete;
-        CallExp& operator=(const CallExp&) = delete;
-        /// Destroy a CallExp node.
-        ~CallExp() override;
-        /** \} */
+    /// Construct a CallExp node.
+    CallExp(const Location& location, misc::symbol name, exps_type* args);
+    CallExp(const CallExp&) = delete;
+    CallExp& operator=(const CallExp&) = delete;
+    /// Destroy a CallExp node.
+    ~CallExp() override;
+    /** \} */
 
-        /// \name Visitors entry point.
-        /// \{ */
-        /// Accept a const visitor \a v.
-        void accept(ConstVisitor& v) const override;
-        /// Accept a non-const visitor \a v.
-        void accept(Visitor& v) override;
-        /// \}
+    /// \name Visitors entry point.
+    /// \{ */
+    /// Accept a const visitor \a v.
+    void accept(ConstVisitor& v) const override;
+    /// Accept a non-const visitor \a v.
+    void accept(Visitor& v) override;
+    /// \}
 
-        /** \name Accessors.
+    /** \name Accessors.
          ** \{ */
-        /// Return declarations of the statement.
-        const misc::symbol name_get() const;
-        /// Return declarations of the statement.
-        misc::symbol name_get();
-        void name_set(misc::symbol name);
-        /// Return instructions executed in the statement.
-        const exps_type& args_get() const;
-        /// Return instructions executed in the statement.
-        exps_type& args_get();
-        /// Return definition site.
-        const FunctionDec* def_get() const;
-        /// Return definition site.
-        FunctionDec* def_get();
-        /// Set definition site.
-        void def_set(FunctionDec*);
-        /** \} */
+    /// Return declarations of the statement.
+    const misc::symbol name_get() const;
+    /// Return declarations of the statement.
+    misc::symbol name_get();
+    void name_set(misc::symbol name);
+    /// Return instructions executed in the statement.
+    const exps_type& args_get() const;
+    /// Return instructions executed in the statement.
+    exps_type& args_get();
+    /// Return definition site.
+    const FunctionDec* def_get() const;
+    /// Return definition site.
+    FunctionDec* def_get();
+    /// Set definition site.
+    void def_set(FunctionDec*);
+    /** \} */
 
-    protected:
-        /// High bound of the loop.
-        misc::symbol name_;
-        /// Instructions executed in the loop.
-        exps_type* args_;
-        FunctionDec* def_ = nullptr;
-    };
+  protected:
+    /// High bound of the loop.
+    misc::symbol name_;
+    /// Instructions executed in the loop.
+    exps_type* args_;
+    FunctionDec* def_ = nullptr;
+  };
 } // namespace ast
 #include <ast/call-exp.hxx>

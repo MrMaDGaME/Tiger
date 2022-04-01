@@ -83,7 +83,7 @@ get_options ()
 ## ------ ##
 
 me=$(basename $0)
-move_if_change='/home/arthur/Documents/ING1/TIGER/pensive_hugle-tiger-2024/build-aux/bin/move-if-change'
+move_if_change='/Users/matheo/local_doc/info_ing1/tiger/github/build-aux/bin/move-if-change'
 
 # First, make sure Flex is recent enough (2.5.35 at least).  For
 # instance Flex 2.3.33 has a problem with REJECT and produces a

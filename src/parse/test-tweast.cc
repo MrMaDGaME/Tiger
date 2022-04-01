@@ -2,12 +2,12 @@
  ** Test the tweast.
  **/
 
+#include <iostream>
 #include <ast/chunk-list.hh>
 #include <ast/libast.hh>
 #include <ast/name-ty.hh>
 #include <ast/seq-exp.hh>
 #include <ast/simple-var.hh>
-#include <iostream>
 #include <misc/contract.hh>
 #include <misc/symbol.hh>
 #include <parse/libparse.hh>
@@ -18,7 +18,7 @@ const char* program_name = "test-tweast";
 
 int main()
 {
-    /*try
+  /*try
       {
         parse::Tweast in;
         parse::location l;
@@ -47,5 +47,5 @@ int main()
         std::cerr << e;
         exit(e.status_get_value());
       }*/
-    return 0;
+  return 0;
 }

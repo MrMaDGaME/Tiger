@@ -10,22 +10,10 @@
 namespace ast
 {
 
-    inline const Var& SubscriptVar::var_get() const
-    {
-        return *var_;
-    }
-    inline Var& SubscriptVar::var_get()
-    {
-        return *var_;
-    }
+  inline const Var& SubscriptVar::var_get() const { return *var_; }
+  inline Var& SubscriptVar::var_get() { return *var_; }
 
-    inline const Exp& SubscriptVar::index_get() const
-    {
-        return *index_;
-    }
-    inline Exp& SubscriptVar::index_get()
-    {
-        return *index_;
-    }
+  inline const Exp& SubscriptVar::index_get() const { return *index_; }
+  inline Exp& SubscriptVar::index_get() { return *index_; }
 
 } // namespace ast

@@ -8,8 +8,8 @@
 
 namespace ast
 {
-    Exp::Exp(const Location& location)
-        : Ast(location)
-    {}
+  Exp::Exp(const Location& location)
+    : Ast(location)
+  {}
 
 } // namespace ast

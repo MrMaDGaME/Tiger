@@ -10,7 +10,7 @@
 
 namespace ast
 {
-    /** \class ast::CastExp
+  /** \class ast::CastExp
      ** \brief Cast the type of an expression to a given type.
      **
      ** This node is only used in the bounds checking transformation
@@ -19,44 +19,44 @@ namespace ast
      ** this option.
      */
 
-    class CastExp : public Exp
-    {
-    public:
-        /** \name Ctor & dtor.
+  class CastExp : public Exp
+  {
+  public:
+    /** \name Ctor & dtor.
          ** \{ */
-        /// Construct a CastExp node.
-        CastExp(const Location& location, Exp* exp, Ty* ty);
-        CastExp(const CastExp&) = delete;
-        CastExp& operator=(const CastExp&) = delete;
-        /// Destroy a CastExp node.
-        ~CastExp() override;
-        /** \} */
+    /// Construct a CastExp node.
+    CastExp(const Location& location, Exp* exp, Ty* ty);
+    CastExp(const CastExp&) = delete;
+    CastExp& operator=(const CastExp&) = delete;
+    /// Destroy a CastExp node.
+    ~CastExp() override;
+    /** \} */
 
-        /// \name Visitors entry point.
-        /// \{ */
-        /// Accept a const visitor \a v.
-        void accept(ConstVisitor& v) const override;
-        /// Accept a non-const visitor \a v.
-        void accept(Visitor& v) override;
-        /// \}
+    /// \name Visitors entry point.
+    /// \{ */
+    /// Accept a const visitor \a v.
+    void accept(ConstVisitor& v) const override;
+    /// Accept a non-const visitor \a v.
+    void accept(Visitor& v) override;
+    /// \}
 
-        /** \name Accessors.
+    /** \name Accessors.
          ** \{ */
-        /// Return the cast expression.
-        const Exp& exp_get() const;
-        /// Return the cast expression.
-        Exp& exp_get();
-        /// Return the target type.
-        const Ty& ty_get() const;
-        /// Return the target type.
-        Ty& ty_get();
-        /** \} */
+    /// Return the cast expression.
+    const Exp& exp_get() const;
+    /// Return the cast expression.
+    Exp& exp_get();
+    /// Return the target type.
+    const Ty& ty_get() const;
+    /// Return the target type.
+    Ty& ty_get();
+    /** \} */
 
-    protected:
-        /// The cast expression.
-        Exp* exp_;
-        /// The target type.
-        Ty* ty_;
-    };
+  protected:
+    /// The cast expression.
+    Exp* exp_;
+    /// The target type.
+    Ty* ty_;
+  };
 } // namespace ast
 #include <ast/cast-exp.hxx>
