@@ -34,12 +34,15 @@ namespace type
   const Type* TypeChecker::type(ast::Typable& e)
   {
     // FIXME: Some code was deleted here.
+    return e.getType();
   }
 
   const Record* TypeChecker::type(const ast::fields_type& e)
   {
     auto res = new Record;
     // FIXME: Some code was deleted here.
+    for (const auto& var : e)
+      res->field_add(e);
     return res;
   }
 
@@ -82,6 +85,8 @@ namespace type
                                 const Type& type2)
   {
     // FIXME: Some code was deleted here.
+    if (type1 != type2)
+        type_mismatch(ast, exp1, type1, exp2, type2);
   }
 
   void TypeChecker::check_types(const ast::Ast& ast,
@@ -91,9 +96,10 @@ namespace type
                                 ast::Typable& type2)
   {
     // Ensure evaluation order.
-    type(type1);
-    type(type2);
+    const Type& ty1 = type(type1);
+    const Type& ty2 = type(type2);
     // FIXME: Some code was deleted here (Check types).
+    check_types(ast, exp1, ty1, exp2, ty2);
   }
 
   /*--------------------------.
@@ -107,6 +113,7 @@ namespace type
   void TypeChecker::operator()(ast::SimpleVar& e)
   {
     // FIXME: Some code was deleted here.
+
   }
 
   // FIXME: Some code was deleted here.
@@ -126,11 +133,17 @@ namespace type
   void TypeChecker::operator()(ast::IntExp& e)
   {
     // FIXME: Some code was deleted here.
+    auto int_ptr = std::make_unique<IntExp>(e);
+    type_default(e, int_ptr.get());
+    created_type_default(e, int_ptr.release());
   }
 
   void TypeChecker::operator()(ast::StringExp& e)
   {
     // FIXME: Some code was deleted here.
+    auto str_ptr = std::make_unique<StringExp>(e);
+    type_default(e, str_ptr.get());
+    created_type_default(e, str_ptr.release());
   }
 
   // Complex values.
@@ -182,6 +195,7 @@ namespace type
   void TypeChecker::visit_dec_header<ast::FunctionDec>(ast::FunctionDec& e)
   {
     // FIXME: Some code was deleted here.
+    e.type_set(e.result_get());
   }
 
   // Type check this function's body.
@@ -196,6 +210,7 @@ namespace type
         if (!error_)
           {
             // FIXME: Some code was deleted here.
+
           }
       }
   }
