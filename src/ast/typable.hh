@@ -22,6 +22,21 @@ namespace ast
   class Typable
   {
     // FIXME: Some code was deleted here.
+  public:
+    Typable();
+
+    type::Type* type_get() const
+    {
+        return type_;
+    }
+
+    void type_set(type::Type* type)
+    {
+        type_ = type;
+    }
+
+  protected:
+    type::Type* type_;
   };
 } // namespace ast
 #include <ast/typable.hxx>
