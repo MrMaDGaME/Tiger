@@ -40,7 +40,7 @@ namespace astclone
     const Location& location = e.location_get();
     Var* var = recurse(e.var_get());
     Exp* exp = recurse(e.exp_get());
-    result_ = new ArrayTy(location, var, exp);
+    result_ = new AssignExp(location, var, exp);
   }
 
   void Cloner::operator()(const ast::BreakExp& e)
@@ -56,7 +56,7 @@ namespace astclone
     // FIXME: Some code was deleted here.
     const Location& location = e.location_get();
     misc::symbol name = e.name_get();
-    exps_type *args = recurse(e.args_get());
+    exps_type* args = recurse(e.args_get());
     result_ = new CallExp(location, name, args);
   }
 
@@ -136,7 +136,7 @@ namespace astclone
     Exp* body = recurse(e.body_get());
     Exp* else_clause = recurse(e.else_clause_get());
     bool is_else = e.is_else_get();
-    result_ = new ifExp(location, condition, body, else_clause, is_else);
+    result_ = new IfExp(location, condition, body, else_clause, is_else);
   }
 
   void Cloner::operator()(const ast::IntExp& e)
@@ -210,7 +210,7 @@ namespace astclone
     // FIXME: Some code was deleted here.
     const Location& location = e.location_get();
     NameTy* type_name = recurse(e.type_name_get());
-    fieldinits_type* fields = recurse(e.field_get());
+    fieldinits_type* fields = recurse(e.fields_get());
     result_ = new RecordExp(location, type_name, fields);
   }
 
