@@ -58,6 +58,9 @@ namespace type
 
     // FIXME: Some code was deleted here (Inherited method).
 
+    /// bool compatible_with(const Type& other) const override;
+
+
   protected:
     /// Fields list.
     fields_type fields_;

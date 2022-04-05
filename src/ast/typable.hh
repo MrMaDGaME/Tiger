@@ -23,20 +23,18 @@ namespace ast
   {
     // FIXME: Some code was deleted here.
   public:
-    Typable();
+      Typable() = default;
+      Typable(const type::Type* type);
 
-    type::Type* type_get() const
-    {
-        return type_;
-    }
+      virtual void accept(ConstVisitor& v) const = 0;
+      /// Accept a non-const visitor \a v.
+      virtual void accept(Visitor& v) = 0;
 
-    void type_set(type::Type* type)
-    {
-        type_ = type;
-    }
+    const type::Type* type_get() const;
+    void type_set(const type::Type* type);
 
   protected:
-    type::Type* type_;
+     const type::Type* type_ = nullptr;
   };
 } // namespace ast
 #include <ast/typable.hxx>

@@ -25,19 +25,21 @@ namespace type
   template <typename NodeType>
   void TypeChecker::type_default(NodeType& e, const type::Type* type)
   {
-    // FIXME: Some code was deleted here.
+    if (!e.type_get())
+        e.type_set(type);
   }
 
   template <typename NodeType>
   void TypeChecker::created_type_default(NodeType& e, const type::Type* type)
   {
-    // FIXME: Some code was deleted here.
+    if (!e.type_get())
+        e.type_set(type);
   }
 
   template <typename NodeType>
   void TypeChecker::type_set(NodeType& e, const type::Type* type)
   {
-    // FIXME: Some code was deleted here (Basically e.type_set(type)).
+    e.type_set(type);
   }
 
   /*-----------------.
@@ -60,12 +62,18 @@ namespace type
     loc.type_set(&nil_error_instance);
   }
 
+  //S'utilise quand un type doit etre comparé un autre type mais que le noeud existe pas
+  //Nodetype est un noeud d'ast'
   template <typename NodeType>
   void TypeChecker::check_type(NodeType& e,
                                const std::string& s,
                                const Type& expected)
   {
-    // FIXME: Some code was deleted here.
+    if (e.actual() != expected)
+    {
+        error(s, e.actual());
+        e.type_set(expected);
+    }
   }
 
   /*------------.
@@ -76,6 +84,9 @@ namespace type
   void TypeChecker::visit_routine_body(Routine_Node& e)
   {
     // FIXME: Some code was deleted here.
+    const Function* fun = dynamic_cast<const Function*>(e.type_get());
+    check_types(e, "Zbeub Zbeub", *e.body_get(),"Bien vu chacal", fun->result_get());
+
   }
 
 } // namespace type

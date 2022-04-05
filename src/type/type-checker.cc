@@ -34,6 +34,9 @@ namespace type
   const Type* TypeChecker::type(ast::Typable& e)
   {
     // FIXME: Some code was deleted here.
+    if (!e.type_get())
+        e.accept(*this);
+    return e.type_get();
   }
 
   const Record* TypeChecker::type(const ast::fields_type& e)
@@ -81,7 +84,9 @@ namespace type
                                 const std::string& exp2,
                                 const Type& type2)
   {
-    // FIXME: Some code was deleted here.
+    //DONE : Some code was deleted here.
+     if (!type1.compatible_with(type2))
+         error("Invalid type: ");
   }
 
   void TypeChecker::check_types(const ast::Ast& ast,
@@ -94,6 +99,7 @@ namespace type
     type(type1);
     type(type2);
     // FIXME: Some code was deleted here (Check types).
+    check_types(ast, exp1, type1.type_get(), exp2, type2.type_get());
   }
 
   /*--------------------------.
@@ -126,11 +132,13 @@ namespace type
   void TypeChecker::operator()(ast::IntExp& e)
   {
     // FIXME: Some code was deleted here.
+    type_default(e, &Int::instance());
   }
 
   void TypeChecker::operator()(ast::StringExp& e)
   {
     // FIXME: Some code was deleted here.
+    type_default(e, &String::instance());
   }
 
   // Complex values.
@@ -142,6 +150,11 @@ namespace type
     // If there are any record initializations, set the `record_type_`
     // of the `Nil` to the expected type.
     // FIXME: Some code was deleted here.
+    /*if (!error_) {
+        for (auto &ftype: e.fields_get()) {
+            if (type(ftype))
+        }
+    }*/
   }
 
   void TypeChecker::operator()(ast::OpExp& e)
@@ -181,7 +194,14 @@ namespace type
   template <>
   void TypeChecker::visit_dec_header<ast::FunctionDec>(ast::FunctionDec& e)
   {
-    // FIXME: Some code was deleted here.
+    const Type* res_type;
+    if (e.result_get())
+        res_type = type(*e.result_get());//type() pas sur que ca marche
+    else
+        res_type = &Void::instance();
+    auto function = new Function(type(e.formals_get()), *res_type);
+    e.type_constructor_set(function);//A vérifier
+    e.type_set(function);
   }
 
   // Type check this function's body.
@@ -255,6 +275,20 @@ namespace type
   void TypeChecker::operator()(ast::NameTy& e)
   {
     // FIXME: Some code was deleted here (Recognize user defined types, and built-in types).
+    if (!e.def_get())
+    {
+        if (e.name_get() == "int")
+        {
+            e.type_set(&Int::instance());
+        }
+        else if (e.name_get() == "string")
+        {
+            e.type_set(&String::instance());
+        }
+    }
+    else
+        e.type_set(e.def_get()->type_get());
+
   }
 
   void TypeChecker::operator()(ast::RecordTy& e)

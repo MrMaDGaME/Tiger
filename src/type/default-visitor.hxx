@@ -39,19 +39,23 @@ namespace type
   template <template <typename> class Const>
   void GenDefaultVisitor<Const>::operator()(const_t<Named>& e)
   {
-    // FIXME: Some code was deleted here.
+    /*e.name_get().accept(*this);
+    e.type_get().accept(*this);*/
   }
 
   template <template <typename> class Const>
   void GenDefaultVisitor<Const>::operator()(const_t<Array>& e)
   {
-    // FIXME: Some code was deleted here.
+    //e.array_type_get().accept(*this);
   }
 
   template <template <typename> class Const>
   void GenDefaultVisitor<Const>::operator()(const_t<Record>& e)
   {
-    // FIXME: Some code was deleted here.
+    /*for (Field& f : e.fields_get())
+    {
+        f.accept(*this);
+    }*/
   }
 
   template <template <typename> class Const>
@@ -63,13 +67,14 @@ namespace type
   template <template <typename> class Const>
   void GenDefaultVisitor<Const>::operator()(const_t<Function>& e)
   {
-    // FIXME: Some code was deleted here.
+      /*e.formals_get().accept(*this);
+      e.type_get().accept(*this);*/
   }
 
   template <template <typename> class Const>
   void GenDefaultVisitor<Const>::operator()(const_t<Method>& e)
   {
-    e.Function::accept(*this);
+    //e.Function::accept(*this);
   }
 
 } // namespace type
