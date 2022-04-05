@@ -34,13 +34,9 @@ namespace type
   const Type* TypeChecker::type(ast::Typable& e)
   {
     // FIXME: Some code was deleted here.
-<<<<<<< HEAD
     if (!e.type_get())
         e.accept(*this);
     return e.type_get();
-=======
-    return e.getType();
->>>>>>> 964d84619ef1eb7c0c5e134eec8aeeeafa93b8ce
   }
 
   const Record* TypeChecker::type(const ast::fields_type& e)
@@ -90,15 +86,8 @@ namespace type
                                 const std::string& exp2,
                                 const Type& type2)
   {
-<<<<<<< HEAD
-    //DONE : Some code was deleted here.
      if (!type1.compatible_with(type2))
          error("Invalid type: ");
-=======
-    // FIXME: Some code was deleted here.
-    if (type1 != type2)
-        type_mismatch(ast, exp1, type1, exp2, type2);
->>>>>>> 964d84619ef1eb7c0c5e134eec8aeeeafa93b8ce
   }
 
   void TypeChecker::check_types(const ast::Ast& ast,
@@ -111,11 +100,7 @@ namespace type
     const Type& ty1 = type(type1);
     const Type& ty2 = type(type2);
     // FIXME: Some code was deleted here (Check types).
-<<<<<<< HEAD
     check_types(ast, exp1, type1.type_get(), exp2, type2.type_get());
-=======
-    check_types(ast, exp1, ty1, exp2, ty2);
->>>>>>> 964d84619ef1eb7c0c5e134eec8aeeeafa93b8ce
   }
 
   /*--------------------------.
@@ -149,25 +134,13 @@ namespace type
   void TypeChecker::operator()(ast::IntExp& e)
   {
     // FIXME: Some code was deleted here.
-<<<<<<< HEAD
     type_default(e, &Int::instance());
-=======
-    auto int_ptr = std::make_unique<IntExp>(e);
-    type_default(e, int_ptr.get());
-    created_type_default(e, int_ptr.release());
->>>>>>> 964d84619ef1eb7c0c5e134eec8aeeeafa93b8ce
   }
 
   void TypeChecker::operator()(ast::StringExp& e)
   {
     // FIXME: Some code was deleted here.
-<<<<<<< HEAD
     type_default(e, &String::instance());
-=======
-    auto str_ptr = std::make_unique<StringExp>(e);
-    type_default(e, str_ptr.get());
-    created_type_default(e, str_ptr.release());
->>>>>>> 964d84619ef1eb7c0c5e134eec8aeeeafa93b8ce
   }
 
   // Complex values.
@@ -223,7 +196,6 @@ namespace type
   template <>
   void TypeChecker::visit_dec_header<ast::FunctionDec>(ast::FunctionDec& e)
   {
-<<<<<<< HEAD
     const Type* res_type;
     if (e.result_get())
         res_type = type(*e.result_get());//type() pas sur que ca marche
@@ -232,10 +204,6 @@ namespace type
     auto function = new Function(type(e.formals_get()), *res_type);
     e.type_constructor_set(function);//A vérifier
     e.type_set(function);
-=======
-    // FIXME: Some code was deleted here.
-    e.type_set(e.result_get());
->>>>>>> 964d84619ef1eb7c0c5e134eec8aeeeafa93b8ce
   }
 
   // Type check this function's body.
