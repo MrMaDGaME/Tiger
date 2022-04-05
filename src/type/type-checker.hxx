@@ -69,10 +69,10 @@ namespace type
                                const std::string& s,
                                const Type& expected)
   {
-    if (e.actual() != expected)
+    if (*e.type_get() != expected)
     {
-        error(s, e.actual());
-        e.type_set(expected);
+        error(e, s);
+        e.type_set(&expected);
     }
   }
 
@@ -85,7 +85,8 @@ namespace type
   {
     // FIXME: Some code was deleted here.
     const Function* fun = dynamic_cast<const Function*>(e.type_get());
-    check_types(e, "Zbeub Zbeub", *e.body_get(),"Bien vu chacal", fun->result_get());
+
+    check_types(e, "Test", *e.body_get()->type_get(),"Bien vu chacal", fun->result_get());
 
   }
 

@@ -43,9 +43,9 @@ namespace type
   {
     auto res = new Record;
     // FIXME: Some code was deleted here.
-    for (const auto& var : e)
-      res->field_add(e);
-    return res;
+    /*for (auto var : e)
+      res->field_add(var);
+    return res;*/
   }
 
   const Record* TypeChecker::type(const ast::VarChunk& e)
@@ -87,7 +87,7 @@ namespace type
                                 const Type& type2)
   {
      if (!type1.compatible_with(type2))
-         error("Invalid type: ");
+         type_mismatch(ast, exp1, type1, exp2, type2);
   }
 
   void TypeChecker::check_types(const ast::Ast& ast,
@@ -97,10 +97,10 @@ namespace type
                                 ast::Typable& type2)
   {
     // Ensure evaluation order.
-    const Type& ty1 = type(type1);
-    const Type& ty2 = type(type2);
+    type(type1);
+    type(type2);
     // FIXME: Some code was deleted here (Check types).
-    check_types(ast, exp1, type1.type_get(), exp2, type2.type_get());
+    check_types(ast, exp1, *type1.type_get(), exp2, *type2.type_get());
   }
 
   /*--------------------------.
@@ -162,17 +162,57 @@ namespace type
   void TypeChecker::operator()(ast::OpExp& e)
   {
     // FIXME: Some code was deleted here.
+    auto left = &e.left_get();
+    auto right = &e.right_get();
+    ast::OpExp::Oper oper = e.oper_get();
 
+    if(type(*left)->compatible_with(*type(*right))) {
+        switch(oper){
+            /* operators */
+            case ast::OpExp::Oper::add:
+                check_type(*left, "left add", Int::instance());
+                check_type(*right, "right add", Int::instance());
+                break;
+            case ast::OpExp::Oper::sub:
+                check_type(*left, "left sub", Int::instance());
+                check_type(*right, "right sub", Int::instance());
+                break;
+            case ast::OpExp::Oper::mul:
+                check_type(*left, "left mul", Int::instance());
+                check_type(*right, "right mul", Int::instance());
+                break;
+            case ast::OpExp::Oper::div:
+                check_type(*left, "left div", Int::instance());
+                check_type(*right, "right div", Int::instance());
+                break;
+            /* comparisons */
+            
+        }
+    }
     // If any of the operands are of type Nil, set the `record_type_` to the
     // type of the opposite operand.
     if (!error_)
       {
         // FIXME: Some code was deleted here.
       }
+    /* 1. Int match all
+     * 2. string match comparison
+     * 3. records match nil */
   }
 
   // FIXME: Some code was deleted here.
-
+  void TypeChecker::operator()(ast::SeqExp& e){
+      if (e.exps_get().size()) {
+          ast::Exp *last = e.exps_get()[0];
+          for (ast::Exp *exp: e.exps_get()) {
+              type(*exp);
+              last = exp;
+          }
+          e.type_set(last->type_get());
+      }
+      else
+          e.type_set(&Void::instance());
+  }
   /*-----------------.
   | Visiting /Dec/.  |
   `-----------------*/

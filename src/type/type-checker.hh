@@ -166,7 +166,7 @@ namespace type
     void operator()(ast::RecordExp& e) override;
     void operator()(ast::OpExp& e) override;
     // FIXME: Some code was deleted here (Other Exp nodes).
-
+    void operator()(ast::SeqExp& e) override;
     // ---------------- //
     // Visiting /Dec/.  //
     // ---------------- //
