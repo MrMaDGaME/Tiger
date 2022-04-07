@@ -165,39 +165,41 @@ namespace type
     auto left = &e.left_get();
     auto right = &e.right_get();
     ast::OpExp::Oper oper = e.oper_get();
-
-    if(type(*left)->compatible_with(*type(*right))) {
-        switch(oper){
-            /* operators */
-            case ast::OpExp::Oper::add:
-                check_type(*left, "left add", Int::instance());
-                check_type(*right, "right add", Int::instance());
-                break;
-            case ast::OpExp::Oper::sub:
-                check_type(*left, "left sub", Int::instance());
-                check_type(*right, "right sub", Int::instance());
-                break;
-            case ast::OpExp::Oper::mul:
-                check_type(*left, "left mul", Int::instance());
-                check_type(*right, "right mul", Int::instance());
-                break;
-            case ast::OpExp::Oper::div:
-                check_type(*left, "left div", Int::instance());
-                check_type(*right, "right div", Int::instance());
-                break;
-            /* comparisons */
-            
+    if(type(*left)->compatible_with(*type(*right)))
+    {
+        if (!dynamic_cast<const Int*>(type(*left)) && !dynamic_cast<const Nil*>(type(*left)))
+        {
+            if (dynamic_cast<const String*>(type(*left)))
+            {
+                if (oper == ast::OpExp::Oper::add
+                    || oper == ast::OpExp::Oper::sub
+                    || oper == ast::OpExp::Oper::mul
+                    || oper == ast::OpExp::Oper::div)
+                    error(e, "Wrong operator for type string");
+            }
+            else if (dynamic_cast<const Record*>(type(*left)))
+            {
+                if (oper != ast::OpExp::Oper::eq && oper != ast::OpExp::Oper::ne)
+                    error(e, "Wrong operator for type record");
+            }
+            else
+                error(e, "Unrecognized type");
         }
+    }
+    else
+    {
+        error(e, "Left operand is not compatible with right operand\n");
     }
     // If any of the operands are of type Nil, set the `record_type_` to the
     // type of the opposite operand.
     if (!error_)
       {
-        // FIXME: Some code was deleted here.
+        // DONE: Some code was deleted here.
+        if (Nil* nil = dynamic_cast<Nil*>(left))
+            nil->record_type_set(*type(*left));
+        else if (Nil* nil = dynamic_cast<Nil*>(right))
+            nil->record_type_set(*type(*right));
       }
-    /* 1. Int match all
-     * 2. string match comparison
-     * 3. records match nil */
   }
 
   // FIXME: Some code was deleted here.
@@ -294,12 +296,23 @@ namespace type
     // name in E.  A declaration has no type in itself; here we store
     // the type declared by E.
     // FIXME: Some code was deleted here.
+    Named* name = new Named(e.name_get());
+    e.type_constructor_set(name);
+    e.type_set(name);
   }
 
   // Bind the type body to its name.
   template <> void TypeChecker::visit_dec_body<ast::TypeDec>(ast::TypeDec& e)
   {
     // FIXME: Some code was deleted here.
+     Named* name = dynamic_cast<Named*>(e.type_get());
+     //add a Named le type du body
+     type(e.ty_get());
+     name->type_set(e.ty_get->type_get());
+     if (e.sound())
+     {
+         error(e, "VASY DJ FAIT PETER LE SON\n");
+     }
   }
 
   /*------------------.
@@ -309,6 +322,14 @@ namespace type
   template <class D> void TypeChecker::chunk_visit(ast::Chunk<D>& e)
   {
     // FIXME: Some code was deleted here.
+    for (auto elt : e)
+    {
+        visit_dec_header<D>(*elt);
+    }
+    for (auto elt : e)
+    {
+        visit_dec_body<D>(*elt);
+    }
   }
 
   /*-------------.
