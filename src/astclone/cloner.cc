@@ -56,7 +56,7 @@ namespace astclone
     // FIXME: Some code was deleted here.
     const Location& location = e.location_get();
     misc::symbol name = e.name_get();
-    exps_type* args;
+    exps_type* args = new exps_type();
     for(auto exp : e.args_get())
       {
         args->push_back(recurse(*exp));
@@ -165,7 +165,7 @@ namespace astclone
     // FIXME: Some code was deleted here.
     const Location& location = e.location_get();
     misc::symbol name = e.name_get();
-    exps_type* args;
+    exps_type* args = new exps_type();
     for(auto exp : e.args_get())
       {
         args->push_back(recurse(*exp));
@@ -220,7 +220,7 @@ namespace astclone
     const Location& location = e.location_get();
     NameTy* type_name = recurse(e.type_name_get());
     //fieldinits_type* fields = recurse(e.fields_get());
-    fieldinits_type* fields;
+    fieldinits_type* fields = new fieldinits_type();
     for(auto f : e.fields_get())
       {
         fields->push_back(recurse(*f));
@@ -232,7 +232,7 @@ namespace astclone
   {
     // FIXME: Some code was deleted here.
     const Location& location = e.location_get();
-    fields_type* fields;
+    fields_type* fields = new fields_type();
     for(auto f : e.fields_get())
       {
         fields->push_back(recurse(*f));
@@ -244,7 +244,7 @@ namespace astclone
   {
     // FIXME: Some code was deleted here.
     const Location& location = e.location_get();
-    exps_type* exps;
+    exps_type* exps = new exps_type(); // = recurse(e.exps_get());
     for(auto exp : e.exps_get())
       {
         exps->push_back(recurse(*exp));

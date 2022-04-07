@@ -25,6 +25,39 @@ namespace desugar
   void DesugarVisitor::operator()(const ast::OpExp& e)
   {
     // FIXME: Some code was deleted here.
+    std::string op = str(e.oper_get());
+    const ast::Exp* left = recurse(e.left_get());
+    const ast::Exp* right = recurse(e.right_get());
+
+    if (op == "=")
+      {
+          auto a = std::get<ast::Exp*>(parse::parse(parse::Tweast() << "streq(" << *left << "," << *right << ")"));
+          result_ = a;
+      }
+    else if (op == "<")
+      {
+          auto a = std::get<ast::Exp*>(parse::parse(parse::Tweast() << "(strcmp(" << *left << "," << *right << ") < 0)"));
+          result_ = a;
+      }
+    else if (op == "<=")
+      {
+          auto a = std::get<ast::Exp*>(parse::parse(parse::Tweast() << "(strcmp(" << *left << "," << *right << ") <= 0)"));
+          result_ = a;
+      }
+    else if (op == ">=")
+      {
+          auto a = std::get<ast::Exp*>(parse::parse(parse::Tweast() << "(strcmp(" << *left << "," << *right << ") > 0)"));
+          result_ = a;
+      }
+    else if (op == ">=")
+      {
+          auto a = std::get<ast::Exp*>(parse::parse(parse::Tweast() << "(strcmp(" << *left << "," << *right << ") >= 0)"));
+          result_ = a;
+      }
+    else
+      {
+          std::cerr << "\n>>>error<<<\n";
+      }
   }
 
   /*----------------------.
@@ -70,6 +103,16 @@ namespace desugar
   void DesugarVisitor::operator()(const ast::ForExp& e)
   {
     // FIXME: Some code was deleted here.
+    ast::VarDec* vardec = recurse(e.vardec_get());
+    ast::Exp* hi = recurse(e.hi_get());
+    ast::Exp* body = recurse(e.body_get());
+
+    auto a = std::get<ast::Exp*>(parse::parse(parse::Tweast() << "let\n  var lower := " << *vardec->init_get()
+                                                              << "\n  var high := " << *hi
+                                                              << "\n  var i := lower"
+                                                              << "\nin\n  if i <= high then\n    while 1 do\n      (\n        " << *body
+                                                              << ";\n        if i = high then\n          break;\n       i := i + 1\n      )\n end\n"));
+    result_ = a;
   }
 
 } // namespace desugar
