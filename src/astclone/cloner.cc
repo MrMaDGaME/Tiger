@@ -56,7 +56,12 @@ namespace astclone
     // FIXME: Some code was deleted here.
     const Location& location = e.location_get();
     misc::symbol name = e.name_get();
-    exps_type* args = recurse(e.args_get());
+    exps_type* args;
+    for(auto exp : e.args_get())
+      {
+        args->push_back(recurse(*exp));
+      }
+    //exps_type* args = recurse(e.args_get());
     result_ = new CallExp(location, name, args);
   }
 
@@ -160,7 +165,11 @@ namespace astclone
     // FIXME: Some code was deleted here.
     const Location& location = e.location_get();
     misc::symbol name = e.name_get();
-    exps_type* args = recurse(e.args_get());
+    exps_type* args;
+    for(auto exp : e.args_get())
+      {
+        args->push_back(recurse(*exp));
+      }
     Var* var = recurse(e.object_get());
     result_ = new MethodCallExp(location, name, args, var);
   }
@@ -210,7 +219,12 @@ namespace astclone
     // FIXME: Some code was deleted here.
     const Location& location = e.location_get();
     NameTy* type_name = recurse(e.type_name_get());
-    fieldinits_type* fields = recurse(e.fields_get());
+    //fieldinits_type* fields = recurse(e.fields_get());
+    fieldinits_type* fields;
+    for(auto f : e.fields_get())
+      {
+        fields->push_back(recurse(*f));
+      }
     result_ = new RecordExp(location, type_name, fields);
   }
 
@@ -218,7 +232,11 @@ namespace astclone
   {
     // FIXME: Some code was deleted here.
     const Location& location = e.location_get();
-    fields_type* fields = recurse(e.fields_get());
+    fields_type* fields;
+    for(auto f : e.fields_get())
+      {
+        fields->push_back(recurse(*f));
+      }
     result_ = new RecordTy(location, fields);
   }
 
@@ -226,7 +244,11 @@ namespace astclone
   {
     // FIXME: Some code was deleted here.
     const Location& location = e.location_get();
-    exps_type* exps = recurse(e.exps_get());
+    exps_type* exps;
+    for(auto exp : e.exps_get())
+      {
+        exps->push_back(recurse(*exp));
+      }
     result_ = new SeqExp(location, exps);
   }
 
